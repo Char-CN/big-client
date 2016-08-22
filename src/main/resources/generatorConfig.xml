@@ -17,8 +17,8 @@
 		<sqlMapGenerator targetPackage="org.blazer.bigclient.mapper" targetProject="/Users/hyy/Work/workspace/big-client/src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
-		<javaClientGenerator targetPackage="org.blazer.bigclient.mapper" targetProject="/Users/hyy/Work/workspace/big-client/src/main/java" type="XMLMAPPER" >
-<!-- 		<javaClientGenerator targetPackage="org.blazer.bigclient.mapper" targetProject="/Users/hyy/Work/workspace/big-client/src/main/java" type="ANNOTATEDMAPPER"> -->
+		<javaClientGenerator targetPackage="org.blazer.bigclient.mapper" targetProject="/Users/hyy/Work/workspace/big-client/src/main/java" type="XMLMAPPER">
+			<!-- <javaClientGenerator targetPackage="org.blazer.bigclient.mapper" targetProject="/Users/hyy/Work/workspace/big-client/src/main/java" type="ANNOTATEDMAPPER"> -->
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 		<table schema="dw_dataservice" tableName="ds_config" enableCountByExample="false" enableSelectByExample="false" enableInsert="false"
