@@ -68,4 +68,71 @@
       ctime = #{ctime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <resultMap id="BaseResultMap" type="org.blazer.bigclient.model.DsConfig">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="group_id" jdbcType="BIGINT" property="groupId" />
+    <result column="datasource_id" jdbcType="BIGINT" property="datasourceId" />
+    <result column="config_name" jdbcType="VARCHAR" property="configName" />
+    <result column="config_type" jdbcType="INTEGER" property="configType" />
+    <result column="order_asc" jdbcType="INTEGER" property="orderAsc" />
+    <result column="enable" jdbcType="INTEGER" property="enable" />
+    <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, group_id, datasource_id, config_name, config_type, order_asc, enable, mtime, 
+    ctime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ds_config
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ds_config
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <update id="updateByPrimaryKeySelective" parameterType="org.blazer.bigclient.model.DsConfig">
+    update ds_config
+    <set>
+      <if test="groupId != null">
+        group_id = #{groupId,jdbcType=BIGINT},
+      </if>
+      <if test="datasourceId != null">
+        datasource_id = #{datasourceId,jdbcType=BIGINT},
+      </if>
+      <if test="configName != null">
+        config_name = #{configName,jdbcType=VARCHAR},
+      </if>
+      <if test="configType != null">
+        config_type = #{configType,jdbcType=INTEGER},
+      </if>
+      <if test="orderAsc != null">
+        order_asc = #{orderAsc,jdbcType=INTEGER},
+      </if>
+      <if test="enable != null">
+        enable = #{enable,jdbcType=INTEGER},
+      </if>
+      <if test="mtime != null">
+        mtime = #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.blazer.bigclient.model.DsConfig">
+    update ds_config
+    set group_id = #{groupId,jdbcType=BIGINT},
+      datasource_id = #{datasourceId,jdbcType=BIGINT},
+      config_name = #{configName,jdbcType=VARCHAR},
+      config_type = #{configType,jdbcType=INTEGER},
+      order_asc = #{orderAsc,jdbcType=INTEGER},
+      enable = #{enable,jdbcType=INTEGER},
+      mtime = #{mtime,jdbcType=TIMESTAMP},
+      ctime = #{ctime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
 </mapper>
