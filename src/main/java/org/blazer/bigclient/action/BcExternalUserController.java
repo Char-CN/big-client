@@ -18,10 +18,5 @@ public class BcExternalUserController {
     @Autowired
     private BcExternalUserService bcExternalUserService;
 
-    @RequestMapping()
-    public String toPage(){
-
-        return null;
-    }
 
 }

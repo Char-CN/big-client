@@ -21,10 +21,10 @@
         </plugin>
 
         <!-- 阻止生成注释信息 -->
-        <commentGenerator>
+        <!--<commentGenerator>
             <property name="suppressAllComments" value="true"/>
             <property name="suppressDate" value="true"/>
-        </commentGenerator>
+        </commentGenerator>-->
 
         <!-- 用于指定数据库连接信息 -->
         <jdbcConnection driverClass="${driverClass}" connectionURL="${url}" userId="${username}" password="${password}">
