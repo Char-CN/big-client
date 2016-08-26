@@ -6,7 +6,7 @@
 
 <generatorConfiguration>
   <!-- 用来指定外部的属性元素 -->
-  <properties resource="config.properties"/>
+  <properties resource="datasource.properties"/>
   <!-- context 至少需要一个，指定生成一组对象的环境，例如指定要连接的数据库，要生成对象的类型和要处理的数据库中的表等 -->
   <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
     <!-- 指定分隔符 反向引号 -->
