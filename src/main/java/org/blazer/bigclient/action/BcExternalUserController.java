@@ -1,6 +1,5 @@
 package org.blazer.bigclient.action;
 
-import org.blazer.bigclient.model.BcExternalUser;
 import org.blazer.bigclient.service.BcExternalUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
