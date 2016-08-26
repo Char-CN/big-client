@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.blazer.bigclient.mapper.BcExternalUserMapper">
+  <resultMap id="BaseResultMap" type="org.blazer.bigclient.generator.BcExternalUser">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="excel_id" jdbcType="BIGINT" property="excelId" />
+    <result column="phone_number" jdbcType="BIGINT" property="phoneNumber" />
+    <result column="sys_name" jdbcType="VARCHAR" property="sysName" />
+    <result column="sys_if_register" jdbcType="VARCHAR" property="sysIfRegister" />
+    <result column="sys_register_date" jdbcType="VARCHAR" property="sysRegisterDate" />
+    <result column="sys_if_real_name" jdbcType="VARCHAR" property="sysIfRealName" />
+    <result column="sys_if_bind_card" jdbcType="VARCHAR" property="sysIfBindCard" />
+    <result column="sys_if_transaction" jdbcType="VARCHAR" property="sysIfTransaction" />
+    <result column="sys_referrer" jdbcType="VARCHAR" property="sysReferrer" />
+    <result column="sys_rebate_expiration_date" jdbcType="VARCHAR" property="sysRebateExpirationDate" />
+    <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, excel_id, phone_number, sys_name, sys_if_register, sys_register_date, sys_if_real_name, 
+    sys_if_bind_card, sys_if_transaction, sys_referrer, sys_rebate_expiration_date, mtime, 
+    ctime
+  </sql>
+  <select id="selectByExample" parameterType="org.blazer.bigclient.model.BcExternalUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bc_external_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bc_external_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from bc_external_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.blazer.bigclient.model.BcExternalUserExample">
+    delete from bc_external_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.blazer.bigclient.generator.BcExternalUser">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bc_external_user (excel_id, phone_number, sys_name, 
+      sys_if_register, sys_register_date, sys_if_real_name, 
+      sys_if_bind_card, sys_if_transaction, sys_referrer, 
+      sys_rebate_expiration_date, mtime, ctime
+      )
+    values (#{excelId,jdbcType=BIGINT}, #{phoneNumber,jdbcType=BIGINT}, #{sysName,jdbcType=VARCHAR}, 
+      #{sysIfRegister,jdbcType=VARCHAR}, #{sysRegisterDate,jdbcType=VARCHAR}, #{sysIfRealName,jdbcType=VARCHAR}, 
+      #{sysIfBindCard,jdbcType=VARCHAR}, #{sysIfTransaction,jdbcType=VARCHAR}, #{sysReferrer,jdbcType=VARCHAR}, 
+      #{sysRebateExpirationDate,jdbcType=VARCHAR}, #{mtime,jdbcType=TIMESTAMP}, #{ctime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.blazer.bigclient.generator.BcExternalUser">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bc_external_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="excelId != null">
+        excel_id,
+      </if>
+      <if test="phoneNumber != null">
+        phone_number,
+      </if>
+      <if test="sysName != null">
+        sys_name,
+      </if>
+      <if test="sysIfRegister != null">
+        sys_if_register,
+      </if>
+      <if test="sysRegisterDate != null">
+        sys_register_date,
+      </if>
+      <if test="sysIfRealName != null">
+        sys_if_real_name,
+      </if>
+      <if test="sysIfBindCard != null">
+        sys_if_bind_card,
+      </if>
+      <if test="sysIfTransaction != null">
+        sys_if_transaction,
+      </if>
+      <if test="sysReferrer != null">
+        sys_referrer,
+      </if>
+      <if test="sysRebateExpirationDate != null">
+        sys_rebate_expiration_date,
+      </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="excelId != null">
+        #{excelId,jdbcType=BIGINT},
+      </if>
+      <if test="phoneNumber != null">
+        #{phoneNumber,jdbcType=BIGINT},
+      </if>
+      <if test="sysName != null">
+        #{sysName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysIfRegister != null">
+        #{sysIfRegister,jdbcType=VARCHAR},
+      </if>
+      <if test="sysRegisterDate != null">
+        #{sysRegisterDate,jdbcType=VARCHAR},
+      </if>
+      <if test="sysIfRealName != null">
+        #{sysIfRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysIfBindCard != null">
+        #{sysIfBindCard,jdbcType=VARCHAR},
+      </if>
+      <if test="sysIfTransaction != null">
+        #{sysIfTransaction,jdbcType=VARCHAR},
+      </if>
+      <if test="sysReferrer != null">
+        #{sysReferrer,jdbcType=VARCHAR},
+      </if>
+      <if test="sysRebateExpirationDate != null">
+        #{sysRebateExpirationDate,jdbcType=VARCHAR},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.blazer.bigclient.model.BcExternalUserExample" resultType="java.lang.Long">
+    select count(*) from bc_external_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update bc_external_user
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.excelId != null">
+        excel_id = #{record.excelId,jdbcType=BIGINT},
+      </if>
+      <if test="record.phoneNumber != null">
+        phone_number = #{record.phoneNumber,jdbcType=BIGINT},
+      </if>
+      <if test="record.sysName != null">
+        sys_name = #{record.sysName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sysIfRegister != null">
+        sys_if_register = #{record.sysIfRegister,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sysRegisterDate != null">
+        sys_register_date = #{record.sysRegisterDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sysIfRealName != null">
+        sys_if_real_name = #{record.sysIfRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sysIfBindCard != null">
+        sys_if_bind_card = #{record.sysIfBindCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sysIfTransaction != null">
+        sys_if_transaction = #{record.sysIfTransaction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sysReferrer != null">
+        sys_referrer = #{record.sysReferrer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sysRebateExpirationDate != null">
+        sys_rebate_expiration_date = #{record.sysRebateExpirationDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mtime != null">
+        mtime = #{record.mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ctime != null">
+        ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update bc_external_user
+    set id = #{record.id,jdbcType=BIGINT},
+      excel_id = #{record.excelId,jdbcType=BIGINT},
+      phone_number = #{record.phoneNumber,jdbcType=BIGINT},
+      sys_name = #{record.sysName,jdbcType=VARCHAR},
+      sys_if_register = #{record.sysIfRegister,jdbcType=VARCHAR},
+      sys_register_date = #{record.sysRegisterDate,jdbcType=VARCHAR},
+      sys_if_real_name = #{record.sysIfRealName,jdbcType=VARCHAR},
+      sys_if_bind_card = #{record.sysIfBindCard,jdbcType=VARCHAR},
+      sys_if_transaction = #{record.sysIfTransaction,jdbcType=VARCHAR},
+      sys_referrer = #{record.sysReferrer,jdbcType=VARCHAR},
+      sys_rebate_expiration_date = #{record.sysRebateExpirationDate,jdbcType=VARCHAR},
+      mtime = #{record.mtime,jdbcType=TIMESTAMP},
+      ctime = #{record.ctime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.blazer.bigclient.generator.BcExternalUser">
+    update bc_external_user
+    <set>
+      <if test="excelId != null">
+        excel_id = #{excelId,jdbcType=BIGINT},
+      </if>
+      <if test="phoneNumber != null">
+        phone_number = #{phoneNumber,jdbcType=BIGINT},
+      </if>
+      <if test="sysName != null">
+        sys_name = #{sysName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysIfRegister != null">
+        sys_if_register = #{sysIfRegister,jdbcType=VARCHAR},
+      </if>
+      <if test="sysRegisterDate != null">
+        sys_register_date = #{sysRegisterDate,jdbcType=VARCHAR},
+      </if>
+      <if test="sysIfRealName != null">
+        sys_if_real_name = #{sysIfRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysIfBindCard != null">
+        sys_if_bind_card = #{sysIfBindCard,jdbcType=VARCHAR},
+      </if>
+      <if test="sysIfTransaction != null">
+        sys_if_transaction = #{sysIfTransaction,jdbcType=VARCHAR},
+      </if>
+      <if test="sysReferrer != null">
+        sys_referrer = #{sysReferrer,jdbcType=VARCHAR},
+      </if>
+      <if test="sysRebateExpirationDate != null">
+        sys_rebate_expiration_date = #{sysRebateExpirationDate,jdbcType=VARCHAR},
+      </if>
+      <if test="mtime != null">
+        mtime = #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.blazer.bigclient.generator.BcExternalUser">
+    update bc_external_user
+    set excel_id = #{excelId,jdbcType=BIGINT},
+      phone_number = #{phoneNumber,jdbcType=BIGINT},
+      sys_name = #{sysName,jdbcType=VARCHAR},
+      sys_if_register = #{sysIfRegister,jdbcType=VARCHAR},
+      sys_register_date = #{sysRegisterDate,jdbcType=VARCHAR},
+      sys_if_real_name = #{sysIfRealName,jdbcType=VARCHAR},
+      sys_if_bind_card = #{sysIfBindCard,jdbcType=VARCHAR},
+      sys_if_transaction = #{sysIfTransaction,jdbcType=VARCHAR},
+      sys_referrer = #{sysReferrer,jdbcType=VARCHAR},
+      sys_rebate_expiration_date = #{sysRebateExpirationDate,jdbcType=VARCHAR},
+      mtime = #{mtime,jdbcType=TIMESTAMP},
+      ctime = #{ctime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
