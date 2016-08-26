@@ -1,7 +1,7 @@
 package org.blazer.bigclient.mapper;
 
 import org.blazer.bigclient.model.BcExcel;
-import tk.mybatis.mapper.common.Mapper;
+import org.blazer.bigclient.util.MyMapper;
 
-public interface BcExcelMapper extends Mapper<BcExcel> {
+public interface BcExcelMapper extends MyMapper<BcExcel> {
 }

@@ -1,7 +1,7 @@
 package org.blazer.bigclient.mapper;
 
 import org.blazer.bigclient.model.BcExternalUser;
-import tk.mybatis.mapper.common.Mapper;
+import org.blazer.bigclient.util.MyMapper;
 
-public interface BcExternalUserMapper extends Mapper<BcExternalUser> {
+public interface BcExternalUserMapper extends MyMapper<BcExternalUser> {
 }

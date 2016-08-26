@@ -1,7 +1,7 @@
 package org.blazer.bigclient.mapper;
 
 import org.blazer.bigclient.model.BcWaitAllotUser;
-import tk.mybatis.mapper.common.Mapper;
+import org.blazer.bigclient.util.MyMapper;
 
-public interface BcWaitAllotUserMapper extends Mapper<BcWaitAllotUser> {
+public interface BcWaitAllotUserMapper extends MyMapper<BcWaitAllotUser> {
 }

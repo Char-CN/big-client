@@ -1,7 +1,7 @@
 package org.blazer.bigclient.mapper;
 
 import org.blazer.bigclient.model.BcFormalUser;
-import tk.mybatis.mapper.common.Mapper;
+import org.blazer.bigclient.util.MyMapper;
 
-public interface BcFormalUserMapper extends Mapper<BcFormalUser> {
+public interface BcFormalUserMapper extends MyMapper<BcFormalUser> {
 }

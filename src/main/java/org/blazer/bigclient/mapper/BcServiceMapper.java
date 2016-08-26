@@ -1,7 +1,7 @@
 package org.blazer.bigclient.mapper;
 
 import org.blazer.bigclient.model.BcService;
-import tk.mybatis.mapper.common.Mapper;
+import org.blazer.bigclient.util.MyMapper;
 
-public interface BcServiceMapper extends Mapper<BcService> {
+public interface BcServiceMapper extends MyMapper<BcService> {
 }
