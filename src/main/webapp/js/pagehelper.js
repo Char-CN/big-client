@@ -11,7 +11,7 @@ var PageHelper = function(id) {
 		});
 		pagination.append(li_first);
 
-		var totalPage = total / pageSize;
+		var totalPage = Math.ceil(total / pageSize);
 		var start = 0;
 		var end = 0;
 
