@@ -9,7 +9,7 @@ var PageHelper = function(id) {
 		var li_up = $('<li><span>上一页</span></li>');
 		pagination.append(li_first);
 		pagination.append(li_up);
-		
+
 		if (currentPage == 1) {
 			li_first.addClass("disabled");
 			li_up.addClass("disabled");
@@ -29,15 +29,15 @@ var PageHelper = function(id) {
 		if (totalPage < showSize) {
 			start = 1;
 			end = totalPage;
-		} else if (currentPage >= totalPage - parseInt(showSize/2)) {
+		} else if (currentPage >= totalPage - parseInt(showSize / 2)) {
 			start = totalPage - showSize + 1;
 			end = totalPage;
-		} else if (currentPage <= parseInt(showSize/2)){
+		} else if (currentPage <= parseInt(showSize / 2)) {
 			start = 1;
 			end = showSize;
 		} else {
-			start = currentPage - parseInt(showSize/2);
-			end = currentPage + parseInt(showSize/2);
+			start = currentPage - parseInt(showSize / 2);
+			end = currentPage + parseInt(showSize / 2);
 		}
 		for (var i = start; i <= end; i++) {
 			var cls = currentPage == i ? "active" : "";
