@@ -1,10 +1,97 @@
 <script>
-	var aaa = function() {
-		alert(1);
-	};
+	$(function() {
+		var lock = false;
+		var findByPage = function(current) {
+			if (lock) {
+				return;
+			}
+			lock = true;
+			$.post("ext/findByPage.do", {
+				currentPage : current,
+				pageSize : 10
+			}, function(data) {
+				// 		alert(JSON.stringify(data.page));
+				init(data);
+				initPagination(data);
+				lock = false;
+			});
+		};
+
+		var init = function(data) {
+			$("#tb>tbody").empty();
+			$("#tb").height(341);
+			var rst = data.rst;
+			for ( var i in rst) {
+				var cls = i % 2 == 0 ? "info" : "warning";
+				var tr = $('<tr class="' + cls + '">');
+				tr.append('<td>' + rst[i].phoneNumber + '</td>');
+				tr.append('<td>' + rst[i].sysName + '</td>');
+				tr.append('<td>' + rst[i].sysIfRegister + '</td>');
+				tr.append('<td>' + rst[i].sysRegisterDate + '</td>');
+				tr.append('<td>' + rst[i].sysIfRealName + '</td>');
+				tr.append('<td>' + rst[i].sysIfBindCard + '</td>');
+				tr.append('<td>' + rst[i].sysIfTransaction + '</td>');
+				tr.append('<td>' + rst[i].sysReferrer + '</td>');
+				tr.append('<td>' + rst[i].sysRebateExpirationDate + '</td>');
+				$("#tb>tbody").append(tr);
+			}
+		};
+
+		var initPagination = function(page) {
+			var pagination = $('<ul id="pagination" class="pagination" style="cursor:pointer">');
+			if ($("#center>#pagination").length != 0) {
+				$("#center>#pagination").remove();
+			}
+			$("#center").append(pagination);
+			var showSize = 5;
+			pagination.empty();
+			var li_first = $('<li><span>首页</span></li>');
+			li_first.click(function() {
+				findByPage(1);
+			});
+			pagination.append(li_first);
+
+			var currentPage = page.currentPage;
+			var pageSize = page.pageSize;
+			var total = page.total;
+			var totalPage = total / pageSize;
+
+			var start = 0;
+			var end = 0;
+
+			if (totalPage < showSize) {
+				start = 1;
+				end = totalPage;
+			} else if (currentPage >= totalPage - parseInt(showSize/2)) {
+				start = totalPage - showSize + 1;
+				end = totalPage;
+			} else if (currentPage <= parseInt(showSize/2)){
+				start = 1;
+				end = showSize;
+			} else {
+				start = currentPage - parseInt(showSize/2);
+				end = currentPage + parseInt(showSize/2);
+			}
+			for (var i = start; i <= end; i++) {
+				var cls = currentPage == i ? "active" : "";
+				var li = $('<li class="' + cls + '"><span>' + i + '</span></li>');
+				li.click(function() {
+					findByPage($(this).text());
+				});
+				pagination.append(li);
+			}
+			var li_end = $('<li><span>尾页</span></li>');
+			li_end.click(function() {
+				findByPage(totalPage);
+			});
+			pagination.append(li_end);
+		};
+
+		findByPage(1);
+	});
 </script>
 <div class="row" style="margin: 0;">
-	<div class="input-group has-primary" style="float: left; width:200px;">
+	<div class="input-group has-primary" style="float: left; width: 200px;">
 		<input type="text" class="form-control" placeholder="Search for..." /> <span class="input-group-btn">
 			<button class="btn btn-primary" type="button">搜索</button>
 		</span>
@@ -14,80 +101,28 @@
 </div>
 <hr class="line-3" />
 <!-- /.col-lg-6 -->
-<table class="table table-hover table-condensed table-bordered" >
+<table id="tb" class="table table-hover table-condensed table-bordered">
 	<thead>
 		<tr>
-			<th width="15%">编号</th>
-			<th width="35%">产品</th>
-			<th width="25%">交付时间</th>
-			<th width="25%">状态</th>
+			<th width="10%">手机号码</th>
+			<th width="10%">系统内姓名</th>
+			<th width="10%">是否注册</th>
+			<th width="10%">注册日期</th>
+			<th width="10%">是否实名</th>
+			<th width="10%">是否绑卡</th>
+			<th width="10%">是否有过交易</th>
+			<th width="10%">扫码推荐人</th>
+			<th width="10%">返利失效日期</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr class="warning">
-			<td>4</td>
-			<td>TB - Monthly</td>
-			<td>03/04/2012</td>
-			<td>Pending</td>
-		</tr>
-		<tr class="info">
-			<td>5</td>
-			<td>TB - Monthly</td>
-			<td>04/04/2012</td>
-			<td>Call in to confirm</td>
-		</tr>
-		<tr class="warning">
-			<td>4</td>
-			<td>TB - Monthly</td>
-			<td>03/04/2012</td>
-			<td>Pending</td>
-		</tr>
-		<tr class="info">
-			<td>5</td>
-			<td>TB - Monthly</td>
-			<td>04/04/2012</td>
-			<td>Call in to confirm</td>
-		</tr>
-		<tr class="warning">
-			<td>4</td>
-			<td>TB - Monthly</td>
-			<td>03/04/2012</td>
-			<td>Pending</td>
-		</tr>
-		<tr class="info">
-			<td>5</td>
-			<td>TB - Monthly</td>
-			<td>04/04/2012</td>
-			<td>Call in to confirm</td>
-		</tr>
-		<tr class="warning">
-			<td>4</td>
-			<td>TB - Monthly</td>
-			<td>03/04/2012</td>
-			<td>Pending</td>
-		</tr>
-		<tr class="info">
-			<td>5</td>
-			<td>TB - Monthly</td>
-			<td>04/04/2012</td>
-			<td>Call in to confirm</td>
-		</tr>
-		<tr class="warning">
-			<td>4</td>
-			<td>TB - Monthly</td>
-			<td>03/04/2012</td>
-			<td>Pending</td>
-		</tr>
-		<tr class="info">
-			<td>5</td>
-			<td>TB - Monthly</td>
-			<td>04/04/2012</td>
-			<td>Call in to confirm</td>
-		</tr>
 	</tbody>
 </table>
-<nav>
-	<ul class="pagination">
+<ul id="pagination" class="pagination" style="cursor:pointer"></ul>
+<!-- 
+	<ul id="pagination" class="pagination" style="cursor:pointer">
+		<li><a href="#" aria-label="Previous"> <span aria-hidden="true">首页</span>
+		</a></li>
 		<li><a href="#" aria-label="Previous"> <span aria-hidden="true">上一页</span>
 		</a></li>
 		<li class="active"><a href="#">1</a></li>
@@ -97,5 +132,19 @@
 		<li><a href="#">5</a></li>
 		<li><a href="#" aria-label="Next"> <span aria-hidden="true">下一页</span>
 		</a></li>
+		<li><a href="#" aria-label="Previous"> <span aria-hidden="true">尾页</span>
+		</a></li>
+		<li><span aria-hidden="true">
+		每页
+			<select>
+				<option>10</option>
+				<option>20</option>
+				<option>50</option>
+				<option>100</option>
+			</select>
+		条
+			</span>
+		</li>
+		<li><span aria-hidden="true">共123条记录</span></li>
 	</ul>
-</nav>
+-->

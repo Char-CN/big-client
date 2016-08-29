@@ -23,24 +23,24 @@
 		var width = $(window).width();
 		var height = $(window).height();
 		$("#center").width(width - 64);
-		$("#center").height(height - $("#north").height() - $("#south").height() - 103);
+		$("#center").height(height - $("#north").height() - $("#south").height() - 103 - 32);
 		var init = function() {
 			var body = $('body');
 			var link_ul = $('#ulnavbar');
 			//
-			var link_li_1 = $('<li><a href="javascript:void(0);">页面1</a></li>');
+			var link_li_1 = $('<li><a href="javascript:void(0);">外部扩展客户</a></li>');
 			link_li_1.click(function() {
 				setSrc(this, 'page1.html');
 			});
 			link_ul.append(link_li_1);
 			//
-			var link_li_2 = $('<li><a href="javascript:void(0);">页面2</a></li>');
+			var link_li_2 = $('<li><a href="javascript:void(0);">平台待分配客户</a></li>');
 			link_li_2.click(function() {
 				setSrc(this, 'page2.html');
 			});
 			link_ul.append(link_li_2);
 			//
-			var link_li_3 = $('<li><a href="javascript:void(0);">页面2</a></li>');
+			var link_li_3 = $('<li><a href="javascript:void(0);">正式客户</a></li>');
 			link_li_3.click(function() {
 				setSrc(this, 'page3.html');
 			});
@@ -48,6 +48,7 @@
 			link_li_1.click();
 		};
 		var setSrc = function(obj, src) {
+			$("#center_head").text($(obj).text());
 			$("#ulnavbar .active").removeClass();
 			$(obj).addClass("active");
 			if (!$('#headBtn').hasClass('collapsed')) {
@@ -89,7 +90,7 @@
 		</nav>
 	</div>
 	<div class="panel panel-primary panel-border" style="overflow: auto; margin: 15px; align: center; background:">
-		<div class="panel-heading">页面一</div>
+		<div id="center_head" class="panel-heading">默认</div>
 		<div id="center" class="panel-body"></div>
 	</div>
 	<div id="south" style="height: 20px; text-align: center; color: #fff; background-color: #337ab7;">@copy 2016 evergrande group</div>
