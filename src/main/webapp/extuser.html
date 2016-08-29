@@ -11,8 +11,10 @@
 			$.post("ext/findByPage.do", {
 				currentPage : currentPage,
 				pageSize : 10,
-				search : $("#search_text").val()
+// 				search : $("#center .row #search_text").val()
+				search : search_text
 			}, function(data) {
+				alert(1);
 				// 		alert(JSON.stringify(data.page));
 				init(data.rst);
 				// 初始化分页控件：参数：(当前页，页大小，总条数，点击分页时候调用的方法)
@@ -44,6 +46,10 @@
 		findByPage(1);
 		$("#search").click(function(){
 			findByPage(1);
+		});
+		var search_text = "";
+		$("#search_text").change(function() {
+			search_text = $(this).val();
 		});
 	});
 </script>

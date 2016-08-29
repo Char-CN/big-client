@@ -40,11 +40,14 @@ var PageHelper = function(id) {
 			end = currentPage + parseInt(showSize / 2);
 		}
 		for (var i = start; i <= end; i++) {
-			var cls = currentPage == i ? "active" : "";
-			var li = $('<li class="' + cls + '"><span>' + i + '</span></li>');
-			li.click(function() {
-				findByPage($(this).text());
-			});
+			var li = $('<li><span>' + i + '</span></li>');
+			if (currentPage != i) {
+				li.click(function() {
+					findByPage($(this).text());
+				});
+			} else {
+				li.addClass("active");
+			}
 			pagination.append(li);
 		}
 
