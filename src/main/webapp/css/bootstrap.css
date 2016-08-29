@@ -5040,10 +5040,10 @@ fieldset[disabled] .navbar-custom .btn-link:focus {
 .pagination > .disabled > a,
 .pagination > .disabled > a:hover,
 .pagination > .disabled > a:focus {
-  color: #777;
+  color: #fff;
   cursor: not-allowed;
-  background-color: #fff;
-  border-color: #ddd;
+  background-color: #337ab7;
+  border-color: #122b40;
 }
 .pagination-lg > li > a,
 .pagination-lg > li > span {
