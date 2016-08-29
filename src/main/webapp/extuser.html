@@ -1,26 +1,29 @@
 <script>
 	$(function() {
 		var lock = false;
-		var findByPage = function(current) {
+		// 定义分页控件
+		var pagination = new PageHelper("pagination");
+		var findByPage = function(currentPage) {
 			if (lock) {
 				return;
 			}
 			lock = true;
 			$.post("ext/findByPage.do", {
-				currentPage : current,
+				currentPage : currentPage,
 				pageSize : 10
 			}, function(data) {
 				// 		alert(JSON.stringify(data.page));
-				init(data);
-				initPagination(data);
+				init(data.rst);
+				// 初始化分页控件：参数：(当前页，页大小，总条数，点击分页时候调用的方法)
+				pagination.init(data.currentPage, data.pageSize, data.total, findByPage);
 				lock = false;
 			});
 		};
 
-		var init = function(data) {
+		// 初始化数据
+		var init = function(rst) {
 			$("#tb>tbody").empty();
 			$("#tb").height(341);
-			var rst = data.rst;
 			for ( var i in rst) {
 				var cls = i % 2 == 0 ? "info" : "warning";
 				var tr = $('<tr class="' + cls + '">');
@@ -35,56 +38,6 @@
 				tr.append('<td>' + rst[i].sysRebateExpirationDate + '</td>');
 				$("#tb>tbody").append(tr);
 			}
-		};
-
-		var initPagination = function(page) {
-			var pagination = $('<ul id="pagination" class="pagination" style="cursor:pointer">');
-			if ($("#center>#pagination").length != 0) {
-				$("#center>#pagination").remove();
-			}
-			$("#center").append(pagination);
-			var showSize = 5;
-			pagination.empty();
-			var li_first = $('<li><span>首页</span></li>');
-			li_first.click(function() {
-				findByPage(1);
-			});
-			pagination.append(li_first);
-
-			var currentPage = page.currentPage;
-			var pageSize = page.pageSize;
-			var total = page.total;
-			var totalPage = total / pageSize;
-
-			var start = 0;
-			var end = 0;
-
-			if (totalPage < showSize) {
-				start = 1;
-				end = totalPage;
-			} else if (currentPage >= totalPage - parseInt(showSize/2)) {
-				start = totalPage - showSize + 1;
-				end = totalPage;
-			} else if (currentPage <= parseInt(showSize/2)){
-				start = 1;
-				end = showSize;
-			} else {
-				start = currentPage - parseInt(showSize/2);
-				end = currentPage + parseInt(showSize/2);
-			}
-			for (var i = start; i <= end; i++) {
-				var cls = currentPage == i ? "active" : "";
-				var li = $('<li class="' + cls + '"><span>' + i + '</span></li>');
-				li.click(function() {
-					findByPage($(this).text());
-				});
-				pagination.append(li);
-			}
-			var li_end = $('<li><span>尾页</span></li>');
-			li_end.click(function() {
-				findByPage(totalPage);
-			});
-			pagination.append(li_end);
 		};
 
 		findByPage(1);
@@ -118,7 +71,7 @@
 	<tbody>
 	</tbody>
 </table>
-<!-- <ul id="pagination" class="pagination" style="cursor:pointer"></ul> -->
+<ul id="pagination" class="pagination" style="cursor:pointer"></ul>
 <!-- 
 	<ul id="pagination" class="pagination" style="cursor:pointer">
 		<li><a href="#" aria-label="Previous"> <span aria-hidden="true">首页</span>

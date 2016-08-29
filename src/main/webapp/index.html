@@ -18,6 +18,7 @@
 </style>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/pagehelper.js"></script>
 <script>
 	window.onload = function() {
 		var width = $(window).width();
@@ -30,7 +31,7 @@
 			//
 			var link_li_1 = $('<li><a href="javascript:void(0);">外部扩展客户</a></li>');
 			link_li_1.click(function() {
-				setSrc(this, 'page1.html');
+				setSrc(this, 'extuser.html');
 			});
 			link_ul.append(link_li_1);
 			//
