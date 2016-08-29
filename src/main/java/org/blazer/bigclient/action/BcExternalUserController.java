@@ -32,7 +32,8 @@ public class BcExternalUserController extends BaseController {
 	@RequestMapping("findByPage")
 	public PageBody<BcExternalUser> listAllUserByPage(HttpServletRequest request, HttpServletResponse response) {
 		HashMap<String, String> params = getParamMap(request);
-		return bcExternalUserService.findByPage(IntegerUtil.getInt0(params.get("currentPage")), IntegerUtil.getInt0(params.get("pageSize")));
+		LOGGER.debug("currentPage:" + IntegerUtil.getInt0(params.get("currentPage")) + ", pageSize:" + IntegerUtil.getInt0(params.get("pageSize")));
+		return bcExternalUserService.findByPage(params);
 	}
 
 }

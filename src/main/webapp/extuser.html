@@ -10,7 +10,8 @@
 			lock = true;
 			$.post("ext/findByPage.do", {
 				currentPage : currentPage,
-				pageSize : 10
+				pageSize : 10,
+				search : $("#search_text").val()
 			}, function(data) {
 				// 		alert(JSON.stringify(data.page));
 				init(data.rst);
@@ -41,12 +42,15 @@
 		};
 
 		findByPage(1);
+		$("#search").click(function(){
+			findByPage(1);
+		});
 	});
 </script>
 <div class="row" style="margin: 0;">
 	<div class="input-group has-primary" style="float: left; width: 200px;">
-		<input type="text" class="form-control" placeholder="Search for..." /> <span class="input-group-btn">
-			<button class="btn btn-primary" type="button">搜索</button>
+		<input id="search_text" type="text" class="form-control" placeholder="Search for..." /> <span class="input-group-btn">
+			<button id="search" class="btn btn-primary" type="button">搜索</button>
 		</span>
 	</div>
 	<button type="button" class="btn btn-primary" style="float: right;" onclick="aaa();">导出Excel</button>
