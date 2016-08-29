@@ -15,9 +15,9 @@
 				search : search_text
 			}, function(data) {
 				// 		alert(JSON.stringify(data.page));
-				init(data.rst);
+				init(data.list);
 				// 初始化分页控件：参数：(当前页，页大小，总条数，点击分页时候调用的方法)
-				pagination.init(data.currentPage, data.pageSize, data.total, findByPage);
+				pagination.init(data.pageNum, data.pageSize, data.total, findByPage);
 				lock = false;
 			});
 		};
