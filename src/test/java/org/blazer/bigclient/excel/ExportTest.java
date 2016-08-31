@@ -94,6 +94,7 @@ public class ExportTest {
 
     /***
      * 导出测试,指定导出字段
+     *
      * @throws Exception
      */
     @Test
@@ -102,9 +103,16 @@ public class ExportTest {
         //注意,如果传的集合为null,默认导出所有字段,所以想要导出指定的字段集合一定不能为empty,
         //这里我指定导出id,name,age三个字段(以配置文件中的name属性为准,而不是标题)
         List<String> specifyFields = new ArrayList<String>();
-        specifyFields.add("age");
-        specifyFields.add("name");
-        specifyFields.add("id");
+        specifyFields.add("phoneNumber");
+        specifyFields.add("sysName");
+        specifyFields.add("sysIfRegister");
+        specifyFields.add("sysIfRealName");
+        specifyFields.add("sysIfBindCard");
+        specifyFields.add("sysIfTransaction");
+        specifyFields.add("sysReferrer");
+        specifyFields.add("sysRebateExpirationDate");
+        specifyFields.add("mtime");
+        specifyFields.add("ctime");
         List<BcExternalUser> list = getUserList();
         Workbook workbook = context.createExcel(excelId, list, null, specifyFields);
         workbook.write(ops);
@@ -122,9 +130,14 @@ public class ExportTest {
         //注意,如果传的集合为null,默认导出所有字段,所以想要导出指定的字段集合一定不能为empty,
         //这里我指定导出id,name,age三个字段(以配置文件中的name属性为准,而不是标题)
         List<String> specifyFields = new ArrayList<String>();
-        specifyFields.add("id");
-        specifyFields.add("name");
-        specifyFields.add("age");
+        specifyFields.add("phoneNumber");
+        specifyFields.add("sysName");
+        specifyFields.add("sysIfRegister");
+        specifyFields.add("sysIfRealName");
+        specifyFields.add("sysIfBindCard");
+        specifyFields.add("sysIfTransaction");
+        specifyFields.add("sysReferrer");
+        specifyFields.add("sysRebateExpirationDate");
         final List<BcExternalUser> stus = getUserList();
         Workbook workbook = context.createExcel(excelId, stus, new ExcelHeader() {
 
@@ -180,9 +193,14 @@ public class ExportTest {
         //注意,如果传的集合为null,默认导出所有字段,所以想要导出指定的字段集合一定不能为empty,
         //这里我指定导出id,name,age三个字段(以配置文件中的name属性为准,而不是标题)
         List<String> specifyFields = new ArrayList<String>();
-        specifyFields.add("age");
-        specifyFields.add("name");
-        specifyFields.add("id");
+        specifyFields.add("phoneNumber");
+        specifyFields.add("sysName");
+        specifyFields.add("sysIfRegister");
+        specifyFields.add("sysIfRealName");
+        specifyFields.add("sysIfBindCard");
+        specifyFields.add("sysIfTransaction");
+        specifyFields.add("sysReferrer");
+        specifyFields.add("sysRebateExpirationDate");
         //Workbook workbook = context.createExcelTemplate(excelId,null,specifyFields);
         //Workbook workbook = context.createExcelTemplate(excelId,null,null);
         Workbook workbook = context.createExcelTemplate(excelId, new ExcelHeader() {
@@ -196,8 +214,8 @@ public class ExportTest {
                         cell2.setCellValue("这种模板还是有弊端的,没有示例数据,用户不知道填写数据的格式等..");
                     }
                 },
-                //specifyFields);//指定字段,可以打开注释测试
-                null);//不指定字段
+                specifyFields);//指定字段,可以打开注释测试
+                //null);//不指定字段
         workbook.write(ops);
         ops.close();
         workbook.close();
@@ -205,7 +223,7 @@ public class ExportTest {
 
     //获取模拟数据,数据库数据...
     public static List<BcExternalUser> getUserList() {
-        int size = 30;
+        int size = 10;
         List<BcExternalUser> userList = new ArrayList<BcExternalUser>(size);
         for (int i = 0; i < size; i++) {
             BcExternalUser user = new BcExternalUser();

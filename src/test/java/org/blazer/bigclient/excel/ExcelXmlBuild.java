@@ -2,6 +2,8 @@ package org.blazer.bigclient.excel;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.blazer.bigclient.model.BcExternalUser;
+import org.blazer.bigclient.model.BcFormalUser;
+import org.blazer.bigclient.model.BcWaitAllotUser;
 import org.easy.util.ReflectUtil;
 import org.springframework.util.TypeUtils;
 
@@ -23,6 +25,11 @@ public class ExcelXmlBuild {
     public static void main(String[] args) {
         String xml = builderXml("bcExternalUser", "外部拓展客户名单列表", true, BcExternalUser.class, 5000);
         System.out.println(xml);
+        String xml1 = builderXml("bcWaitAllotUser", "平台待分配客户名单列表", true, BcWaitAllotUser.class, 5000);
+        System.out.println(xml1);
+        String xml2 = builderXml("bcFormalUser", "正式客户名单列表", true, BcFormalUser.class, 5000);
+        System.out.println(xml2);
+
     }
 
     /**
@@ -83,7 +90,7 @@ public class ExcelXmlBuild {
         //不是复杂对象
         res.append("\n").append("\t<field").append(" name=").append("\"" + name + "\"").append(" title=").append("\"" + name + "\"");
         if (TypeUtils.isAssignable(Date.class, field.getType())) {
-            String pattern = "yyyy/MM/dd";
+            String pattern = "yyyy-MM-dd";
             res.append(" pattern=").append("\"" + pattern + "\"");
         }
         //是否构建其他标签信息

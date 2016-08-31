@@ -106,5 +106,7 @@
         <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
 
+    <!-- 初始化SpringUtil -->
+    <bean id="springUtil" class="org.easy.util.SpringUtil"/>
 
 </beans>
