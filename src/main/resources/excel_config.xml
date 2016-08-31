@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<excels>
+	<!-- excel标签参看:ExcelDefinition,Field标签参看:FieldValue -->
+
+	<!-- BcExternalUser -->
+	<excel id="bcExternalUser" class="org.blazer.bigclient.model.BcExternalUser" sheetname="外部拓展客户名单列表" defaultColumnWidth="5000" enableStyle="true">
+		<field name="id" title="id"/>
+		<field name="excelId" title="excelId"/>
+		<field name="phoneNumber" title="phoneNumber"/>
+		<field name="sysName" title="sysName"/>
+		<field name="sysIfRegister" title="sysIfRegister"/>
+		<field name="sysRegisterDate" title="sysRegisterDate"/>
+		<field name="sysIfRealName" title="sysIfRealName"/>
+		<field name="sysIfBindCard" title="sysIfBindCard"/>
+		<field name="sysIfTransaction" title="sysIfTransaction"/>
+		<field name="sysReferrer" title="sysReferrer"/>
+		<field name="sysRebateExpirationDate" title="sysRebateExpirationDate"/>
+		<field name="mtime" title="mtime" pattern="yyyy/MM/dd"/>
+		<field name="ctime" title="ctime" pattern="yyyy/MM/dd"/>
+	</excel>
+
+</excels>

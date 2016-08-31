@@ -315,4 +315,23 @@ public class BcExternalUser {
     public void setCtime(Date ctime) {
         this.ctime = ctime;
     }
+
+    @Override
+    public String toString() {
+        return "BcExternalUser{" +
+                "id=" + id +
+                ", excelId=" + excelId +
+                ", phoneNumber=" + phoneNumber +
+                ", sysName='" + sysName + '\'' +
+                ", sysIfRegister='" + sysIfRegister + '\'' +
+                ", sysRegisterDate='" + sysRegisterDate + '\'' +
+                ", sysIfRealName='" + sysIfRealName + '\'' +
+                ", sysIfBindCard='" + sysIfBindCard + '\'' +
+                ", sysIfTransaction='" + sysIfTransaction + '\'' +
+                ", sysReferrer='" + sysReferrer + '\'' +
+                ", sysRebateExpirationDate='" + sysRebateExpirationDate + '\'' +
+                ", mtime=" + mtime +
+                ", ctime=" + ctime +
+                '}';
+    }
 }
