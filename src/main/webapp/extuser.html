@@ -50,6 +50,34 @@
 			search_text = $(this).val();
 		});
 	});
+
+	var importExcel = function () {
+		if ($("fileExcel").val().length > 0) {
+			ajaxFileUpload();
+		}
+		else {
+			alert("请选择图片");
+		}
+	};
+
+	var ajaxFileUpload = function () {
+		$.ajaxFileUpload({
+			url: "/etx/upload", //用于文件上传的服务器端请求地址
+			type: "post",
+			secureuri: false, //一般设置为false
+			fileElementId: "filePicture", //文件上传空间的id属性
+			dataType: "json", //返回值类型 一般设置为json
+			success: function (data, status) {  //服务器成功响应处理函数
+				alert(data.fileName);
+				alert(data.filePath);
+				alert(data.fileSize);
+			},
+			error: function (data, status, e){  //服务器响应失败处理函数
+				alert(e);
+			}
+		});
+	}
+
 </script>
 <div class="row" style="margin: 0;">
 	<div class="input-group has-primary" style="float: left; width: 200px;">
@@ -57,8 +85,9 @@
 			<button id="search" class="btn btn-primary" type="button">搜索</button>
 		</span>
 	</div>
-	<button type="button" class="btn btn-primary" style="float: right;" onclick="aaa();">导出Excel</button>
-	<button type="button" class="btn btn-primary" style="float: right; margin-right: 10px;">新增人员</button>
+	<button type="button" class="btn btn-primary" style="float: right;" onclick="exportExcel();">导出Excel</button>
+	<button type="button" class="btn btn-primary" style="float: right; margin-right: 10px;" onclick="importExcel();">导入Excel</button>
+	<input type="file" id="fileExcel" name="fileExcel" accept=".xls,.xlsx" style="display: none"/>
 </div>
 <hr class="line-3" />
 <!-- /.col-lg-6 -->
@@ -103,9 +132,4 @@
 				<option>50</option>
 				<option>100</option>
 			</select>
-		条
-			</span>
-		</li>
-		<li><span aria-hidden="true">共123条记录</span></li>
-	</ul>
--->
+	
