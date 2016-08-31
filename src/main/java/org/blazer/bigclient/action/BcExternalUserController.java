@@ -1,7 +1,10 @@
 package org.blazer.bigclient.action;
 
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang3.StringUtils;
+import org.blazer.bigclient.model.BcExcel;
 import org.blazer.bigclient.model.BcExternalUser;
+import org.blazer.bigclient.service.BcExcelService;
 import org.blazer.bigclient.service.BcExternalUserService;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.slf4j.Logger;
@@ -12,11 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by cuican on 2016-8-26.
@@ -29,6 +35,9 @@ public class BcExternalUserController extends BaseController {
 
 	@Autowired
 	private BcExternalUserService bcExternalUserService;
+
+	@Autowired
+	private BcExcelService bcExcelService;
 
 	/**
 	 * 根据搜索条件分页查询列表
@@ -45,6 +54,15 @@ public class BcExternalUserController extends BaseController {
 		return bcExternalUserService.findByPage(params);
 	}
 
+
+	@ResponseBody
+	@RequestMapping(value = "upload", method = RequestMethod.POST)
+	public String importExcel(HttpServletRequest request) {
+
+
+
+		return "redirect:/ext/findByPage.do";
+	}
 
 	/**
 	 * 导出excel列表
