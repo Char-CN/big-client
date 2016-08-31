@@ -9,7 +9,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +30,13 @@ public class BcExternalUserController extends BaseController {
 	@Autowired
 	private BcExternalUserService bcExternalUserService;
 
+	/**
+	 * 根据搜索条件分页查询列表
+	 *
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("findByPage")
 	public PageInfo<BcExternalUser> listAllUserByPage(HttpServletRequest request, HttpServletResponse response) {
@@ -34,5 +44,25 @@ public class BcExternalUserController extends BaseController {
 		LOGGER.debug("currentPage:" + IntegerUtil.getInt0(params.get("currentPage")) + ", pageSize:" + IntegerUtil.getInt0(params.get("pageSize")));
 		return bcExternalUserService.findByPage(params);
 	}
+
+
+	/**
+	 * 导出excel列表
+	 *
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	@RequestMapping(value = "export/excel", method = RequestMethod.POST)
+	public ModelAndView exportExcel(@RequestParam(value = "page", defaultValue = "1") Integer page,
+									@RequestParam(value = "rows", defaultValue = "10") Integer rows) {
+		ModelAndView mv = new ModelAndView();
+		// 设置视图名称
+		mv.setViewName("excelView");
+		// 模型数据
+//		mv.addObject("userList", this.bcExternalUserService.queryUserList(page, rows).getRows());
+		return mv;
+	}
+
 
 }

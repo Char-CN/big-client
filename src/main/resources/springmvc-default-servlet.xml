@@ -44,6 +44,9 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <!-- 定义Excel的视图对象 -->
+    <bean name="excelView" class="org.blazer.bigclient.view.BcExternalUserExcelView"></bean>
+
     <mvc:annotation-driven/>
 
     <mvc:interceptors>
