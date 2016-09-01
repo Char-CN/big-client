@@ -106,7 +106,14 @@
         <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
 
+    <!-- Excel上下文  -->
+    <bean id="excelContext" class="org.blazer.bigclient.excel.ExcelContext">
+        <constructor-arg>
+            <!--你自己的excel配置文件路径,不要使用classpath前缀,底层使用的classPathResource-->
+            <value>excel-config.xml</value>
+        </constructor-arg>
+    </bean>
     <!-- 初始化SpringUtil -->
-    <bean id="springUtil" class="org.easy.util.SpringUtil"/>
+    <bean id="springUtil" class="org.blazer.bigclient.util.SpringUtil"/>
 
 </beans>

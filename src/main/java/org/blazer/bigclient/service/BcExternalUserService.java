@@ -30,4 +30,5 @@ public class BcExternalUserService extends BaseService<BcExternalUser> {
 		return new PageInfo<BcExternalUser>(list);
 	}
 
+
 }
