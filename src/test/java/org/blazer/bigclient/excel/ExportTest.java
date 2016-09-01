@@ -5,11 +5,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.blazer.bigclient.model.BcExternalUser;
-import org.easy.excel.ExcelContext;
-import org.easy.excel.ExcelExportResult;
-import org.easy.excel.ExcelHeader;
-import org.easy.excel.vo.ExcelDefinition;
-import org.easy.excel.vo.FieldValue;
+import org.blazer.bigclient.excel.vo.ExcelDefinition;
+import org.blazer.bigclient.excel.vo.FieldValue;
 import org.junit.Test;
 
 import java.io.FileOutputStream;

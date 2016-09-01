@@ -1,10 +1,10 @@
 package org.blazer.bigclient.excel;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.blazer.bigclient.model.BcExternalUser;
 import org.blazer.bigclient.model.BcFormalUser;
 import org.blazer.bigclient.model.BcWaitAllotUser;
-import org.easy.util.ReflectUtil;
+import org.blazer.bigclient.util.ReflectUtil;
 import org.springframework.util.TypeUtils;
 
 import java.lang.reflect.Field;

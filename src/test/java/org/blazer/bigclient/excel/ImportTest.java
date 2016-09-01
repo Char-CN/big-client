@@ -1,8 +1,7 @@
 package org.blazer.bigclient.excel;
 
+import org.blazer.bigclient.excel.vo.ExcelImportResult;
 import org.blazer.bigclient.model.BcExternalUser;
-import org.easy.excel.ExcelContext;
-import org.easy.excel.vo.ExcelImportResult;
 import org.junit.Test;
 
 import java.io.FileInputStream;
