@@ -25,7 +25,7 @@ public class ExcelUtil {
             //获取文件原始名称
             String originalFilename = file.getOriginalFilename();
             //获取文件名后缀
-            String fileSuffix = UploadUtils.getExtensionName(originalFilename);
+            String fileSuffix = UploadUtil.getExtensionName(originalFilename);
 
 
             //判断该类型的文件是否在允许上传的文件类型内
@@ -70,7 +70,7 @@ public class ExcelUtil {
                 File tmpfile = new File(filePath);
 
                 //拷贝文件到服务器缓存目录（在项目下），spring mvc用的方法
-                UploadUtils.copy(file, filePathTemp, tmpFileName);
+                UploadUtil.copy(file, filePathTemp, tmpFileName);
 
                 //删除缓存文件
                 tmpfile.delete();

@@ -9,7 +9,7 @@ import java.io.*;
  *
  * 文件上传工具
  */
-public class UploadUtils {
+public class UploadUtil {
 
 
     /* -----------上传文件,工具方法--------- */
@@ -91,5 +91,15 @@ public class UploadUtils {
         return filename;
     }
 
+    /**
+     * IP地址+时间戳 作为文件名 防止文件名重复
+     *
+     * @param ip
+     * @param suffixString
+     * @return
+     */
+    public static String getNewFileName(String ip,String suffixString){
 
+        return ip+"-"+System.currentTimeMillis()+"."+suffixString;
+    }
 }
