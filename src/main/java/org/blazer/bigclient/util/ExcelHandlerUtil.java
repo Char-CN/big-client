@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ExcelHandlerUtil {
 
+    public static void checkExcelFile(CommonsMultipartFile file, HttpServletRequest request){
+
+    }
+
     public static BcExcel getExcelFile(CommonsMultipartFile file, HttpServletRequest request) {
 
         // 获取文件名

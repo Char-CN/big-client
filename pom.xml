@@ -176,13 +176,6 @@
 			<version>${mapper.version}</version>
 		</dependency>
 
-		<!-- excel导入导出 -->
-		<!--<dependency>
-			<groupId>com.easy</groupId>
-			<artifactId>easy-excel</artifactId>
-			<version>1.0</version>
-		</dependency>-->
-
 	</dependencies>
 
 

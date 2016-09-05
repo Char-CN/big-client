@@ -1,6 +1,7 @@
 package org.blazer.bigclient.action;
 
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.blazer.bigclient.body.AjaxResult;
 import org.blazer.bigclient.excel.ExcelException;
@@ -90,6 +91,32 @@ public class BcExternalUserController extends BaseController {
 		int loginUserId = loginUser.getUserId();*/
 
         if (!file.isEmpty()) {
+
+            //判断请求类型是否为文件上传类型
+            if (!ServletFileUpload.isMultipartContent(request)) {
+                result.setCode(AjaxResult.CODE_FAILURE);
+                result.setMsg("该请求无法上传文件，请联系技术支持。。。");
+                return result;
+            }
+
+            //当文件超过设置的大小时，则不运行上传
+            if (file.getSize() > (1024*1024*100)) {
+                result.setCode(AjaxResult.CODE_FAILURE);
+                result.setMsg("该文件大小超过100m，请更换较小的文件重新上传。。。");
+                return result;
+            }
+
+            //获取文件名后缀
+            String OriginalFilename = file.getOriginalFilename();
+            String fileSuffix = OriginalFilename.substring(OriginalFilename.lastIndexOf(".") + 1).toLowerCase();
+            System.out.println("fileSuffix = " + fileSuffix);
+
+            //判断该类型的文件是否在允许上传的文件类型内
+            if (fileSuffix != "xls" && fileSuffix != "xlsx") {
+                result.setCode(AjaxResult.CODE_FAILURE);
+                result.setMsg("请检查上传的Excle文件的格式是否正确。。。");
+                return result;
+            }
 
             try {
                 // 获取BcExcel对象
