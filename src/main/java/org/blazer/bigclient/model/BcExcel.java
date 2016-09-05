@@ -139,4 +139,18 @@ public class BcExcel {
     public void setCtime(Date ctime) {
         this.ctime = ctime;
     }
+
+    @Override
+    public String toString() {
+        return "BcExcel{" +
+                "id=" + id +
+                ", serviceId=" + serviceId +
+                ", userId=" + userId +
+                ", excelName='" + excelName + '\'' +
+                ", excelRealName='" + excelRealName + '\'' +
+                ", excelRealPath='" + excelRealPath + '\'' +
+                ", mtime=" + mtime +
+                ", ctime=" + ctime +
+                '}';
+    }
 }
