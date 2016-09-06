@@ -10,12 +10,9 @@ import org.blazer.bigclient.excel.vo.ExcelImportResult;
 import org.blazer.bigclient.model.BcExcel;
 import org.blazer.bigclient.model.BcExternalUser;
 import org.blazer.bigclient.model.BcExternalUserBackup;
-import org.blazer.bigclient.service.BcExcelService;
 import org.blazer.bigclient.service.BcExternalUserBackupService;
 import org.blazer.bigclient.service.BcExternalUserService;
-import org.blazer.bigclient.util.ExcelHandlerUtil;
-import org.blazer.bigclient.util.IntegerUtil;
-import org.blazer.bigclient.util.UploadUtil;
+import org.blazer.bigclient.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-
-import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
+import java.util.*;
 
 
 /**
@@ -51,6 +44,18 @@ public class BcExternalUserController extends BaseController {
     @Autowired
     private BcExternalUserBackupService bcExternalUserBackupService;
 
+    //设置文件允许上传的类型
+    private static final HashMap<String, String> TypeMap = new HashMap<String, String>();
+
+    static {
+        TypeMap.put("image", "gif,jpg,jpeg,png,bmp");
+        TypeMap.put("flash", "swf,flv");
+        TypeMap.put("media", "swf,flv,mp3,wav,wma,wmv,mid,avi,mpg,asf,rm,rmvb");
+        TypeMap.put("file", "doc,docx,xls,xlsx,ppt,pptx,htm,html,txt,dwg,pdf");
+    }
+
+    // 设置文件上传大小
+    public static long fileSize = 30 * 1024 * 1024;
 
     /**
      * 根据搜索条件分页查询列表
@@ -63,7 +68,9 @@ public class BcExternalUserController extends BaseController {
     @RequestMapping("findByPage")
     public PageInfo<BcExternalUser> listAllUserByPage(HttpServletRequest request, HttpServletResponse response) {
         HashMap<String, String> params = getParamMap(request);
-        LOGGER.debug("currentPage:" + IntegerUtil.getInt0(params.get("currentPage")) + ", pageSize:" + IntegerUtil.getInt0(params.get("pageSize")));
+        LOGGER.debug("currentPage:" + IntegerUtil.getInt0(params.get("currentPage")) +
+                ", pageSize:" + IntegerUtil.getInt0(params.get("pageSize")) +
+                ", search:" + StringUtil.getStrEmpty(params.get("search")));
         return bcExternalUserService.findByPage(params);
     }
 
@@ -72,16 +79,15 @@ public class BcExternalUserController extends BaseController {
      *
      * @param file
      * @param request
-     * @param response
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "upload", method = RequestMethod.POST)
-    public AjaxResult importExcel(@RequestParam("fileExcel") CommonsMultipartFile file, HttpServletRequest request, HttpServletResponse response) {
+    public AjaxResult importExcel(@RequestParam("fileExcel") CommonsMultipartFile file, HttpServletRequest request) {
 
         LOGGER.info("该上传的excel文件的原文件名是 :" + file.getOriginalFilename());
 
-        AjaxResult result = AjaxResult.success("导入数据成功");
+        AjaxResult result = AjaxResult.success("导入数据成功...");
 
 	/*	User loginUser = (User) request.getSession().getAttribute("loginUser");
         // 判断SESSION是否失效
@@ -95,14 +101,14 @@ public class BcExternalUserController extends BaseController {
             //判断请求类型是否为文件上传类型
             if (!ServletFileUpload.isMultipartContent(request)) {
                 result.setCode(AjaxResult.CODE_FAILURE);
-                result.setMsg("该请求无法上传文件，请联系技术支持。。。");
+                result.setMsg("该请求上传文件失败，请联系技术支持。。。");
                 return result;
             }
 
             //当文件超过设置的大小时，则不运行上传
-            if (file.getSize() > (1024*1024*100)) {
+            if (file.getSize() > fileSize) {
                 result.setCode(AjaxResult.CODE_FAILURE);
-                result.setMsg("该文件大小超过100m，请更换较小的文件重新上传。。。");
+                result.setMsg("该文件大小超限制，请更换较小的文件重新上传。。。");
                 return result;
             }
 
@@ -112,7 +118,8 @@ public class BcExternalUserController extends BaseController {
             System.out.println("fileSuffix = " + fileSuffix);
 
             //判断该类型的文件是否在允许上传的文件类型内
-            if (fileSuffix != "xls" && fileSuffix != "xlsx") {
+            Arrays.asList();
+            if (!Arrays.asList(TypeMap.get("file").split(",")).contains(fileSuffix)) {
                 result.setCode(AjaxResult.CODE_FAILURE);
                 result.setMsg("请检查上传的Excle文件的格式是否正确。。。");
                 return result;
@@ -133,17 +140,17 @@ public class BcExternalUserController extends BaseController {
                 String excelType = "bcExternalUserBackup";
                 ExcelImportResult readExcel = excelContext.readExcel(excelType, file.getInputStream());
                 List<BcExternalUserBackup> listBean = readExcel.getListBean();
-                bcExternalUserBackupService.importExcelData(listBean,bcExcel);
+                bcExternalUserBackupService.importExcelData(listBean, bcExcel);
 
                 // 上传文件
-                UploadUtil.copy(file,bcExcel.getExcelRealPath(), bcExcel.getExcelRealName());
+                UploadUtil.copy(file, bcExcel.getExcelRealPath(), bcExcel.getExcelRealName());
             } catch (Exception e) {
                 result.setCode(AjaxResult.CODE_FAILURE);
                 if (e instanceof ExcelException) {
                     result.setMsg(e.getMessage());
                 } else {
                     if (e instanceof InvalidFormatException) {
-                        result.setMsg("错误的文件格式");
+                        result.setMsg("错误的文件格式。。。");
                     }
                     result.setMsg(e.getMessage());
                     e.printStackTrace();
@@ -158,27 +165,36 @@ public class BcExternalUserController extends BaseController {
 
     /**
      * 导出excel列表
-     *
-     * @param page
-     * @param rows
-     * @return
      */
     @RequestMapping(value = "export/excel", method = RequestMethod.POST)
-    public ModelAndView exportExcel(@RequestParam(value = "page", defaultValue = "1") Integer page,
-                                    @RequestParam(value = "rows", defaultValue = "10") Integer rows) {
-        ModelAndView mv = new ModelAndView();
-        // 设置视图名称
-        mv.setViewName("excelView");
-        // 模型数据
-//		mv.addObject("userList", this.bcExternalUserService.queryUserList(page, rows).getRows());
+    public ModelAndView exportExcel(HttpServletRequest request) {
+
+        //根据条件获取要导出的数据集合
+        HashMap<String, String> params = getParamMap(request);
+        LOGGER.debug("currentPage:" + IntegerUtil.getInt0(params.get("currentPage")) +
+                ", pageSize:" + IntegerUtil.getInt0(params.get("pageSize")) +
+                ", search:" + StringUtil.getStrEmpty(params.get("search")));
+        List<BcExternalUser> list = bcExternalUserService.findByPage(params).getList();
+        //xml配置中的ID
+        String id = "bcExternalUser";
+        //excel文件名称,不需要任何后缀
+        String excelName = "ExternalUser_Export_"+ DateUtil.thisDateTime();
+        //可以为空,自定义Excel头信息
+        ExcelHeader header = null;
+        //指定导出字段
+        List<String> specifyFields = new ArrayList<String>();
+        specifyFields.add("phoneNumber");
+        specifyFields.add("sysName");
+        specifyFields.add("sysIfRegister");
+        specifyFields.add("sysIfRealName");
+        specifyFields.add("sysIfBindCard");
+        specifyFields.add("sysIfTransaction");
+        specifyFields.add("sysReferrer");
+        specifyFields.add("sysRebateExpirationDate");
+
+        //构建excel试图
+        ModelAndView mv = super.createExcelView(id, list, excelName, header, specifyFields);
         return mv;
-    }
-
-
-    @Override
-    public ModelAndView createExcelView(String id, List<?> beans, String excelName, ExcelHeader header, List<String> fields) {
-
-        return super.createExcelView(id, beans, excelName, header, fields);
     }
 
 

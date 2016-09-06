@@ -135,14 +135,14 @@ public class ExportTest {
         specifyFields.add("sysIfTransaction");
         specifyFields.add("sysReferrer");
         specifyFields.add("sysRebateExpirationDate");
-        final List<BcExternalUser> stus = getUserList();
-        Workbook workbook = context.createExcel(excelId, stus, new ExcelHeader() {
+        final List<BcExternalUser> list = getUserList();
+        Workbook workbook = context.createExcel(excelId, list, new ExcelHeader() {
 
             @Override
             public void buildHeader(Sheet sheet, ExcelDefinition excelDefinition, List<?> beans) {
                 Row row1 = sheet.createRow(0);
                 Cell cell = row1.createCell(0);
-                cell.setCellValue("共导出【" + stus.size() + "】条数据");
+                cell.setCellValue("共导出【" + list.size() + "】条数据");
                 Row row2 = sheet.createRow(1);
                 Cell cell2 = row2.createCell(0);
                 cell2.setCellValue("本次批次号为:XXX");
