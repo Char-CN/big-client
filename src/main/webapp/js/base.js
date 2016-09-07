@@ -15,7 +15,7 @@
  */
 var downLoadFile = function (options) {
     var config = $.extend(true, { method: 'post' }, options);
-    var $form = $('<form target="_blank" method="' + config.method + '" />');
+    var $form = $('<form target="_self" method="' + config.method + '" />');
     $form.attr('action', config.url);
     for (var key in config.data) {
         $form.append('<input type="hidden" name="' + key + '" value="' + config.data[key] + '" />');
@@ -25,4 +25,15 @@ var downLoadFile = function (options) {
         config.callback();
     }
     $form[0].submit();
-}
+};
+
+
+var downloadFileByTagA = function(){
+    var a = $("<a></a>").appendTo($("body"));
+    a.attr("href", e.data.filePath);
+    a.attr("download", e.data.fileName);
+    a.appendTo($("body"));
+    a.css("display", "none");
+    $("<span>AAAAAAA</span>").appendTo(a).trigger("click");
+    window.setTimeout(function(){a.remove();},3000);
+};

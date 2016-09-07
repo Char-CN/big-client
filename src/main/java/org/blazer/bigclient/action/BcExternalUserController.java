@@ -164,7 +164,10 @@ public class BcExternalUserController extends BaseController {
     }
 
     /**
-     * 导出excel列表
+     * 根据查询条件导出excel文件
+     *
+     * @param request
+     * @return
      */
     @RequestMapping(value = "export/excel",method = RequestMethod.POST)
     public ModelAndView exportExcel(HttpServletRequest request) {
