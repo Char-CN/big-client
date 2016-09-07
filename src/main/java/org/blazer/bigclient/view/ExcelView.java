@@ -67,7 +67,6 @@ public class ExcelView extends AbstractView{
         List<?> beans = (List<?>) model.get(EXCEL_BEANS);
         Object header = model.get(EXCEL_HEADER);
         Object fields = model.get(EXCEL_FIELDS);
-        @SuppressWarnings("unchecked")
         Workbook workbook = excelContext.createExcel(id, beans,header==null?null:(ExcelHeader)header,fields ==null?null:(List<String>)fields);
         if(workbook!=null){
             excelName = encodeDownloadFileName(request,excelName+FILE_SUFFIX);

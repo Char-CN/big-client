@@ -85,7 +85,7 @@ public class BcExternalUserController extends BaseController {
     @RequestMapping(value = "upload", method = RequestMethod.POST)
     public AjaxResult importExcel(@RequestParam("fileExcel") CommonsMultipartFile file, HttpServletRequest request) {
 
-        LOGGER.info("该上传的excel文件的原文件名是 :" + file.getOriginalFilename());
+        LOGGER.debug("该上传的excel文件的原文件名是 :" + file.getOriginalFilename());
 
         AjaxResult result = AjaxResult.success("导入数据成功...");
 
@@ -166,15 +166,13 @@ public class BcExternalUserController extends BaseController {
     /**
      * 导出excel列表
      */
-    @RequestMapping(value = "export/excel", method = RequestMethod.POST)
+    @RequestMapping(value = "export/excel",method = RequestMethod.POST)
     public ModelAndView exportExcel(HttpServletRequest request) {
 
         //根据条件获取要导出的数据集合
-        HashMap<String, String> params = getParamMap(request);
-        LOGGER.debug("currentPage:" + IntegerUtil.getInt0(params.get("currentPage")) +
-                ", pageSize:" + IntegerUtil.getInt0(params.get("pageSize")) +
-                ", search:" + StringUtil.getStrEmpty(params.get("search")));
-        List<BcExternalUser> list = bcExternalUserService.findByPage(params).getList();
+        String search = StringUtil.getStrEmpty(request.getParameter("search"));
+        LOGGER.debug("search:" + search);
+        List<BcExternalUser> list = bcExternalUserService.findBySearch(search);
         //xml配置中的ID
         String id = "bcExternalUser";
         //excel文件名称,不需要任何后缀
@@ -186,6 +184,7 @@ public class BcExternalUserController extends BaseController {
         specifyFields.add("phoneNumber");
         specifyFields.add("sysName");
         specifyFields.add("sysIfRegister");
+        specifyFields.add("sysRegisterDate");
         specifyFields.add("sysIfRealName");
         specifyFields.add("sysIfBindCard");
         specifyFields.add("sysIfTransaction");

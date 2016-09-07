@@ -16,8 +16,8 @@
 		<field name="sysIfTransaction" title="是否有过交易" />
 		<field name="sysReferrer" title="扫码推荐人" align="center"/>
 		<field name="sysRebateExpirationDate" title="返利失效日期"/>
-		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd"/>
-		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd"/>
+		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
 
 	<!-- BcExternalUserBackup -->
@@ -26,8 +26,8 @@
 		<field name="id" title="自动编号"/>
 		<field name="excelId" title="所属excel编号"/>
 		<field name="phoneNumber" title="手机号码"/>
-		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd"/>
-		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd"/>
+		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
 
 
@@ -37,18 +37,18 @@
 		<field name="id" title="自动编号"/>
 		<field name="userName" title="客户名称"/>
 		<field name="phoneNumber" title="手机号码"/>
-		<field name="registerDate" title="注册日期"/>
+		<field name="registerDate" title="注册日期" pattern="yyyy-MM-dd"/>
 		<field name="idCard" title="身份证号"/>
 		<field name="ifEmployee" title="是否员工"/>
 		<field name="assetsAmount" title="资产余额"/>
 		<field name="sex" title="性别"/>
 		<field name="age" title="年龄"/>
-		<field name="birthday" title="出生日期"/>
+		<field name="birthday" title="出生日期" pattern="yyyy-MM-dd"/>
 		<field name="referrer" title="邀请人"/>
 		<field name="referrerPhoneNumber" title="邀请人手机号"/>
 		<field name="ifReferrerEmployee" title="邀请人是否员工"/>
-		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd"/>
-		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd"/>
+		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
 
 	<!-- BcFormalUser -->
@@ -58,11 +58,11 @@
 		<field name="excelId" title="所属excel编号"/>
 		<field name="phoneNumber" title="手机号码"/>
 		<field name="reportOrAllot" title="上报/分配"/>
-		<field name="reportOrAllotDate" title="上报/分配时间"/>
+		<field name="reportOrAllotDate" title="上报/分配时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<field name="investmentAdviser" title="投资顾问"/>
 		<field name="userIdentify" title="客户标识"/>
-		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd"/>
-		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd"/>
+		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
 
 </excels>

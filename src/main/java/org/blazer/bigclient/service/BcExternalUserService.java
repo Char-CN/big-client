@@ -39,6 +39,20 @@ public class BcExternalUserService extends BaseService<BcExternalUser> {
         return new PageInfo<BcExternalUser>(list);
     }
 
-
-
+    /**
+     * 根据条件查询外部拓展用户集合，
+     * 用于前台页面的Excel导出
+     *
+     * @param search
+     * @return
+     */
+    public List<BcExternalUser> findBySearch(String search) {
+        Example example = new Example(BcExternalUser.class);
+        Example.Criteria criteria = example.createCriteria();
+        if (StringUtils.isNotEmpty(search)) {
+            criteria.andCondition("phone_number like '%" + search + "%'" + " or sys_name like '%" + search + "%'");
+        }
+        List<BcExternalUser> list = selectByExample(example);
+        return list;
+    }
 }

@@ -54,6 +54,10 @@
         <property name="maxInMemorySize" value="40960" />
     </bean>
 
+    <!-- 支持自定义视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+        <property name="order" value="100"></property>
+    </bean>
 
     <!-- 定义Excel的视图对象 -->
     <bean name="excelView" class="org.blazer.bigclient.view.ExcelView"></bean>
