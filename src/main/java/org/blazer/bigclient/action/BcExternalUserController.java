@@ -74,6 +74,44 @@ public class BcExternalUserController extends BaseController {
         return bcExternalUserService.findByPage(params);
     }
 
+
+    @RequestMapping(value = "addOneUser", method = RequestMethod.POST)
+    public AjaxResult addOneUser(HttpServletRequest request){
+        LOGGER.debug("新添加的用户的手机号是 :" + request.getParameter(""));
+
+        AjaxResult result = AjaxResult.success("新添加用户成功...");
+
+
+        return result;
+
+    }
+
+
+    @RequestMapping(value = "editById", method = RequestMethod.POST)
+    public AjaxResult editUserById(HttpServletRequest request){
+        LOGGER.debug("新添加的用户的手机号是 :" + request.getParameter(""));
+
+        AjaxResult result = AjaxResult.success("修改该用户信息成功...");
+
+
+        return result;
+
+    }
+
+
+    @RequestMapping(value = "deleteById", method = RequestMethod.POST)
+    public AjaxResult deleteUserById(HttpServletRequest request){
+        LOGGER.debug("新添加的用户的手机号是 :" + request.getParameter(""));
+
+        AjaxResult result = AjaxResult.success("删除该用户成功...");
+
+
+        return result;
+
+    }
+
+
+
     /**
      * Excel导入
      *

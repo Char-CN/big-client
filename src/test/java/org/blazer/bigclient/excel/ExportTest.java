@@ -130,6 +130,7 @@ public class ExportTest {
         specifyFields.add("phoneNumber");
         specifyFields.add("sysName");
         specifyFields.add("sysIfRegister");
+        specifyFields.add("sysRegisterDate");
         specifyFields.add("sysIfRealName");
         specifyFields.add("sysIfBindCard");
         specifyFields.add("sysIfTransaction");
