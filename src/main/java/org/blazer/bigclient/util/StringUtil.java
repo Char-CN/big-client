@@ -1,7 +1,7 @@
 package org.blazer.bigclient.util;
 
 /**
- * 字符串处理工具
+ * 字符串参数处理工具
  */
 public class StringUtil {
 

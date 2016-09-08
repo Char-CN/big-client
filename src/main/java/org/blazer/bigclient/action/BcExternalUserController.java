@@ -68,40 +68,99 @@ public class BcExternalUserController extends BaseController {
     @RequestMapping("findByPage")
     public PageInfo<BcExternalUser> listAllUserByPage(HttpServletRequest request, HttpServletResponse response) {
         HashMap<String, String> params = getParamMap(request);
-        LOGGER.debug("currentPage:" + IntegerUtil.getInt0(params.get("currentPage")) +
-                ", pageSize:" + IntegerUtil.getInt0(params.get("pageSize")) +
+        LOGGER.debug("currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
+                ", pageSize:" + IntegerUtil.getIntZero(params.get("pageSize")) +
                 ", search:" + StringUtil.getStrEmpty(params.get("search")));
         return bcExternalUserService.findByPage(params);
     }
 
 
+    /**
+     * 手动新增单个用户
+     *
+     * @param request
+     * @return
+     */
+    @ResponseBody
     @RequestMapping(value = "addOneUser", method = RequestMethod.POST)
     public AjaxResult addOneUser(HttpServletRequest request){
-        LOGGER.debug("新添加的用户的手机号是 :" + request.getParameter(""));
-
+        LOGGER.debug("新添加的用户的手机号是 :" + request.getParameter("phoneNumber"));
         AjaxResult result = AjaxResult.success("新添加用户成功...");
 
 
+
+        System.out.println("result = " + result);
         return result;
 
     }
 
+    /**
+     * 根据id查询单个用户信息
+     *
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "selectOneById")
+    public AjaxResult selectOneById(HttpServletRequest request){
+        LOGGER.debug("当前查询的用户的ID编号是 :" + request.getParameter("id"));
+        AjaxResult result = AjaxResult.success("查询单个用户信息成功。。。");
+        try {
+            //获取用户id
+            long id = LongUtil.getLongZero(request.getParameter("id"));
+            System.out.println("id = " + id);
+            //查询数据库
+            BcExternalUser bcExternalUser = this.bcExternalUserService.selectByKey(id);
+            result.setObj(bcExternalUser);
+            if(bcExternalUser == null){
+                result.setCode(AjaxResult.CODE_FAILURE);
+                result.setMsg("该用户信息不存在。。。");
+                return result;
+            }
+        } catch (Exception e) {
+            result.setCode(AjaxResult.CODE_FAILURE);
+            result.setMsg("查询用户信息失败。。。"+e.getMessage());
+            e.printStackTrace();
+        }
 
+        System.out.println("result = " + result);
+        return result;
+    }
+
+
+    /**
+     * 根据id修改单个用户信息
+     *
+     * @param request
+     * @return
+     */
+    @ResponseBody
     @RequestMapping(value = "editById", method = RequestMethod.POST)
     public AjaxResult editUserById(HttpServletRequest request){
-        LOGGER.debug("新添加的用户的手机号是 :" + request.getParameter(""));
+        LOGGER.debug("当前该修改的用户手机号是 :" + request.getParameter("phoneNumber"));
 
         AjaxResult result = AjaxResult.success("修改该用户信息成功...");
 
 
+
+
+
+
         return result;
 
     }
 
 
+    /**
+     * 根据id删除单个用户
+     *
+     * @param request
+     * @return
+     */
+    @ResponseBody
     @RequestMapping(value = "deleteById", method = RequestMethod.POST)
     public AjaxResult deleteUserById(HttpServletRequest request){
-        LOGGER.debug("新添加的用户的手机号是 :" + request.getParameter(""));
+        LOGGER.debug("当前被删除用户的手机号是 :" + request.getParameter("phoneNumber"));
 
         AjaxResult result = AjaxResult.success("删除该用户成功...");
 

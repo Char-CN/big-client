@@ -13,7 +13,7 @@ public class IntegerUtil {
 		return null;
 	}
 
-	public static Integer getInt0(Object o) {
+	public static Integer getIntZero(Object o) {
 		if (o == null) {
 			return 0;
 		}
