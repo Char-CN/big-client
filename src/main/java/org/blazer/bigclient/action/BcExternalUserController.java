@@ -103,7 +103,8 @@ public class BcExternalUserController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "selectOneById")
     public AjaxResult selectOneById(HttpServletRequest request){
-        LOGGER.debug("当前查询的用户的ID编号是 :" + request.getParameter("id"));
+
+        LOGGER.debug("当前查询的用户的ID编号是 :" + LongUtil.getLongZero(request.getParameter("id")));
         AjaxResult result = AjaxResult.success("查询单个用户信息成功。。。");
         try {
             //获取用户id
