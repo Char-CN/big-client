@@ -78,6 +78,85 @@ var util = function() {
 		return this.toFixed(num, 0, true);
 	};
 
+	this.replaceAll = function(data, old_regexp, new_str) {
+		return data.replace(new RegExp(old_regexp, "gm"), new_str);
+	};
+	this.object2QeuryString = function(obj) {
+		var str = "";
+		for ( var i in obj) {
+			if (str != "") {
+				str += "&";
+			}
+			str += i + "=" + obj[i];
+		}
+		return str;
+	};
+	this.getQueryString = function(queryString, name) {
+		var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+		var r = queryString.match(reg);
+		if (r != null) {
+			return unescape(r[2]);
+		}
+		return null;
+	};
+	this.uuid = function() {
+		var len=32;//32长度
+		var radix=16;//16进制
+		var chars='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');var uuid=[],i;radix=radix||chars.length;if(len){for(i=0;i<len;i++)uuid[i]=chars[0|Math.random()*radix];}else{var r;uuid[8]=uuid[13]=uuid[18]=uuid[23]='-';uuid[14]='4';for(i=0;i<36;i++){if(!uuid[i]){r=0|Math.random()*16;uuid[i]=chars[(i==19)?(r&0x3)|0x8:r];}}}
+		return uuid.join('');
+	};
+
+	this.modal = function(title, url, data, onClose) {
+		var div_id = $util.uuid();
+		var div = '';
+		div += '<div id="' + div_id + '" class="modal fade">';
+		div += '	<div class="modal-dialog" role="document">';
+		div += '		<div class="modal-content">';
+		div += '			<div class="modal-header">';
+		div += '				<button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">';
+		div += '					<span aria-hidden="true">&times;</span>';
+		div += '				</button>';
+		div += '				<h4 class="modal-title">' + title + '</h4>';
+		div += '			</div>';
+		div += '		<div class="modal-body">';
+		div += '			One fine body&hellip;';
+		div += '		</div>';
+		div += '		<div class="modal-footer">';
+		div += '			<button type="button" class="btn btn-secondary modal-close" data-dismiss="modal">关闭</button>';
+		div += '			<button type="button" class="btn btn-primary modal-save">保存</button>';
+		div += '		</div>';
+		div += '	</div>';
+		div += '</div>';
+		div = $(div).modal();
+		div.find(".modal-close").click(function() {
+			if (onClose != undefined) {
+				try {
+					onClose();
+				} catch (e) {
+				}
+			}
+		});
+		url = url == undefined ? "404.html" : url;
+		htmlobj = $.ajax({
+			url : url,
+			async : false
+		});
+		var rst = htmlobj.responseText;
+		rst = $util.replaceAll(rst, "[$][{]queryString[}]", $util.object2QeuryString(data));
+		rst = $util.replaceAll(rst, "[$][{]windowId[}]", div_id);
+		div.find(".modal-body").html(rst);
+	};
+
+	this.modalOnSave = function(windowId, func) {
+		$("#" + windowId).find(".modal-save").click(function() {
+			if (func != undefined) {
+				try {
+					func();
+				} catch (e) {
+				}
+			}
+		});
+	};
 };
 
 var $util = new util();

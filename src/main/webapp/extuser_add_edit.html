@@ -15,7 +15,14 @@
 <script>
     $(function () {
 //        var id = "${id}";
+		var queryString = "${queryString}";
+		var windowId = "${windowId}";
         var id = "6";
+		
+		id = $util.getQueryString(queryString, "id");
+		$util.modalOnSave(windowId, function() {
+			alert("这个时候保存了。");
+		});
 
         console.log(id);
 
