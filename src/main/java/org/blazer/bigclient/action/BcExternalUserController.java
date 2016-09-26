@@ -87,7 +87,11 @@ public class BcExternalUserController extends BaseController {
         LOGGER.debug("新添加的用户的手机号是 :" + request.getParameter("phoneNumber"));
         AjaxResult result = AjaxResult.success("新添加用户成功...");
         Long id = LongUtil.getLongZero(request.getParameter("id"));
+        if(id == 0){
 
+        }else {
+
+        }
 
 
         System.out.println("result = " + result);
