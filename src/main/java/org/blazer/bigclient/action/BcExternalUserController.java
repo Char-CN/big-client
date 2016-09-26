@@ -86,6 +86,7 @@ public class BcExternalUserController extends BaseController {
     public AjaxResult addOneUser(HttpServletRequest request){
         LOGGER.debug("新添加的用户的手机号是 :" + request.getParameter("phoneNumber"));
         AjaxResult result = AjaxResult.success("新添加用户成功...");
+        Long id = LongUtil.getLongZero(request.getParameter("id"));
 
 
 
@@ -130,29 +131,6 @@ public class BcExternalUserController extends BaseController {
 
 
     /**
-     * 根据id修改单个用户信息
-     *
-     * @param request
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = "editById", method = RequestMethod.POST)
-    public AjaxResult editUserById(HttpServletRequest request){
-        LOGGER.debug("当前该修改的用户手机号是 :" + request.getParameter("phoneNumber"));
-
-        AjaxResult result = AjaxResult.success("修改该用户信息成功...");
-
-
-
-
-
-
-        return result;
-
-    }
-
-
-    /**
      * 根据id删除单个用户
      *
      * @param request
@@ -161,13 +139,14 @@ public class BcExternalUserController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "deleteById", method = RequestMethod.POST)
     public AjaxResult deleteUserById(HttpServletRequest request){
-        LOGGER.debug("当前被删除用户的手机号是 :" + request.getParameter("phoneNumber"));
+
+        LOGGER.debug("正在被删除的用户手机号是 :" + request.getParameter("phoneNumber"));
 
         AjaxResult result = AjaxResult.success("删除该用户成功...");
-
+        int num1 = this.bcExternalUserService.delete(request.getParameter("id"));
+        int num2 = this.bcExternalUserBackupService.delete(request.getParameter("id"));
 
         return result;
-
     }
 
 

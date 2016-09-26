@@ -13,7 +13,6 @@
             $.post("ext/findByPage.do", {
                 currentPage: currentPage,
                 pageSize: 10,
-// 				search : $("#center .row #search_text").val()
                 search: search_text
             }, function (data) {
                 // 		alert(JSON.stringify(data.page));
@@ -47,15 +46,59 @@
                
 				var td = $("<td>");
 				td.append($("<a>编辑</a>").click({
-					id : rst[i].id
+					id : rst[i].id,
+                    phoneNumber: rst[i].phoneNumber,
+                    sysName: rst[i].sysName,
+                    sysIfRegister: rst[i].sysIfRegister,
+                    sysRegisterDate: rst[i].sysRegisterDate,
+                    sysIfRealName: rst[i].sysIfRealName,
+                    sysIfBindCard: rst[i].sysIfBindCard,
+                    sysIfTransaction: rst[i].sysIfTransaction,
+                    sysReferrer: rst[i].sysReferrer,
+                    sysRebateExpirationDate: rst[i].sysRebateExpirationDate
 				}, function(event) {
-					editUser(event.data.id);
+                    $util.modal("修改用户", "extuser_add_edit.html", {
+                        id : event.data.id,
+                        phoneNumber: event.data.phoneNumber,
+                        sysName: event.data.sysName,
+                        sysIfRegister: event.data.sysIfRegister,
+                        sysRegisterDate: event.data.sysRegisterDate,
+                        sysIfRealName: event.data.sysIfRealName,
+                        sysIfBindCard: event.data.sysIfBindCard,
+                        sysIfTransaction: event.data.sysIfTransaction,
+                        sysReferrer: event.data.sysReferrer,
+                        sysRebateExpirationDate: event.data.sysRebateExpirationDate
+                    }, function() {
+                        //刷新当前页
+                        reload();
+                    });
 				}));
 				td.append($("<a>删除</a>").click({
 					id : rst[i].id
 				}, function(event) {
-					deleteUser(event.data.id);
+				    var id = event.data.id;
+                    console.log(id);
+                    var r = confirm("确定要删除该用户吗？删除后数据无法恢复！！！")
+                    if (r == true) {
+                        $.ajax({
+                            type : 'POST',
+                            contentType : 'application/json',
+                            url : '/ext/deleteById.do',
+                            data : {'id' : id},
+                            dataType : 'json',
+                            success : function(data) {
+                                alert(data.msg);
+                                //刷新当前页
+                                reload();
+                            },
+                            error : function(data) {
+                                alert(data.msg);
+                            }
+                        });
+                    } else {
+                    }
 				}));
+
 				tr.append(td);
 				$("#tb>tbody").append(tr);
 			}
@@ -70,54 +113,6 @@
 			search_text = $(this).val();
 		});
 
-		/**编辑用户*/
-		var editUser = function(id) {
-			alert(id);
-            window.location.href="extuser_add_edit.html";
-
-            /*$.ajax({
-                type : 'POST',
-                contentType : 'application/json',
-                url : '/ext/editById.do',
-                data : {'id' : id},
-                dataType : 'json',
-                success : function(data) {
-                    alert(data.msg);
-                },
-                error : function(data) {
-                    alert(data.msg);
-                }
-            });*/
-		};
-
-		/**删除用户*/
-		var deleteUser = function(id) {
-            var r = confirm("确定要上传该Excel文件吗？")
-            if (r == true) {
-                alert(id);
-                $.ajax({
-                    type : 'POST',
-                    contentType : 'application/json',
-                    url : '/ext/deleteById.do',
-                    data : {'id' : id},
-                    dataType : 'json',
-                    success : function(data) {
-                        alert(data.msg);
-                    },
-                    error : function(data) {
-                        alert(data.msg);
-                    }
-                });
-            } else {
-
-            }
-
-		};
-
-		/**手动添加单个用户*/
-		$('#addOneUser').click(function(){
-
-        });
 
 		/**ajax上传excel*/
 		$('#importExcel').click(function() {
@@ -173,11 +168,15 @@
 			});
 		});
 
-		$('#addOneUser').click(function() {
-			$util.modal("新增人员", "extuser_add_edit.html", {id:111,name:"aaa"}, function() {
-				alert("这个时候关闭了。");
+        /**
+         * 保存用户
+         */
+        $('#addOneUser').click(function() {
+			$util.modal("新增人员", "extuser_add_edit.html", {}, function() {
+				reload();
 			});
 		});
+
 
     });
 </script>
@@ -191,25 +190,6 @@
     <button type="button" id="exportExcel" class="btn btn-primary" style="float: right;">导出Excel</button>
     <button type="button" id="importExcel" class="btn btn-primary" style="float: right; margin-right: 10px;">导入Excel</button>
     <button type="button" id="addOneUser" class="btn btn-primary" style="float: right; margin-right: 10px;">新增用户</button>
-<!--     <div id="myModal" class="modal fade"> -->
-<!-- 	  <div class="modal-dialog" role="document"> -->
-<!-- 	    <div class="modal-content"> -->
-<!-- 	      <div class="modal-header"> -->
-<!-- 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
-<!-- 	          <span aria-hidden="true">&times;</span> -->
-<!-- 	        </button> -->
-<!-- 	        <h4 class="modal-title">Modal title</h4> -->
-<!-- 	      </div> -->
-<!-- 	      <div class="modal-body"> -->
-<!-- 	        One fine body&hellip; -->
-<!-- 	      </div> -->
-<!-- 	      <div class="modal-footer"> -->
-<!-- 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-<!-- 	        <button type="button" class="btn btn-primary">Save changes</button> -->
-<!-- 	      </div> -->
-<!-- 	    </div> -->
-<!-- 	  </div> -->
-<!-- 	</div> -->
     <input type="file" id="fileExcel" name="fileExcel" accept=".xls,.xlsx" style="display: none"/>
 </div>
 <hr class="line-3"/>
