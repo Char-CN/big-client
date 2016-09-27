@@ -1,77 +1,14 @@
-<style type="text/css">
-    .modal-header {
-        padding: 10px 15px;
-    }
 
-    .modal-title {
-        font-size: 20px;
-        color: #3c4f62;
-        font-weight: 600;
-    }
-
-    .close {
-        position: absolute;
-        width: 42px;
-        height: 45px;
-        top: 0;
-        right: 0;
-        transition: all 0.5s;
-        font-size: 30px;
-    }
-
-    .close:hover {
-        color: #12d950;
-        transform: rotateZ(360deg);
-    }
-
-    .input-group {
-        width: 100%;
-        padding: 5px;
-
-    }
-
-    .input-group-addon {
-        text-align: right;
-        width: 30%;
-        background-color: transparent;
-        border: none;
-        font-size: 14px;
-        color: #666;
-        font-weight: 600;
-    }
-
-    .modal-dialog .form-control {
-        width: 70% !important;
-        border: none;
-        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .0);
-        border-bottom: 1px solid #c0d0dd;
-        border-radius: 0;
-        font-weight: 600;
-    }
-
-    .input-group .radio-inline {
-        margin-left: -10px;
-    }
-
-    .modal-footer .btn {
-        padding: 6px 30px;
-    }
-
-    /*
-        .modal-footer .btn-primary{
-            background: #12d950;
-        }*/
-</style>
 <script>
     $(function () {
         //接受传参
         var queryString = "${queryString}";
         // 当前窗口id
         var windowId = "${windowId}";
+        //当前窗口dom对象
         var this_window = $("#" + windowId);
-        var id = "1";
         //获取参数
-        id = $util.getQueryString(queryString, "id");
+        var id = $util.getQueryString(queryString, "id");
         var phoneNumber = $util.getQueryString(queryString, "phoneNumber");
         var sysName = $util.getQueryString(queryString, "sysName");
         var sysIfRegister = $util.getQueryString(queryString, "sysIfRegister");
@@ -91,15 +28,31 @@
         var _sysIfTransaction = this_window.find("input[name=sysIfTransaction]");
         var _sysReferrer = this_window.find("input[name=sysReferrer]");
         var _sysRebateExpirationDate = this_window.find("input[name=sysRebateExpirationDate]");
-        console.log(_phoneNumber);
+//        console.log(_phoneNumber);
         //回显数据
-        if (queryString) {
+        if (id != null) {
             _phoneNumber.val(phoneNumber);
             _sysName.val(sysName);
+            if (sysIfRegister == "否") {
+                this_window.find('#sysIfRegister2').attr("checked","checked");
+//                this_window.find('#sysIfRegister1').removeAttr("checked");
+            }
             _sysIfRegister.val(sysIfRegister);
             _sysRegisterDate.val(sysRegisterDate);
+            if (sysIfRealName == "否") {
+                this_window.find('#sysIfRealName2').attr("checked","checked");
+//                this_window.find('#sysIfRealName1').removeAttr("checked");
+            }
             _sysIfRealName.val(sysIfRealName);
+            if (sysIfBindCard == "否") {
+                this_window.find('#sysIfBindCard2').attr("checked","checked");
+//                this_window.find('#sysIfBindCard1').removeAttr("checked");
+            }
             _sysIfBindCard.val(sysIfBindCard);
+            if (sysIfTransaction == "否") {
+                this_window.find('#sysIfTransaction2').attr("checked","checked");
+//                this_window.find('#sysIfTransaction1').removeAttr("checked");
+            }
             _sysIfTransaction.val(sysIfTransaction);
             _sysReferrer.val(sysReferrer);
             _sysRebateExpirationDate.val(sysRebateExpirationDate);
@@ -126,6 +79,34 @@
         });
 
     });
+    //   Date 插件   start
+    $('#ca').calendar({
+        width: 320,
+        height: 320,
+        data: [
+            {
+                date: '2015/12/24',
+                value: 'Christmas Eve'
+            },
+            {
+                date: '2015/12/25',
+                value: 'Merry Christmas'
+            },
+            {
+                date: '2016/01/01',
+                value: 'Happy New Year'
+            }
+        ],
+        onSelected: function (view, date, data) {
+        }
+    });
+    function createDate(event) {
+        $("<div id='da'></div>").calendar({
+            trigger: $(event),
+            zIndex: 999,
+            format: 'yyyy-mm-dd'
+        }).appendTo($("body"));
+    }
 </script>
 
 
@@ -143,114 +124,45 @@
 </div>
 <div class="input-group">
     <span class="input-group-addon">注册日期</span>
-    <input type="text" class="form-control" name="sysRegisterDate" placeholder="请选择注册日期">
+    <input type="text" class="form-control" name="sysRegisterDate" onclick="createDate(this)" onfocus="createDate(this)"  placeholder="请选择注册日期">
 </div>
 <div class="input-group">
     <span class="input-group-addon">返利失效日期</span>
-    <input type="text" class="form-control" name="sysRebateExpirationDate" placeholder="请选择返利失效日期">
+    <input type="text" class="form-control" name="sysRebateExpirationDate" onclick="createDate(this)" onfocus="createDate(this)"  placeholder="请选择返利失效日期">
 </div>
 <div class="input-group">
     <span class="input-group-addon">是否注册</span>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <label class="radio-inline">
         <input type="radio" name="sysIfRegister" id="sysIfRegister1" value="是" checked> 是
     </label>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <label class="radio-inline">
         <input type="radio" name="sysIfRegister" id="sysIfRegister2" value="否"> 否
     </label>
 </div>
 <div class="input-group">
     <span class="input-group-addon">是否实名</span>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <label class="radio-inline">
         <input type="radio" name="sysIfRealName" id="sysIfRealName1" value="是" checked> 是
     </label>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <label class="radio-inline">
         <input type="radio" name="sysIfRealName" id="sysIfRealName2" value="否"> 否
     </label>
 </div>
 <div class="input-group">
     <span class="input-group-addon">是否绑卡</span>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <label class="radio-inline">
         <input type="radio" name="sysIfBindCard" id="sysIfBindCard1" value="是" checked> 是
     </label>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <label class="radio-inline">
         <input type="radio" name="sysIfBindCard" id="sysIfBindCard2" value="否"> 否
     </label>
 </div>
 <div class="input-group">
     <span class="input-group-addon">是否有过交易</span>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <label class="radio-inline">
         <input type="radio" name="sysIfTransaction" id="sysIfTransaction1" value="是" checked> 是
     </label>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <label class="radio-inline">
         <input type="radio" name="sysIfTransaction" id="sysIfTransaction2" value="否"> 否
     </label>
 </div>
-
-
-    <!--
-    <div class="form-group">
-        <label class="col-sm-2 control-label">聚焦</label>
-        <div class="col-sm-10">
-            <input class="form-control" id="focusedInput" type="text"  value="该输入框获得焦点...">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="inputPassword" class="col-sm-2 control-label">
-            禁用
-        </label>
-        <div class="col-sm-10">
-            <input class="form-control" id="disabledInput" type="text" placeholder="该输入框禁止输入..." disabled>
-        </div>
-    </div>
-    <fieldset disabled>
-        <div class="form-group">
-            <label for="disabledTextInput"  class="col-sm-2 control-label">禁用输入（Fieldset disabled）
-            </label>
-            <div class="col-sm-10">
-                <input type="text" id="disabledTextInput" class="form-control"  placeholder="禁止输入">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="disabledSelect"  class="col-sm-2 control-label">禁用选择菜单（Fieldset disabled）
-            </label>
-            <div class="col-sm-10">
-                <select id="disabledSelect" class="form-control">
-                    <option>禁止选择</option>
-                </select>
-            </div>
-        </div>
-    </fieldset>
-    <div class="form-group has-success">
-        <label class="col-sm-2 control-label" for="inputSuccess">
-            输入成功
-        </label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputSuccess">
-        </div>
-    </div>
-    <div class="form-group has-warning">
-        <label class="col-sm-2 control-label" for="inputWarning">
-            输入警告
-        </label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputWarning">
-        </div>
-    </div>
-    <div class="form-group has-error">
-        <label class="col-sm-2 control-label" for="inputError">
-            输入错误
-        </label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputError">
-        </div>
-    </div>
-
-</body>-->

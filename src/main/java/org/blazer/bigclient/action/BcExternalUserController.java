@@ -76,27 +76,70 @@ public class BcExternalUserController extends BaseController {
 
 
     /**
-     * 手动新增单个用户
+     * 保存单个用户
      *
      * @param request
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "addOneUser", method = RequestMethod.POST)
-    public AjaxResult addOneUser(HttpServletRequest request){
-        LOGGER.debug("新添加的用户的手机号是 :" + request.getParameter("phoneNumber"));
-        AjaxResult result = AjaxResult.success("新添加用户成功...");
+    public AjaxResult addOneUser(HttpServletRequest request) {
+        AjaxResult result = AjaxResult.success("添加用户成功...");
+        //获取前台页面传递的参数
         Long id = LongUtil.getLongZero(request.getParameter("id"));
-        if(id == 0){
+        String phoneNumber = StringUtil.getStrEmpty(request.getParameter("phoneNumber"));
+        LOGGER.debug("正在保存的用户手机号是 :" + phoneNumber);
+        String sysName = StringUtil.getStrEmpty(request.getParameter("sysName"));
+        String sysIfRegister = StringUtil.getStrEmpty(request.getParameter("sysIfRegister"));
+        String sysRegisterDate = StringUtil.getStrEmpty(request.getParameter("sysRegisterDate"));
+        String sysIfRealName = StringUtil.getStrEmpty(request.getParameter("sysIfRealName"));
+        String sysIfBindCard = StringUtil.getStrEmpty(request.getParameter("sysIfBindCard"));
+        String sysIfTransaction = StringUtil.getStrEmpty(request.getParameter("sysIfTransaction"));
+        String sysReferrer = StringUtil.getStrEmpty(request.getParameter("sysReferrer"));
+        String sysRebateExpirationDate = StringUtil.getStrEmpty(request.getParameter("sysRebateExpirationDate"));
 
-        }else {
+        //查询该手机号数据库中是否存在
+        Boolean flag = this.bcExternalUserService.findByPhoneNumber(phoneNumber);
 
+        // 如果id为空，则是新增，不为空，则为修改
+        if (id == null && !flag) {
+            //构建BcExternalUser对象
+            BcExternalUser bcExternalUser = new BcExternalUser();
+            bcExternalUser.setExcelId(0L);
+            bcExternalUser.setPhoneNumber(Long.parseLong(phoneNumber));
+            bcExternalUser.setSysName(sysName);
+            bcExternalUser.setSysIfRegister(sysIfRegister);
+            bcExternalUser.setSysRegisterDate(sysRegisterDate);
+            bcExternalUser.setSysIfRealName(sysIfRealName);
+            bcExternalUser.setSysIfBindCard(sysIfBindCard);
+            bcExternalUser.setSysIfTransaction(sysIfTransaction);
+            bcExternalUser.setSysReferrer(sysReferrer);
+            bcExternalUser.setSysRebateExpirationDate(sysRebateExpirationDate);
+            bcExternalUser.setCtime(new Date());
+            bcExternalUser.setMtime(bcExternalUser.getCtime());
+            //构建BcExternalUserBackup对象
+            BcExternalUserBackup bcExternalUserBackup = new BcExternalUserBackup();
+            //当excelId为0时，则说明该条记录不是excel导入，是手动单条添加的。
+            bcExternalUserBackup.setExcelId(bcExternalUser.getExcelId());
+            bcExternalUserBackup.setPhoneNumber(Long.parseLong(phoneNumber));
+            bcExternalUserBackup.setCtime(bcExternalUser.getCtime());
+            bcExternalUserBackup.setMtime(bcExternalUserBackup.getCtime());
+            //保存到数据库
+            int num = this.bcExternalUserService.saveUserToTwo(bcExternalUser, bcExternalUserBackup);
+            if (num > 0) {
+                return result;
+            } else {
+                result.setCode(AjaxResult.CODE_FAILURE);
+                result.setMsg("新添加用户失败！");
+                return result;
+            }
+
+        } else {
+            //修改用户
+
+            System.out.println("result = " + result);
+            return result;
         }
-
-
-        System.out.println("result = " + result);
-        return result;
-
     }
 
     /**
@@ -107,7 +150,7 @@ public class BcExternalUserController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "selectOneById")
-    public AjaxResult selectOneById(HttpServletRequest request){
+    public AjaxResult selectOneById(HttpServletRequest request) {
 
         LOGGER.debug("当前查询的用户的ID编号是 :" + LongUtil.getLongZero(request.getParameter("id")));
         AjaxResult result = AjaxResult.success("查询单个用户信息成功。。。");
@@ -118,14 +161,14 @@ public class BcExternalUserController extends BaseController {
             //查询数据库
             BcExternalUser bcExternalUser = this.bcExternalUserService.selectByKey(id);
             result.setObj(bcExternalUser);
-            if(bcExternalUser == null){
+            if (bcExternalUser == null) {
                 result.setCode(AjaxResult.CODE_FAILURE);
                 result.setMsg("该用户信息不存在。。。");
                 return result;
             }
         } catch (Exception e) {
             result.setCode(AjaxResult.CODE_FAILURE);
-            result.setMsg("查询用户信息失败。。。"+e.getMessage());
+            result.setMsg("查询用户信息失败。。。" + e.getMessage());
             e.printStackTrace();
         }
 
@@ -142,7 +185,7 @@ public class BcExternalUserController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "deleteById", method = RequestMethod.POST)
-    public AjaxResult deleteUserById(HttpServletRequest request){
+    public AjaxResult deleteUserById(HttpServletRequest request) {
 
         LOGGER.debug("正在被删除的用户手机号是 :" + request.getParameter("phoneNumber"));
 
@@ -152,7 +195,6 @@ public class BcExternalUserController extends BaseController {
 
         return result;
     }
-
 
 
     /**
@@ -250,7 +292,7 @@ public class BcExternalUserController extends BaseController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "export/excel",method = RequestMethod.POST)
+    @RequestMapping(value = "export/excel", method = RequestMethod.POST)
     public ModelAndView exportExcel(HttpServletRequest request) {
 
         //根据条件获取要导出的数据集合
@@ -260,7 +302,7 @@ public class BcExternalUserController extends BaseController {
         //xml配置中的ID
         String id = "bcExternalUser";
         //excel文件名称,不需要任何后缀
-        String excelName = "ExternalUser_Export_"+ DateUtil.thisDateTime();
+        String excelName = "ExternalUser_Export_" + DateUtil.thisDateTime();
         //可以为空,自定义Excel头信息
         ExcelHeader header = null;
         //指定导出字段

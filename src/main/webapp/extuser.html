@@ -45,7 +45,7 @@
                 tr.append('<td>' + rst[i].sysRebateExpirationDate + '</td>');
                
 				var td = $("<td>");
-				td.append($("<a>编辑</a>").click({
+				td.append($("<a class='compileA'>编辑</a>").click({
 					id : rst[i].id,
                     phoneNumber: rst[i].phoneNumber,
                     sysName: rst[i].sysName,
@@ -73,7 +73,7 @@
                         reload();
                     });
 				}));
-				td.append($("<a>删除</a>").click({
+				td.append($("<a class='removeA'>删除</a>").click({
 					id : rst[i].id
 				}, function(event) {
 				    var id = event.data.id;
