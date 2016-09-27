@@ -1,8 +1,10 @@
 package org.blazer.bigclient.test;
 
 import org.apache.ibatis.session.SqlSession;
+import org.blazer.bigclient.mapper.BcExternalUserBackupMapper;
 import org.blazer.bigclient.mapper.BcExternalUserMapper;
 import org.blazer.bigclient.model.BcExternalUser;
+import org.blazer.bigclient.model.BcExternalUserBackup;
 import org.blazer.bigclient.util.DateUtil;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +23,13 @@ public class BcExternalUserMapperTest extends BasicTest {
 
     @Test
     public void addUserTest() {
-        //获取当前mapper
+        //获取mapper
         BcExternalUserMapper userMapper = sqlSession.getMapper(BcExternalUserMapper.class);
+        BcExternalUserBackupMapper externalUserBackupMapper = sqlSession.getMapper(BcExternalUserBackupMapper.class);
         //批量添加用户
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 200; i++) {
             BcExternalUser user = new BcExternalUser();
+
             if(i % 2 == 0){
                 user.setPhoneNumber(18899990000L + i);
                 user.setSysName("刘备"+i);
@@ -53,9 +57,16 @@ public class BcExternalUserMapperTest extends BasicTest {
 //            for (int j = 0; j < 18 - 1; j++) {
 //                s += random.nextInt(10);
 //            }
+            user.setExcelId(0L);
             user.setMtime(DateUtil.getFirstDateOfMonth(new Date()));
             user.setCtime(user.getMtime());
             userMapper.insert(user);
+            BcExternalUserBackup bcExternalUserBackup = new BcExternalUserBackup();
+            bcExternalUserBackup.setPhoneNumber(user.getPhoneNumber());
+            bcExternalUserBackup.setExcelId(0L);
+            bcExternalUserBackup.setCtime(user.getMtime());
+            bcExternalUserBackup.setMtime(user.getMtime());
+            externalUserBackupMapper.insert(bcExternalUserBackup);
         }
 
 

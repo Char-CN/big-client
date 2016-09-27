@@ -90,11 +90,12 @@ public class BcExternalUserService extends BaseService<BcExternalUser> {
         bcExternalUserBackup.setPhoneNumber(bcExternalUser.getPhoneNumber());
         //查询
         BcExternalUser externalUser = this.mapper.selectOne(bcExternalUser);
-        BcExternalUserBackup externalUserBackup = this.bcExternalUserBackupService.mapper.selectOne(bcExternalUserBackup);
+        BcExternalUserBackup externalUserBackup = this.bcExternalUserBackupService.selcetOne(bcExternalUserBackup);
         if (externalUser == null && externalUserBackup == null) {
             return false;
         } else {
             return true;
         }
     }
+
 }

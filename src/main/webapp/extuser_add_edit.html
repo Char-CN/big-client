@@ -1,4 +1,3 @@
-
 <script>
     $(function () {
         //接受传参
@@ -18,44 +17,17 @@
         var sysIfTransaction = $util.getQueryString(queryString, "sysIfTransaction");
         var sysReferrer = $util.getQueryString(queryString, "sysReferrer");
         var sysRebateExpirationDate = $util.getQueryString(queryString, "sysRebateExpirationDate");
-        //获取input的标签对象
-        var _phoneNumber = this_window.find("input[name=phoneNumber]");
-        var _sysName = this_window.find("input[name=sysName]");
-        var _sysIfRegister = this_window.find("input[name=sysIfRegister]");
-        var _sysRegisterDate = this_window.find("input[name=sysRegisterDate]");
-        var _sysIfRealName = this_window.find("input[name=sysIfRealName]");
-        var _sysIfBindCard = this_window.find("input[name=sysIfBindCard]");
-        var _sysIfTransaction = this_window.find("input[name=sysIfTransaction]");
-        var _sysReferrer = this_window.find("input[name=sysReferrer]");
-        var _sysRebateExpirationDate = this_window.find("input[name=sysRebateExpirationDate]");
-//        console.log(_phoneNumber);
         //回显数据
         if (id != null) {
-            _phoneNumber.val(phoneNumber);
-            _sysName.val(sysName);
-            if (sysIfRegister == "否") {
-                this_window.find('#sysIfRegister2').attr("checked","checked");
-//                this_window.find('#sysIfRegister1').removeAttr("checked");
-            }
-            _sysIfRegister.val(sysIfRegister);
-            _sysRegisterDate.val(sysRegisterDate);
-            if (sysIfRealName == "否") {
-                this_window.find('#sysIfRealName2').attr("checked","checked");
-//                this_window.find('#sysIfRealName1').removeAttr("checked");
-            }
-            _sysIfRealName.val(sysIfRealName);
-            if (sysIfBindCard == "否") {
-                this_window.find('#sysIfBindCard2').attr("checked","checked");
-//                this_window.find('#sysIfBindCard1').removeAttr("checked");
-            }
-            _sysIfBindCard.val(sysIfBindCard);
-            if (sysIfTransaction == "否") {
-                this_window.find('#sysIfTransaction2').attr("checked","checked");
-//                this_window.find('#sysIfTransaction1').removeAttr("checked");
-            }
-            _sysIfTransaction.val(sysIfTransaction);
-            _sysReferrer.val(sysReferrer);
-            _sysRebateExpirationDate.val(sysRebateExpirationDate);
+            this_window.find("input[name=phoneNumber]").val(phoneNumber);
+            this_window.find("input[name=sysName]").val(sysName);
+            this_window.find("input[name=sysIfRegister][value='" + sysIfRegister + "']").attr("checked", true);
+            this_window.find("input[name=sysRegisterDate]").val(sysRegisterDate);
+            this_window.find("input[name=sysIfRealName][value='" + sysIfRealName + "']").attr("checked", true);
+            this_window.find("input[name=sysIfBindCard][value='" + sysIfBindCard + "']").attr("checked", true);
+            this_window.find("input[name=sysIfTransaction][value='" + sysIfTransaction + "']").attr("checked", true);
+            this_window.find("input[name=sysReferrer]").val(sysReferrer);
+            this_window.find("input[name=sysRebateExpirationDate]").val(sysRebateExpirationDate);
         }
 
         /**
@@ -64,16 +36,20 @@
         $util.modalOnSave(windowId, function () {
             $.post("ext/addOneUser.do", {
                 id: id,
-                phoneNumber: _phoneNumber.val(),
-                sysName: _sysName.val(),
-                sysIfRegister: _sysIfRegister.val(),
-                sysRegisterDate: _sysRegisterDate.val(),
-                sysIfRealName: _sysIfRealName.val(),
-                sysIfBindCard: _sysIfBindCard.val(),
-                sysIfTransaction: _sysIfTransaction.val(),
-                sysReferrer: _sysReferrer.val(),
-                sysRebateExpirationDate: _sysRebateExpirationDate.val()
+                phoneNumber: this_window.find("input[name=phoneNumber]").val(),
+                sysName: this_window.find("input[name=sysName]").val(),
+                sysIfRegister: this_window.find("input[name=sysIfRegister]:checked").val(),
+                sysRegisterDate: this_window.find("input[name=sysRegisterDate]").val(),
+                sysIfRealName: this_window.find("input[name=sysIfRealName]:checked").val(),
+                sysIfBindCard: this_window.find("input[name=sysIfBindCard]:checked").val(),
+                sysIfTransaction: this_window.find("input[name=sysIfTransaction]:checked").val(),
+                sysReferrer: this_window.find("input[name=sysReferrer]").val(),
+                sysRebateExpirationDate: this_window.find("input[name=sysRebateExpirationDate]").val()
             }, function (data) {
+                if (data.code == 1) {
+                    //保存成功，关闭当前窗口
+                    $util.modalOnClose(windowId);
+                }
                 alert(data.msg);
             });
         });
@@ -124,11 +100,13 @@
 </div>
 <div class="input-group">
     <span class="input-group-addon">注册日期</span>
-    <input type="text" class="form-control" name="sysRegisterDate" onclick="createDate(this)" onfocus="createDate(this)"  placeholder="请选择注册日期">
+    <input type="text" class="form-control" name="sysRegisterDate" onclick="createDate(this)" onfocus="createDate(this)"
+           placeholder="请选择注册日期">
 </div>
 <div class="input-group">
     <span class="input-group-addon">返利失效日期</span>
-    <input type="text" class="form-control" name="sysRebateExpirationDate" onclick="createDate(this)" onfocus="createDate(this)"  placeholder="请选择返利失效日期">
+    <input type="text" class="form-control" name="sysRebateExpirationDate" onclick="createDate(this)"
+           onfocus="createDate(this)" placeholder="请选择返利失效日期">
 </div>
 <div class="input-group">
     <span class="input-group-addon">是否注册</span>

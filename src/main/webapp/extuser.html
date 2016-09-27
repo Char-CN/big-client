@@ -77,25 +77,14 @@
 					id : rst[i].id
 				}, function(event) {
 				    var id = event.data.id;
-                    console.log(id);
                     var r = confirm("确定要删除该用户吗？删除后数据无法恢复！！！")
                     if (r == true) {
-                        $.ajax({
-                            type : 'POST',
-                            contentType : 'application/json',
-                            url : '/ext/deleteById.do',
-                            data : {'id' : id},
-                            dataType : 'json',
-                            success : function(data) {
-                                alert(data.msg);
-                                //刷新当前页
-                                reload();
-                            },
-                            error : function(data) {
-                                alert(data.msg);
-                            }
+                        console.log(id);
+                        $.post("ext/deleteById.do", {id: id}, function (data) {
+                            alert(data.msg);
+                            //刷新当前页
+                            reload();
                         });
-                    } else {
                     }
 				}));
 
