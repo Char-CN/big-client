@@ -1,115 +1,220 @@
 <script>
-	$(function() {
-		var lock = false;
-		// 定义分页控件
-		var pagination = new PageHelper("pagination");
-		var findByPage = function(currentPage) {
-			if (lock) {
-				return;
-			}
-			lock = true;
-			$.post("ext/findByPage.do", {
-				currentPage : currentPage,
-				pageSize : 10,
-// 				search : $("#center .row #search_text").val()
-				search : search_text
-			}, function(data) {
-				// 		alert(JSON.stringify(data.page));
-				init(data.list);
-				// 初始化分页控件：参数：(当前页，页大小，总条数，点击分页时候调用的方法)
-				pagination.init(data.pageNum, data.pageSize, data.total, findByPage);
-				lock = false;
-			});
-		};
+    $(function () {
+        var lock = false;
+        // 定义分页控件
+        var pagination = new PageHelper("pagination");
+        var _currentPage_lastCurrent = 1;
+        var findByPage = function (currentPage) {
+            if (lock) {
+                return;
+            }
+            _currentPage_lastCurrent = currentPage;
+            lock = true;
+            $.post("wait/findByPage.do", {
+                currentPage: currentPage,
+                pageSize: 10,
+                search: search_text
+            }, function (data) {
+                // alert(JSON.stringify(data.page));
+                init(data.list);
+                // 初始化分页控件：参数：(当前页，页大小，总条数，点击分页时候调用的方法)
+                pagination.init(data.pageNum, data.pageSize, data.total, findByPage);
+                lock = false;
+            });
+        };
 
-		// 初始化数据
-		var init = function(rst) {
-			$("#tb>tbody").empty();
-			for ( var i in rst) {
-				var cls = i % 2 == 0 ? "info" : "warning";
-				var tr = $('<tr class="' + cls + '">');
-				tr.append('<td>' + rst[i].phoneNumber + '</td>');
-				tr.append('<td>' + rst[i].sysName + '</td>');
-				tr.append('<td>' + rst[i].sysIfRegister + '</td>');
-				tr.append('<td>' + rst[i].sysRegisterDate + '</td>');
-				tr.append('<td>' + rst[i].sysIfRealName + '</td>');
-				tr.append('<td>' + rst[i].sysIfBindCard + '</td>');
-				tr.append('<td>' + rst[i].sysIfTransaction + '</td>');
-				tr.append('<td>' + rst[i].sysReferrer + '</td>');
-				tr.append('<td>' + rst[i].sysRebateExpirationDate + '</td>');
+        //刷新当前页
+        var reload = function() {
+            findByPage(_currentPage_lastCurrent);
+        };
+
+        // 初始化数据
+        var init = function (rst) {
+            $("#tb>tbody").empty();
+            for (var i in rst) {
+                var cls = i % 2 == 0 ? "info" : "warning";
+                var tr = $('<tr class="' + cls + '">');
+                tr.append('<td>' + rst[i].userName + '</td>');
+                tr.append('<td>' + rst[i].phoneNumber + '</td>');
+                tr.append('<td>' + rst[i].registerDate + '</td>');
+                tr.append('<td>' + rst[i].idCard + '</td>');
+                tr.append('<td>' + rst[i].ifEmployee + '</td>');
+                tr.append('<td>' + rst[i].assetsAmount + '</td>');
+                tr.append('<td>' + rst[i].sex + '</td>');
+                tr.append('<td>' + rst[i].age + '</td>');
+                tr.append('<td>' + rst[i].birthday + '</td>');
+                tr.append('<td>' + rst[i].referrer + '</td>');
+                tr.append('<td>' + rst[i].referrerPhoneNumber + '</td>');
+                tr.append('<td>' + rst[i].ifReferrerEmployee + '</td>');
+
+				var td = $("<td>");
+				td.append($("<a class='compileA'>编辑</a>").click({
+					id : rst[i].id,
+                    userName:rst[i].userName,
+                    phoneNumber:rst[i].phoneNumber,
+                    registerDate:rst[i].registerDate,
+                    idCard:rst[i].idCard,
+                    ifEmployee:rst[i].ifEmployee,
+                    assetsAmount:rst[i].assetsAmount,
+                    sex:rst[i].sex,
+                    age:rst[i].age,
+                    birthday:rst[i].birthday,
+                    referrer:rst[i].referrer,
+                    referrerPhoneNumber:rst[i].referrerPhoneNumber,
+                    ifReferrerEmployee:rst[i].ifReferrerEmployee
+				}, function(event) {
+                    $util.modal("修改用户", "allotuser_add_edit.html", {
+                        id : event.data.id,
+                        userName:event.data.userName,
+                        phoneNumber:event.data.phoneNumber,
+                        registerDate:event.data.registerDate,
+                        idCard:event.data.idCard,
+                        ifEmployee:event.data.ifEmployee,
+                        assetsAmount:event.data.assetsAmount,
+                        sex:event.data.sex,
+                        age:event.data.age,
+                        birthday:event.data.birthday,
+                        referrer:event.data.referrer,
+                        referrerPhoneNumber:event.data.referrerPhoneNumber,
+                        ifReferrerEmployee:event.data.ifReferrerEmployee
+                    }, function() {
+                        //刷新当前页
+                        reload();
+                    });
+				}));
+				td.append($("<a class='removeA'>删除</a>").click({
+					id : rst[i].id
+				}, function(event) {
+				    var id = event.data.id;
+                    var r = confirm("确定要删除该用户吗？删除后数据无法恢复！！！")
+                    if (r == true) {
+                        console.log(id);
+                        $.post("wait/deleteById.do", {id: id}, function (data) {
+                            alert(data.msg);
+                            //刷新当前页
+                            reload();
+                        });
+                    }
+				}));
+
+				tr.append(td);
 				$("#tb>tbody").append(tr);
 			}
 		};
 
 		findByPage(1);
-		$("#search").click(function(){
+		$("#search").click(function() {
 			findByPage(1);
 		});
 		var search_text = "";
 		$("#search_text").change(function() {
 			search_text = $(this).val();
 		});
-	});
 
-	var importExcel = function () {
-		if ($("fileExcel").val().length > 0) {
-			ajaxFileUpload();
-		}
-		else {
-			alert("请选择图片");
-		}
-	};
 
-	var ajaxFileUpload = function () {
-		$.ajaxFileUpload({
-			url: "/etx/upload", //用于文件上传的服务器端请求地址
-			type: "post",
-			secureuri: false, //一般设置为false
-			fileElementId: "filePicture", //文件上传空间的id属性
-			dataType: "json", //返回值类型 一般设置为json
-			success: function (data, status) {  //服务器成功响应处理函数
-				alert(data.fileName);
-				alert(data.filePath);
-				alert(data.fileSize);
-			},
-			error: function (data, status, e){  //服务器响应失败处理函数
-				alert(e);
+		/**ajax上传excel*/
+		$('#importExcel').click(function() {
+			$("#fileExcel").click();
+		});
+
+		/**选择上传文件后触发*/
+		$('#fileExcel').change(function() {
+			var r = confirm("确定要上传该Excel文件吗？")
+			if (r == true) {
+				ajaxFileUpload();
+			} else {
+				$("#fileExcel").val("");
 			}
 		});
-	}
 
+		//ajax上传文件
+		var ajaxFileUpload = function() {
+			$.ajaxFileUpload({
+				url : "/wait/upload.do", //用于文件上传的服务器端请求地址
+				type : "post",
+				secureuri : false, //一般设置为false
+				fileElementId : "fileExcel", //文件上传空间的id属性
+				dataType : "json", //返回值类型 一般设置为json
+				success : function(data, status) { //服务器成功响应处理函数
+					console.log(data);
+					/** 0:失败,1:成功,2:未登录或session过期,3:无权限 */
+					if (data.code == 0) {
+						alert(data.msg);
+					} else if (data.code == 1) {
+						var excelName = data.obj.excelName;
+						alert(excelName + " ,该文件已成功上传，" + data.msg);
+					} else {
+						alert(data.msg);
+					}
+				},
+				error : function(data, status, e) { //服务器响应失败处理函数
+					alert(data.msg + "---" + e);
+				}
+			});
+		};
+
+		/**
+		 * ajax下载excel
+		 */
+		$("#exportExcel").click(function() {
+			downLoadFile({
+				url : '/wait/export/excel.do', //请求的url
+				data : {search : search_text},//要发送的数据
+				callback : function() {
+					//alert("导出excel文件成功");
+				}
+			});
+		});
+
+        /**
+         * 保存用户
+         */
+        $('#addOneUser').click(function() {
+			$util.modal("新增人员", "allotuser_add_edit.html", {}, function() {
+				reload();
+			});
+		});
+
+
+    });
 </script>
 <div class="row" style="margin: 0;">
-	<div class="input-group has-primary" style="float: left; width: 200px;">
-		<input id="search_text" type="text" class="form-control" placeholder="Search for..." /> <span class="input-group-btn">
+    <div class="input-group has-primary" style="float: left; width: 200px;">
+        <input id="search_text" type="text" class="form-control" placeholder="Search for..."/> <span
+            class="input-group-btn">
 			<button id="search" class="btn btn-primary" type="button">搜索</button>
 		</span>
-	</div>
-	<button type="button" class="btn btn-primary" style="float: right;" onclick="exportExcel();">导出Excel</button>
-	<button type="button" class="btn btn-primary" style="float: right; margin-right: 10px;" onclick="importExcel();">导入Excel</button>
-	<input type="file" id="fileExcel" name="fileExcel" accept=".xls,.xlsx" style="display: none"/>
+    </div>
+    <button type="button" id="exportExcel" class="btn btn-primary" style="float: right;">导出Excel</button>
+    <!--<button type="button" id="importExcel" class="btn btn-primary" style="float: right; margin-right: 10px;">导入Excel</button>
+    <button type="button" id="addOneUser" class="btn btn-primary" style="float: right; margin-right: 10px;">新增用户</button>
+    <input type="file" id="fileExcel" name="fileExcel" accept=".xls,.xlsx" style="display: none"/>-->
 </div>
-<hr class="line-3" />
+<hr class="line-3"/>
 <!-- /.col-lg-6 -->
 <table id="tb" class="table table-hover table-condensed table-bordered">
-	<thead>
-		<tr>
-			<th width="10%">手机号码</th>
-			<th width="10%">系统内姓名</th>
-			<th width="10%">是否注册</th>
-			<th width="10%">注册日期</th>
-			<th width="10%">是否实名</th>
-			<th width="10%">是否绑卡</th>
-			<th width="10%">是否有过交易</th>
-			<th width="10%">扫码推荐人</th>
-			<th width="10%">返利失效日期</th>
-		</tr>
-	</thead>
-	<tbody>
-	</tbody>
+    <thead>
+    <tr>
+        <th width="6%">客户名称</th>
+        <th width="7%">手机号码</th>
+        <th width="10%">注册日期</th>
+        <th width="10%">证件号码</th>
+        <th width="4%">是否员工</th>
+        <th width="10%">资产余额</th>
+        <th width="5%">性别</th>
+        <th width="5%">年龄</th>
+        <th width="7%">出生日期</th>
+        <th width="6%">邀请人</th>
+        <th width="10%">邀请人手机号</th>
+        <th width="10%">邀请人是否员工</th>
+        <th width="10%">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
 </table>
 <ul id="pagination" class="pagination" style="cursor:pointer"></ul>
-<!-- 
+<!--
 	<ul id="pagination" class="pagination" style="cursor:pointer">
 		<li><a href="#" aria-label="Previous"> <span aria-hidden="true">首页</span>
 		</a></li>
@@ -132,4 +237,4 @@
 				<option>50</option>
 				<option>100</option>
 			</select>
--->
+-->              
