@@ -135,6 +135,12 @@ var util = function() {
 				} catch (e) {
 				}
 			}
+			try {
+				setTimeout(function() {
+					$(div).remove();
+				}, 500);
+			} catch (e) {
+			}
 		});
 		url = url == undefined ? "404.html" : url;
 		htmlobj = $.ajax({
