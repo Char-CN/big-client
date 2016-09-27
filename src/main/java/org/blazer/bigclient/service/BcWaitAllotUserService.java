@@ -4,7 +4,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.blazer.bigclient.model.BcWaitAllotUser;
-import org.blazer.bigclient.model.BcWaitAllotUser;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.blazer.bigclient.util.StringUtil;
 import org.springframework.stereotype.Service;
@@ -38,7 +37,7 @@ public class BcWaitAllotUserService extends BaseService<BcWaitAllotUser> {
     }
 
     /**
-     * 根据条件查询外部拓展用户集合，
+     * 根据条件查询用户集合，
      * 用于前台页面的Excel导出
      *
      * @param search
@@ -53,44 +52,4 @@ public class BcWaitAllotUserService extends BaseService<BcWaitAllotUser> {
         List<BcWaitAllotUser> list = selectByExample(example);
         return list;
     }
-//
-//    /**
-//     * 保存单个用户到两张表
-//     *
-//     * @param BcWaitAllotUser
-//     * @param BcWaitAllotUserBackup
-//     * @return
-//     */
-//    public int saveUserToTwo(BcWaitAllotUser BcWaitAllotUser, BcWaitAllotUserBackup BcWaitAllotUserBackup) {
-//        int num1 = this.save(BcWaitAllotUser);
-//        int num2 = this.BcWaitAllotUserBackupService.save(BcWaitAllotUserBackup);
-//        if (num1 > 0 && num2 > 0) {
-//            return 1;
-//        } else {
-//            return -1;
-//        }
-//    }
-//
-//    /**
-//     * 查找手机号是否存在
-//     * 两张表里有一张存在就是true，都不存在即为false
-//     *
-//     * @param phoneNumber
-//     * @return
-//     */
-//    public Boolean findByPhoneNumber(String phoneNumber) {
-//        //构建查询条件
-//        BcWaitAllotUser BcWaitAllotUser = new BcWaitAllotUser();
-//        BcWaitAllotUser.setPhoneNumber(Long.parseLong(phoneNumber));
-//        BcWaitAllotUserBackup BcWaitAllotUserBackup = new BcWaitAllotUserBackup();
-//        BcWaitAllotUserBackup.setPhoneNumber(BcWaitAllotUser.getPhoneNumber());
-//        //查询
-//        BcWaitAllotUser externalUser = this.mapper.selectOne(BcWaitAllotUser);
-//        BcWaitAllotUserBackup externalUserBackup = this.BcWaitAllotUserBackupService.selcetOne(BcWaitAllotUserBackup);
-//        if (externalUser == null && externalUserBackup == null) {
-//            return false;
-//        } else {
-//            return true;
-//        }
-//    }
 }

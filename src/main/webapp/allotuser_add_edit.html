@@ -46,14 +46,14 @@
                 phoneNumber: this_window.find("input[name=phoneNumber]").val(),
                 registerDate: this_window.find("input[name=registerDate]").val(),
                 idCard: this_window.find("input[name=idCard]").val(),
-                ifEmployee: this_window.find("input[name=ifEmployee]").val(),
+                ifEmployee: this_window.find("input[name=ifEmployee]:checked").val(),
                 assetsAmount: this_window.find("input[name=assetsAmount]").val(),
-                sex: this_window.find("input[name=sex]").val(),
+                sex: this_window.find("input[name=sex]:checked").val(),
                 age: this_window.find("input[name=age]").val(),
                 birthday: this_window.find("input[name=birthday]").val(),
                 referrer: this_window.find("input[name=referrer]").val(),
                 referrerPhoneNumber: this_window.find("input[name=referrerPhoneNumber]").val(),
-                ifReferrerEmployee: this_window.find("input[name=ifReferrerEmployee]").val()
+                ifReferrerEmployee: this_window.find("input[name=ifReferrerEmployee]:checked").val()
             }, function (data) {
                 if (data.code == 1) {
                     //保存成功，关闭当前窗口
