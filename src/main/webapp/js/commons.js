@@ -163,6 +163,10 @@ var util = function() {
 			}
 		});
 	};
+
+	this.modalOnClose = function(windowId) {
+		$("#" + windowId).find(".modal-close").click();
+	};
 };
 
 var $util = new util();
