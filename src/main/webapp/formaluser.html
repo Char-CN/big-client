@@ -10,7 +10,7 @@
             }
             _currentPage_lastCurrent = currentPage;
             lock = true;
-            $.post("ext/findByPage.do", {
+            $.post("formal/findByPage.do", {
                 currentPage: currentPage,
                 pageSize: 10,
                 search: search_text
@@ -34,40 +34,49 @@
             for (var i in rst) {
                 var cls = i % 2 == 0 ? "info" : "warning";
                 var tr = $('<tr class="' + cls + '">');
+                tr.append('<td>' + rst[i].userName + '</td>');
                 tr.append('<td>' + rst[i].phoneNumber + '</td>');
-                tr.append('<td>' + rst[i].sysName + '</td>');
-                tr.append('<td>' + rst[i].sysIfRegister + '</td>');
-                tr.append('<td>' + rst[i].sysRegisterDate + '</td>');
-                tr.append('<td>' + rst[i].sysIfRealName + '</td>');
-                tr.append('<td>' + rst[i].sysIfBindCard + '</td>');
-                tr.append('<td>' + rst[i].sysIfTransaction + '</td>');
-                tr.append('<td>' + rst[i].sysReferrer + '</td>');
-                tr.append('<td>' + rst[i].sysRebateExpirationDate + '</td>');
+                tr.append('<td>' + rst[i].registerDate + '</td>');
+                tr.append('<td>' + rst[i].idCard + '</td>');
+                tr.append('<td>' + rst[i].ifEmployee + '</td>');
+                tr.append('<td>' + rst[i].assetsAmount + '</td>');
+                tr.append('<td>' + rst[i].sex + '</td>');
+                tr.append('<td>' + rst[i].age + '</td>');
+                tr.append('<td>' + rst[i].birthday + '</td>');
+                tr.append('<td>' + rst[i].referrer + '</td>');
+                tr.append('<td>' + rst[i].referrerPhoneNumber + '</td>');
+                tr.append('<td>' + rst[i].ifReferrerEmployee + '</td>');
 
 				var td = $("<td>");
 				td.append($("<a class='compileA'>编辑</a>").click({
 					id : rst[i].id,
-                    phoneNumber: rst[i].phoneNumber,
-                    sysName: rst[i].sysName,
-                    sysIfRegister: rst[i].sysIfRegister,
-                    sysRegisterDate: rst[i].sysRegisterDate,
-                    sysIfRealName: rst[i].sysIfRealName,
-                    sysIfBindCard: rst[i].sysIfBindCard,
-                    sysIfTransaction: rst[i].sysIfTransaction,
-                    sysReferrer: rst[i].sysReferrer,
-                    sysRebateExpirationDate: rst[i].sysRebateExpirationDate
+                    userName:rst[i].userName,
+                    phoneNumber:rst[i].phoneNumber,
+                    registerDate:rst[i].registerDate,
+                    idCard:rst[i].idCard,
+                    ifEmployee:rst[i].ifEmployee,
+                    assetsAmount:rst[i].assetsAmount,
+                    sex:rst[i].sex,
+                    age:rst[i].age,
+                    birthday:rst[i].birthday,
+                    referrer:rst[i].referrer,
+                    referrerPhoneNumber:rst[i].referrerPhoneNumber,
+                    ifReferrerEmployee:rst[i].ifReferrerEmployee
 				}, function(event) {
-                    $util.modal("修改用户", "extuser_add_edit.html", {
+                    $util.modal("修改用户", "allotuser_add_edit.html", {
                         id : event.data.id,
-                        phoneNumber: event.data.phoneNumber,
-                        sysName: event.data.sysName,
-                        sysIfRegister: event.data.sysIfRegister,
-                        sysRegisterDate: event.data.sysRegisterDate,
-                        sysIfRealName: event.data.sysIfRealName,
-                        sysIfBindCard: event.data.sysIfBindCard,
-                        sysIfTransaction: event.data.sysIfTransaction,
-                        sysReferrer: event.data.sysReferrer,
-                        sysRebateExpirationDate: event.data.sysRebateExpirationDate
+                        userName:event.data.userName,
+                        phoneNumber:event.data.phoneNumber,
+                        registerDate:event.data.registerDate,
+                        idCard:event.data.idCard,
+                        ifEmployee:event.data.ifEmployee,
+                        assetsAmount:event.data.assetsAmount,
+                        sex:event.data.sex,
+                        age:event.data.age,
+                        birthday:event.data.birthday,
+                        referrer:event.data.referrer,
+                        referrerPhoneNumber:event.data.referrerPhoneNumber,
+                        ifReferrerEmployee:event.data.ifReferrerEmployee
                     }, function() {
                         //刷新当前页
                         reload();
@@ -80,7 +89,7 @@
                     var r = confirm("确定要删除该用户吗？删除后数据无法恢复！！！")
                     if (r == true) {
                         console.log(id);
-                        $.post("ext/deleteById.do", {id: id}, function (data) {
+                        $.post("formal/deleteById.do", {id: id}, function (data) {
                             alert(data.msg);
                             //刷新当前页
                             reload();
@@ -121,7 +130,7 @@
 		//ajax上传文件
 		var ajaxFileUpload = function() {
 			$.ajaxFileUpload({
-				url : "/ext/upload.do", //用于文件上传的服务器端请求地址
+				url : "/formal/upload.do", //用于文件上传的服务器端请求地址
 				type : "post",
 				secureuri : false, //一般设置为false
 				fileElementId : "fileExcel", //文件上传空间的id属性
@@ -149,7 +158,7 @@
 		 */
 		$("#exportExcel").click(function() {
 			downLoadFile({
-				url : '/ext/export/excel.do', //请求的url
+				url : '/formal/export/excel.do', //请求的url
 				data : {search : search_text},//要发送的数据
 				callback : function() {
 					//alert("导出excel文件成功");
@@ -161,7 +170,7 @@
          * 保存用户
          */
         $('#addOneUser').click(function() {
-			$util.modal("新增人员", "extuser_add_edit.html", {}, function() {
+			$util.modal("新增人员", "allotuser_add_edit.html", {}, function() {
 				reload();
 			});
 		});
@@ -186,15 +195,18 @@
 <table id="tb" class="table table-hover table-condensed table-bordered">
     <thead>
     <tr>
-        <th width="10%">手机号码</th>
-        <th width="10%">系统内姓名</th>
-        <th width="10%">是否注册</th>
-        <th width="10%">注册日期</th>
-        <th width="10%">是否实名</th>
-        <th width="10%">是否绑卡</th>
-        <th width="10%">是否有过交易</th>
-        <th width="10%">扫码推荐人</th>
-        <th width="10%">返利失效日期</th>
+        <th width="7%">客户名称</th>
+        <th width="8%">手机号码</th>
+        <th width="7%">注册日期</th>
+        <th width="10%">证件号码</th>
+        <th width="7%">是否员工</th>
+        <th width="8%">资产余额</th>
+        <th width="7%">性别</th>
+        <th width="7%">年龄</th>
+        <th width="7%">出生日期</th>
+        <th width="7%">邀请人</th>
+        <th width="8%">邀请人手机号</th>
+        <th width="7%">邀请人是否员工</th>
         <th width="10%">操作</th>
     </tr>
     </thead>

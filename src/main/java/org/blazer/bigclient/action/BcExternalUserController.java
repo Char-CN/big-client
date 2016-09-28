@@ -148,7 +148,7 @@ public class BcExternalUserController extends BaseController {
                     result.setMsg("修改用户信息失败！");
                 }
             }
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             result.setCode(AjaxResult.CODE_FAILURE);
             result.setMsg("保存用户操作失败。。。" + e.getMessage());
             e.printStackTrace();
