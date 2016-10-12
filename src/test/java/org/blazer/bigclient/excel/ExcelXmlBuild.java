@@ -1,10 +1,7 @@
 package org.blazer.bigclient.excel;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.blazer.bigclient.model.BcExternalUser;
-import org.blazer.bigclient.model.BcExternalUserBackup;
-import org.blazer.bigclient.model.BcFormalUser;
-import org.blazer.bigclient.model.BcWaitAllotUser;
+import org.blazer.bigclient.model.*;
 import org.blazer.bigclient.util.ReflectUtil;
 import org.springframework.util.TypeUtils;
 
@@ -24,14 +21,14 @@ public class ExcelXmlBuild {
 
     //快速构建一个XML配置,看不懂直接运行
     public static void main(String[] args) {
-        String xml = builderXml("bcExternalUser", "外部拓展客户名单列表", true, BcExternalUser.class, 5000);
+        String xml = builderXml("kamUserInfo", "客户列表", true, KamUserInfo.class, 5000);
         System.out.println(xml);
-        String xml1 = builderXml("bcWaitAllotUser", "平台待分配客户名单列表", true, BcWaitAllotUser.class, 5000);
-        System.out.println(xml1);
-        String xml2 = builderXml("bcFormalUser", "正式客户名单列表", true, BcFormalUser.class, 5000);
-        System.out.println(xml2);
-        String xml3 = builderXml("bcExternalUserBackup", "外部拓展客户名单列表备份", true, BcExternalUserBackup.class, 5000);
-        System.out.println(xml3);
+//        String xml1 = builderXml("bcWaitAllotUser", "平台待分配客户名单列表", true, BcWaitAllotUser.class, 5000);
+//        System.out.println(xml1);
+//        String xml2 = builderXml("bcFormalUser", "正式客户名单列表", true, BcFormalUser.class, 5000);
+//        System.out.println(xml2);
+//        String xml3 = builderXml("bcExternalUserBackup", "外部拓展客户名单列表备份", true, BcExternalUserBackup.class, 5000);
+//        System.out.println(xml3);
 
     }
 

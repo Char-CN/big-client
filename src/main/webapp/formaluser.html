@@ -10,9 +10,10 @@
             }
             _currentPage_lastCurrent = currentPage;
             lock = true;
-            $.post("formal/findByPage.do", {
+            $.post("user/findUserByPage.do", {
                 currentPage: currentPage,
                 pageSize: 10,
+                ifReportOrAllot: 1,
                 search: search_text
             }, function (data) {
                 // alert(JSON.stringify(data.page));
@@ -34,20 +35,13 @@
             for (var i in rst) {
                 var cls = i % 2 == 0 ? "info" : "warning";
                 var tr = $('<tr class="' + cls + '">');
-                tr.append('<td>' + rst[i].userName + '</td>');
                 tr.append('<td>' + rst[i].phoneNumber + '</td>');
-                tr.append('<td>' + rst[i].registerDate + '</td>');
-                tr.append('<td>' + rst[i].idCard + '</td>');
-                tr.append('<td>' + rst[i].ifEmployee + '</td>');
-                tr.append('<td>' + rst[i].assetsAmount + '</td>');
-                tr.append('<td>' + rst[i].sex + '</td>');
-                tr.append('<td>' + rst[i].age + '</td>');
-                tr.append('<td>' + rst[i].birthday + '</td>');
-                tr.append('<td>' + rst[i].referrer + '</td>');
-                tr.append('<td>' + rst[i].referrerPhoneNumber + '</td>');
-                tr.append('<td>' + rst[i].ifReferrerEmployee + '</td>');
+                tr.append('<td>' + rst[i].reportOrAllot + '</td>');
+                tr.append('<td>' + rst[i].rebateExpirationDate + '</td>');
+                tr.append('<td>' + rst[i].investmentAdviser + '</td>');
+                tr.append('<td>' + rst[i].userIdentify + '</td>');
 
-				var td = $("<td>");
+				/*var td = $("<td>");
 				td.append($("<a class='compileA'>编辑</a>").click({
 					id : rst[i].id,
                     userName:rst[i].userName,
@@ -63,7 +57,7 @@
                     referrerPhoneNumber:rst[i].referrerPhoneNumber,
                     ifReferrerEmployee:rst[i].ifReferrerEmployee
 				}, function(event) {
-                    $util.modal("修改用户", "allotuser_add_edit.html", {
+                    $util.modal("修改用户", "formaluser_add_edit.html", {
                         id : event.data.id,
                         userName:event.data.userName,
                         phoneNumber:event.data.phoneNumber,
@@ -97,7 +91,7 @@
                     }
 				}));
 
-				tr.append(td);
+				tr.append(td);*/
 				$("#tb>tbody").append(tr);
 			}
 		};
@@ -179,35 +173,33 @@
     });
 </script>
 <div class="row" style="margin: 0;">
-    <div class="input-group has-primary" style="float: left; width: 200px;">
-        <input id="search_text" type="text" class="form-control" placeholder="Search for..."/> <span
-            class="input-group-btn">
-			<button id="search" class="btn btn-primary" type="button">搜索</button>
+    <div class="input-group has-primary" style="float: left; width: 300px;">
+
+
+        <input id="search_text" type="text" class="form-control" placeholder="支持手机号或姓名的模糊查询。。。"/>
+        <span class="input-group-btn">
+			<button id="search3" class="btn btn-primary" type="button">搜索</button>
 		</span>
+
     </div>
     <button type="button" id="exportExcel" class="btn btn-primary" style="float: right;">导出Excel</button>
-    <button type="button" id="importExcel" class="btn btn-primary" style="float: right; margin-right: 10px;">导入Excel</button>
-    <button type="button" id="addOneUser" class="btn btn-primary" style="float: right; margin-right: 10px;">新增用户</button>
-    <input type="file" id="fileExcel" name="fileExcel" accept=".xls,.xlsx" style="display: none"/>
+    <!--<button type="button" id="importExcel" class="btn btn-primary" style="float: right; margin-right: 10px;">导入Excel</button>-->
+    <!--<button type="button" id="addOneUser" class="btn btn-primary" style="float: right; margin-right: 10px;">新增用户</button>-->
+    <!--<input type="file" id="fileExcel" name="fileExcel" accept=".xls,.xlsx" style="display: none"/>-->
 </div>
 <hr class="line-3"/>
 <!-- /.col-lg-6 -->
 <table id="tb" class="table table-hover table-condensed table-bordered">
     <thead>
     <tr>
-        <th width="7%">客户名称</th>
-        <th width="8%">手机号码</th>
-        <th width="7%">注册日期</th>
-        <th width="10%">证件号码</th>
-        <th width="7%">是否员工</th>
-        <th width="8%">资产余额</th>
-        <th width="7%">性别</th>
-        <th width="7%">年龄</th>
-        <th width="7%">出生日期</th>
-        <th width="7%">邀请人</th>
-        <th width="8%">邀请人手机号</th>
-        <th width="7%">邀请人是否员工</th>
-        <th width="10%">操作</th>
+        <th width="10%">手机号码</th>
+        <th width="10%">上报/分配</th>
+        <th width="10%">上报/分配时间</th>
+        <th width="10%">投资顾问</th>
+        <th width="10%">客户标识</th>
+        <!--<th width="10%">版本号码</th>-->
+        <!--<th width="10%">更新时间</th>-->
+        <!--<th width="10%">操作</th>-->
     </tr>
     </thead>
     <tbody>
