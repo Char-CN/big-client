@@ -277,24 +277,24 @@ public class BcExternalUserController extends BaseController {
             }
 
             try {
-                // 获取BcExcel对象
-                BcExcel bcExcel = ExcelHandlerUtil.getExcelFile(file, request);
-                bcExcel.setServiceId(1);
-                bcExcel.setUserId(1L);
-                bcExcel.setMtime(new Date());
-                bcExcel.setCtime(bcExcel.getMtime());
-                System.out.println("bcExcel = " + bcExcel);
-
-                result.setObj(bcExcel);
-
-                // 读取excel文件
-                String excelType = "bcExternalUserBackup";
-                ExcelImportResult readExcel = excelContext.readExcel(excelType, file.getInputStream());
-                List<BcExternalUserBackup> listBean = readExcel.getListBean();
-                bcExternalUserBackupService.importExcelData(listBean, bcExcel);
-
-                // 上传文件
-                UploadUtil.copy(file, bcExcel.getExcelRealPath(), bcExcel.getExcelRealName());
+//                // 获取BcExcel对象
+//                BcExcel bcExcel = ExcelHandlerUtil.getExcelFile(file, request);
+//                bcExcel.setServiceId(1);
+//                bcExcel.setUserId(1L);
+//                bcExcel.setMtime(new Date());
+//                bcExcel.setCtime(bcExcel.getMtime());
+//                System.out.println("bcExcel = " + bcExcel);
+//
+//                result.setObj(bcExcel);
+//
+//                // 读取excel文件
+//                String excelType = "bcExternalUserBackup";
+//                ExcelImportResult readExcel = excelContext.readExcel(excelType, file.getInputStream());
+//                List<BcExternalUserBackup> listBean = readExcel.getListBean();
+//                bcExternalUserBackupService.importExcelData(listBean, bcExcel);
+//
+//                // 上传文件
+//                UploadUtil.copy(file, bcExcel.getExcelRealPath(), bcExcel.getExcelRealName());
             } catch (Exception e) {
                 result.setCode(AjaxResult.CODE_FAILURE);
                 if (e instanceof ExcelException) {

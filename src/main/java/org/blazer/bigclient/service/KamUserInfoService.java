@@ -3,11 +3,13 @@ package org.blazer.bigclient.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
+import org.blazer.bigclient.model.KamExtUserUpload;
 import org.blazer.bigclient.model.KamUserInfo;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.blazer.bigclient.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
@@ -21,6 +23,9 @@ import java.util.List;
 public class KamUserInfoService extends BaseService<KamUserInfo> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(KamUserInfoService.class);
+
+    @Autowired
+    private KamExtUserUploadService kamExtUserUploadService;
 
     public PageInfo<KamUserInfo> findUserByPage(HashMap<String, String> params) {
         LOGGER.info("根据条件查询客户列表。。。");
@@ -46,15 +51,68 @@ public class KamUserInfoService extends BaseService<KamUserInfo> {
     }
 
 
-    /**
-     * 外部拓展客户
-     */
-
+    /*外部拓展客户*/
 
     /**
-     * 平台待分配客户
+     * 根据条件查询外部拓展用户集合，
+     * 用于前台页面的Excel导出
+     *
+     * @param search
+     * @return
      */
+    public List<KamUserInfo> findBySearch(String search) {
+        Example example = new Example(KamUserInfo.class);
+        Example.Criteria criteria = example.createCriteria();
+        if (StringUtils.isNotEmpty(search)) {
+            criteria.andCondition("phone_number like '%" + search + "%'" + " or sys_name like '%" + search + "%'");
+        }
+        List<KamUserInfo> list = selectByExample(example);
+        return list;
+    }
+
+    /**
+     * 保存单个用户到两张表
+     *
+     * @param kamUserInfo
+     * @param kamExtUserUpload
+     * @return
+     */
+    public int saveUserToTwo(KamUserInfo kamUserInfo, KamExtUserUpload kamExtUserUpload) {
+        int num1 = this.save(kamUserInfo);
+        int num2 = this.kamExtUserUploadService.save(kamExtUserUpload);
+        if (num1 > 0 && num2 > 0) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    /**
+     * 查找手机号是否存在
+     * 两张表里有一张存在就是true，都不存在即为false
+     *
+     * @param phoneNumber
+     * @return
+     */
+    public Boolean findByPhoneNumber(String phoneNumber) {
+        //构建查询条件
+        KamUserInfo kamUserInfo = new KamUserInfo();
+        kamUserInfo.setPhoneNumber(Long.parseLong(phoneNumber));
+        KamExtUserUpload kamExtUserUpload = new KamExtUserUpload();
+        kamExtUserUpload.setPhoneNumber(kamUserInfo.getPhoneNumber());
+        //查询
+        KamUserInfo userInfo = this.mapper.selectOne(kamUserInfo);
+        KamExtUserUpload extUserUpload = this.kamExtUserUploadService.selcetOne(kamExtUserUpload);
+        if (userInfo == null && extUserUpload == null) {
+            //该手机号不存在
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /*平台待分配客户*/
 
 
-    /**正式客户*/
+    /*正式客户*/
 }

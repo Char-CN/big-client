@@ -9,42 +9,42 @@
         //获取参数
         var id = $util.getQueryString(queryString, "id");
         var phoneNumber = $util.getQueryString(queryString, "phoneNumber");
-        var sysName = $util.getQueryString(queryString, "sysName");
-        var sysIfRegister = $util.getQueryString(queryString, "sysIfRegister");
-        var sysRegisterDate = $util.getQueryString(queryString, "sysRegisterDate");
-        var sysIfRealName = $util.getQueryString(queryString, "sysIfRealName");
-        var sysIfBindCard = $util.getQueryString(queryString, "sysIfBindCard");
-        var sysIfTransaction = $util.getQueryString(queryString, "sysIfTransaction");
-        var sysReferrer = $util.getQueryString(queryString, "sysReferrer");
-        var sysRebateExpirationDate = $util.getQueryString(queryString, "sysRebateExpirationDate");
+        var investmentAdviser = $util.getQueryString(queryString, "investmentAdviser");
+        var userName = $util.getQueryString(queryString, "userName");
+        var ifRegister = $util.getQueryString(queryString, "ifRegister");
+        var registerDate = $util.getQueryString(queryString, "registerDate");
+        var ifRealName = $util.getQueryString(queryString, "ifRealName");
+        var ifBindCard = $util.getQueryString(queryString, "ifBindCard");
+        var ifTransaction = $util.getQueryString(queryString, "ifTransaction");
+        var referrer = $util.getQueryString(queryString, "referrer");
         //回显数据
         if (id != null) {
             this_window.find("input[name=phoneNumber]").val(phoneNumber);
-            this_window.find("input[name=sysName]").val(sysName);
-            this_window.find("input[name=sysIfRegister][value='" + sysIfRegister + "']").attr("checked", true);
-            this_window.find("input[name=sysRegisterDate]").val(sysRegisterDate);
-            this_window.find("input[name=sysIfRealName][value='" + sysIfRealName + "']").attr("checked", true);
-            this_window.find("input[name=sysIfBindCard][value='" + sysIfBindCard + "']").attr("checked", true);
-            this_window.find("input[name=sysIfTransaction][value='" + sysIfTransaction + "']").attr("checked", true);
-            this_window.find("input[name=sysReferrer]").val(sysReferrer);
-            this_window.find("input[name=sysRebateExpirationDate]").val(sysRebateExpirationDate);
+            this_window.find("input[name=investmentAdviser]").val(investmentAdviser);
+            this_window.find("input[name=userName]").val(userName);
+            this_window.find("input[name=ifRegister][value='" + ifRegister + "']").attr("checked", true);
+            this_window.find("input[name=registerDate]").val(registerDate);
+            this_window.find("input[name=ifRealName][value='" + ifRealName + "']").attr("checked", true);
+            this_window.find("input[name=ifBindCard][value='" + ifBindCard + "']").attr("checked", true);
+            this_window.find("input[name=ifTransaction][value='" + ifTransaction + "']").attr("checked", true);
+            this_window.find("input[name=referrer]").val(referrer);
         }
 
         /**
          * 触发保存按钮
          */
         $util.modalOnSave(windowId, function () {
-            $.post("ext/addOneUser.do", {
+            $.post("user/ext/addOneUser.do", {
                 id: id,
                 phoneNumber: this_window.find("input[name=phoneNumber]").val(),
-                sysName: this_window.find("input[name=sysName]").val(),
-                sysIfRegister: this_window.find("input[name=sysIfRegister]:checked").val(),
-                sysRegisterDate: this_window.find("input[name=sysRegisterDate]").val(),
-                sysIfRealName: this_window.find("input[name=sysIfRealName]:checked").val(),
-                sysIfBindCard: this_window.find("input[name=sysIfBindCard]:checked").val(),
-                sysIfTransaction: this_window.find("input[name=sysIfTransaction]:checked").val(),
-                sysReferrer: this_window.find("input[name=sysReferrer]").val(),
-                sysRebateExpirationDate: this_window.find("input[name=sysRebateExpirationDate]").val()
+                investmentAdviser: this_window.find("input[name=investmentAdviser]").val(),
+                userName: this_window.find("input[name=userName]").val(),
+                ifRegister: this_window.find("input[name=ifRegister]:checked").val(),
+                registerDate: this_window.find("input[name=registerDate]").val(),
+                ifRealName: this_window.find("input[name=ifRealName]:checked").val(),
+                ifBindCard: this_window.find("input[name=ifBindCard]:checked").val(),
+                ifTransaction: this_window.find("input[name=ifTransaction]:checked").val(),
+                referrer: this_window.find("input[name=referrer]").val(),
             }, function (data) {
                 if (data.code == 1) {
                     //保存成功，关闭当前窗口
@@ -86,61 +86,79 @@
 </script>
 
 
+<!--
+id: rst[i].id,
+phoneNumber: rst[i].phoneNumber,
+investmentAdviser: rst[i].investmentAdviser,
+userName: rst[i].userName,
+ifRegister: rst[i].ifRegister,
+registerDate: rst[i].registerDate,
+ifRealName: rst[i].ifRealName,
+ifBindCard: rst[i].ifBindCard,
+ifTransaction: rst[i].ifTransaction,
+referrer: rst[i].referrer
+-->
+
+
 <div class="input-group">
     <span class="input-group-addon">手机号码</span>
     <input type="text" class="form-control" name="phoneNumber" placeholder="请输入手机号码">
 </div>
 <div class="input-group">
-    <span class="input-group-addon">系统姓名</span>
-    <input type="text" class="form-control" name="sysName" placeholder="请输入系统内姓名">
+    <span class="input-group-addon">投资顾问</span>
+    <input type="text" class="form-control" name="investmentAdviser" placeholder="请输入投资顾问">
+</div>
+<div class="input-group">
+    <span class="input-group-addon">客户姓名</span>
+    <input type="text" class="form-control" name="userName" placeholder="请输入系统内姓名">
 </div>
 <div class="input-group">
     <span class="input-group-addon">扫码推荐人</span>
-    <input type="text" class="form-control" name="sysReferrer" placeholder="请输入扫码推荐人姓名">
+    <input type="text" class="form-control" name="referrer" placeholder="请输入扫码推荐人姓名">
 </div>
 <div class="input-group">
     <span class="input-group-addon">注册日期</span>
-    <input type="text" class="form-control" name="sysRegisterDate" onclick="createDate(this)" onfocus="createDate(this)"
+    <input type="text" class="form-control" name="registerDate" onclick="createDate(this)" onfocus="createDate(this)"
            placeholder="请选择注册日期">
 </div>
-<div class="input-group">
-    <span class="input-group-addon">返利失效日期</span>
-    <input type="text" class="form-control" name="sysRebateExpirationDate" onclick="createDate(this)"
-           onfocus="createDate(this)" placeholder="请选择返利失效日期">
-</div>
+<!--<div class="input-group">-->
+    <!--<span class="input-group-addon">返利失效日期</span>-->
+    <!--<input type="text" class="form-control" name="sysRebateExpirationDate" onclick="createDate(this)"-->
+           <!--onfocus="createDate(this)" placeholder="请选择返利失效日期">-->
+<!--</div>-->
 <div class="input-group">
     <span class="input-group-addon">是否注册</span>
     <label class="radio-inline">
-        <input type="radio" name="sysIfRegister" id="sysIfRegister1" value="是" checked> 是
+        <input type="radio" name="ifRegister" value="是" checked> 是
     </label>
     <label class="radio-inline">
-        <input type="radio" name="sysIfRegister" id="sysIfRegister2" value="否"> 否
+        <input type="radio" name="ifRegister" value="否"> 否
     </label>
 </div>
 <div class="input-group">
     <span class="input-group-addon">是否实名</span>
     <label class="radio-inline">
-        <input type="radio" name="sysIfRealName" id="sysIfRealName1" value="是" checked> 是
+        <input type="radio" name="ifRealName" value="是" checked> 是
     </label>
     <label class="radio-inline">
-        <input type="radio" name="sysIfRealName" id="sysIfRealName2" value="否"> 否
+        <input type="radio" name="ifRealName" value="否"> 否
     </label>
 </div>
 <div class="input-group">
     <span class="input-group-addon">是否绑卡</span>
     <label class="radio-inline">
-        <input type="radio" name="sysIfBindCard" id="sysIfBindCard1" value="是" checked> 是
+        <input type="radio" name="ifBindCard" value="是" checked> 是
     </label>
     <label class="radio-inline">
-        <input type="radio" name="sysIfBindCard" id="sysIfBindCard2" value="否"> 否
+        <input type="radio" name="ifBindCard" value="否"> 否
     </label>
 </div>
 <div class="input-group">
     <span class="input-group-addon">是否有过交易</span>
     <label class="radio-inline">
-        <input type="radio" name="sysIfTransaction" id="sysIfTransaction1" value="是" checked> 是
+        <input type="radio" name="ifTransaction" value="是" checked> 是
     </label>
     <label class="radio-inline">
-        <input type="radio" name="sysIfTransaction" id="sysIfTransaction2" value="否"> 否
+        <input type="radio" name="ifTransaction" value="否"> 否
     </label>
 </div>
