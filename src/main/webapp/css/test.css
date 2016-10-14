@@ -1,0 +1,122 @@
+@import url("commonalityStyle_01.css");
+.header{
+	width: 100%;
+	background:#717171;
+}
+ .header_content_top{
+	width: 95%;
+	line-height:34px;
+	margin:0 auto ;
+}
+.header  .userName{
+	float:right;
+	font-size:25px;
+}
+.header .userName li{
+	font-size: 14px;
+	float: left;
+	margin-right:30px;
+	color: white;
+}
+.header .userName li{
+	margin-top:5px;
+}
+.header .userName li>a{
+	border:3px solid transparent;
+	padding:5px 15px;
+}
+.header .userName li>a{color: white;}
+.header .userName li>a:hover{
+	color:#5fdbb9;
+	border-color:#5fdbb9;
+	}
+.header_content{
+	width: 100%;
+	height: 70px;
+	line-height: 70px;
+	background:white;
+	overflow: hidden;
+	box-shadow: 0 2px  2px 0 #CCCCCC ;
+}
+.header .header_content_nav{
+	width: 95%;
+	margin: 0 auto;
+}
+/*======================================================================*/
+.nav_one_Selected{
+	background:#38cba2;
+	padding:7px 26px ;
+	border-radius: 10px;
+}
+/*被选中的效果*/
+.header .header_content_nav .nav_one:hover>a{
+	color:#7ef1fc ;
+}
+.header .header_content_nav .nav_one{
+	float: left;
+	font-size: 18px;
+	overflow: hidden;
+	text-align: center;
+	width:160px;
+	cursor: pointer;
+}
+/*.header .header_content_nav .nav_one:hover{
+	background:#49baba;
+}*/
+.hide{
+	width:100%;
+	background: white;
+	margin-left: 5px;
+}
+.header .nav_two{
+	box-sizing: border-box;
+	clear: both;
+	border: none;
+}
+.header .nav_one ul{
+	border-top:2px solid #00CCCC;	
+	position: absolute;	
+	height: 0;
+	opacity: 0;
+	transition:.6s all;
+	overflow: hidden;
+	z-index: 9999;
+	transform-origin:top;
+	-moz-transform-origin:top;
+	-webkit-transform-origin:top;
+	transform: scale(0);
+	-moz-transform: scale(0,0);
+	-webkit-transform: scale(0,0);
+	box-shadow: 0 2px 2px rgba(0,0,0,.2);
+}
+.header .nav_one:hover ul{
+	height:auto;
+	opacity: 1;
+	-moz-transform: scale(1,1);
+	-webkit-transform: scale(1);	
+}
+.header .nav_two{
+	z-index: 999;
+	width:160px;
+	height:40px;
+	line-height:40px;
+	background: white;
+	text-align: center;
+	
+}
+.header .nav_two:hover{
+	background:#38cba2;
+}
+.header .nav_two:hover a{
+	color:white;
+}
+.version{
+	width:150px;
+	/*line-height:34px;*/
+	text-align: center;
+	font-size: 18px;
+	color:#38cba2;
+	margin-top:2px;
+	/*margin-left:100px ;*/
+	/*background:#00438A;*/
+	}

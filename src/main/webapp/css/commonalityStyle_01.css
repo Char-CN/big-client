@@ -1,0 +1,42 @@
+@charset "utf-8";
+*{
+	margin:0;
+	padding:0;
+	vertical-align:top;
+	outline:none;
+	border:none;
+}
+html,body{
+	height: 100%;
+	background:white;
+	font-size: 14px;
+	font-weight: 400;
+	font-family: "微软雅黑";
+	overflow: auto;
+	overflow-x: hidden;
+}
+a{
+	text-decoration:none;
+	color:#666666;
+}
+ul,ol{
+		list-style:none;
+}
+i,em{
+	font-style: initial;
+}
+.in_left{
+	float:left;
+}
+.in_right{
+	float:right;
+}
+/*pxove float*/
+.clearfix:after{
+	content:'';
+	height:0;
+	font-size:0;
+	visibility:hidden;
+	display:block;
+	clear:both;
+}

@@ -29,7 +29,7 @@ public class KamAdvisorService extends BaseService<KamAdvisor> {
         if (StringUtils.isNotEmpty(search)) {
             criteria.andCondition("phone_number like '%" + search + "%'" + " or user_name like '%" + search + "%'");
         }
-        criteria.andEqualTo("ifDelete", 0);
+//        criteria.andEqualTo("ifDelete", 0);
         PageHelper.startPage(IntegerUtil.getIntZero(params.get("currentPage")), IntegerUtil.getIntZero(params.get("pageSize")));
         List<KamAdvisor> list = selectByExample(example);
         return new PageInfo<KamAdvisor>(list);

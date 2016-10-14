@@ -31,10 +31,23 @@
 		<field name="userIdentify" title="客户标识"/>
 		<field name="investmentAdviser" title="投资顾问"/>
 		<field name="ifDelete" title="是否删除"/>
-		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd"/>
-		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd"/>
+		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
 
+	<!-- 投资顾问 -->
+	<excel id="kamAdvisor" class="org.blazer.bigclient.model.KamAdvisor"
+		   sheetname="投资顾问" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
+		<field name="id" title="自动编号"/>
+		<field name="serialNumber" title="投顾编号"/>
+		<field name="level" title="投顾级别"/>
+		<field name="systemName" title="系统登录用户名"/>
+		<field name="actualName" title="投顾姓名"/>
+		<field name="phoneNumber" title="手机号码"/>
+		<field name="remark" title="备注"/>
+		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+	</excel>
 
 	<!-- BcExternalUser -->
 	<excel id="bcExternalUser" class="org.blazer.bigclient.model.BcExternalUser"

@@ -21,7 +21,9 @@ public class ExcelXmlBuild {
 
     //快速构建一个XML配置,看不懂直接运行
     public static void main(String[] args) {
-        String xml = builderXml("kamUserInfo", "客户列表", true, KamUserInfo.class, 5000);
+//        String xml = builderXml("kamUserInfo", "客户列表", true, KamUserInfo.class, 5000);
+//        System.out.println(xml);
+        String xml = builderXml("kamAdvisor", "投资顾问", true, KamAdvisor.class, 5000);
         System.out.println(xml);
 //        String xml1 = builderXml("bcWaitAllotUser", "平台待分配客户名单列表", true, BcWaitAllotUser.class, 5000);
 //        System.out.println(xml1);

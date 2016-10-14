@@ -119,6 +119,12 @@ public class KamUserInfoController extends BaseController {
                 kamUserInfo.setIfBindCard(ifBindCard);
                 kamUserInfo.setIfTransaction(ifTransaction);
                 kamUserInfo.setReferrer(referrer);
+
+                kamUserInfo.setIfReportOrAllot(0);
+                kamUserInfo.setUserIdentify("DHK0000");
+
+
+
                 kamUserInfo.setCtime(new Date());
                 //构建KamExtUserUpload对象
                 KamExtUserUpload kamExtUserUpload = new KamExtUserUpload();
