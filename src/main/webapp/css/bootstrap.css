@@ -10,6 +10,7 @@ html {
       -ms-text-size-adjust: 100%;
 }
 body {
+  overflow-y: hidden !important;
   margin: 0;
 }
 article,
@@ -2308,6 +2309,7 @@ th {
   border-bottom: 2px solid #5fdbb9;
   color: #fff;
   background-color: #5fdbb9;
+  height: 36px;
 }
 .table > caption + thead > tr:first-child > th,
 .table > colgroup + thead > tr:first-child > th,
@@ -2417,7 +2419,7 @@ table th[class*="col-"] {
 .table > thead > tr.info > th,
 .table > tbody > tr.info > th,
 .table > tfoot > tr.info > th {
-  background-color: #d9edf7;
+  background-color: #ffffff;
 }
 .table-hover > tbody > tr > td.info:hover,
 .table-hover > tbody > tr > th.info:hover,
@@ -2438,7 +2440,7 @@ table th[class*="col-"] {
 .table > thead > tr.warning > th,
 .table > tbody > tr.warning > th,
 .table > tfoot > tr.warning > th {
-  background-color: #fcf8e3;
+  background-color: #ffffff;
 }
 .table-hover > tbody > tr > td.warning:hover,
 .table-hover > tbody > tr > th.warning:hover,

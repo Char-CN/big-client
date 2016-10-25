@@ -11,16 +11,17 @@
 <!--<link href="css/bootstrap-theme.css" rel="stylesheet">-->
 <link rel="stylesheet" type="text/css" href="css/private.css"/>
 <link rel="stylesheet" type="text/css" href="css/calendar.css"/>
-<link rel="stylesheet" type="text/css" href="css/test.css"/>
+<link rel="stylesheet" href="css/commonalityStyle_01.css" />
+<link rel="stylesheet" type="text/css" href="css/index.css"/>
+<link rel="stylesheet" type="text/css" href="css/laydate.css"/>
 <style>
 	.bian {
 		background-image: -moz-linear-gradient(top, #BDBD3A, #fff); /* Firefox */
 		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFF0), color-stop(1, #fff)); /* Saf4+, Chrome */
 		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFF0', endColorstr='#fff', GradientType='0'); /* IE*/
-	}
-
+}
 	th,td {
-		text-align: center
+		text-align: center;
 	}
 </style>
 <script src="js/jquery.min.js"></script>
@@ -34,71 +35,48 @@
 	window.onload = function() {
 		var width = $(window).width();
 		var height = $(window).height();
-		$("#center").width(width - 64);
-		$("#center").height(height - $("#north").height() - $("#south").height() - 103);
+		$("#center").width(width - 40);
+		$("#center").height(height - $("#north").height() - $("#south").height() - 120);
 		var init = function () {
 			var body = $('body');
 			var link_ul = $('#ulnavbar');
-			/*1，客户名单-频道*/
-			var link_li_1_1 = $('#list_1_1');
-			link_li_1_1.click(function () {
+			/*客户名单-频道*/
+			var link_li_1 = $('#list_one');
+			link_li_1.click(function () {
 				setSrc(this, 'extuser.html');
 			});
-			link_ul.append(link_li_1_1);
-			var link_li_1_2 = $('#list_1_2');
-			link_li_1_2.click(function () {
+			link_ul.append(link_li_1);
+			//
+			var link_li_2 = $('#list_two');
+			link_li_2.click(function () {
 				setSrc(this, 'extuser_bak.html');
 			});
-			link_ul.append(link_li_1_2);
-			var link_li_1_3 = $('#list_1_3');
-			link_li_1_3.click(function () {
+			link_ul.append(link_li_2);
+			//
+			var link_li_3 = $('#list_three');
+			link_li_3.click(function () {
 				setSrc(this, 'allotuser.html');
 			});
-			link_ul.append(link_li_1_3);
-			var link_li_1_4 = $('#list_1_4');
-			link_li_1_4.click(function () {
+			link_ul.append(link_li_3);
+			//
+			var link_li_4 = $('#list_four');
+			link_li_4.click(function () {
 				setSrc(this, 'formaluser.html');
 			});
-			link_ul.append(link_li_1_4);
-			/*2*/
-			var link_li_2_1 = $('#list_2_1');
-			link_li_2_1.click(function () {
-				setSrc(this, 'extuser.html');
+			link_ul.append(link_li_4);
+			/**/
+			var link_li_5 = $('<li><a href="javascript:void(0);">销售明细</a></li>');
+			link_li_5.click(function () {
+				setSrc(this, 'page3.html');
 			});
-			link_ul.append(link_li_2_1);
-			/*3*/
-			var link_li_3_1 = $('#list_3_1');
-			link_li_3_1.click(function () {
-				setSrc(this, 'extuser.html');
+			link_ul.append(link_li_5);
+			//
+			var link_li_6 = $('<li><a href="javascript:void(0);">投资顾问</a></li>');
+			link_li_6.click(function () {
+				setSrc(this, 'page3.html');
 			});
-			link_ul.append(link_li_3_1);
-			/*4*/
-			var link_li_4_1 = $('#list_4_1');
-			link_li_4_1.click(function () {
-				setSrc(this, 'extuser.html');
-			});
-			link_ul.append(link_li_4_1);
-			/*5*/
-			var link_li_5_1 = $('#list_5_1');
-			link_li_5_1.click(function () {
-				setSrc(this, 'extuser.html');
-			});
-			link_ul.append(link_li_5_1);
-			/*6*/
-			var link_li_6_1 = $('#list_6_1');
-			link_li_6_1.click(function () {
-				setSrc(this, 'extuser.html');
-			});
-			link_ul.append(link_li_6_1);
-			/*7*/
-			var link_li_7_1 = $('#list_7_1');
-			link_li_7_1.click(function () {
-				setSrc(this, 'advisor.html');
-			});
-			link_ul.append(link_li_7_1);
-
-			/*默认显示的页面*/
-			link_li_1_2.click();
+			link_ul.append(link_li_6);
+			link_li_1.click();
 		};
 		var setSrc = function(obj, src) {
 			$("#center_head").text($(obj).text());
@@ -123,104 +101,70 @@
 </head>
 <body>
 	<div id="north">
-		<!--<nav class="navbar navbar-custom navbar-static-top">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button id="headBtn" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="javascript:void(0);">大客户系统-<span>首页</span></a>
-				</div>
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul id="ulnavbar" class="nav navbar-nav">
-					</ul>
-					<ul id="ulnavbar" class="nav navbar-nav navbar-right">
-					<li><a href="javascript:void(0);" onclick="alert('上菜');">小二</a></li>
-					<li><a href="javascript:void(0);" onclick="alert('登不出');">登出</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>-->
-
-	<header class="header clearfix">
-			<div class="header_content_top">
-		  		<ul class="in_left version">
-		  			<li>©版本号：2.0.1</li>
-		  		</ul>
-				<ul class="userName in_right">
-					<li><a href="javascript:void(0);" onclick="alert('上菜');">小二</a></li>
-					<li><a href="javascript:void(0);" onclick="alert('登不出');">登出</a></li>
-				</ul>
-			</div>
+			<header class="header clearfix">
 			<section class="header_content clearfix">
 				<nav class="header_content_nav clearfix">	
 					<span class="logo">
-						<img src="images/logo.png"  >
+						<img src="images/logo.png" width="300">
 					</span>
-			<ul class="in_right">
-				<li class="nav_one"><a href="javascript:void(0);" class="nav_one_Selected">客户名单</a>
-					<ul>
-						<li class="nav_two" id="list_1_1"><a href="javascript:void(0);" onclick="stylesWitch(this)">外部拓展名单</a></li>
-						<li class="nav_two" id="list_1_2"><a href="javascript:void(0);" onclick="stylesWitch(this)">外部拓展(导入)</a></li>
-						<li class="nav_two" id="list_1_3"><a href="javascript:void(0);" onclick="stylesWitch(this)">分配名单</a></li>
-						<li class="nav_two" id="list_1_4"><a href="javascript:void(0);" onclick="stylesWitch(this)">正式名单</a></li>
-					</ul>
-				</li>
-				<li class="nav_one"><a href="javascript:void(0);">资产余额</a>
-					<ul>
-						<li class="nav_two" id="list_2_1"><a href="javascript:void(0);" onclick="stylesWitch(this)">待定一</a></li>
-						<li class="nav_two" id="list_2_2"><a href="javascript:void(0);" onclick="stylesWitch(this)">待定二</a></li>
-					</ul>
-				</li>
-				<li class="nav_one"><a href="javascript:void(0);">投资规模核算</a>
-					<ul>
-						<li class="nav_two" id="list_3_1"><a href="javascript:void(0);" onclick="stylesWitch(this)">分配系数</a></li>
-						<li class="nav_two" id="list_3_2"><a href="javascript:void(0);" onclick="stylesWitch(this)">业绩池系数</a></li>
-						<li class="nav_two" id="list_3_3"><a href="javascript:void(0);" onclick="stylesWitch(this)">返利系数</a></li>
-						<li class="nav_two" id="list_3_4"><a href="javascript:void(0);" onclick="stylesWitch(this)">产品系数</a></li>
-						<li class="nav_two" id="list_3_5"><a href="javascript:void(0);" onclick="stylesWitch(this)">项目到期兑付</a></li>
-					</ul>
-				</li>
-				<li class="nav_one"><a href="javascript:void(0);">获客数核算</a>
-					<ul>
-						<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">期末值>=50万</a></li>
-						<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">期末值<50万</a></li>
-						<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">业绩池</a></li>
-						<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">客户流失</a></li>
-					</ul>
-				</li>
-				<li class="nav_one"><a href="javascript:void(0);">业绩核算KPI</a>
-					<ul>
-						<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">综合完成率</a></li>
-						<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">客户构成</a></li>
-						<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">客户的注册转化率、交易转化率</a></li>
-					</ul>
-				</li>
-				<li class="nav_one"><a href="javascript:void(0);">平台销售数据</a>
-					<ul>
-						<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">销售规模</a></li>
-						<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">资产余额</a></li>
-						<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">VIP客户</a></li>
-						<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">新增注册客户数、交易客户数</a></li>
-					</ul>
-				</li>
-				<li class="nav_one"><a href="javascript:void(0);">投资顾问</a>
-					<ul>
-						<li class="nav_two" id="list_7_1"><a href="javascript:void(0);" onclick="stylesWitch(this)">投顾名单</a></li>
-						<li class="nav_two" id="list_7_2"><a href="javascript:void(0);" onclick="stylesWitch(this)">待定二</a></li>
-					</ul>
-				</li>
-			</ul>
-			</ul>
+				<ul class="in_left width1003" style="margin-left:300px;">
+					<li class="nav_one"><a href="javascript:void(0);" class="nav_one_Selected">客户名单</a>
+						<ul>
+							<li class="nav_two" id="list_one"><a href="javascript:void(0);" onclick="stylesWitch(this)">外部拓展名单</a></li>
+							<li class="nav_two" id="list_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">外部拓展（导入）</a></li>
+							<li class="nav_two" id="list_three"><a href="javascript:void(0);" onclick="stylesWitch(this)">分配名单</a></li>
+							<li class="nav_two" id="list_four"><a href="javascript:void(0);" onclick="stylesWitch(this)">正式名单</a></li>
+						</ul>
+					</li>
+					<li class="nav_one"><a href="javascript:void(0);">投资规模核算</a>
+						<ul>
+							<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">分配系数</a></li>
+							<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">业绩池系数</a></li>
+							<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">返利系数</a></li>
+							<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">产品系数</a></li>
+							<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">项目到期兑付</a></li>
+						</ul>
+					</li>
+					<li class="nav_one"><a href="javascript:void(0);">获客数核算</a>
+						<ul>
+							<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">期末值>=50万</a></li>
+							<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">期末值<50万</a></li>
+							<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">业绩池</a></li>
+							<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">客户流失</a></li>
+						</ul>
+					</li>
+					<li class="nav_one"><a href="javascript:void(0);">业绩核算KPI</a>
+						<ul>
+							<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">综合完成率</a></li>
+							<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">客户构成</a></li>
+							<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">客户的注册转化率</a></li>
+							<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">客户交易转化率</a></li>
+						</ul>
+					</li>
+					<li class="nav_one"><a href="javascript:void(0);">平台销售数据</a>
+						<ul>
+							<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">销售规模</a></li>
+							<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">资产余额</a></li>
+							<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">VIP客户</a></li>
+							<li class="nav_two"><a href="javascript:void(0);" onclick="stylesWitch(this)">注册客户数</a></li>
+							<li class="nav_two"><a href="javascript:void(0);"onclick="stylesWitch(this)">新增交易客户数</a></li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="in_right login">
+					<li class="in_left"><a href="javascript:void(0);" onclick="alert('上菜');" class="exit">小二</a></li>
+					<li class="in_left"><a href="javascript:void(0);" onclick="alert('登不出');" class="border">登出</a></li>
+				</ul>
 				</nav>
 			</section>
 		</header>
+	
 	</div>
-	<div class="panel panel-primary panel-border" style="overflow: auto; margin-top:15px;align: center; background:">
+	<div class="panel panel-primary panel-border" style="overflow: auto; margin-top:20px;align: center;">
 		<div id="center_head" class="panel-heading">默认</div>
 		<div id="center" class="panel-body"></div>
 	</div>
-	<div id="south" style="height: 30px;line-height: 30px; text-align: center; color: #fff;background:#717171;">@copy 2016 evergrande group</div>
+	<div id="south" class="copyright">©版本号：2.0.0</div>
 </body>
 <script type="text/javascript">
 	  function stylesWitch(e) {           
@@ -228,4 +172,5 @@
             $(e).parents('.nav_one').children('a').addClass('nav_one_Selected');
         }
 </script>
+<script type="text/javascript" src="js/laydate.js"></script>
 </html>

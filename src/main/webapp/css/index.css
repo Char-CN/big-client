@@ -1,0 +1,110 @@
+@import url("commonalityStyle_01.css");
+.header_content{
+	width: 100%;
+	height: 80px;
+	line-height: 80px;
+	overflow: hidden;
+	box-shadow: 0 1px  2px 0 #CCCCCC ;
+}
+.header .header_content_nav{
+	width: 95%;
+	margin: 0 auto;
+}
+/*======================================================================*/
+.nav_one_Selected{
+	background:#38cba2;
+	width:100% ;
+	height: 80px;
+	color:#FFFFFF;
+	display: inline-block;
+}
+/*以上是被选中的效果*/
+/*.header .header_content_nav .nav_one>a{
+	color:#333333;
+}*/
+.header .header_content_nav .nav_one{
+	float: left;
+	font-size: 18px;
+	overflow: hidden;
+	text-align: center;
+	width:20%;
+	cursor: pointer;
+}
+.hide{
+	width:100%;
+	background: white;
+	margin-left: 5px;
+}
+.header .nav_two{
+	box-sizing: border-box;
+	clear: both;
+	border: none;
+}
+.header .nav_one ul{
+	border-top:2px solid #34d88d;
+	width:166px;	
+	position: absolute;	
+	height: 0;
+	opacity: 0;
+	transition:.6s all;
+	overflow: hidden;
+	z-index: 9999;
+	transform-origin:top;
+	-moz-transform-origin:top;
+	-webkit-transform-origin:top;
+	transform: scale(0);
+	-moz-transform: scale(0,0);
+	-webkit-transform: scale(0,0);
+	box-shadow: 0 1px 3px rgba(0,0,0,.2);
+}
+.header .nav_one:hover ul{
+	height:auto;
+	opacity: 1;
+	-moz-transform: scale(1,1);
+	-webkit-transform: scale(1);	
+}
+.header .nav_one>a{font-weight:bold;}
+.header .nav_one:hover>a{color: #03db8c;}
+.header .nav_two{
+	z-index: 999;
+	height:40px;
+	line-height:40px;
+	background: white;
+	text-align: center;
+}
+.header .nav_two:hover{
+	background:#38cba2;
+}
+.header .nav_two>a{font-size:16px;}
+.header .nav_two:hover a{
+	color:white;
+}
+.header .login li{
+	margin-left:10px;
+	font-size:16px;
+}
+.header .login li a{ color:#333333;}
+.header .login .border{
+	border:#38cba2 solid 2px;
+	padding:8px 15px;
+}
+.header .login .border:hover{border-color:#38cba2;  color:#38cba2;}
+.header .login .exit{
+	padding:8px 18px;
+	border:transparent solid 2px;}
+.header .login .exit:hover{
+	border-color:#38cba2;
+	color:#38cba2;
+}
+.width1003 {
+    width:830px;
+    margin: 0 auto;
+}
+.header .logo{position:absolute;left:5px;}
+.copyright{
+	font-size: 16px;
+	height: 30px;
+	line-height: 30px; 
+	text-align: center; 
+	color: #fff;
+	background:#717171;}
