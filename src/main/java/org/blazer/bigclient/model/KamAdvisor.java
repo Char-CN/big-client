@@ -13,6 +13,11 @@ public class KamAdvisor {
     private Long id;
 
     /**
+     * 所属团队ID（advisor_team.id）
+     */
+    private Long tid;
+
+    /**
      * 投顾编号
      */
     @Column(name = "serial_number")
@@ -72,6 +77,24 @@ public class KamAdvisor {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /**
+     * 获取所属团队ID（advisor_team.id）
+     *
+     * @return tid - 所属团队ID（advisor_team.id）
+     */
+    public Long getTid() {
+        return tid;
+    }
+
+    /**
+     * 设置所属团队ID（advisor_team.id）
+     *
+     * @param tid 所属团队ID（advisor_team.id）
+     */
+    public void setTid(Long tid) {
+        this.tid = tid;
     }
 
     /**

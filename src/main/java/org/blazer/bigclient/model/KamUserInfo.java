@@ -147,6 +147,12 @@ public class KamUserInfo {
     private String investmentAdviser;
 
     /**
+     * 是否业绩池（0：不计入，1：计入）
+     */
+    @Column(name = "if_performance_pool")
+    private Integer ifPerformancePool;
+
+    /**
      * 是否删除，0代表未删除，1代表删除
      */
     @Column(name = "if_delete")
@@ -592,6 +598,24 @@ public class KamUserInfo {
      */
     public void setInvestmentAdviser(String investmentAdviser) {
         this.investmentAdviser = investmentAdviser;
+    }
+
+    /**
+     * 获取是否业绩池（0：不计入，1：计入）
+     *
+     * @return if_performance_pool - 是否业绩池（0：不计入，1：计入）
+     */
+    public Integer getIfPerformancePool() {
+        return ifPerformancePool;
+    }
+
+    /**
+     * 设置是否业绩池（0：不计入，1：计入）
+     *
+     * @param ifPerformancePool 是否业绩池（0：不计入，1：计入）
+     */
+    public void setIfPerformancePool(Integer ifPerformancePool) {
+        this.ifPerformancePool = ifPerformancePool;
     }
 
     /**

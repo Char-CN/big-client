@@ -29,6 +29,7 @@
     <result column="report_or_allot_date" property="reportOrAllotDate" jdbcType="VARCHAR" />
     <result column="user_identify" property="userIdentify" jdbcType="VARCHAR" />
     <result column="investment_adviser" property="investmentAdviser" jdbcType="VARCHAR" />
+    <result column="if_performance_pool" property="ifPerformancePool" jdbcType="INTEGER" />
     <result column="if_delete" property="ifDelete" jdbcType="INTEGER" />
     <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
     <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
