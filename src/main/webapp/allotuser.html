@@ -33,7 +33,8 @@
         var init = function (rst) {
             $("#tb>tbody").empty();
             for (var i in rst) {
-                var cls = i % 2 == 0 ? "info" : "warning";
+//                var cls = i % 2 == 0 ? "info" : "warning";
+                var cls = "warning";
                 var tr = $('<tr class="' + cls + '">');
                 /**
                  * <field name="id" title="自动编号"/>
