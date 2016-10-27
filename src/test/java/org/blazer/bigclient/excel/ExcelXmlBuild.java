@@ -21,16 +21,11 @@ public class ExcelXmlBuild {
 
     //快速构建一个XML配置,看不懂直接运行
     public static void main(String[] args) {
-//        String xml = builderXml("kamUserInfo", "客户列表", true, KamUserInfo.class, 5000);
-//        System.out.println(xml);
-        String xml = builderXml("kamAdvisor", "投资顾问", true, KamAdvisor.class, 5000);
+
+        String xml = builderXml("srAssetsBalance", "资产余额表", true, SrAssetsBalance.class, 5000);
         System.out.println(xml);
-//        String xml1 = builderXml("bcWaitAllotUser", "平台待分配客户名单列表", true, BcWaitAllotUser.class, 5000);
-//        System.out.println(xml1);
-//        String xml2 = builderXml("bcFormalUser", "正式客户名单列表", true, BcFormalUser.class, 5000);
-//        System.out.println(xml2);
-//        String xml3 = builderXml("bcExternalUserBackup", "外部拓展客户名单列表备份", true, BcExternalUserBackup.class, 5000);
-//        System.out.println(xml3);
+        String xml1 = builderXml("kamUserInfo", "资产余额表", true, KamUserInfo.class, 5000);
+        System.out.println(xml1);
 
     }
 
@@ -92,7 +87,7 @@ public class ExcelXmlBuild {
         //不是复杂对象
         res.append("\n").append("\t<field").append(" name=").append("\"" + name + "\"").append(" title=").append("\"" + name + "\"");
         if (TypeUtils.isAssignable(Date.class, field.getType())) {
-            String pattern = "yyyy-MM-dd";
+            String pattern = "yyyy-MM-dd HH:mm:ss";
             res.append(" pattern=").append("\"" + pattern + "\"");
         }
         //是否构建其他标签信息

@@ -57,6 +57,18 @@ public class SrAssetsBalance {
      */
     private Date ctime;
 
+    //添加user对象字段
+    @Transient
+    private KamUserInfo kamUserInfo;
+
+    public KamUserInfo getKamUserInfo() {
+        return kamUserInfo;
+    }
+
+    public void setKamUserInfo(KamUserInfo kamUserInfo) {
+        this.kamUserInfo = kamUserInfo;
+    }
+
     /**
      * 获取自动编号
      *
@@ -217,5 +229,21 @@ public class SrAssetsBalance {
      */
     public void setCtime(Date ctime) {
         this.ctime = ctime;
+    }
+
+    @Override
+    public String toString() {
+        return "SrAssetsBalance{" +
+                "id=" + id +
+                ", uid=" + uid +
+                ", regularAssetsTotal='" + regularAssetsTotal + '\'' +
+                ", regularAumTimePoint='" + regularAumTimePoint + '\'' +
+                ", currentAssetsTotal='" + currentAssetsTotal + '\'' +
+                ", currentAumTimePoint='" + currentAumTimePoint + '\'' +
+                ", aumTotal='" + aumTotal + '\'' +
+                ", mtime=" + mtime +
+                ", ctime=" + ctime +
+                ", kamUserInfo=" + kamUserInfo +
+                '}';
     }
 }

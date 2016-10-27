@@ -30,7 +30,33 @@
 		<field name="reportOrAllotDate" title="上报/分配时间"/>
 		<field name="userIdentify" title="客户标识"/>
 		<field name="investmentAdviser" title="投资顾问"/>
+		<field name="ifPerformancePool" title="是否业绩池"/>
 		<field name="ifDelete" title="是否删除"/>
+		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+	</excel>
+
+
+	<!-- 资产余额 带有userInfo的复杂对象 -->
+	<excel id="srAssetsBalance" class="org.blazer.bigclient.model.SrAssetsBalance"
+		   sheetname="资产余额表" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
+		<!-- 复杂对象 -->
+		<!--<field name="book.bookName" title="图书名称" columnWidth="6000"/>-->
+		<!--<field name="book.price" title="图书价格" columnWidth="6000" decimalFormatPattern="###,##0.00" roundingMode="up" defaultValue="0.00"/>-->
+		<!--<field name="book.author.authorName" title="作者名称" columnWidth="6000"/>-->
+
+		<field name="kamUserInfo.userName" title="客户姓名"/>
+		<field name="kamUserInfo.phoneNumber" title="手机号码"/>
+		<field name="kamUserInfo.investmentAdviser" title="投资顾问"/>
+		<field name="kamUserInfo.registerDate" title="注册日期"/>
+
+		<field name="id" title="自动编号"/>
+		<field name="uid" title="客户的自动编号"/>
+		<field name="regularAssetsTotal" title="当前定期AUM（资产总额）"/>
+		<field name="regularAumTimePoint" title="当前定期AUM时间点"/>
+		<field name="currentAssetsTotal" title="当前活期AUM（资产总额）"/>
+		<field name="currentAumTimePoint" title="当前活期AUM时间点"/>
+		<field name="aumTotal" title="当前AUM汇总（单位：元）"/>
 		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
