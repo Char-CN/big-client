@@ -24,7 +24,7 @@ public class ExcelXmlBuild {
 
         String xml = builderXml("srAssetsBalance", "资产余额表", true, SrAssetsBalance.class, 5000);
         System.out.println(xml);
-        String xml1 = builderXml("kamUserInfo", "资产余额表", true, KamUserInfo.class, 5000);
+        String xml1 = builderXml("kamExtUserUpload", "外部拓展客户（导入）", true, KamExtUserUpload.class, 5000);
         System.out.println(xml1);
 
     }

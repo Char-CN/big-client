@@ -32,8 +32,13 @@
 <script src="js/commons.js"></script>
 <!--<script type="text/javascript" src="js/calendar.js"></script>-->
 <script type="text/javascript" src="js/laydate.js"></script>
+<script type="text/javascript" src="http://bigdata.blazer.org:8030/js/userservice.js"></script>
 <script>
+	var $userservice = new $userservice("user-service");
 	window.onload = function() {
+		//获取用户名
+		$(".login>li:eq(0)").append($userservice.userName + '('+ $userservice.userNameCn+')');
+
 		var width = $(window).width();
 		var height = $(window).height();
 		$("#center").width(width - 40);
@@ -207,7 +212,7 @@
 					</li>
 				</ul>
 				<ul class="in_right login">
-					<li class="in_left"><a href="javascript:void(0);" onclick="alert('上菜');" class="exit">小二</a></li>
+					<li class="in_left"><a href="javascript:void(0);" onclick="alert('上菜');" class="exit"></a></li>
 					<li class="in_left"><a href="javascript:void(0);" onclick="alert('登不出');" class="border">登出</a></li>
 				</ul>
 				</nav>

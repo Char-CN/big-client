@@ -1,5 +1,7 @@
 package org.blazer.bigclient.model;
 
+import org.blazer.bigclient.util.DateUtil;
+
 import java.util.Date;
 import javax.persistence.*;
 
@@ -25,16 +27,39 @@ public class KamExtUserUpload {
     private Long phoneNumber;
 
     /**
+     * 投顾上传的客户姓名（待匹配系统客户姓名）
+     */
+    @Column(name = "customer_name")
+    private String customerName;
+
+    /**
+     * 客户姓名
+     */
+    @Column(name = "user_name")
+    private String userName;
+
+    /**
      * 投资顾问
      */
     @Column(name = "investment_adviser")
     private String investmentAdviser;
 
     /**
+     * 是否有效（1：有效，0：无效）
+     */
+    @Column(name = "if_effective")
+    private Integer ifEffective;
+
+    /**
      * 是否删除，0代表未删除，1代表删除
      */
     @Column(name = "if_delete")
     private Integer ifDelete;
+
+    /**
+     * 备注信息(用来记录上报无效的原因）
+     */
+    private String remark;
 
     /**
      * 更新时间
@@ -45,6 +70,23 @@ public class KamExtUserUpload {
      * 创建时间
      */
     private Date ctime;
+
+    //格式化创建时间
+    @Transient
+    private String ctime_format;
+
+    public String getCtime_format() {
+        if (ctime == null) {
+            ctime_format = "";
+        } else {
+            ctime_format = DateUtil.date2Str(ctime, DateUtil.DEFAULT_DATE_TIME_FORMAT);
+        }
+        return ctime_format;
+    }
+
+    public void setCtime_format(String ctime_format) {
+        this.ctime_format = ctime_format;
+    }
 
     /**
      * 获取自动编号
@@ -101,6 +143,42 @@ public class KamExtUserUpload {
     }
 
     /**
+     * 获取投顾上传的客户姓名（待匹配系统客户姓名）
+     *
+     * @return customer_name - 投顾上传的客户姓名（待匹配系统客户姓名）
+     */
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    /**
+     * 设置投顾上传的客户姓名（待匹配系统客户姓名）
+     *
+     * @param customerName 投顾上传的客户姓名（待匹配系统客户姓名）
+     */
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    /**
+     * 获取客户姓名
+     *
+     * @return user_name - 客户姓名
+     */
+    public String getUserName() {
+        return userName;
+    }
+
+    /**
+     * 设置客户姓名
+     *
+     * @param userName 客户姓名
+     */
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    /**
      * 获取投资顾问
      *
      * @return investment_adviser - 投资顾问
@@ -119,6 +197,24 @@ public class KamExtUserUpload {
     }
 
     /**
+     * 获取是否有效（1：有效，0：无效）
+     *
+     * @return if_effective - 是否有效（1：有效，0：无效）
+     */
+    public Integer getIfEffective() {
+        return ifEffective;
+    }
+
+    /**
+     * 设置是否有效（1：有效，0：无效）
+     *
+     * @param ifEffective 是否有效（1：有效，0：无效）
+     */
+    public void setIfEffective(Integer ifEffective) {
+        this.ifEffective = ifEffective;
+    }
+
+    /**
      * 获取是否删除，0代表未删除，1代表删除
      *
      * @return if_delete - 是否删除，0代表未删除，1代表删除
@@ -134,6 +230,24 @@ public class KamExtUserUpload {
      */
     public void setIfDelete(Integer ifDelete) {
         this.ifDelete = ifDelete;
+    }
+
+    /**
+     * 获取备注信息(用来记录上报无效的原因）
+     *
+     * @return remark - 备注信息(用来记录上报无效的原因）
+     */
+    public String getRemark() {
+        return remark;
+    }
+
+    /**
+     * 设置备注信息(用来记录上报无效的原因）
+     *
+     * @param remark 备注信息(用来记录上报无效的原因）
+     */
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     /**
