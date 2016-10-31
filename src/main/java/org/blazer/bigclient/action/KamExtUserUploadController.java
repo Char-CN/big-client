@@ -78,7 +78,7 @@ public class KamExtUserUploadController extends BaseController {
 
         //判断当前登录用户如果为投顾,则添加投顾真实姓名作为查询参数
         if (advisor != null) {
-            params.put("advisorName",advisor.getActualName());
+            params.put("advisorName", advisor.getActualName());
         }
 
         return kamExtUserUploadService.findByPage(params);
@@ -208,15 +208,16 @@ public class KamExtUserUploadController extends BaseController {
     @RequestMapping(value = "importExcel", method = RequestMethod.POST)
     public AjaxResult importExcel(@RequestParam("fileExcel") CommonsMultipartFile file, HttpServletRequest request) {
 
+        LOGGER.debug("该上传excel文件的原文件名是 :" + file.getOriginalFilename());
 
-        LOGGER.debug("该上传的excel文件的原文件名是 :" + file.getOriginalFilename());
+        // 获取当前登录用户信息，然后判断权限
+        KamAdvisor advisor = super.getCurrentUser(request);
+        System.out.println("advisor = " + advisor);
+        LOGGER.debug("当前登录用户为 :" + advisor.getActualName());
 
         AjaxResult result = AjaxResult.success("导入数据成功...");
 
-        // 获取当前登录用户信息，然后判断权限
-//        KamAdvisor advisor = JudgePermissions.getAdvisorByCookie(request);
-
-        if (!file.isEmpty()) {
+        if (!file.isEmpty() && advisor != null) {
 
             //判断请求类型是否为文件上传类型
             if (!ServletFileUpload.isMultipartContent(request)) {
@@ -238,35 +239,26 @@ public class KamExtUserUploadController extends BaseController {
             System.out.println("fileSuffix = " + fileSuffix);
 
             //判断该类型的文件是否在允许上传的文件类型内
-            Arrays.asList();
             if (!Arrays.asList(TypeMap.get("file").split(",")).contains(fileSuffix)) {
                 result.setCode(AjaxResult.CODE_FAILURE);
-                result.setMsg("请检查上传的Excle文件的格式是否正确。。。");
+                result.setMsg("请检查上传文件的格式。。。");
                 return result;
             }
 
             try {
-                // 获取BcExcel对象
+                // 获取Excel对象
                 KamExcel excel = ExcelHandlerUtil.getExcelFile(file, request);
-                /*`id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自动编号',
-                `user_id` bigint(20) DEFAULT NULL COMMENT '当前用户ID',
-                `excel_name` varchar(100) DEFAULT NULL COMMENT 'Excel源文件名',
-                `excel_real_name` varchar(100) DEFAULT NULL COMMENT 'Excel服务器文件名',
-              `excel_real_path` varchar(200) DEFAULT NULL COMMENT 'Excel服务器路径',
-              `mtime` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-              `ctime` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',*/
-//                excel.setUserId(advisor.getId());//当前上传用户的id
+                excel.setUserId(advisor.getId());//当前上传用户的id
                 excel.setCtime(new Date());
-
                 result.setObj(excel);
 
                 // 读取excel文件
-                String excelType = "bcExternalUserBackup";
+                String excelType = "kamExtUserUpload";
                 ExcelImportResult readExcel = excelContext.readExcel(excelType, file.getInputStream());
                 List<KamExtUserUpload> listBean = readExcel.getListBean();
                 this.kamExtUserUploadService.importExcelData(listBean, excel);
 
-                // 上传文件
+                // 存储excel文件
                 UploadUtil.copy(file, excel.getExcelRealPath(), excel.getExcelRealName());
             } catch (Exception e) {
                 result.setCode(AjaxResult.CODE_FAILURE);
@@ -281,6 +273,10 @@ public class KamExtUserUploadController extends BaseController {
                     LOGGER.error(e.getMessage());
                 }
             }
+        } else {
+            //上传文件为空，或者当前登录用户不是投资顾问，则无权限上传
+            result.setCode(AjaxResult.CODE_DENIED);
+            result.setMsg("无法上传，请检查该上传文件或您的登录账户权限！");
         }
 
         System.out.println("result = " + result);

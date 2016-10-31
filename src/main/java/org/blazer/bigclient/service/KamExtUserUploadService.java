@@ -3,12 +3,14 @@ package org.blazer.bigclient.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
+import org.blazer.bigclient.mapper.KamExcelMapper;
 import org.blazer.bigclient.model.KamExcel;
 import org.blazer.bigclient.model.KamExtUserUpload;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.blazer.bigclient.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
@@ -22,6 +24,9 @@ import java.util.List;
 public class KamExtUserUploadService extends BaseService<KamExtUserUpload> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(KamExtUserUploadService.class);
+
+    @Autowired
+    private KamExcelService kamExcelService;
 
     /**
      * 条件分页查询列表
@@ -40,7 +45,7 @@ public class KamExtUserUploadService extends BaseService<KamExtUserUpload> {
         }
         if (StringUtils.isNotEmpty(advisorName)) {
             //此处为实体类的属性，不是表字段
-            criteria.andEqualTo("investmentAdviser",advisorName);
+            criteria.andEqualTo("investmentAdviser", advisorName);
         }
         PageHelper.startPage(IntegerUtil.getIntZero(params.get("currentPage")), IntegerUtil.getIntZero(params.get("pageSize")));
         List<KamExtUserUpload> list = selectByExample(example);
@@ -63,11 +68,22 @@ public class KamExtUserUploadService extends BaseService<KamExtUserUpload> {
         return list;
     }
 
-
-
-
-
-
+    /**
+     * excel导入名单
+     *
+     * @param listBean
+     * @param kamExcel
+     */
     public void importExcelData(List<KamExtUserUpload> listBean, KamExcel kamExcel) {
+        if (listBean != null && listBean.size() > 0 && kamExcel != null) {
+            kamExcelService.mapper.insert(kamExcel);
+            KamExcel excel = kamExcelService.mapper.selectOne(kamExcel);
+
+            for (int i = 0; i < listBean.size(); i++) {
+                KamExtUserUpload kamExtUserUpload = listBean.get(i);
+                kamExtUserUpload.setExcelId(excel.getId());
+                this.mapper.insert(kamExtUserUpload);
+            }
+        }
     }
 }

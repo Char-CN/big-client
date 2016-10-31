@@ -38,7 +38,7 @@ public class ExcelHandlerUtil {
         kamExcel.setExcelRealName(targetFileName);
         kamExcel.setExcelRealPath(targetDirectory);
 
-        System.out.println("bcExcel = " + kamExcel);
+        System.out.println("kamExcel = " + kamExcel);
 
         return kamExcel;
     }
