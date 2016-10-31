@@ -34,8 +34,13 @@ public class KamExtUserUploadService extends BaseService<KamExtUserUpload> {
         Example example = new Example(KamExtUserUpload.class);
         Example.Criteria criteria = example.createCriteria();
         String search = StringUtil.getStrEmpty(params.get("search"));
+        String advisorName = StringUtil.getStrEmpty(params.get("advisorName"));
         if (StringUtils.isNotEmpty(search)) {
             criteria.andCondition("phone_number like '%" + search + "%'" + " or user_name like '%" + search + "%'");
+        }
+        if (StringUtils.isNotEmpty(advisorName)) {
+            //此处为实体类的属性，不是表字段
+            criteria.andEqualTo("investmentAdviser",advisorName);
         }
         PageHelper.startPage(IntegerUtil.getIntZero(params.get("currentPage")), IntegerUtil.getIntZero(params.get("pageSize")));
         List<KamExtUserUpload> list = selectByExample(example);

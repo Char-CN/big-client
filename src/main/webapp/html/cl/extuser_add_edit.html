@@ -31,7 +31,7 @@
         }
 
         /**
-         * 触发保存按钮
+         * 触发按钮
          */
         $util.modalOnSave(windowId, function () {
             $.post("user/ext/addOneUser.do", {
@@ -59,20 +59,6 @@
 </script>
 
 
-<!--
-id: rst[i].id,
-phoneNumber: rst[i].phoneNumber,
-investmentAdviser: rst[i].investmentAdviser,
-userName: rst[i].userName,
-ifRegister: rst[i].ifRegister,
-registerDate: rst[i].registerDate,
-ifRealName: rst[i].ifRealName,
-ifBindCard: rst[i].ifBindCard,
-ifTransaction: rst[i].ifTransaction,
-referrer: rst[i].referrer
--->
-
-
 <div class="input-group">
     <span class="input-group-addon">手机号码</span>
     <input type="text" class="form-control" name="phoneNumber" placeholder="请输入手机号码">
@@ -94,11 +80,6 @@ referrer: rst[i].referrer
     <input placeholder="请选择注册日期"name="registerDate" class="laydate-icon form-control" onClick="laydate({istime: true, format: 'YYYY-MM-DD'})">
     
 </div>
-<!--<div class="input-group">-->
-    <!--<span class="input-group-addon">返利失效日期</span>-->
-    <!--<input type="text" class="form-control" name="sysRebateExpirationDate" onclick="createDate(this)"-->
-           <!--onfocus="createDate(this)" placeholder="请选择返利失效日期">-->
-<!--</div>-->
 <div class="input-group">
     <span class="input-group-addon">是否注册</span>
     <label class="radio-inline">

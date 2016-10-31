@@ -240,4 +240,20 @@ public class KamAdvisor {
     public void setCtime(Date ctime) {
         this.ctime = ctime;
     }
+
+    @Override
+    public String toString() {
+        return "KamAdvisor{" +
+                "id=" + id +
+                ", tid=" + tid +
+                ", serialNumber='" + serialNumber + '\'' +
+                ", level='" + level + '\'' +
+                ", systemName='" + systemName + '\'' +
+                ", actualName='" + actualName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", remark='" + remark + '\'' +
+                ", mtime=" + mtime +
+                ", ctime=" + ctime +
+                '}';
+    }
 }

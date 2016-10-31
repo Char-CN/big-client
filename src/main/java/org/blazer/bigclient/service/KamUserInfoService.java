@@ -32,17 +32,22 @@ public class KamUserInfoService extends BaseService<KamUserInfo> {
         Example example = new Example(KamUserInfo.class);
         Example.Criteria criteria = example.createCriteria();
         String search = StringUtil.getStrEmpty(params.get("search"));
-        String userIdentify = StringUtil.getStrEmpty(params.get("userIdentify"));
-        String ifReportOrAllot = StringUtil.getStrEmpty(params.get("ifReportOrAllot"));
         if (StringUtils.isNotEmpty(search)) {
             criteria.andCondition("phone_number like '%" + search + "%'" + " or user_name like '%" + search + "%'");
         }
+        String userIdentify = StringUtil.getStrEmpty(params.get("userIdentify"));
         if (StringUtils.isNotEmpty(userIdentify)) {
             //通过客户标识DKH000，DHK001区别客户类别
             criteria.andEqualTo("userIdentify", userIdentify);
         }
+        String ifReportOrAllot = StringUtil.getStrEmpty(params.get("ifReportOrAllot"));
         if (StringUtils.isNotEmpty(ifReportOrAllot)) {
             criteria.andEqualTo("ifReportOrAllot", ifReportOrAllot);
+        }
+        String advisorName = StringUtil.getStrEmpty(params.get("advisorName"));
+        if (StringUtils.isNotEmpty(advisorName)) {
+            //此处为实体类的属性，不是表字段
+            criteria.andEqualTo("investmentAdviser", advisorName);
         }
         criteria.andEqualTo("ifDelete", 0);
         PageHelper.startPage(IntegerUtil.getIntZero(params.get("currentPage")), IntegerUtil.getIntZero(params.get("pageSize")));

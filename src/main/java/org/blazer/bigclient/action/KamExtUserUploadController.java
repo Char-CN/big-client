@@ -4,7 +4,6 @@ import com.github.pagehelper.PageInfo;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.blazer.bigclient.body.AjaxResult;
 import org.blazer.bigclient.excel.ExcelException;
 import org.blazer.bigclient.excel.ExcelHeader;
@@ -15,8 +14,6 @@ import org.blazer.bigclient.model.KamExtUserUpload;
 import org.blazer.bigclient.service.KamAdvisorService;
 import org.blazer.bigclient.service.KamExtUserUploadService;
 import org.blazer.bigclient.util.*;
-import org.blazer.userservice.core.filter.PermissionsFilter;
-import org.blazer.userservice.core.model.SessionModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +27,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.util.*;
 
 /**
@@ -47,10 +42,11 @@ public class KamExtUserUploadController extends BaseController {
     private static final HashMap<String, String> TypeMap = new HashMap<String, String>();
 
     static {
-        TypeMap.put("image", "gif,jpg,jpeg,png,bmp");
+        /*TypeMap.put("image", "gif,jpg,jpeg,png,bmp");
         TypeMap.put("flash", "swf,flv");
         TypeMap.put("media", "swf,flv,mp3,wav,wma,wmv,mid,avi,mpg,asf,rm,rmvb");
-        TypeMap.put("file", "doc,docx,xls,xlsx,ppt,pptx,htm,html,txt,dwg,pdf");
+        TypeMap.put("file", "doc,docx,xls,xlsx,ppt,pptx,htm,html,txt,dwg,pdf");*/
+        TypeMap.put("file", "xls,xlsx");
     }
 
     // 设置文件上传大小
@@ -59,11 +55,9 @@ public class KamExtUserUploadController extends BaseController {
     @Autowired
     private KamExtUserUploadService kamExtUserUploadService;
 
-    @Autowired
-    private KamAdvisorService kamAdvisorService;
-
     /**
      * 根据搜索条件分页查询
+     * 添加了投顾权限控制
      *
      * @param request
      * @param response
@@ -72,13 +66,21 @@ public class KamExtUserUploadController extends BaseController {
     @ResponseBody
     @RequestMapping("/findByPage")
     public PageInfo<KamExtUserUpload> findByPage(HttpServletRequest request, HttpServletResponse response) {
+        //获取前台传递过来的参数
         HashMap<String, String> params = getParamMap(request);
-        //获取当前登录用户
-        String name = JudgePermissions.getAdvisorNameByCookie(request);
-        System.out.println(name);
         LOGGER.debug("currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
                 ", pageSize:" + IntegerUtil.getIntZero(params.get("pageSize")) +
                 ", search:" + StringUtil.getStrEmpty(params.get("search")));
+
+        //获取当前登录用户
+        KamAdvisor advisor = super.getCurrentUser(request);
+        System.out.println("当前登录用户: advisor = " + advisor);
+
+        //判断当前登录用户如果为投顾,则添加投顾真实姓名作为查询参数
+        if (advisor != null) {
+            params.put("advisorName",advisor.getActualName());
+        }
+
         return kamExtUserUploadService.findByPage(params);
     }
 
@@ -212,9 +214,9 @@ public class KamExtUserUploadController extends BaseController {
         AjaxResult result = AjaxResult.success("导入数据成功...");
 
         // 获取当前登录用户信息，然后判断权限
-        KamAdvisor advisor = JudgePermissions.getAdvisorByCookie(request);
+//        KamAdvisor advisor = JudgePermissions.getAdvisorByCookie(request);
 
-        if (!file.isEmpty() && advisor != null) {
+        if (!file.isEmpty()) {
 
             //判断请求类型是否为文件上传类型
             if (!ServletFileUpload.isMultipartContent(request)) {
@@ -253,7 +255,7 @@ public class KamExtUserUploadController extends BaseController {
               `excel_real_path` varchar(200) DEFAULT NULL COMMENT 'Excel服务器路径',
               `mtime` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
               `ctime` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',*/
-                excel.setUserId(advisor.getId());//当前上传用户的id
+//                excel.setUserId(advisor.getId());//当前上传用户的id
                 excel.setCtime(new Date());
 
                 result.setObj(excel);
