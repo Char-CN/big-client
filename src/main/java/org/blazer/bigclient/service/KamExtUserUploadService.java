@@ -118,7 +118,7 @@ public class KamExtUserUploadService extends BaseService<KamExtUserUpload> {
      * @param phoneNumber
      * @return
      */
-    private List<KamExtUserUpload> selectByPhoneNumber(Long phoneNumber) {
+    public List<KamExtUserUpload> selectByPhoneNumber(Long phoneNumber) {
         Example example = new Example(KamExtUserUpload.class);
         Example.Criteria criteria = example.createCriteria();
         Long phoneNo = LongUtil.getLongZero(phoneNumber);

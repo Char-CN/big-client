@@ -55,9 +55,6 @@ public class KamExtUserUploadController extends BaseController {
     @Autowired
     private KamExtUserUploadService kamExtUserUploadService;
 
-    @Autowired
-    private KamExcelService kamExcelService;
-
     /**
      * 根据搜索条件分页查询
      * 添加了投顾权限控制
@@ -77,7 +74,6 @@ public class KamExtUserUploadController extends BaseController {
 
         //获取当前登录用户
         KamAdvisor advisor = super.getCurrentUser(request);
-        System.out.println("当前登录用户: advisor = " + advisor);
 
         //判断当前登录用户如果为投顾,则添加投顾真实姓名作为查询参数
         if (advisor != null) {
@@ -94,44 +90,46 @@ public class KamExtUserUploadController extends BaseController {
      * @param request
      * @return
      */
-/*    @ResponseBody
+    @ResponseBody
     @RequestMapping(value = "saveOne", method = RequestMethod.POST)
     public AjaxResult saveOne(HttpServletRequest request) {
+
         AjaxResult result = AjaxResult.success("保存用户成功。。。");
+
         //获取前台页面传递的参数
         Long id = LongUtil.getLongZero(request.getParameter("id"));
         String phoneNumber = StringUtil.getStrEmpty(request.getParameter("phoneNumber"));
+
         LOGGER.debug("正在保存的用户手机号是 :" + phoneNumber);
-        String sysName = StringUtil.getStrEmpty(request.getParameter("sysName"));
-        String sysIfRegister = StringUtil.getStrEmpty(request.getParameter("sysIfRegister"));
-        String sysRegisterDate = StringUtil.getStrEmpty(request.getParameter("sysRegisterDate"));
-        String sysIfRealName = StringUtil.getStrEmpty(request.getParameter("sysIfRealName"));
-        String sysIfBindCard = StringUtil.getStrEmpty(request.getParameter("sysIfBindCard"));
-        String sysIfTransaction = StringUtil.getStrEmpty(request.getParameter("sysIfTransaction"));
-        String sysReferrer = StringUtil.getStrEmpty(request.getParameter("sysReferrer"));
-        String sysRebateExpirationDate = StringUtil.getStrEmpty(request.getParameter("sysRebateExpirationDate"));
+
+        String customerName = StringUtil.getStrEmpty(request.getParameter("customerName"));
+        String userName = StringUtil.getStrEmpty(request.getParameter("userName"));
+        String investmentAdviser = StringUtil.getStrEmpty(request.getParameter("investmentAdviser"));
+        //获取当前登录用户
+        KamAdvisor advisor = super.getCurrentUser(request);
+        //判断当前登录用户如果为投顾,则添加投顾真实姓名作为查询参数
+        if (advisor != null) {
+            investmentAdviser = advisor.getActualName();
+        }
+        String remark = StringUtil.getStrEmpty(request.getParameter("remark"));
 
         try {
             //查询该手机号数据库中是否存在
-            Boolean flag = this.kamExtUserUploadService.findByPhoneNumber(phoneNumber);
+            List<KamExtUserUpload> list = this.kamExtUserUploadService.selectByPhoneNumber(Long.parseLong(phoneNumber));
+
             // 如果id为空，则是新增，不为空，则为修改
-            if (id == 0L && !flag) {
+            if (id == 0L && list.size() == 0) {
                 //构建BcExternalUser对象
                 KamExtUserUpload user = new KamExtUserUpload();
-                user.setExcelId(0L);
+                user.setExcelId(0L);//手动添加为0
                 user.setPhoneNumber(Long.parseLong(phoneNumber));
-                user.setSysName(sysName);
-                user.setSysIfRegister(sysIfRegister);
-                user.setSysRegisterDate(sysRegisterDate);
-                user.setSysIfRealName(sysIfRealName);
-                user.setSysIfBindCard(sysIfBindCard);
-                user.setSysIfTransaction(sysIfTransaction);
-                user.setSysReferrer(sysReferrer);
-                user.setSysRebateExpirationDate(sysRebateExpirationDate);
+                user.setCustomerName(customerName);
+                user.setInvestmentAdviser(investmentAdviser);
+                user.setIfEffective(1);
+                user.setIfDelete(0);
                 user.setCtime(new Date());
-                user.setMtime(user.getCtime());
                 //保存到数据库
-                int num = this.bcExternalUserService.saveUserToTwo(user, bcExternalUserBackup);
+                int num = this.kamExtUserUploadService.save(user);
                 if (num < 0) {
                     result.setCode(AjaxResult.CODE_FAILURE);
                     result.setMsg("保存用户信息失败！");
@@ -139,16 +137,14 @@ public class KamExtUserUploadController extends BaseController {
             } else {
                 //修改用户，先根据id查询到用户
                 KamExtUserUpload user = this.kamExtUserUploadService.selectByKey(id);
-                user.setSysName(sysName);
-                user.setSysIfRegister(sysIfRegister);
-                user.setSysRegisterDate(sysRegisterDate);
-                user.setSysIfRealName(sysIfRealName);
-                user.setSysIfBindCard(sysIfBindCard);
-                user.setSysIfTransaction(sysIfTransaction);
-                user.setSysReferrer(sysReferrer);
-                user.setSysRebateExpirationDate(sysRebateExpirationDate);
+                user.setExcelId(0L);//手动添加为0
+                user.setPhoneNumber(Long.parseLong(phoneNumber));
+                user.setCustomerName(customerName);
+                user.setInvestmentAdviser(investmentAdviser);
+                user.setIfEffective(1);
+                user.setIfDelete(0);
                 user.setMtime(new Date());
-                int num = this.bcExternalUserService.updateNotNull(user);
+                int num = this.kamExtUserUploadService.updateNotNull(user);
                 if (num < 0) {
                     result.setCode(AjaxResult.CODE_FAILURE);
                     result.setMsg("修改用户信息失败！");
@@ -161,7 +157,7 @@ public class KamExtUserUploadController extends BaseController {
         }
         System.out.println("result = " + result);
         return result;
-    }*/
+    }
 
 
     /**
