@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.blazer.bigclient.model.KamExtUserUpload;
 import org.blazer.bigclient.model.KamUserInfo;
 import org.blazer.bigclient.util.IntegerUtil;
+import org.blazer.bigclient.util.LongUtil;
 import org.blazer.bigclient.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,28 @@ public class KamUserInfoService extends BaseService<KamUserInfo> {
     @Autowired
     private KamExtUserUploadService kamExtUserUploadService;
 
+
+    /**
+     * 根据手机号查询客户
+     *
+     * @param phoneNumber
+     * @return
+     */
+    public List<KamUserInfo> selectByPhoneNumber(Long phoneNumber) {
+        Example example = new Example(KamUserInfo.class);
+        Example.Criteria criteria = example.createCriteria();
+        Long phoneNo = LongUtil.getLongZero(phoneNumber);
+        criteria.andEqualTo("phoneNumber", phoneNo);
+        List<KamUserInfo> list = this.selectByExample(example);
+        return list;
+    }
+
+    /**
+     * list查询+分页+条件
+     *
+     * @param params
+     * @return
+     */
     public PageInfo<KamUserInfo> findUserByPage(HashMap<String, String> params) {
         LOGGER.info("根据条件查询客户列表。。。");
         Example example = new Example(KamUserInfo.class);
@@ -115,6 +138,8 @@ public class KamUserInfoService extends BaseService<KamUserInfo> {
             return true;
         }
     }
+
+
 
     /*平台待分配客户*/
 

@@ -671,4 +671,38 @@ public class KamUserInfo {
     public void setCtime(Date ctime) {
         this.ctime = ctime;
     }
+
+    @Override
+    public String toString() {
+        return "KamUserInfo{" +
+                "id=" + id +
+                ", excelId=" + excelId +
+                ", phoneNumber=" + phoneNumber +
+                ", userName='" + userName + '\'' +
+                ", sex='" + sex + '\'' +
+                ", age='" + age + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", idCard='" + idCard + '\'' +
+                ", assetsAmount='" + assetsAmount + '\'' +
+                ", ifEmployee='" + ifEmployee + '\'' +
+                ", ifRegister='" + ifRegister + '\'' +
+                ", registerDate='" + registerDate + '\'' +
+                ", ifRealName='" + ifRealName + '\'' +
+                ", ifBindCard='" + ifBindCard + '\'' +
+                ", ifTransaction='" + ifTransaction + '\'' +
+                ", referrer='" + referrer + '\'' +
+                ", referrerPhoneNumber='" + referrerPhoneNumber + '\'' +
+                ", ifReferrerEmployee='" + ifReferrerEmployee + '\'' +
+                ", rebateExpirationDate='" + rebateExpirationDate + '\'' +
+                ", ifReportOrAllot=" + ifReportOrAllot +
+                ", reportOrAllot='" + reportOrAllot + '\'' +
+                ", reportOrAllotDate='" + reportOrAllotDate + '\'' +
+                ", userIdentify='" + userIdentify + '\'' +
+                ", investmentAdviser='" + investmentAdviser + '\'' +
+                ", ifPerformancePool=" + ifPerformancePool +
+                ", ifDelete=" + ifDelete +
+                ", mtime=" + mtime +
+                ", ctime=" + ctime +
+                '}';
+    }
 }

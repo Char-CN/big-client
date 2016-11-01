@@ -193,4 +193,18 @@ public class KamAdvisorTeam {
     public void setCtime(Date ctime) {
         this.ctime = ctime;
     }
+
+    @Override
+    public String toString() {
+        return "KamAdvisorTeam{" +
+                "id=" + id +
+                ", teamName='" + teamName + '\'' +
+                ", teamLeaderId=" + teamLeaderId +
+                ", totalNumber=" + totalNumber +
+                ", area='" + area + '\'' +
+                ", remark='" + remark + '\'' +
+                ", mtime=" + mtime +
+                ", ctime=" + ctime +
+                '}';
+    }
 }

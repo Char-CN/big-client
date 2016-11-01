@@ -11,7 +11,7 @@ import org.blazer.bigclient.excel.vo.ExcelImportResult;
 import org.blazer.bigclient.model.KamAdvisor;
 import org.blazer.bigclient.model.KamExcel;
 import org.blazer.bigclient.model.KamExtUserUpload;
-import org.blazer.bigclient.service.KamAdvisorService;
+import org.blazer.bigclient.service.KamExcelService;
 import org.blazer.bigclient.service.KamExtUserUploadService;
 import org.blazer.bigclient.util.*;
 import org.slf4j.Logger;
@@ -54,6 +54,9 @@ public class KamExtUserUploadController extends BaseController {
 
     @Autowired
     private KamExtUserUploadService kamExtUserUploadService;
+
+    @Autowired
+    private KamExcelService kamExcelService;
 
     /**
      * 根据搜索条件分页查询
@@ -209,11 +212,11 @@ public class KamExtUserUploadController extends BaseController {
     public AjaxResult importExcel(@RequestParam("fileExcel") CommonsMultipartFile file, HttpServletRequest request) {
 
         LOGGER.debug("该上传excel文件的原文件名是 :" + file.getOriginalFilename());
+        LOGGER.debug("当前登录用户为 :" + super.getCurrentUserName(request));
 
         // 获取当前登录用户信息，然后判断权限
         KamAdvisor advisor = super.getCurrentUser(request);
         System.out.println("advisor = " + advisor);
-        LOGGER.debug("当前登录用户为 :" + advisor.getActualName());
 
         AjaxResult result = AjaxResult.success("导入数据成功...");
 
@@ -267,10 +270,11 @@ public class KamExtUserUploadController extends BaseController {
                 } else {
                     if (e instanceof InvalidFormatException) {
                         result.setMsg("错误的文件格式。。。");
+                    } else {
+                        result.setMsg(e.getMessage());
+                        e.printStackTrace();
+                        LOGGER.error(e.getMessage());
                     }
-                    result.setMsg(e.getMessage());
-                    e.printStackTrace();
-                    LOGGER.error(e.getMessage());
                 }
             }
         } else {

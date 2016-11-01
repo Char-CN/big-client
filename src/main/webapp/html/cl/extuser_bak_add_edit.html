@@ -10,7 +10,7 @@
         var id = $util.getQueryString(queryString, "id");
         var excelId = $util.getQueryString(queryString, "excelId");
         var phoneNumber = $util.getQueryString(queryString, "phoneNumber");
-        var userName = $util.getQueryString(queryString, "userName");
+        var customerName = $util.getQueryString(queryString, "customerName");
         var investmentAdviser = $util.getQueryString(queryString, "investmentAdviser");
         var ifDelete = $util.getQueryString(queryString, "ifDelete");
         var mtime = $util.getQueryString(queryString, "mtime");
@@ -19,7 +19,7 @@
         if (id != null) {
             this_window.find("input[name=phoneNumber]").val(id);
             this_window.find("input[name=phoneNumber]").val(phoneNumber);
-            this_window.find("input[name=userName]").val(userName);
+            this_window.find("input[name=customerName]").val(customerName);
             this_window.find("input[name=investmentAdviser]").val(investmentAdviser);
             this_window.find("input[name=ifRegister][value='" + ifDelete + "']").attr("checked", true);
         }
@@ -32,7 +32,7 @@
                 id: id,
                 phoneNumber: this_window.find("input[name=phoneNumber]").val(),
                 investmentAdviser: this_window.find("input[name=investmentAdviser]").val(),
-                userName: this_window.find("input[name=userName]").val(),
+                customerName: this_window.find("input[name=customerName]").val(),
                 ifRegister: this_window.find("input[name=ifRegister]:checked").val(),
                 registerDate: this_window.find("input[name=registerDate]").val(),
                 ifRealName: this_window.find("input[name=ifRealName]:checked").val(),

@@ -285,4 +285,22 @@ public class KamExtUserUpload {
     public void setCtime(Date ctime) {
         this.ctime = ctime;
     }
+
+    @Override
+    public String toString() {
+        return "KamExtUserUpload{" +
+                "id=" + id +
+                ", excelId=" + excelId +
+                ", phoneNumber=" + phoneNumber +
+                ", customerName='" + customerName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", investmentAdviser='" + investmentAdviser + '\'' +
+                ", ifEffective=" + ifEffective +
+                ", ifDelete=" + ifDelete +
+                ", remark='" + remark + '\'' +
+                ", mtime=" + mtime +
+                ", ctime=" + ctime +
+                ", ctime_format='" + ctime_format + '\'' +
+                '}';
+    }
 }

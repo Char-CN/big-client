@@ -4,15 +4,14 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.blazer.bigclient.model.BcExternalUser;
 import org.blazer.bigclient.excel.vo.ExcelDefinition;
 import org.blazer.bigclient.excel.vo.FieldValue;
+import org.blazer.bigclient.model.KamUserInfo;
 import org.junit.Test;
 
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -72,7 +71,7 @@ public class ExportTest {
     @Test
     public void testExportCustomHeader() throws Exception {
         OutputStream ops = new FileOutputStream(path);
-        final List<BcExternalUser> list = getUserList();
+        final List<KamUserInfo> list = getUserList();
         Workbook workbook = context.createExcel(excelId, list, new ExcelHeader() {
             @Override
             public void buildHeader(Sheet sheet, ExcelDefinition excelDefinition, List<?> beans) {
@@ -110,7 +109,7 @@ public class ExportTest {
         specifyFields.add("sysRebateExpirationDate");
         specifyFields.add("mtime");
         specifyFields.add("ctime");
-        List<BcExternalUser> list = getUserList();
+        List<KamUserInfo> list = getUserList();
         Workbook workbook = context.createExcel(excelId, list, null, specifyFields);
         workbook.write(ops);
         ops.close();
@@ -136,7 +135,7 @@ public class ExportTest {
         specifyFields.add("sysIfTransaction");
         specifyFields.add("sysReferrer");
         specifyFields.add("sysRebateExpirationDate");
-        final List<BcExternalUser> list = getUserList();
+        final List<KamUserInfo> list = getUserList();
         Workbook workbook = context.createExcel(excelId, list, new ExcelHeader() {
 
             @Override
@@ -220,31 +219,13 @@ public class ExportTest {
     }
 
     //获取模拟数据,数据库数据...
-    public static List<BcExternalUser> getUserList() {
+    public static List<KamUserInfo> getUserList() {
         int size = 10;
-        List<BcExternalUser> userList = new ArrayList<BcExternalUser>(size);
+        List<KamUserInfo> userList = new ArrayList<KamUserInfo>(size);
         for (int i = 0; i < size; i++) {
-            BcExternalUser user = new BcExternalUser();
+            KamUserInfo user = new KamUserInfo();
             user.setId(Long.parseLong("" + i) + 1);
             user.setPhoneNumber(13345678900L + i);
-            user.setSysName("张三" + i);
-            if (i % 2 == 0) {
-                user.setSysIfRealName("是");
-                user.setSysIfBindCard("是");
-                user.setSysIfRegister("是");
-                user.setSysIfTransaction("是");
-            } else {
-                user.setSysIfRealName("否");
-                user.setSysIfBindCard("否");
-                user.setSysIfRegister("否");
-                user.setSysIfTransaction("否");
-            }
-            user.setSysRegisterDate("2016-08-31");
-            user.setSysReferrer("王五" + i);
-            user.setSysRebateExpirationDate("2016-10-01");
-            user.setMtime(new Date());
-            user.setCtime(new Date());
-
             userList.add(user);
         }
         return userList;

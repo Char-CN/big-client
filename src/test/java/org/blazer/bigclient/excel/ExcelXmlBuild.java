@@ -26,6 +26,8 @@ public class ExcelXmlBuild {
         System.out.println(xml);
         String xml1 = builderXml("kamExtUserUpload", "外部拓展客户（导入）", true, KamExtUserUpload.class, 5000);
         System.out.println(xml1);
+        String xml2 = builderXml("kamExcel", "Excel", true, KamExcel.class, 5000);
+        System.out.println(xml2);
 
     }
 

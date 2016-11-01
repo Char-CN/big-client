@@ -171,4 +171,17 @@ public class KamExcel {
     public void setCtime(Date ctime) {
         this.ctime = ctime;
     }
+
+    @Override
+    public String toString() {
+        return "KamExcel{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", excelName='" + excelName + '\'' +
+                ", excelRealName='" + excelRealName + '\'' +
+                ", excelRealPath='" + excelRealPath + '\'' +
+                ", mtime=" + mtime +
+                ", ctime=" + ctime +
+                '}';
+    }
 }

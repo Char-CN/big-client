@@ -147,4 +147,16 @@ public class KamUserToAdvisor {
     public void setCtime(Date ctime) {
         this.ctime = ctime;
     }
+
+    @Override
+    public String toString() {
+        return "KamUserToAdvisor{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", advisorId=" + advisorId +
+                ", versionNo='" + versionNo + '\'' +
+                ", mtime=" + mtime +
+                ", ctime=" + ctime +
+                '}';
+    }
 }

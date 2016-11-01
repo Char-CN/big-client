@@ -3,8 +3,7 @@ package org.blazer.bigclient.excel.converter;
 import org.blazer.bigclient.excel.ExcelException;
 import org.blazer.bigclient.excel.ResolveFieldValueConverter;
 import org.blazer.bigclient.excel.vo.FieldValue;
-import org.blazer.bigclient.model.BcExternalUser;
-import org.springframework.stereotype.Component;
+import org.blazer.bigclient.model.KamUserInfo;
 
 /**
  * 自定义转换,测试学生创建人
@@ -22,7 +21,7 @@ public class CreateUserFieldValueConverter implements ResolveFieldValueConverter
 		if(type==Type.IMPORT){
 			if(queryForDb(value.toString())){
 				//这里可以重新对对象进行设置
-				BcExternalUser stu = (BcExternalUser) bean;
+				KamUserInfo stu = (KamUserInfo) bean;
 				stu.setExcelId((long)001);
 				//stu.setCreateUserId(xx);
 				return value;
