@@ -20,6 +20,19 @@
 		<field name="ctime_format" title="创建时间格式化"/>
 	</excel>
 
+	<!-- 正式名单版本表 -->
+	<excel id="kamUserToAdvisor" class="org.blazer.bigclient.model.KamUserToAdvisor"
+		   sheetname="正式名单版本表" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
+		<field name="id" title="自动编号"/>
+		<field name="userId" title="客户ID"/>
+		<field name="advisorId" title="投顾ID"/>
+		<field name="versionNo" title="版本号"/>
+		<field name="startDate" title="分配起始日期" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="endDate" title="分配结束日期（为null及为当前版本状态）" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+	</excel>
+
 	<!-- KamUserInfo -->
 	<excel id="kamUserInfo" class="org.blazer.bigclient.model.KamUserInfo"
 		   sheetname="客户列表" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
@@ -42,13 +55,13 @@
 		<field name="referrerPhoneNumber" title="推荐人手机号"/>
 		<field name="ifReferrerEmployee" title="推荐人是否员工"/>
 		<field name="rebateExpirationDate" title="返利失效日期"/>
-		<field name="ifReportOrAllot" title="是否上报/分配"/>
+		<field name="ifReportOrAllot" title="是否上报/分配" format="0:未上报/分配,1:已上报/分配"/>
 		<field name="reportOrAllot" title="上报/分配"/>
 		<field name="reportOrAllotDate" title="上报/分配时间"/>
 		<field name="userIdentify" title="客户标识"/>
 		<field name="investmentAdviser" title="投资顾问"/>
-		<field name="ifPerformancePool" title="是否业绩池"/>
-		<field name="ifDelete" title="是否删除"/>
+		<field name="ifPerformancePool" title="是否业绩池" format="0:不计入,1:计入"/>
+		<field name="ifDelete" title="是否删除" format="0:未删除,1:已删除"/>
 		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>

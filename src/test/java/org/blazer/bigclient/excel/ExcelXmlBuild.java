@@ -22,12 +22,14 @@ public class ExcelXmlBuild {
     //快速构建一个XML配置,看不懂直接运行
     public static void main(String[] args) {
 
-        String xml = builderXml("srAssetsBalance", "资产余额表", true, SrAssetsBalance.class, 5000);
-        System.out.println(xml);
-        String xml1 = builderXml("kamExtUserUpload", "外部拓展客户（导入）", true, KamExtUserUpload.class, 5000);
-        System.out.println(xml1);
-        String xml2 = builderXml("kamExcel", "Excel", true, KamExcel.class, 5000);
-        System.out.println(xml2);
+//        String xml = builderXml("srAssetsBalance", "资产余额表", true, SrAssetsBalance.class, 5000);
+//        System.out.println(xml);
+//        String xml1 = builderXml("kamExtUserUpload", "外部拓展客户（导入）", true, KamExtUserUpload.class, 5000);
+//        System.out.println(xml1);
+//        String xml2 = builderXml("kamExcel", "Excel", true, KamExcel.class, 5000);
+//        System.out.println(xml2);
+        String xml3 = builderXml("kamUserToAdvisor", "正式名单版本表", true, KamUserToAdvisor.class, 5000);
+        System.out.println(xml3);
 
     }
 

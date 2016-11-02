@@ -9,6 +9,8 @@
     <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="advisor_id" property="advisorId" jdbcType="BIGINT" />
     <result column="version_no" property="versionNo" jdbcType="VARCHAR" />
+    <result column="start_date" property="startDate" jdbcType="TIMESTAMP" />
+    <result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
     <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
     <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
   </resultMap>

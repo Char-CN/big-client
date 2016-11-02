@@ -3,9 +3,8 @@ package org.blazer.bigclient.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
-import org.blazer.bigclient.model.KamExcel;
-import org.blazer.bigclient.model.KamExtUserUpload;
-import org.blazer.bigclient.model.KamUserInfo;
+import org.blazer.bigclient.model.*;
+import org.blazer.bigclient.util.DateUtil;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.blazer.bigclient.util.LongUtil;
 import org.blazer.bigclient.util.StringUtil;
@@ -32,6 +31,12 @@ public class KamExtUserUploadService extends BaseService<KamExtUserUpload> {
 
     @Autowired
     private KamUserInfoService kamUserInfoService;
+
+    @Autowired
+    private KamUserToAdvisorService kamUserToAdvisorService;
+
+    @Autowired
+    private KamAdvisorService kamAdvisorService;
 
     /**
      * 条件分页查询列表
@@ -95,19 +100,42 @@ public class KamExtUserUploadService extends BaseService<KamExtUserUpload> {
                 //此处对客户手机号是否存在做判断（有效用户两个原则：1,上报姓名正确原则 2,先报先得原则）
                 Long phoneNumber = kamExtUserUpload.getPhoneNumber();
                 List<KamUserInfo> userInfoList = this.kamUserInfoService.selectByPhoneNumber(phoneNumber);
-                List<KamExtUserUpload> extUserUploadList = this.selectByPhoneNumber(phoneNumber);
 
-                if (userInfoList.size() == 0 && extUserUploadList.size() == 0) {
+                if (userInfoList == null || userInfoList.size() == 0) {
                     //不存在
                     kamExtUserUpload.setIfDelete(0);
                     kamExtUserUpload.setIfEffective(1);
+                    //如果有效，则加入到正式名单里面
+                    KamUserInfo user = new KamUserInfo();
+                    user.setExcelId(kamExtUserUpload.getExcelId());
+                    user.setPhoneNumber(kamExtUserUpload.getPhoneNumber());
+                    user.setIfReportOrAllot(1);
+                    user.setReportOrAllot("上报");
+                    user.setReportOrAllotDate(DateUtil.dateTime2Str(kamExtUserUpload.getCtime(), DateUtil.DEFAULT_DATE_TIME_FORMAT));
+                    user.setUserIdentify("DKH000");
+                    user.setIfDelete(0);
+                    user.setCtime(new Date());
+                    kamUserInfoService.save(user);
+                    //保存到user版本表
+                    KamUserToAdvisor userToAdvisor = new KamUserToAdvisor();
+                    userToAdvisor.setUserId(user.getId());
+                    KamAdvisor advisor = kamAdvisorService.selectByActualName(kamExtUserUpload.getInvestmentAdviser());
+                    Long advisorId = null;
+                    if (advisor != null) {
+                        advisorId = advisor.getId();
+                    }
+                    userToAdvisor.setAdvisorId(advisorId);
+                    userToAdvisor.setVersionNo("1");
+                    userToAdvisor.setStartDate(kamExtUserUpload.getCtime());
+                    userToAdvisor.setCtime(new Date());
+                    this.kamUserToAdvisorService.save(userToAdvisor);
                 } else {
                     //存在
                     kamExtUserUpload.setIfDelete(1);
                     kamExtUserUpload.setIfEffective(0);
                     kamExtUserUpload.setRemark("无效原因：手机号已存在");
                 }
-                this.mapper.insert(kamExtUserUpload);
+                this.save(kamExtUserUpload);
             }
         }
     }

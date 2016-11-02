@@ -34,4 +34,28 @@ public class KamAdvisorService extends BaseService<KamAdvisor> {
         List<KamAdvisor> list = selectByExample(example);
         return new PageInfo<KamAdvisor>(list);
     }
+
+
+    /**
+     * 根据中文名查询投顾
+     *
+     * @param actualName
+     * @return
+     */
+    public KamAdvisor selectByActualName(String actualName) {
+        KamAdvisor advisor = null;
+        try {
+            Example example = new Example(KamAdvisor.class);
+            Example.Criteria criteria = example.createCriteria();
+            String name = StringUtil.getStrEmpty(actualName);
+            criteria.andEqualTo("actualName", name);
+            List<KamAdvisor> list = selectByExample(example);
+            if (list != null && list.size() != 0) {
+                advisor = list.get(0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return advisor;
+    }
 }

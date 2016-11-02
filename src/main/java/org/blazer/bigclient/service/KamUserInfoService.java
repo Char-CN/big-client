@@ -36,6 +36,7 @@ public class KamUserInfoService extends BaseService<KamUserInfo> {
      * @return
      */
     public List<KamUserInfo> selectByPhoneNumber(Long phoneNumber) {
+        LOGGER.info("要查询的手机号是："+ phoneNumber);
         Example example = new Example(KamUserInfo.class);
         Example.Criteria criteria = example.createCriteria();
         Long phoneNo = LongUtil.getLongZero(phoneNumber);

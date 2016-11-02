@@ -25,10 +25,22 @@ public class KamUserToAdvisor {
     private Long advisorId;
 
     /**
-     * 版本号
+     * 版本号:默认是1，依次递增
      */
     @Column(name = "version_no")
     private String versionNo;
+
+    /**
+     * 分配起始日期
+     */
+    @Column(name = "start_date")
+    private Date startDate;
+
+    /**
+     * 分配结束日期，为NULL值表示没有结束日期
+     */
+    @Column(name = "end_date")
+    private Date endDate;
 
     /**
      * 更新时间
@@ -95,21 +107,57 @@ public class KamUserToAdvisor {
     }
 
     /**
-     * 获取版本号
+     * 获取版本号:默认是1，依次递增
      *
-     * @return version_no - 版本号
+     * @return version_no - 版本号:默认是1，依次递增
      */
     public String getVersionNo() {
         return versionNo;
     }
 
     /**
-     * 设置版本号
+     * 设置版本号:默认是1，依次递增
      *
-     * @param versionNo 版本号
+     * @param versionNo 版本号:默认是1，依次递增
      */
     public void setVersionNo(String versionNo) {
         this.versionNo = versionNo;
+    }
+
+    /**
+     * 获取分配起始日期
+     *
+     * @return start_date - 分配起始日期
+     */
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    /**
+     * 设置分配起始日期
+     *
+     * @param startDate 分配起始日期
+     */
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    /**
+     * 获取分配结束日期，为NULL值表示没有结束日期
+     *
+     * @return end_date - 分配结束日期，为NULL值表示没有结束日期
+     */
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    /**
+     * 设置分配结束日期，为NULL值表示没有结束日期
+     *
+     * @param endDate 分配结束日期，为NULL值表示没有结束日期
+     */
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     /**
@@ -155,6 +203,8 @@ public class KamUserToAdvisor {
                 ", userId=" + userId +
                 ", advisorId=" + advisorId +
                 ", versionNo='" + versionNo + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
                 ", mtime=" + mtime +
                 ", ctime=" + ctime +
                 '}';
