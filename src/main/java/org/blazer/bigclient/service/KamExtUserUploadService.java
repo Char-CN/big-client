@@ -113,6 +113,7 @@ public class KamExtUserUploadService extends BaseService<KamExtUserUpload> {
                     user.setReportOrAllot("上报");
                     user.setReportOrAllotDate(DateUtil.dateTime2Str(kamExtUserUpload.getCtime(), DateUtil.DEFAULT_DATE_TIME_FORMAT));
                     user.setUserIdentify("DKH000");
+                    user.setInvestmentAdviser(kamExtUserUpload.getInvestmentAdviser());
                     user.setIfDelete(0);
                     user.setCtime(new Date());
                     kamUserInfoService.save(user);

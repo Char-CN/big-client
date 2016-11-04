@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.blazer.bigclient.model.KamExtUserUpload;
 import org.blazer.bigclient.model.KamUserInfo;
+import org.blazer.bigclient.model.KamUserToAdvisor;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.blazer.bigclient.util.LongUtil;
 import org.blazer.bigclient.util.StringUtil;
@@ -27,6 +28,9 @@ public class KamUserInfoService extends BaseService<KamUserInfo> {
 
     @Autowired
     private KamExtUserUploadService kamExtUserUploadService;
+
+    @Autowired
+    private KamUserToAdvisorService kamUserToAdvisorService;
 
 
     /**
@@ -100,23 +104,6 @@ public class KamUserInfoService extends BaseService<KamUserInfo> {
     }
 
     /**
-     * 保存单个用户到两张表
-     *
-     * @param kamUserInfo
-     * @param kamExtUserUpload
-     * @return
-     */
-    public int saveUserToTwo(KamUserInfo kamUserInfo, KamExtUserUpload kamExtUserUpload) {
-        int num1 = this.save(kamUserInfo);
-        int num2 = this.kamExtUserUploadService.save(kamExtUserUpload);
-        if (num1 > 0 && num2 > 0) {
-            return 1;
-        } else {
-            return -1;
-        }
-    }
-
-    /**
      * 查找手机号是否存在
      * 两张表里有一张存在就是true，都不存在即为false
      *
@@ -140,10 +127,62 @@ public class KamUserInfoService extends BaseService<KamUserInfo> {
         }
     }
 
-
-
     /*平台待分配客户*/
 
 
-    /*正式客户*/
+
+    /**正式客户*/
+
+    /**
+     * 正式名单条件查询 版本在另一张表
+     *
+     * @param params
+     * @return
+     */
+    public PageInfo<KamUserInfo> findByPage(HashMap<String, String> params) {
+        LOGGER.info("根据条件查询客户列表。。。");
+        Example example = new Example(KamUserInfo.class);
+        Example.Criteria criteria = example.createCriteria();
+        String search = StringUtil.getStrEmpty(params.get("search"));
+        if (StringUtils.isNotEmpty(search)) {
+            criteria.andCondition("phone_number like '%" + search + "%'" + " or user_name like '%" + search + "%'");
+        }
+        String ifReportOrAllot = StringUtil.getStrEmpty(params.get("ifReportOrAllot"));
+        if (StringUtils.isNotEmpty(ifReportOrAllot)) {
+            criteria.andEqualTo("ifReportOrAllot", ifReportOrAllot);
+        }
+
+        String advisorName = StringUtil.getStrEmpty(params.get("advisorName"));
+        if (StringUtils.isNotEmpty(advisorName)) {
+            //此处为实体类的属性，不是表字段
+            criteria.andEqualTo("investmentAdviser", advisorName);
+        }
+        criteria.andEqualTo("ifDelete", 0);
+        PageHelper.startPage(IntegerUtil.getIntZero(params.get("currentPage")), IntegerUtil.getIntZero(params.get("pageSize")));
+        List<KamUserInfo> list = selectByExample(example);
+
+        if(list != null && list.size() != 0){
+            for(int i = 0;i< list.size();i++){
+
+            }
+        }
+
+        //判断版本
+        String dateStart = StringUtil.getStrEmpty(params.get("dateStart"));
+        if (StringUtils.isNotEmpty(dateStart)) {
+            criteria.andEqualTo("132", dateStart);
+        }
+        String dateEnd = StringUtil.getStrEmpty(params.get("dateEnd"));
+        if (StringUtils.isNotEmpty(dateEnd)) {
+            criteria.andEqualTo("2321", dateEnd);
+        }
+
+
+
+
+
+        return new PageInfo<KamUserInfo>(list);
+    }
+
+
 }

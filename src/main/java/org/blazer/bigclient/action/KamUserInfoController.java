@@ -1,34 +1,26 @@
 package org.blazer.bigclient.action;
 
 import com.github.pagehelper.PageInfo;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.blazer.bigclient.body.AjaxResult;
-import org.blazer.bigclient.excel.ExcelException;
-import org.blazer.bigclient.excel.vo.ExcelImportResult;
 import org.blazer.bigclient.model.KamAdvisor;
-import org.blazer.bigclient.model.KamExcel;
 import org.blazer.bigclient.model.KamExtUserUpload;
 import org.blazer.bigclient.model.KamUserInfo;
-import org.blazer.bigclient.service.KamExtUserUploadService;
 import org.blazer.bigclient.service.KamUserInfoService;
-import org.blazer.bigclient.util.*;
+import org.blazer.bigclient.util.IntegerUtil;
+import org.blazer.bigclient.util.LongUtil;
+import org.blazer.bigclient.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by yyccb on 2016-10-11.
@@ -41,9 +33,6 @@ public class KamUserInfoController extends BaseController {
 
     @Autowired
     private KamUserInfoService kamUserInfoService;
-
-    @Autowired
-    private KamExtUserUploadService kamExtUserUploadService;
 
 
 
@@ -65,7 +54,6 @@ public class KamUserInfoController extends BaseController {
 
         //获取当前登录用户
         KamAdvisor advisor = super.getCurrentUser(request);
-        System.out.println("当前登录用户: advisor = " + advisor);
 
         //判断当前登录用户如果为投顾,则添加投顾真实姓名作为查询参数
         if (advisor != null) {
@@ -131,11 +119,11 @@ public class KamUserInfoController extends BaseController {
                 kamExtUserUpload.setPhoneNumber(kamUserInfo.getPhoneNumber());
                 kamExtUserUpload.setCtime(kamUserInfo.getCtime());
                 //保存到数据库
-                int num = this.kamUserInfoService.saveUserToTwo(kamUserInfo, kamExtUserUpload);
-                if (num < 0) {
-                    result.setCode(AjaxResult.CODE_FAILURE);
-                    result.setMsg("保存用户信息失败！");
-                }
+//                int num = this.kamUserInfoService.saveUserToTwo(kamUserInfo, kamExtUserUpload);
+//                if (num < 0) {
+//                    result.setCode(AjaxResult.CODE_FAILURE);
+//                    result.setMsg("保存用户信息失败！");
+//                }
             } else {
                 //修改用户，先根据id查询到用户
                 KamUserInfo kamUserInfo = this.kamUserInfoService.selectByKey(id);
@@ -174,6 +162,33 @@ public class KamUserInfoController extends BaseController {
 
     /**正式客户*/
 
+    /**
+     * 根据搜索条件分页查询
+     *
+     * @param request
+     * @param response
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("formal/findByPage")
+    public PageInfo<KamUserInfo> findByPage(HttpServletRequest request, HttpServletResponse response) {
+        //获取前台传递过来的参数
+        HashMap<String, String> params = getParamMap(request);
+        LOGGER.debug("currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
+                ", pageSize:" + IntegerUtil.getIntZero(params.get("pageSize")) +
+                ", search:" + StringUtil.getStrEmpty(params.get("search")) +
+                ", dateStart:" + StringUtil.getStrEmpty(params.get("dateStart")) +
+                ", dateEnd:" + StringUtil.getStrEmpty(params.get("dateEnd")));
+
+        //获取当前登录用户
+        KamAdvisor advisor = super.getCurrentUser(request);
+
+        //判断当前登录用户如果为投顾,则添加投顾真实姓名作为查询参数
+        if (advisor != null) {
+            params.put("advisorName",advisor.getActualName());
+        }
+        return kamUserInfoService.findByPage(params);
+    }
 
 
 
