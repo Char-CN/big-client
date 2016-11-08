@@ -1,4 +1,4 @@
-package org.blazer.bigclient.action;
+package org.blazer.bigclient.controller;
 
 import com.github.pagehelper.PageInfo;
 import org.blazer.bigclient.model.KamAdvisor;

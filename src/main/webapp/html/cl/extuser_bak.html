@@ -10,7 +10,7 @@
             }
             _currentPage_lastCurrent = currentPage;
             lock = true;
-            $.post("extUserUpload/findByPage.do", {
+            $.post("cl/extUserBak/findByPage.do", {
                 currentPage: currentPage,
                 pageSize: 10,
                 search: search_text
@@ -64,7 +64,7 @@
                     investmentAdviser: rst[i].investmentAdviser,
                     ifDelete: rst[i].ifDelete,
                 }, function (event) {
-                    $util.modal("修改用户", "html/cl/extuser_bak_add_edit.html", {
+                    $util.modal("修改客户", "html/cl/extuser_bak_add_edit.html", {
                         id: event.data.id,
                         excelId: event.data.excelId,
                         phoneNumber: event.data.phoneNumber,
@@ -83,7 +83,7 @@
                     var r = confirm("确定要删除该客户吗？")
                     if (r == true) {
                         console.log(id);
-                        $.post("extUserUpload/deleteById.do", {id: id}, function (data) {
+                        $.post("cl/extUserBak/deleteById.do", {id: id}, function (data) {
                             alert(data.msg);
                             //刷新当前页
                             reload();
@@ -123,7 +123,7 @@
 		//ajax上传文件
 		var ajaxFileUpload = function() {
 			$.ajaxFileUpload({
-				url : "/extUserUpload/importExcel.do", //用于文件上传的服务器端请求地址
+				url : "/cl/extUserBak/importExcel.do", //用于文件上传的服务器端请求地址
 				type : "post",
 				secureuri : false, //一般设置为false
 				fileElementId : "fileExcel", //文件上传空间的id属性
@@ -153,7 +153,7 @@
 		 */
 		$("#exportExcel").click(function() {
 			downLoadFile({
-				url : '/extUserUpload/exportExcel.do', //请求的url
+				url : '/cl/extUserBak/exportExcel.do', //请求的url
 				data : {search : search_text},//要发送的数据
 				callback : function() {
 					//alert("导出excel文件成功");
@@ -166,7 +166,7 @@
          */
         $("#template_download").click(function () {
             downLoadFile({
-                url: '/extUserUpload/exportExcel.do', //请求的url
+                url: '/cl/extUserBak/exportExcel.do', //请求的url
                 data: {template: "template"},//发送标识，下载模板
                 callback: function () {
                     //alert("导出excel模板成功");

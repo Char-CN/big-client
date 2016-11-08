@@ -1,4 +1,4 @@
-package org.blazer.bigclient.action;
+package org.blazer.bigclient.controller;
 
 import org.blazer.bigclient.excel.ExcelContext;
 import org.blazer.bigclient.excel.ExcelHeader;
@@ -23,8 +23,8 @@ public class BaseController {
     @Autowired
     protected ExcelContext excelContext;
 
-    @Autowired
-    protected KamAdvisorService kamAdvisorService;
+    /*@Autowired
+    protected KamAdvisorService kamAdvisorService;*/
 
     public HashMap<String, String> getParamMap(HttpServletRequest request) {
         HashMap<String, String> paramMap = new HashMap<String, String>();
@@ -62,7 +62,7 @@ public class BaseController {
      *
      * @param request
      * @return
-     */
+     *//*
     public KamAdvisor getCurrentUser(HttpServletRequest request) {
         SessionModel model = PermissionsFilter.getSessionModel(request);
         String userName = model.getUserName();
@@ -73,17 +73,17 @@ public class BaseController {
         return kamAdvisorService.selcetOne(advisor);
     }
 
-    /**
+    *//**
      * 获取当前登录用户
      * login_name登录用户名
      *
      * @param request
      * @return
-     */
+     *//*
     public String getCurrentUserName(HttpServletRequest request) {
         SessionModel model = PermissionsFilter.getSessionModel(request);
         return model.getUserName();
-    }
+    }*/
 
 
 }

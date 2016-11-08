@@ -31,12 +31,7 @@
                 phoneNumber: this_window.find("input[name=phoneNumber]").val(),
                 investmentAdviser: this_window.find("input[name=investmentAdviser]").val(),
                 customerName: this_window.find("input[name=customerName]").val(),
-                ifRegister: this_window.find("input[name=ifRegister]:checked").val(),
-                registerDate: this_window.find("input[name=registerDate]").val(),
-                ifRealName: this_window.find("input[name=ifRealName]:checked").val(),
-                ifBindCard: this_window.find("input[name=ifBindCard]:checked").val(),
-                ifTransaction: this_window.find("input[name=ifTransaction]:checked").val(),
-                referrer: this_window.find("input[name=referrer]").val(),
+                userName: this_window.find("input[name=userName]:checked").val()
             }, function (data) {
                 if (data.code == 1) {
                     //保存成功，关闭当前窗口
@@ -56,8 +51,8 @@
     <input type="text" class="form-control" name="phoneNumber" placeholder="请输入手机号码">
 </div>
 <div class="input-group">
-    <span class="input-group-addon">客户姓名</span>
-    <input type="text" class="form-control" name="userName" placeholder="请输入客户姓名">
+    <span class="input-group-addon">上传姓名</span>
+    <input type="text" class="form-control" name="customerName" placeholder="请输入客户姓名">
 </div>
 <div class="input-group">
     <span class="input-group-addon">投资顾问</span>

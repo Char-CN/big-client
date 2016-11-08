@@ -1,4 +1,4 @@
-package org.blazer.bigclient.action;
+package org.blazer.bigclient.controller;
 
 import com.github.pagehelper.PageInfo;
 import org.blazer.bigclient.body.AjaxResult;
@@ -29,20 +29,20 @@ import java.util.HashMap;
 @Controller
 public class KamUserInfoController extends BaseController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(KamUserInfoController.class);
+    /*private static final Logger LOGGER = LoggerFactory.getLogger(KamUserInfoController.class);
 
     @Autowired
     private KamUserInfoService kamUserInfoService;
 
 
 
-    /**
+    *//**
      * 根据搜索条件分页查询
      *
      * @param request
      * @param response
      * @return
-     */
+     *//*
     @ResponseBody
     @RequestMapping("/findUserByPage")
     public PageInfo<KamUserInfo> findUserByPage(HttpServletRequest request, HttpServletResponse response) {
@@ -63,14 +63,14 @@ public class KamUserInfoController extends BaseController {
     }
 
 
-    /**外部拓展客户*/
+    *//**外部拓展客户*//*
 
-    /**
+    *//**
      * 保存单个用户
      *
      * @param request
      * @return
-     */
+     *//*
     @ResponseBody
     @RequestMapping(value = "ext/addOneUser", method = RequestMethod.POST)
     public AjaxResult addOneUser(HttpServletRequest request) {
@@ -154,21 +154,21 @@ public class KamUserInfoController extends BaseController {
 
 
 
-    /**平台待分配客户*/
+    *//**平台待分配客户*//*
 
 
 
 
 
-    /**正式客户*/
+    *//**正式客户*//*
 
-    /**
+    *//**
      * 根据搜索条件分页查询
      *
      * @param request
      * @param response
      * @return
-     */
+     *//*
     @ResponseBody
     @RequestMapping("formal/findByPage")
     public PageInfo<KamUserInfo> findByPage(HttpServletRequest request, HttpServletResponse response) {
@@ -190,6 +190,6 @@ public class KamUserInfoController extends BaseController {
         return kamUserInfoService.findByPage(params);
     }
 
-
+*/
 
 }

@@ -32,12 +32,12 @@
 <script src="js/commons.js"></script>
 <!--<script type="text/javascript" src="js/calendar.js"></script>-->
 <script type="text/javascript" src="js/laydate.js"></script>
-<script type="text/javascript" src="http://bigdata.blazer.org:8030/js/userservice.js"></script>
+<!--<script type="text/javascript" src="http://bigdata.blazer.org:8030/js/userservice.js"></script>-->
 <script>
-	var $userservice = new $userservice("user-service");
+	/*var $userservice = new $userservice("user-service");*/
 	window.onload = function() {
-		//获取用户名
-		$(".login>li:eq(0)").append($userservice.userName + '('+ $userservice.userNameCn+')');
+		/*//获取用户名
+		$(".login>li:eq(0)").append($userservice.userName + '('+ $userservice.userNameCn+')');*/
 
 		var width = $(window).width();
 		var height = $(window).height();
@@ -142,7 +142,7 @@
 			link_ul.append(link_li_e2);
 
 			//默认页面
-			link_li_a4.click();
+			link_li_a1.click();
 		};
 		var setSrc = function(obj, src) {
 			$("#center_head").text($(obj).text());
