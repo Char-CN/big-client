@@ -205,6 +205,15 @@ public class ClExtUserBakService extends BaseService<ClExtUserBak> {
                 }
                 //更新user版本表
                 ClFormalUserVersion maxVersion = this.clFormalUserVersionService.selectMaxVerNoByUid(formalUser.getId());
+                KamAdvisor advisor = kamAdvisorService.selectByActualName(extUserBak.getInvestmentAdviser());
+                Long advisorId = null;
+                if (advisor != null) {
+                    advisorId = advisor.getId();
+                }
+                maxVersion.setAdvisorId(advisorId);
+                maxVersion.setVersionNo(maxVersion.getVersionNo()+1);
+                maxVersion.setStartDate(new Date());
+                maxVersion.setCtime(new Date());
 
             }
         } catch (Exception e) {
