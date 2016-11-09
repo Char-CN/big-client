@@ -27,7 +27,7 @@ public class ClExtUserBakService extends BaseService<ClExtUserBak> {
     private static final Logger LOGGER = LoggerFactory.getLogger(ClExtUserBakService.class);
 
     @Autowired
-    private KamExcelService kamExcelService;
+    private ClExcelService clExcelService;
 
     @Autowired
     private ClFormalUserService clFormalUserService;
@@ -44,13 +44,13 @@ public class ClExtUserBakService extends BaseService<ClExtUserBak> {
      * @param listBean
      * @param excel
      */
-    public void importExcelData(List<ClExtUserBak> listBean, KamExcel excel) {
+    public void importExcelData(List<ClExtUserBak> listBean, ClExcel excel) {
 
         if (listBean != null && listBean.size() > 0 && excel != null) {
 
             //保存excel文件对象信息到数据库表
             LOGGER.info("保存excel对象信息到数据库表。");
-            this.kamExcelService.getMapper().insert(excel);
+            this.clExcelService.getMapper().insert(excel);
             Long id = excel.getId();
             //遍历上传名单的list集合，完善每一个客户对象信息
             for (int i = 0; i < listBean.size(); i++) {
@@ -235,7 +235,7 @@ public class ClExtUserBakService extends BaseService<ClExtUserBak> {
      * @return
      */
     public List<ClExtUserBak> findBySearch(String search) {
-        Example example = new Example(KamExtUserUpload.class);
+        Example example = new Example(ClExtUserBak.class);
         Example.Criteria criteria = example.createCriteria();
         if (StringUtils.isNotEmpty(search)) {
             criteria.andCondition("phone_number like '%" + search + "%'" + " or customer_name like '%" + search + "%'");

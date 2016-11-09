@@ -4,7 +4,7 @@ import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "kam_excel")
-public class KamExcel {
+public class ClExcel {
     /**
      * 自动编号
      */
@@ -174,7 +174,7 @@ public class KamExcel {
 
     @Override
     public String toString() {
-        return "KamExcel{" +
+        return "ClExcel{" +
                 "id=" + id +
                 ", userId=" + userId +
                 ", excelName='" + excelName + '\'' +

@@ -102,7 +102,7 @@ public class ClExtUserBakController extends BaseController {
 
             try {
                 // 获取Excel对象
-                KamExcel excel = ExcelHandlerUtil.getExcelFile(file, request);
+                ClExcel excel = ExcelHandlerUtil.getExcelFile(file, request);
                 //当前上传用户的id
                 excel.setUserId(88888888L);
                 excel.setCtime(new Date());

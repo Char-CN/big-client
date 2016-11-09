@@ -1,7 +1,7 @@
 package org.blazer.bigclient.excel;
 
 import org.blazer.bigclient.excel.vo.ExcelImportResult;
-import org.blazer.bigclient.model.KamUserInfo;
+import org.blazer.bigclient.model.ClFormalUser;
 import org.junit.Test;
 
 import java.io.FileInputStream;
@@ -32,8 +32,8 @@ public class ImportTest {
 		//比如数据批次号之类的,关于如何转换成javaBean,具体参考配置信息描述
 		ExcelImportResult result = context.readExcel(excelId, 0, fis);
 		System.out.println(result.getHeader());
-		List<KamUserInfo> list = result.getListBean();
-		for(KamUserInfo user:list){
+		List<ClFormalUser> list = result.getListBean();
+		for(ClFormalUser user:list){
 			System.out.println(user);
 		}
 		

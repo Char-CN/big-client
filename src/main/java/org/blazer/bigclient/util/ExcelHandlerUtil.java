@@ -1,6 +1,6 @@
 package org.blazer.bigclient.util;
 
-import org.blazer.bigclient.model.KamExcel;
+import org.blazer.bigclient.model.ClExcel;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ExcelHandlerUtil {
 
-    public static KamExcel getExcelFile(CommonsMultipartFile file, HttpServletRequest request) {
+    public static ClExcel getExcelFile(CommonsMultipartFile file, HttpServletRequest request) {
 
         // 获取文件名
         String originalFileName = file.getOriginalFilename();
@@ -33,14 +33,14 @@ public class ExcelHandlerUtil {
         System.out.println("标文件夹地址targetDirectory = " + targetDirectory);
 
         // 将Excle文件名称和路径存到数据库中
-        KamExcel kamExcel = new KamExcel();
-        kamExcel.setExcelName(originalFileName);
-        kamExcel.setExcelRealName(targetFileName);
-        kamExcel.setExcelRealPath(targetDirectory);
+        ClExcel clExcel = new ClExcel();
+        clExcel.setExcelName(originalFileName);
+        clExcel.setExcelRealName(targetFileName);
+        clExcel.setExcelRealPath(targetDirectory);
 
-        System.out.println("kamExcel = " + kamExcel);
+        System.out.println("clExcel = " + clExcel);
 
-        return kamExcel;
+        return clExcel;
     }
 
 

@@ -23,7 +23,7 @@ import java.util.HashMap;
 @RequestMapping("/advisor")
 @Controller
 public class KamAdvisorController extends BaseController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(KamUserInfoController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(KamAdvisorController.class);
 
     @Autowired
     private KamAdvisorService kamAdvisorService;

@@ -6,7 +6,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.blazer.bigclient.excel.vo.ExcelDefinition;
 import org.blazer.bigclient.excel.vo.FieldValue;
-import org.blazer.bigclient.model.KamUserInfo;
+import org.blazer.bigclient.model.ClFormalUser;
 import org.junit.Test;
 
 import java.io.FileOutputStream;
@@ -71,7 +71,7 @@ public class ExportTest {
     @Test
     public void testExportCustomHeader() throws Exception {
         OutputStream ops = new FileOutputStream(path);
-        final List<KamUserInfo> list = getUserList();
+        final List<ClFormalUser> list = getUserList();
         Workbook workbook = context.createExcel(excelId, list, new ExcelHeader() {
             @Override
             public void buildHeader(Sheet sheet, ExcelDefinition excelDefinition, List<?> beans) {
@@ -109,7 +109,7 @@ public class ExportTest {
         specifyFields.add("sysRebateExpirationDate");
         specifyFields.add("mtime");
         specifyFields.add("ctime");
-        List<KamUserInfo> list = getUserList();
+        List<ClFormalUser> list = getUserList();
         Workbook workbook = context.createExcel(excelId, list, null, specifyFields);
         workbook.write(ops);
         ops.close();
@@ -135,7 +135,7 @@ public class ExportTest {
         specifyFields.add("sysIfTransaction");
         specifyFields.add("sysReferrer");
         specifyFields.add("sysRebateExpirationDate");
-        final List<KamUserInfo> list = getUserList();
+        final List<ClFormalUser> list = getUserList();
         Workbook workbook = context.createExcel(excelId, list, new ExcelHeader() {
 
             @Override
@@ -219,11 +219,11 @@ public class ExportTest {
     }
 
     //获取模拟数据,数据库数据...
-    public static List<KamUserInfo> getUserList() {
+    public static List<ClFormalUser> getUserList() {
         int size = 10;
-        List<KamUserInfo> userList = new ArrayList<KamUserInfo>(size);
+        List<ClFormalUser> userList = new ArrayList<ClFormalUser>(size);
         for (int i = 0; i < size; i++) {
-            KamUserInfo user = new KamUserInfo();
+            ClFormalUser user = new ClFormalUser();
             user.setId(Long.parseLong("" + i) + 1);
             user.setPhoneNumber(13345678900L + i);
             userList.add(user);
