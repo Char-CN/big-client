@@ -34,7 +34,7 @@
          * 触发按钮
          */
         $util.modalOnSave(windowId, function () {
-            $.post("user/ext/addOneUser.do", {
+            $.post("cl/extUser/saveOne.do", {
                 id: id,
                 phoneNumber: this_window.find("input[name=phoneNumber]").val(),
                 investmentAdviser: this_window.find("input[name=investmentAdviser]").val(),
