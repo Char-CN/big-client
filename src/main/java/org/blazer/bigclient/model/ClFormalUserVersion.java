@@ -3,6 +3,11 @@ package org.blazer.bigclient.model;
 import java.util.Date;
 import javax.persistence.*;
 
+/**
+ * 分配起始日期 startDate = 创建时间 ctime
+ * 分配结束日期 endDate = 更新时间 mtime
+ */
+
 @Table(name = "cl_formal_user_version")
 public class ClFormalUserVersion {
     /**
@@ -194,5 +199,19 @@ public class ClFormalUserVersion {
      */
     public void setCtime(Date ctime) {
         this.ctime = ctime;
+    }
+
+    @Override
+    public String toString() {
+        return "ClFormalUserVersion{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", advisorId=" + advisorId +
+                ", versionNo='" + versionNo + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", mtime=" + mtime +
+                ", ctime=" + ctime +
+                '}';
     }
 }

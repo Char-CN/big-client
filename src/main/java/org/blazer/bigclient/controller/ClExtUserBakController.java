@@ -2,9 +2,11 @@ package org.blazer.bigclient.controller;
 
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.blazer.bigclient.body.AjaxResult;
 import org.blazer.bigclient.excel.ExcelException;
+import org.blazer.bigclient.excel.ExcelHeader;
 import org.blazer.bigclient.excel.vo.ExcelImportResult;
 import org.blazer.bigclient.model.*;
 import org.blazer.bigclient.service.ClExtUserBakService;
@@ -18,13 +20,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by cuican on 2016-11-8.
@@ -232,5 +232,94 @@ public class ClExtUserBakController extends BaseController {
         return result;
     }
 
+
+    /**
+     * 根据id逻辑删除单个
+     *
+     * 只删除该表
+     *
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "deleteById", method = RequestMethod.POST)
+    public AjaxResult deleteUserById(HttpServletRequest request) {
+        //获取用户id
+        Long id = LongUtil.getLongZero(request.getParameter("id"));
+        LOGGER.debug("正在被删除的用户id是 :" + id);
+        AjaxResult result = AjaxResult.success("删除用户信息成功...");
+        try {
+            ClExtUserBak clExtUserBak = this.clExtUserBakService.selectByKey(id);
+            clExtUserBak.setIfDelete(1);
+            this.clExtUserBakService.updateNotNull(clExtUserBak);
+        } catch (Exception e) {
+            result.setCode(AjaxResult.CODE_FAILURE);
+            result.setMsg("删除用户操作失败。。。" + e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+    /**
+     * 条件查询导出excel文件
+     * 或导出excel模板
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "exportExcel", method = RequestMethod.POST)
+    public ModelAndView exportExcel(HttpServletRequest request) {
+        ModelAndView mv = null;
+        try {
+            //根据条件获取要导出的数据集合
+            String search = StringUtil.getStrEmpty(request.getParameter("search"));
+            String template = StringUtil.getStrEmpty(request.getParameter("template"));
+            LOGGER.debug("search:" + search + "，template:" + template);
+
+            //xml配置中的ID
+            String id = "clExtUserBak";
+            //可以为空,自定义Excel头信息
+            ExcelHeader header = null;
+            //指定导出字段
+            List<String> specifyFields = new ArrayList<String>();
+            //excel文件名称,不需要任何后缀
+            String excelName = null;
+            // 要导出的数据
+            List<ClExtUserBak> list = new ArrayList<ClExtUserBak>();
+
+            //下载空模板的判断
+            if (StringUtils.isNotEmpty(template) && template.equals("template")) {
+                ClExtUserBak user = new ClExtUserBak();
+                user.setPhoneNumber(13802108888L);
+                user.setCustomerName("客户姓名");
+                user.setInvestmentAdviser("投资顾问");
+                list.add(user);
+
+                excelName = "ExtUserUpload_Template_v1.0";
+
+                specifyFields.add("phoneNumber");
+                specifyFields.add("customerName");
+                specifyFields.add("investmentAdviser");
+            } else {
+                //导出数据的表格
+                list = this.clExtUserBakService.findBySearch(search);
+                excelName = "ExtUserUpload_Export_" + DateUtil.date2Str(new Date(),DateUtil.DEFAULT_DATE_TIME_FORMAT);
+
+                specifyFields.add("phoneNumber");
+                specifyFields.add("customerName");
+                specifyFields.add("userName");
+                specifyFields.add("investmentAdviser");
+                specifyFields.add("ifEffective");
+                specifyFields.add("remark");
+                specifyFields.add("ctime");
+            }
+            //构建excel试图
+            mv = super.createExcelView(id, list, excelName, header, specifyFields);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mv;
+    }
 
 }

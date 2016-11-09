@@ -133,7 +133,7 @@ public class ClExtUserBakService extends BaseService<ClExtUserBak> {
         String search = StringUtil.getStrEmpty(params.get("search"));
         String advisorName = StringUtil.getStrEmpty(params.get("advisorName"));
         if (StringUtils.isNotEmpty(search)) {
-            criteria.andCondition("phone_number like '%" + search + "%'" + " or user_name like '%" + search + "%'");
+            criteria.andCondition("phone_number like '%" + search + "%'" + " or customer_name like '%" + search + "%'");
         }
         if (StringUtils.isNotEmpty(advisorName)) {
             //此处为实体类的属性，不是表字段
@@ -203,21 +203,46 @@ public class ClExtUserBakService extends BaseService<ClExtUserBak> {
                     formalUser.setInvestmentAdviser(extUserBak.getInvestmentAdviser());
                     this.clFormalUserService.updateNotNull(formalUser);
                 }
-                //更新user版本表
+                //更新user版本表,先查询之前最大版本的记录，然后添加一条新的记录
                 ClFormalUserVersion maxVersion = this.clFormalUserVersionService.selectMaxVerNoByUid(formalUser.getId());
+
+                ClFormalUserVersion userVersion = new ClFormalUserVersion();
                 KamAdvisor advisor = kamAdvisorService.selectByActualName(extUserBak.getInvestmentAdviser());
                 Long advisorId = null;
                 if (advisor != null) {
                     advisorId = advisor.getId();
                 }
-                maxVersion.setAdvisorId(advisorId);
-                maxVersion.setVersionNo(maxVersion.getVersionNo()+1);
-                maxVersion.setStartDate(new Date());
-                maxVersion.setCtime(new Date());
+                userVersion.setUserId(extUserBak.getId());
+                userVersion.setAdvisorId(advisorId);
+                userVersion.setVersionNo(maxVersion.getVersionNo()+1);
+                userVersion.setStartDate(new Date());
+                userVersion.setCtime(new Date());
+                this.clFormalUserVersionService.save(userVersion);
 
+                maxVersion.setEndDate(userVersion.getStartDate());
+                this.clFormalUserVersionService.updateNotNull(maxVersion);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
+    /**
+     * 根据条件查询 用于前台页面的Excel导出
+     *
+     * @param search
+     * @return
+     */
+    public List<ClExtUserBak> findBySearch(String search) {
+        Example example = new Example(KamExtUserUpload.class);
+        Example.Criteria criteria = example.createCriteria();
+        if (StringUtils.isNotEmpty(search)) {
+            criteria.andCondition("phone_number like '%" + search + "%'" + " or customer_name like '%" + search + "%'");
+        }
+        criteria.andEqualTo("ifDelete", 0);
+        List<ClExtUserBak> list = selectByExample(example);
+        return list;
+    }
+
 }
