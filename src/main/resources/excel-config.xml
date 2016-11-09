@@ -4,7 +4,7 @@
 	<!-- excel标签参看:ExcelDefinition,Field标签参看:FieldValue -->
 
 	<!-- KamUserInfo -->
-	<excel id="kamUserInfo" class="org.blazer.bigclient.model.KamUserInfo"
+	<!--<excel id="kamUserInfo" class="org.blazer.bigclient.model.KamUserInfo"
 		   sheetname="客户列表" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
 		<field name="id" title="自动编号"/>
 		<field name="excelId" title="excel关联id"/>
@@ -34,7 +34,7 @@
 		<field name="ifDelete" title="是否删除" format="0:未删除,1:已删除"/>
 		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
-	</excel>
+	</excel>-->
 
 	<!-- 外部拓展客户（导入） -->
 	<excel id="clExtUserBak" class="org.blazer.bigclient.model.ClExtUserBak"
@@ -104,46 +104,16 @@
 		<field name="ctime" title="ctime" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
 
-	<!-- 外部拓展客户（导入） -->
-	<excel id="kamExtUserUpload" class="org.blazer.bigclient.model.KamExtUserUpload"
-		   sheetname="外部拓展客户（导入）" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
-		<field name="id" title="自动编号"/>
-		<field name="excelId" title="excel关联id"/>
-		<field name="phoneNumber" title="手机号码"/>
-		<field name="customerName" title="上传姓名"/>
-		<field name="userName" title="客户姓名"/>
-		<field name="investmentAdviser" title="投资顾问"/>
-		<field name="ifEffective" title="是否有效" titleBgColor="green" format="1:有效,0:无效"/>
-		<field name="ifDelete" title="是否删除" titleBgColor="yellow" format="1:已删除,0:未删除"/>
-		<field name="remark" title="备注信息"/>
-		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
-		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
-		<field name="ctime_format" title="创建时间格式化"/>
-	</excel>
-
-	<!-- 正式名单版本表 -->
-	<excel id="kamUserToAdvisor" class="org.blazer.bigclient.model.KamUserToAdvisor"
-		   sheetname="正式名单版本表" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
-		<field name="id" title="自动编号"/>
-		<field name="userId" title="客户ID"/>
-		<field name="advisorId" title="投顾ID"/>
-		<field name="versionNo" title="版本号"/>
-		<field name="startDate" title="分配起始日期" pattern="yyyy-MM-dd HH:mm:ss"/>
-		<field name="endDate" title="分配结束日期（为null及为当前版本状态）" pattern="yyyy-MM-dd HH:mm:ss"/>
-		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
-		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
-	</excel>
-
 
 
 
 	<!-- 资产余额 带有userInfo的复杂对象 -->
-	<excel id="srAssetsBalance" class="org.blazer.bigclient.model.SrAssetsBalance"
+	<!--<excel id="srAssetsBalance" class="org.blazer.bigclient.model.SrAssetsBalance"
 		   sheetname="资产余额表" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
-		<!-- 复杂对象 -->
-		<!--<field name="book.bookName" title="图书名称" columnWidth="6000"/>-->
-		<!--<field name="book.price" title="图书价格" columnWidth="6000" decimalFormatPattern="###,##0.00" roundingMode="up" defaultValue="0.00"/>-->
-		<!--<field name="book.author.authorName" title="作者名称" columnWidth="6000"/>-->
+		&lt;!&ndash; 复杂对象 &ndash;&gt;
+		&lt;!&ndash;<field name="book.bookName" title="图书名称" columnWidth="6000"/>&ndash;&gt;
+		&lt;!&ndash;<field name="book.price" title="图书价格" columnWidth="6000" decimalFormatPattern="###,##0.00" roundingMode="up" defaultValue="0.00"/>&ndash;&gt;
+		&lt;!&ndash;<field name="book.author.authorName" title="作者名称" columnWidth="6000"/>&ndash;&gt;
 
 		<field name="kamUserInfo.userName" title="客户姓名"/>
 		<field name="kamUserInfo.phoneNumber" title="手机号码"/>
@@ -159,7 +129,7 @@
 		<field name="aumTotal" title="当前AUM汇总（单位：元）"/>
 		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
-	</excel>
+	</excel>-->
 
 	<!-- 投资顾问 -->
 	<excel id="kamAdvisor" class="org.blazer.bigclient.model.KamAdvisor"

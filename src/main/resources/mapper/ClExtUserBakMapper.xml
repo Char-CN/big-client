@@ -17,4 +17,11 @@
     <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
     <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
   </resultMap>
+
+
+
+
+
+
+
 </mapper>

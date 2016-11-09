@@ -17,7 +17,7 @@
 
 
 
-  <select id="selectMaxVerNoByUid" parameterType="userId" resultType="org.blazer.bigclient.model.ClFormalUserVersion">
+  <select id="selectMaxVerNoByUid" resultType="org.blazer.bigclient.model.ClFormalUserVersion">
     SELECT a.*
     FROM  (SELECT * FROM cl_formal_user_version WHERE user_id=#{userId}) AS a
     JOIN  (SELECT user_id, MAX(version_no) AS max_version_no FROM cl_formal_user_version WHERE user_id=#{userId}) AS b
