@@ -11,7 +11,7 @@
 
         //回显数据
         if (ids != null) {
-            this_window.find("input[name=userName]").val(userName);
+            /*this_window.find("input[name=userName]").val(userName);
             this_window.find("input[name=phoneNumber]").val(phoneNumber);
             this_window.find("input[name=registerDate]").val(registerDate);
             this_window.find("input[name=idCard]").val(idCard);
@@ -22,7 +22,7 @@
             this_window.find("input[name=birthday]").val(birthday);
             this_window.find("input[name=referrer]").val(referrer);
             this_window.find("input[name=referrerPhoneNumber]").val(referrerPhoneNumber);
-            this_window.find("input[name=ifReferrerEmployee][value='" + ifReferrerEmployee + "']").attr("checked", true);
+            this_window.find("input[name=ifReferrerEmployee][value='" + ifReferrerEmployee + "']").attr("checked", true);*/
         }
 
         /**
@@ -30,8 +30,8 @@
          */
         $util.modalOnSave(windowId, function () {
             $.post("cl/allot/saveOne.do", {
-                id: id,
-                userName: this_window.find("input[name=userName]").val(),
+                ids: ids
+                /*userName: this_window.find("input[name=userName]").val(),
                 phoneNumber: this_window.find("input[name=phoneNumber]").val(),
                 registerDate: this_window.find("input[name=registerDate]").val(),
                 idCard: this_window.find("input[name=idCard]").val(),
@@ -42,7 +42,7 @@
                 birthday: this_window.find("input[name=birthday]").val(),
                 referrer: this_window.find("input[name=referrer]").val(),
                 referrerPhoneNumber: this_window.find("input[name=referrerPhoneNumber]").val(),
-                ifReferrerEmployee: this_window.find("input[name=ifReferrerEmployee]:checked").val()
+                ifReferrerEmployee: this_window.find("input[name=ifReferrerEmployee]:checked").val()*/
             }, function (data) {
                 if (data.code == 1) {
                     //保存成功，关闭当前窗口
@@ -60,18 +60,16 @@
 
 <div class="input-group">
     <span class="input-group-addon">待分配客户ID</span>
-    <input type="text" class="form-control" name="userName" value={ids}>
+    <input type="text" class="form-control" name="userName" value={ids} disabled>
 </div>
 
 
 <div class="input-group">
     <span class="input-group-addon">投资顾问</span>
-    <select class="form-control">
+    <select id="advisor" name="advisor" class="form-control">
         <option>1</option>
         <option>2</option>
         <option>3</option>
-        <option>4</option>
-        <option>5</option>
     </select>
 </div>
 
