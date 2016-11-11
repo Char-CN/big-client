@@ -3,7 +3,7 @@ package org.blazer.bigclient.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
-import org.blazer.bigclient.model.ClExtUser;
+import org.blazer.bigclient.model.ClAllotUser;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.blazer.bigclient.util.StringUtil;
 import org.slf4j.Logger;
@@ -15,23 +15,16 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by cuican on 2016-11-9.
+ * Created by cuican on 2016-11-10.
  */
 @Service
-public class ClExtUserService extends BaseService<ClExtUser> {
+public class ClAllotUserService extends BaseService<ClAllotUser> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ClExtUserService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClAllotUserService.class);
 
-
-    /**
-     * 分页条件查询
-     *
-     * @param params
-     * @return
-     */
-    public PageInfo<ClExtUser> findByPage(HashMap<String, String> params) {
-        LOGGER.info("根据条件查询外部拓展客户列表。。。");
-        Example example = new Example(ClExtUser.class);
+    public PageInfo<ClAllotUser> findByPage(HashMap<String, String> params) {
+        LOGGER.info("根据条件查询平台待分配客户列表。。。");
+        Example example = new Example(ClAllotUser.class);
         Example.Criteria criteria = example.createCriteria();
         String search = StringUtil.getStrEmpty(params.get("search"));
         String advisorName = StringUtil.getStrEmpty(params.get("advisorName"));
@@ -44,19 +37,13 @@ public class ClExtUserService extends BaseService<ClExtUser> {
         }
         criteria.andEqualTo("ifDelete", 0);
         PageHelper.startPage(IntegerUtil.getIntZero(params.get("currentPage")), IntegerUtil.getIntZero(params.get("pageSize")));
-        List<ClExtUser> list = selectByExample(example);
-        return new PageInfo<ClExtUser>(list);
+        List<ClAllotUser> list = selectByExample(example);
+        return new PageInfo<ClAllotUser>(list);
     }
 
-    /**
-     * 条件查询用户列表，作为导出到excel文件的数据
-     *
-     * @param search
-     * @return
-     */
-    public List<ClExtUser> findBySearch(String search) {
+    public List<ClAllotUser> findBySearch(String search) {
         LOGGER.info("根据条件查询外部拓展客户数据，导出到excel表。");
-        Example example = new Example(ClExtUser.class);
+        Example example = new Example(ClAllotUser.class);
         Example.Criteria criteria = example.createCriteria();
         String search_text = StringUtil.getStrEmpty(search);
         if (StringUtils.isNotEmpty(search_text)) {

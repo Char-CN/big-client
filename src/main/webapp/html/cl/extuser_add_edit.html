@@ -8,8 +8,8 @@
         var this_window = $("#" + windowId);
         //获取参数
         var id = $util.getQueryString(queryString, "id");
-        var phoneNumber = $util.getQueryString(queryString, "phoneNumber");
         var investmentAdviser = $util.getQueryString(queryString, "investmentAdviser");
+        var phoneNumber = $util.getQueryString(queryString, "phoneNumber");
         var userName = $util.getQueryString(queryString, "userName");
         var ifRegister = $util.getQueryString(queryString, "ifRegister");
         var registerDate = $util.getQueryString(queryString, "registerDate");
@@ -19,8 +19,8 @@
         var referrer = $util.getQueryString(queryString, "referrer");
         //回显数据
         if (id != null) {
-            this_window.find("input[name=phoneNumber]").val(phoneNumber);
             this_window.find("input[name=investmentAdviser]").val(investmentAdviser);
+            this_window.find("input[name=phoneNumber]").val(phoneNumber);
             this_window.find("input[name=userName]").val(userName);
             this_window.find("input[name=ifRegister][value='" + ifRegister + "']").attr("checked", true);
             this_window.find("input[name=registerDate]").val(registerDate);
@@ -36,8 +36,8 @@
         $util.modalOnSave(windowId, function () {
             $.post("cl/extUser/saveOne.do", {
                 id: id,
-                phoneNumber: this_window.find("input[name=phoneNumber]").val(),
                 investmentAdviser: this_window.find("input[name=investmentAdviser]").val(),
+                phoneNumber: this_window.find("input[name=phoneNumber]").val(),
                 userName: this_window.find("input[name=userName]").val(),
                 ifRegister: this_window.find("input[name=ifRegister]:checked").val(),
                 registerDate: this_window.find("input[name=registerDate]").val(),
@@ -60,12 +60,12 @@
 
 
 <div class="input-group">
-    <span class="input-group-addon">手机号码</span>
-    <input type="text" class="form-control" name="phoneNumber" placeholder="请输入手机号码">
-</div>
-<div class="input-group">
     <span class="input-group-addon">投资顾问</span>
     <input type="text" class="form-control" name="investmentAdviser" placeholder="请输入投资顾问">
+</div>
+<div class="input-group">
+    <span class="input-group-addon">手机号码</span>
+    <input type="text" class="form-control" name="phoneNumber" placeholder="请输入手机号码">
 </div>
 <div class="input-group">
     <span class="input-group-addon">客户姓名</span>

@@ -64,36 +64,11 @@
         });
 
     });
-    //   Date 插件   start
-    $('#ca').calendar({
-        width: 320,
-        height: 320,
-        data: [
-            {
-                date: '2015/12/24',
-                value: 'Christmas Eve'
-            },
-            {
-                date: '2015/12/25',
-                value: 'Merry Christmas'
-            },
-            {
-                date: '2016/01/01',
-                value: 'Happy New Year'
-            }
-        ],
-        onSelected: function (view, date, data) {
-        }
-    });
-    function createDate(event) {
-        $("<div id='da'></div>").calendar({
-            trigger: $(event),
-            zIndex: 999,
-            format: 'yyyy-mm-dd'
-        }).appendTo($("body"));
-    }
+
 </script>
 
+<!--<input placeholder="请选择注册日期"name="registerDate"
+class="laydate-icon form-control" onClick="laydate({istime: true, format: 'YYYY-MM-DD'})">-->
 
 <div class="input-group">
     <span class="input-group-addon">客户名称</span>
@@ -125,12 +100,12 @@
 </div>
 <div class="input-group">
     <span class="input-group-addon">注册日期</span>
-    <input type="text" class="form-control" name="registerDate" onclick="createDate(this)" onfocus="createDate(this)"
+    <input type="text" class="laydate-icon form-control" onClick="laydate({istime: true, format: 'YYYY-MM-DD'})""
            placeholder="请选择注册日期">
 </div>
 <div class="input-group">
     <span class="input-group-addon">出生日期</span>
-    <input type="text" class="form-control" name="birthday" onclick="createDate(this)" onfocus="createDate(this)"
+    <input type="text" class="laydate-icon form-control" onClick="laydate({istime: true, format: 'YYYY-MM-DD'})""
            placeholder="请选择出生日期">
 </div>
 <div class="input-group">
