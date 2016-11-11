@@ -144,11 +144,11 @@ public class ClAllotUserController extends BaseController {
             LOGGER.debug("search:" + search + "，template:" + template);
 
             //xml配置中的ID
-            String id = "clExtUser";
+            String id = "clAllotUser";
             // 要导出的数据
             List<ClAllotUser> list = this.clAllotUserService.findBySearch(search);
             //excel文件名称,不需要任何后缀
-            String excelName = "ExtUser_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
+            String excelName = "AllotUser_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
             //可以为空,自定义Excel头信息
             ExcelHeader header = null;
             //指定导出字段

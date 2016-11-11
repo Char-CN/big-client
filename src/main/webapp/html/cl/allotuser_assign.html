@@ -7,21 +7,10 @@
         //当前窗口dom对象
         var this_window = $("#" + windowId);
         //获取参数
-        var id = $util.getQueryString(queryString, "id");
-        var userName = $util.getQueryString(queryString, "userName");
-        var phoneNumber = $util.getQueryString(queryString, "phoneNumber");
-        var registerDate = $util.getQueryString(queryString, "registerDate");
-        var idCard = $util.getQueryString(queryString, "idCard");
-        var ifEmployee = $util.getQueryString(queryString, "ifEmployee");
-        var assetsAmount = $util.getQueryString(queryString, "assetsAmount");
-        var sex = $util.getQueryString(queryString, "sex");
-        var age = $util.getQueryString(queryString, "age");
-        var birthday = $util.getQueryString(queryString, "birthday");
-        var referrer = $util.getQueryString(queryString, "referrer");
-        var referrerPhoneNumber = $util.getQueryString(queryString, "referrerPhoneNumber");
-        var ifReferrerEmployee = $util.getQueryString(queryString, "ifReferrerEmployee");
+        var ids = $util.getQueryString(queryString, "ids");
+
         //回显数据
-        if (id != null) {
+        if (ids != null) {
             this_window.find("input[name=userName]").val(userName);
             this_window.find("input[name=phoneNumber]").val(phoneNumber);
             this_window.find("input[name=registerDate]").val(registerDate);
@@ -67,71 +56,24 @@
 
 </script>
 
-<!--<input placeholder="请选择注册日期"name="registerDate"
-class="laydate-icon form-control" onClick="laydate({istime: true, format: 'YYYY-MM-DD'})">-->
+
 
 <div class="input-group">
-    <span class="input-group-addon">客户名称</span>
-    <input type="text" class="form-control" name="userName" placeholder="请输入客户姓名">
+    <span class="input-group-addon">待分配客户ID</span>
+    <input type="text" class="form-control" name="userName" value={ids}>
 </div>
+
+
 <div class="input-group">
-    <span class="input-group-addon">手机号码</span>
-    <input type="text" class="form-control" name="phoneNumber" placeholder="请输入手机号码">
+    <span class="input-group-addon">投资顾问</span>
+    <select class="form-control">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+    </select>
 </div>
-<div class="input-group">
-    <span class="input-group-addon">证件号码</span>
-    <input type="text" class="form-control" name="idCard" placeholder="请输入证件号码">
-</div>
-<div class="input-group">
-    <span class="input-group-addon">资产余额</span>
-    <input type="text" class="form-control" name="assetsAmount" placeholder="请输入资产余额（单位：元）">
-</div>
-<div class="input-group">
-    <span class="input-group-addon">年  龄</span>
-    <input type="text" class="form-control" name="age" placeholder="请输入年龄">
-</div>
-<div class="input-group">
-    <span class="input-group-addon">邀请人</span>
-    <input type="text" class="form-control" name="referrer" placeholder="请输入邀请人姓名">
-</div>
-<div class="input-group">
-    <span class="input-group-addon">邀请人手机号</span>
-    <input type="text" class="form-control" name="referrerPhoneNumber" placeholder="请输入邀请人手机号">
-</div>
-<div class="input-group">
-    <span class="input-group-addon">注册日期</span>
-    <input type="text" class="laydate-icon form-control" onClick="laydate({istime: true, format: 'YYYY-MM-DD'})""
-           placeholder="请选择注册日期">
-</div>
-<div class="input-group">
-    <span class="input-group-addon">出生日期</span>
-    <input type="text" class="laydate-icon form-control" onClick="laydate({istime: true, format: 'YYYY-MM-DD'})""
-           placeholder="请选择出生日期">
-</div>
-<div class="input-group">
-    <span class="input-group-addon">性  别</span>
-    <label class="radio-inline">
-        <input type="radio" name="sex" id="sex1" value="男" checked> 男
-    </label>
-    <label class="radio-inline">
-        <input type="radio" name="sex" id="sex2" value="女"> 女
-    </label>
-</div>
-<div class="input-group">
-    <span class="input-group-addon">是否员工</span>
-    <label class="radio-inline">
-        <input type="radio" name="ifEmployee" id="ifEmployee1" value="是" checked> 是
-    </label>
-    <label class="radio-inline">
-        <input type="radio" name="ifEmployee" id="ifEmployee2" value="否"> 否
-    </label>
-</div>
-<div class="input-group">
-    <span class="input-group-addon">邀请人是否员工</span>
-    <label class="radio-inline">
-        <input type="radio" name="ifReferrerEmployee" id="ifReferrerEmployee1" value="是" checked> 是
-    </label>
-    <label class="radio-inline">
-        <input type="radio" name="ifReferrerEmployee" id="ifReferrerEmployee2" value="否"> 否
-    </label>
-</div>
+
+
+

@@ -24,7 +24,7 @@
         };
 
         //刷新当前页
-        var reload = function() {
+        var reload = function () {
             findByPage(_currentPage_lastCurrent);
         };
 
@@ -50,7 +50,7 @@
                  <field name="ifReferrerEmployee" title="推荐人是否员工"/>
                  <field name="investmentAdviser" title="投资顾问"/>
                  <field name="userIdentify" title="客户标识"/>*/
-                tr.append('<td>' + '<input type="checkbox" value="rst[i].id" style="margin-right: 20px;">' + rst[i].userName + '</td>');
+                tr.append('<td>' + '<input type="checkbox" value="' + rst[i].id + '" style="margin-right: 20px;">' + rst[i].userName + '</td>');
                 tr.append('<td>' + rst[i].phoneNumber + '</td>');
                 tr.append('<td>' + rst[i].registerDate + '</td>');
                 tr.append('<td>' + rst[i].idCard + '</td>');
@@ -63,45 +63,45 @@
                 tr.append('<td>' + rst[i].referrerPhoneNumber + '</td>');
                 tr.append('<td>' + rst[i].ifReferrerEmployee + '</td>');
 
-				var td = $("<td>");
-				td.append($("<a class='compileA'>编辑</a>").click({
-					id : rst[i].id,
-                    userName:rst[i].userName,
-                    phoneNumber:rst[i].phoneNumber,
-                    registerDate:rst[i].registerDate,
-                    idCard:rst[i].idCard,
-                    ifEmployee:rst[i].ifEmployee,
-                    assetsAmount:rst[i].assetsAmount,
-                    sex:rst[i].sex,
-                    age:rst[i].age,
-                    birthday:rst[i].birthday,
-                    referrer:rst[i].referrer,
-                    referrerPhoneNumber:rst[i].referrerPhoneNumber,
-                    ifReferrerEmployee:rst[i].ifReferrerEmployee
-				}, function(event) {
+                var td = $("<td>");
+                td.append($("<a class='compileA'>编辑</a>").click({
+                    id: rst[i].id,
+                    userName: rst[i].userName,
+                    phoneNumber: rst[i].phoneNumber,
+                    registerDate: rst[i].registerDate,
+                    idCard: rst[i].idCard,
+                    ifEmployee: rst[i].ifEmployee,
+                    assetsAmount: rst[i].assetsAmount,
+                    sex: rst[i].sex,
+                    age: rst[i].age,
+                    birthday: rst[i].birthday,
+                    referrer: rst[i].referrer,
+                    referrerPhoneNumber: rst[i].referrerPhoneNumber,
+                    ifReferrerEmployee: rst[i].ifReferrerEmployee
+                }, function (event) {
                     $util.modal("修改用户", "/html/cl/allotuser_add_edit.html", {
-                        id : event.data.id,
-                        userName:event.data.userName,
-                        phoneNumber:event.data.phoneNumber,
-                        registerDate:event.data.registerDate,
-                        idCard:event.data.idCard,
-                        ifEmployee:event.data.ifEmployee,
-                        assetsAmount:event.data.assetsAmount,
-                        sex:event.data.sex,
-                        age:event.data.age,
-                        birthday:event.data.birthday,
-                        referrer:event.data.referrer,
-                        referrerPhoneNumber:event.data.referrerPhoneNumber,
-                        ifReferrerEmployee:event.data.ifReferrerEmployee
-                    }, function() {
+                        id: event.data.id,
+                        userName: event.data.userName,
+                        phoneNumber: event.data.phoneNumber,
+                        registerDate: event.data.registerDate,
+                        idCard: event.data.idCard,
+                        ifEmployee: event.data.ifEmployee,
+                        assetsAmount: event.data.assetsAmount,
+                        sex: event.data.sex,
+                        age: event.data.age,
+                        birthday: event.data.birthday,
+                        referrer: event.data.referrer,
+                        referrerPhoneNumber: event.data.referrerPhoneNumber,
+                        ifReferrerEmployee: event.data.ifReferrerEmployee
+                    }, function () {
                         //刷新当前页
                         reload();
                     });
-				}));
-				td.append($("<a class='removeA'>删除</a>").click({
-					id : rst[i].id
-				}, function(event) {
-				    var id = event.data.id;
+                }));
+                td.append($("<a class='removeA'>删除</a>").click({
+                    id: rst[i].id
+                }, function (event) {
+                    var id = event.data.id;
                     var r = confirm("确定要删除该用户吗？删除后数据无法恢复！！！")
                     if (r == true) {
                         console.log(id);
@@ -111,64 +111,78 @@
                             reload();
                         });
                     }
-				}));
+                }));
 
-				tr.append(td);
-				$("#tb>tbody").append(tr);
-			}
+                tr.append(td);
+                $("#tb>tbody").append(tr);
+            }
 
-			//全选、反选
-            $("#tb th input[type='checkbox']").click(function() {
+            //全选、反选
+            $("#tb th input[type='checkbox']").click(function () {
                 var flag = $(this).prop("checked");
-                $("#tb tbody input[type='checkbox']").each(function(i, o){
+                $("#tb tbody input[type='checkbox']").each(function (i, o) {
                     $(this).prop("checked", flag);
                 });
             });
-		};
+        };
 
-		findByPage(1);
-		$("#search").click(function() {
-			findByPage(1);
-		});
-		var search_text = "";
-		$("#search_text").change(function() {
-			search_text = $(this).val();
-		});
+        findByPage(1);
+        $("#search").click(function () {
+            findByPage(1);
+        });
+        var search_text = "";
+        $("#search_text").change(function () {
+            search_text = $(this).val();
+        });
 
 
-		/**
-		 * ajax下载excel
-		 */
-		$("#exportExcel").click(function() {
-			downLoadFile({
-				url : '/cl/allot/exportExcel.do', //请求的url
-				data : {search : search_text},//要发送的数据
-				callback : function() {
-					//alert("导出excel文件成功");
-				}
-			});
-		});
+        /**
+         * ajax下载excel
+         */
+        $("#exportExcel").click(function () {
+            downLoadFile({
+                url: '/cl/allot/exportExcel.do', //请求的url
+                data: {search: search_text},//要发送的数据
+                callback: function () {
+                    //alert("导出excel文件成功");
+                }
+            });
+        });
 
         /**
          * 批量操作分配客户
          */
-        $("#assignCustomer").click(function(){
-            $util.modal("分配客户", "html/cl/allotuser_assign.html", {}, function() {
-                reload();
+        $("#assignCustomer").click(function () {
+            //检查哪些行的checkbox选中
+            var ids = new Array();
+            $("#tb tbody input[type='checkbox']").each(function (i, o) {
+                if ($(this).prop("checked")) {
+                    ids.push($(this).val());
+                    console.log(ids);
+                }
             });
+
+            //ajax获取所有投顾
+            if(ids.length > 0){
+                $util.modal("分配客户", "html/cl/allotuser_assign.html", {ids: ids}, function () {
+                    reload();
+                });
+            }else {
+                alert("请选择要分配的客户");
+            }
+
         });
 
     });
 </script>
 <div class="row" style="margin: 0;">
-    <div class="input-group has-primary" style="float: left; width: 200px;">
-        <input id="search_text" type="text" class="form-control" placeholder="Search for..."/> <span
-            class="input-group-btn">
+    <div class="input-group has-primary" style="float: left; width: 400px;">
+        <input id="search_text" type="text" class="form-control" placeholder="Search for..."/> <span class="input-group-btn">
 			<button id="search" class="btn btn-primary" type="button">搜索</button>
 		</span>
+        <button type="button" id="assignCustomer" class="btn btn-primary" style="float: left;margin-left: 10px;">分配客户</button>
     </div>
     <button type="button" id="exportExcel" class="btn btn-primary" style="float: right;margin-right: 10px;">导出Excel</button>
-    <button type="button" id="assignCustomer" class="btn btn-primary" style="float: right;margin-right: 10px;">分配客户</button>
 </div>
 <hr class="line-3"/>
 <table id="tb" class="table table-hover table-condensed table-bordered">
