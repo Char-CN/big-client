@@ -4,7 +4,9 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.blazer.bigclient.mapper.ClFormalUserMapper;
+import org.blazer.bigclient.mapper.ClFormalUserVersionMapper;
 import org.blazer.bigclient.model.ClFormalUser;
+import org.blazer.bigclient.model.ClFormalUserVersion;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.blazer.bigclient.util.LongUtil;
 import org.blazer.bigclient.util.StringUtil;
@@ -27,6 +29,9 @@ public class ClFormalUserService extends BaseService<ClFormalUser> {
 
     @Autowired
     private ClFormalUserMapper clFormalUserMapper;
+
+    @Autowired
+    private ClFormalUserVersionMapper clFormalUserVersionMapper;
 
     /**
      * 根据手机号查询单个客户
@@ -74,6 +79,10 @@ public class ClFormalUserService extends BaseService<ClFormalUser> {
         String search = StringUtil.getStrEmpty(params.get("search"));
         String dateStart = StringUtil.getStrEmpty(params.get("dateStart"));
         String dateEnd = StringUtil.getStrEmpty(params.get("dateEnd"));
+
+        List<ClFormalUserVersion> list1 = clFormalUserVersionMapper.selectMaxVerNoList();
+
+
 
         PageHelper.startPage(IntegerUtil.getIntZero(params.get("currentPage")), IntegerUtil.getIntZero(params.get("pageSize")));
 
