@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.blazer.bigclient.mapper.PaCurrentSalesScaleAccountingMapper" >
+  <resultMap id="BaseResultMap" type="org.blazer.bigclient.model.PaCurrentSalesScaleAccounting" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="investment_adviser" property="investmentAdviser" jdbcType="VARCHAR" />
+    <result column="monthly_purchase_amount" property="monthlyPurchaseAmount" jdbcType="DOUBLE" />
+    <result column="monthly_purchase_amount_10" property="monthlyPurchaseAmount10" jdbcType="DOUBLE" />
+    <result column="monthly_investment_target" property="monthlyInvestmentTarget" jdbcType="DOUBLE" />
+    <result column="monthly_performance_limit" property="monthlyPerformanceLimit" jdbcType="DOUBLE" />
+    <result column="effective_current_sales_scale" property="effectiveCurrentSalesScale" jdbcType="DOUBLE" />
+    <result column="deferred_next_month" property="deferredNextMonth" jdbcType="DOUBLE" />
+    <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+  </resultMap>
+</mapper>
