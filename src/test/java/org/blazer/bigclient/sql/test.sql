@@ -1,10 +1,8 @@
-/*search: search_text,
-dateStart: search_date_start,
-dateEnd: search_date_end
-
+/*
 b.start_date <= dateStart
-b.end_date >= dateEnd
-a.phone_number like %phoneNumber%  */
+b.end_date >= dateEnd  有可能为null
+a.phone_number like %phoneNumber%
+*/
 
 SELECT
 a.id(b.user_id),

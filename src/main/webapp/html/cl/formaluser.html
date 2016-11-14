@@ -74,7 +74,7 @@
             }
             _currentPage_lastCurrent = currentPage;
             lock = true;
-            $.post("user/findUserByPage.do", {
+            $.post("cl/formal/findByPage.do", {
                 currentPage: currentPage,
                 pageSize: 10,
                 ifReportOrAllot: 1,
@@ -100,6 +100,15 @@
             for (var i in rst) {
                 var cls = "warning";
                 var tr = $('<tr class="' + cls + '">');
+                /*<field name="id" title="自动编号"/>
+                 <field name="phoneNumber" title="手机号码"/>
+                 <field name="reportOrAllot" title="上报/分配"/>
+                 <field name="reportOrAllotDate" title="上报/分配时间"/>
+                 <field name="userIdentify" title="客户标识"/>
+                 <field name="investmentAdviser" title="投资顾问"/>
+                 <field name="ifDelete" title="是否删除" format="0:未删除,1:已删除"/>
+                 <field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+                 <field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>*/
                 tr.append('<td>' + rst[i].phoneNumber + '</td>');
                 tr.append('<td>' + rst[i].reportOrAllot + '</td>');
                 tr.append('<td>' + rst[i].reportOrAllotDate + '</td>');
@@ -110,33 +119,25 @@
                 var td = $("<td>");
                 td.append($("<a class='compileA'>编辑</a>").click({
                     id: rst[i].id,
-                    userName: rst[i].userName,
                     phoneNumber: rst[i].phoneNumber,
-                    registerDate: rst[i].registerDate,
-                    idCard: rst[i].idCard,
-                    ifEmployee: rst[i].ifEmployee,
-                    assetsAmount: rst[i].assetsAmount,
-                    sex: rst[i].sex,
-                    age: rst[i].age,
-                    birthday: rst[i].birthday,
-                    referrer: rst[i].referrer,
-                    referrerPhoneNumber: rst[i].referrerPhoneNumber,
-                    ifReferrerEmployee: rst[i].ifReferrerEmployee
+                    reportOrAllot: rst[i].reportOrAllot,
+                    reportOrAllotDate: rst[i].reportOrAllotDate,
+                    userIdentify: rst[i].userIdentify,
+                    investmentAdviser: rst[i].investmentAdviser,
+                    ifDelete: rst[i].ifDelete,
+                    mtime: rst[i].mtime,
+                    ctime: rst[i].ctime
                 }, function (event) {
                     $util.modal("修改客户", "html/cl/formaluser_add_edit.html", {
                         id: event.data.id,
-                        userName: event.data.userName,
                         phoneNumber: event.data.phoneNumber,
-                        registerDate: event.data.registerDate,
-                        idCard: event.data.idCard,
-                        ifEmployee: event.data.ifEmployee,
-                        assetsAmount: event.data.assetsAmount,
-                        sex: event.data.sex,
-                        age: event.data.age,
-                        birthday: event.data.birthday,
-                        referrer: event.data.referrer,
-                        referrerPhoneNumber: event.data.referrerPhoneNumber,
-                        ifReferrerEmployee: event.data.ifReferrerEmployee
+                        reportOrAllot: event.data.reportOrAllot,
+                        reportOrAllotDate: event.data.reportOrAllotDate,
+                        userIdentify: event.data.userIdentify,
+                        investmentAdviser: event.data.investmentAdviser,
+                        ifDelete: event.data.ifDelete,
+                        mtime: event.data.mtime,
+                        ctime: event.data.ctime
                     }, function () {
                         //刷新当前页
                         reload();
@@ -149,7 +150,7 @@
                     var r = confirm("确定要删除该客户吗？")
                     if (r == true) {
                         console.log(id);
-                        $.post("formal/deleteById.do", {id: id}, function (data) {
+                        $.post("cl/formal/deleteById.do", {id: id}, function (data) {
                             alert(data.msg);
                             //刷新当前页
                             reload();
@@ -184,7 +185,7 @@
 		 */
 		$("#exportExcel").click(function() {
             downLoadFile({
-                url: '/formal/export/excel.do', //请求的url
+                url: 'cl/formal/exportExcel.do', //请求的url
                 data: {search: search_text},//要发送的数据
                 callback: function () {
                     //alert("导出excel文件成功");

@@ -72,8 +72,11 @@ public class ClFormalUserService extends BaseService<ClFormalUser> {
         List<ClFormalUser> list = selectByExample(example);*/
 
         String search = StringUtil.getStrEmpty(params.get("search"));
-//        String search = StringUtil.getStrEmpty(params.get("search"));
-//        String search = StringUtil.getStrEmpty(params.get("search"));
+        String dateStart = StringUtil.getStrEmpty(params.get("dateStart"));
+        String dateEnd = StringUtil.getStrEmpty(params.get("dateEnd"));
+
+        PageHelper.startPage(IntegerUtil.getIntZero(params.get("currentPage")), IntegerUtil.getIntZero(params.get("pageSize")));
+
         List<ClFormalUser> list = this.clFormalUserMapper.selectMaxVersionByPage();
 
         return new PageInfo<ClFormalUser>(list);
