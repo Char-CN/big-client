@@ -51,9 +51,10 @@
         <th width="10%">上报/分配时间</th>
         <th width="10%">投资顾问</th>
         <th width="10%">客户标识</th>
+        <th width="10%">版本号码</th>
+        <th width="10%">版本起始日期</th>
+        <th width="10%">版本结束日期</th>
         <th width="10%">是否业绩池</th>
-        <!--<th width="10%">版本号码</th>-->
-        <!--<th width="10%">更新时间</th>-->
         <th width="10%">操作</th>
     </tr>
     </thead>
@@ -106,10 +107,18 @@
                 tr.append('<td>' + rst[i].reportOrAllotDate + '</td>');
                 tr.append('<td>' + rst[i].investmentAdviser + '</td>');
                 tr.append('<td>' + rst[i].userIdentify + '</td>');
-                tr.append('<td>' + rst[i].ifPerformancePool + '</td>');
+                tr.append('<td>' + rst[i].versionNo + '</td>');
+                tr.append('<td>' + rst[i].startDate + '</td>');
+                var endDate = rst[i].endDate;
+                if(!endDate){
+                    endDate="";
+                }
+                tr.append('<td>' + endDate + '</td>');
+//                tr.append('<td>' + rst[i].ifPerformancePool + '</td>');
+                tr.append('<td>' + rst[i].ifDelete + '</td>');
 
                 var td = $("<td>");
-                td.append($("<a class='compileA'>编辑</a>").click({
+                /*td.append($("<a class='compileA'>编辑</a>").click({
                     id: rst[i].id,
                     phoneNumber: rst[i].phoneNumber,
                     reportOrAllot: rst[i].reportOrAllot,
@@ -134,7 +143,7 @@
                         //刷新当前页
                         reload();
                     });
-                }));
+                }));*/
                 td.append($("<a class='removeA'>删除</a>").click({
                     id: rst[i].id
                 }, function (event) {

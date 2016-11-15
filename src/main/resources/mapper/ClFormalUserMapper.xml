@@ -18,15 +18,15 @@
   <!-- 自定义DTO对象 -->
   <resultMap id="DTOResultMap" type="org.blazer.bigclient.body.FormalUserBean">
     <id column="id" property="userId"/>
-    <result column="phoneNumber" property="phoneNumber"/>
-    <result column="reportOrAllot" property="reportOrAllot"/>
-    <result column="reportOrAllotDate" property="reportOrAllotDate"/>
-    <result column="userIdentify" property="userIdentify"/>
-    <result column="investmentAdviser" property="investmentAdviser"/>
-    <result column="ifDelete" property="ifDelete"/>
-    <result column="versionNo" property="versionNo"/>
-    <result column="startDate" property="startDate"/>
-    <result column="endDate" property="endDate"/>
+    <result column="phone_number" property="phoneNumber"/>
+    <result column="report_or_allot" property="reportOrAllot"/>
+    <result column="report_or_allot_date" property="reportOrAllotDate"/>
+    <result column="user_identify" property="userIdentify"/>
+    <result column="actual_name" property="investmentAdviser"/>
+    <result column="if_delete" property="ifDelete"/>
+    <result column="version_no" property="versionNo"/>
+    <result column="start_date" property="startDate"/>
+    <result column="end_date" property="endDate"/>
   </resultMap>
 
 

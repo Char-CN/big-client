@@ -1,7 +1,6 @@
 package org.blazer.bigclient.controller;
 
 import com.github.pagehelper.PageInfo;
-import org.apache.commons.lang3.StringUtils;
 import org.blazer.bigclient.body.AjaxResult;
 import org.blazer.bigclient.excel.ExcelHeader;
 import org.blazer.bigclient.model.ClAllotUser;
@@ -83,7 +82,7 @@ public class ClAllotUserController extends BaseController {
 
         LOGGER.debug("客户即将被分配给投资顾问————" + advisorName);
 
-        this.clAllotUserService.assignToFormal(advisorName,ids);
+        this.clAllotUserService.assignToFormal(advisorName, ids);
 
         return result;
     }

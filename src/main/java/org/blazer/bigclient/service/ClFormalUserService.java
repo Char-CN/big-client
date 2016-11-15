@@ -7,7 +7,6 @@ import org.blazer.bigclient.body.FormalUserBean;
 import org.blazer.bigclient.mapper.ClFormalUserMapper;
 import org.blazer.bigclient.mapper.ClFormalUserVersionMapper;
 import org.blazer.bigclient.model.ClFormalUser;
-import org.blazer.bigclient.model.ClFormalUserVersion;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.blazer.bigclient.util.LongUtil;
 import org.blazer.bigclient.util.StringUtil;
