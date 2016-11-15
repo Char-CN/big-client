@@ -30,9 +30,6 @@ public class ClFormalUserService extends BaseService<ClFormalUser> {
     @Autowired
     private ClFormalUserMapper clFormalUserMapper;
 
-    @Autowired
-    private ClFormalUserVersionMapper clFormalUserVersionMapper;
-
     /**
      * 根据手机号查询单个客户
      *
@@ -61,20 +58,6 @@ public class ClFormalUserService extends BaseService<ClFormalUser> {
      */
     public PageInfo<FormalUserBean> findByPage(HashMap<String, String> params) {
         LOGGER.info("根据条件查询正式客户【ClFormalUser】列表。。。");
-        /*Example example = new Example(ClFormalUser.class);
-        Example.Criteria criteria = example.createCriteria();
-        String search = StringUtil.getStrEmpty(params.get("search"));
-        String advisorName = StringUtil.getStrEmpty(params.get("advisorName"));
-        if (StringUtils.isNotEmpty(search)) {
-            criteria.andCondition("phone_number like '%" + search + "%'" + " or user_name like '%" + search + "%'");
-        }
-        if (StringUtils.isNotEmpty(advisorName)) {
-            //此处为实体类的属性，不是表字段
-            criteria.andEqualTo("investmentAdviser", advisorName);
-        }
-        criteria.andEqualTo("ifDelete", 0);
-        PageHelper.startPage(IntegerUtil.getIntZero(params.get("currentPage")), IntegerUtil.getIntZero(params.get("pageSize")));
-        List<ClFormalUser> list = selectByExample(example);*/
 
         String search = StringUtil.getStrEmpty(params.get("search"));
         String dateStart = StringUtil.getStrEmpty(params.get("dateStart"));
@@ -83,7 +66,6 @@ public class ClFormalUserService extends BaseService<ClFormalUser> {
         PageHelper.startPage(IntegerUtil.getIntZero(params.get("currentPage")), IntegerUtil.getIntZero(params.get("pageSize")));
 
         List<FormalUserBean> list = this.clFormalUserMapper.selectMaxVersionList();
-
 
         return new PageInfo<FormalUserBean>(list);
     }

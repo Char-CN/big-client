@@ -1,5 +1,7 @@
 package org.blazer.bigclient.body;
 
+import org.blazer.bigclient.util.DateUtil;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,10 +20,12 @@ public class FormalUserBean implements Serializable {
     private String reportOrAllotDate;
     private String userIdentify;
     private String investmentAdviser;
-    private Integer ifDelete;
+    private String ifPerformancePool;
     private String versionNo;
     private Date startDate;
     private Date endDate;
+    private String startDateFormat;
+    private String endDateFormat;
 
     public Long getUserId() {
         return userId;
@@ -71,12 +75,12 @@ public class FormalUserBean implements Serializable {
         this.investmentAdviser = investmentAdviser;
     }
 
-    public Integer getIfDelete() {
-        return ifDelete;
+    public String getIfPerformancePool() {
+        return ifPerformancePool;
     }
 
-    public void setIfDelete(Integer ifDelete) {
-        this.ifDelete = ifDelete;
+    public void setIfPerformancePool(String ifPerformancePool) {
+        this.ifPerformancePool = ifPerformancePool;
     }
 
     public String getVersionNo() {
@@ -103,6 +107,32 @@ public class FormalUserBean implements Serializable {
         this.endDate = endDate;
     }
 
+    public String getStartDateFormat() {
+        if (startDate == null) {
+            startDateFormat = "";
+        } else {
+            startDateFormat = DateUtil.date2Str(startDate, DateUtil.DEFAULT_DATE_TIME_FORMAT);
+        }
+        return startDateFormat;
+    }
+
+    public void setStartDateFormat(String startDateFormat) {
+        this.startDateFormat = startDateFormat;
+    }
+
+    public String getEndDateFormat() {
+        if (endDate == null) {
+            endDateFormat = "";
+        } else {
+            endDateFormat = DateUtil.date2Str(endDate, DateUtil.DEFAULT_DATE_TIME_FORMAT);
+        }
+        return endDateFormat;
+    }
+
+    public void setEndDateFormat(String endDateFormat) {
+        this.endDateFormat = endDateFormat;
+    }
+
     @Override
     public String toString() {
         return "FormalUserBean{" +
@@ -112,10 +142,12 @@ public class FormalUserBean implements Serializable {
                 ", reportOrAllotDate='" + reportOrAllotDate + '\'' +
                 ", userIdentify='" + userIdentify + '\'' +
                 ", investmentAdviser='" + investmentAdviser + '\'' +
-                ", ifDelete=" + ifDelete +
+                ", ifPerformancePool='" + ifPerformancePool + '\'' +
                 ", versionNo='" + versionNo + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
+                ", startDateFormat='" + startDateFormat + '\'' +
+                ", endDateFormat='" + endDateFormat + '\'' +
                 '}';
     }
 }

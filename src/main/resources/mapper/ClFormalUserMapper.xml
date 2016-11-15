@@ -11,6 +11,7 @@
     <result column="report_or_allot_date" property="reportOrAllotDate" jdbcType="VARCHAR" />
     <result column="user_identify" property="userIdentify" jdbcType="VARCHAR" />
     <result column="if_delete" property="ifDelete" jdbcType="INTEGER" />
+    <result column="if_performance_pool" property="ifPerformancePool" jdbcType="VARCHAR" />
     <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
     <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -23,7 +24,7 @@
     <result column="report_or_allot_date" property="reportOrAllotDate"/>
     <result column="user_identify" property="userIdentify"/>
     <result column="actual_name" property="investmentAdviser"/>
-    <result column="if_delete" property="ifDelete"/>
+    <result column="if_performance_pool" property="ifPerformancePool"/>
     <result column="version_no" property="versionNo"/>
     <result column="start_date" property="startDate"/>
     <result column="end_date" property="endDate"/>
@@ -38,7 +39,7 @@
       b.report_or_allot_date,
       b.user_identify,
       c.actual_name,
-      b.if_delete,
+      b.if_performance_pool,
       a.version_no,
       a.start_date,
       a.end_date

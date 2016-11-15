@@ -108,14 +108,17 @@
                 tr.append('<td>' + rst[i].investmentAdviser + '</td>');
                 tr.append('<td>' + rst[i].userIdentify + '</td>');
                 tr.append('<td>' + rst[i].versionNo + '</td>');
-                tr.append('<td>' + rst[i].startDate + '</td>');
-                var endDate = rst[i].endDate;
-                if(!endDate){
-                    endDate="";
+                tr.append('<td>' + rst[i].startDateFormat + '</td>');
+                var endDateFormat = rst[i].endDateFormat;
+                if(!endDateFormat){
+                    endDateFormat="";
                 }
-                tr.append('<td>' + endDate + '</td>');
-//                tr.append('<td>' + rst[i].ifPerformancePool + '</td>');
-                tr.append('<td>' + rst[i].ifDelete + '</td>');
+                tr.append('<td>' + endDateFormat + '</td>');
+                var ifPerformancePool = rst[i].ifPerformancePool;
+                if(!ifPerformancePool){
+                    ifPerformancePool="";
+                }
+                tr.append('<td>' + ifPerformancePool + '</td>');
 
                 var td = $("<td>");
                 /*td.append($("<a class='compileA'>编辑</a>").click({

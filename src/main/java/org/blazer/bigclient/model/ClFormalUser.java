@@ -43,6 +43,12 @@ public class ClFormalUser {
     private Integer ifDelete;
 
     /**
+     * 是否业绩池
+     */
+    @Column(name = "if_performance_pool")
+    private String ifPerformancePool;
+
+    /**
      * 更新时间
      */
     private Date mtime;
@@ -158,6 +164,24 @@ public class ClFormalUser {
      */
     public void setIfDelete(Integer ifDelete) {
         this.ifDelete = ifDelete;
+    }
+
+    /**
+     * 获取是否业绩池
+     *
+     * @return if_performance_pool - 是否业绩池
+     */
+    public String getIfPerformancePool() {
+        return ifPerformancePool;
+    }
+
+    /**
+     * 设置是否业绩池
+     *
+     * @param ifPerformancePool 是否业绩池
+     */
+    public void setIfPerformancePool(String ifPerformancePool) {
+        this.ifPerformancePool = ifPerformancePool;
     }
 
     /**
