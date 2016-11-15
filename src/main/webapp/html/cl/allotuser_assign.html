@@ -10,39 +10,17 @@
         var ids = $util.getQueryString(queryString, "ids");
 
         //回显数据
-        if (ids) {
-            /*this_window.find("input[name=userName]").val(userName);
-            this_window.find("input[name=phoneNumber]").val(phoneNumber);
-            this_window.find("input[name=registerDate]").val(registerDate);
-            this_window.find("input[name=idCard]").val(idCard);
-            this_window.find("input[name=ifEmployee][value='" + ifEmployee + "']").attr("checked", true);
-            this_window.find("input[name=assetsAmount]").val(assetsAmount);
-            this_window.find("input[name=sex][value='" + sex + "']").attr("checked", true);
-            this_window.find("input[name=age]").val(age);
-            this_window.find("input[name=birthday]").val(birthday);
-            this_window.find("input[name=referrer]").val(referrer);
-            this_window.find("input[name=referrerPhoneNumber]").val(referrerPhoneNumber);
-            this_window.find("input[name=ifReferrerEmployee][value='" + ifReferrerEmployee + "']").attr("checked", true);*/
-        }
+        /*if (ids) {
+
+        }*/
 
         /**
          * 触发保存按钮
          */
         $util.modalOnSave(windowId, function () {
-            $.post("cl/allot/saveOne.do", {
-                ids: ids
-                /*userName: this_window.find("input[name=userName]").val(),
-                phoneNumber: this_window.find("input[name=phoneNumber]").val(),
-                registerDate: this_window.find("input[name=registerDate]").val(),
-                idCard: this_window.find("input[name=idCard]").val(),
-                ifEmployee: this_window.find("input[name=ifEmployee]:checked").val(),
-                assetsAmount: this_window.find("input[name=assetsAmount]").val(),
-                sex: this_window.find("input[name=sex]:checked").val(),
-                age: this_window.find("input[name=age]").val(),
-                birthday: this_window.find("input[name=birthday]").val(),
-                referrer: this_window.find("input[name=referrer]").val(),
-                referrerPhoneNumber: this_window.find("input[name=referrerPhoneNumber]").val(),
-                ifReferrerEmployee: this_window.find("input[name=ifReferrerEmployee]:checked").val()*/
+            $.post("cl/allot/assignToFormal.do", {
+                ids: ids,
+                advisor:this_window.find("input[name=advisor]:checked").val()
             }, function (data) {
                 if (data.code == 1) {
                     //保存成功，关闭当前窗口
@@ -59,8 +37,8 @@
 
 
 <div class="input-group">
-    <span class="input-group-addon">待分配客户ID</span>
-    <input type="text" class="form-control" name="userName" value={ids} disabled>
+    <span class="input-group-addon">友情提示</span>
+    <input type="text" class="form-control" name="userName" value="请为您选择的客户添加一位投资顾问！" disabled>
 </div>
 
 

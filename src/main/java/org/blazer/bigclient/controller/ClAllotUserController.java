@@ -1,6 +1,7 @@
 package org.blazer.bigclient.controller;
 
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.blazer.bigclient.body.AjaxResult;
 import org.blazer.bigclient.excel.ExcelHeader;
 import org.blazer.bigclient.model.ClAllotUser;
@@ -62,6 +63,29 @@ public class ClAllotUserController extends BaseController {
             params.put("advisorName", advisor.getActualName());
         }*/
         return this.clAllotUserService.findByPage(params);
+    }
+
+
+    /**
+     * 分配客户（含批量）
+     *
+     * @param request
+     * @return
+     */
+    public AjaxResult assignToFormal(HttpServletRequest request) {
+
+        AjaxResult result = AjaxResult.success("分配客户成功...");
+
+        // 分配客户包含两个动作，第一，更新自身的两个字段，客户标识和投资顾问
+        // 第二，把分配的客户添加到正式名单中去，操作正式名单表和版本记录表
+        String advisorName = StringUtil.getStrEmpty(request.getParameter("advisor"));
+        String ids = StringUtil.getStrEmpty(request.getParameter("ids"));
+
+        LOGGER.debug("客户即将被分配给投资顾问————" + advisorName);
+
+        this.clAllotUserService.assignToFormal(advisorName,ids);
+
+        return result;
     }
 
 
@@ -164,6 +188,7 @@ public class ClAllotUserController extends BaseController {
             specifyFields.add("birthday");
             specifyFields.add("referrer");
             specifyFields.add("referrerPhoneNumber");
+            specifyFields.add("ifReferrerEmployee");
 
             //构建excel试图
             mv = super.createExcelView(id, list, excelName, header, specifyFields);

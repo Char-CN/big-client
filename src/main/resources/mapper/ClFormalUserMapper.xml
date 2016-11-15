@@ -14,12 +14,36 @@
     <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
     <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
   </resultMap>
+  
+  <!-- 自定义DTO对象 -->
+  <resultMap id="DTOResultMap" type="org.blazer.bigclient.body.FormalUserBean">
+    <id column="id" property="userId"/>
+    <result column="phoneNumber" property="phoneNumber"/>
+    <result column="reportOrAllot" property="reportOrAllot"/>
+    <result column="reportOrAllotDate" property="reportOrAllotDate"/>
+    <result column="userIdentify" property="userIdentify"/>
+    <result column="investmentAdviser" property="investmentAdviser"/>
+    <result column="ifDelete" property="ifDelete"/>
+    <result column="versionNo" property="versionNo"/>
+    <result column="startDate" property="startDate"/>
+    <result column="endDate" property="endDate"/>
+  </resultMap>
 
 
-  <select id="selectMaxVersionList" resultType="List">
-    SELECT a.*,b.*,c.actual_name
+  <select id="selectMaxVersionList" resultMap="DTOResultMap">
+    SELECT
+      b.id,
+      b.phone_number,
+      b.report_or_allot,
+      b.report_or_allot_date,
+      b.user_identify,
+      c.actual_name,
+      b.if_delete,
+      a.version_no,
+      a.start_date,
+      a.end_date
     FROM
-    (SELECT a.user_id,a.version_no,a.advisor_id FROM cl_formal_user_version a
+    (SELECT a.user_id,a.version_no,a.advisor_id,a.start_date,a.end_date FROM cl_formal_user_version a
     JOIN (SELECT user_id,max(version_no) AS max_version_no FROM cl_formal_user_version GROUP BY user_id) b
     ON a.user_id = b.user_id
     AND a.version_no = b.max_version_no) a

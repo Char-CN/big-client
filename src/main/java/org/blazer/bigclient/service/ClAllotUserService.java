@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -51,5 +53,30 @@ public class ClAllotUserService extends BaseService<ClAllotUser> {
         }
         criteria.andEqualTo("ifDelete", 0);
         return selectByExample(example);
+    }
+
+
+    public void assignToFormal(String advisorName, String ids) {
+
+        if (StringUtils.isNotEmpty(advisorName) && StringUtils.isNotEmpty(ids)) {
+
+            String[] idsArr = ids.split(",");
+            for (int i = 0; i < idsArr.length; i++) {
+                ClAllotUser clAllotUser = this.selectByKey(idsArr[i]);
+                clAllotUser.setInvestmentAdviser(advisorName);
+                clAllotUser.setUserIdentify("DHK0001");
+                clAllotUser.setMtime(new Date());
+                this.updateNotNull(clAllotUser);
+
+                //保存到正式名单的表格
+
+//TODO
+
+
+
+            }
+
+        }
+
     }
 }

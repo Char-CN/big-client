@@ -1,11 +1,16 @@
 package org.blazer.bigclient.body;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by cuican on 2016-11-15.
+ *
+ * 正式名单页面展示bean
  */
-public class FormalUserBean {
+public class FormalUserBean implements Serializable {
+
+    private static final long serialVersionUID = -7447069713901405697L;
 
     private Long userId;
     private Long phoneNumber;

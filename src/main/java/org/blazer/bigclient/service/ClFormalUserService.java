@@ -3,6 +3,7 @@ package org.blazer.bigclient.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
+import org.blazer.bigclient.body.FormalUserBean;
 import org.blazer.bigclient.mapper.ClFormalUserMapper;
 import org.blazer.bigclient.mapper.ClFormalUserVersionMapper;
 import org.blazer.bigclient.model.ClFormalUser;
@@ -59,7 +60,7 @@ public class ClFormalUserService extends BaseService<ClFormalUser> {
      * @param params
      * @return
      */
-    public PageInfo<ClFormalUser> findByPage(HashMap<String, String> params) {
+    public PageInfo<FormalUserBean> findByPage(HashMap<String, String> params) {
         LOGGER.info("根据条件查询正式客户【ClFormalUser】列表。。。");
         /*Example example = new Example(ClFormalUser.class);
         Example.Criteria criteria = example.createCriteria();
@@ -80,15 +81,12 @@ public class ClFormalUserService extends BaseService<ClFormalUser> {
         String dateStart = StringUtil.getStrEmpty(params.get("dateStart"));
         String dateEnd = StringUtil.getStrEmpty(params.get("dateEnd"));
 
-//        List<ClFormalUserVersion> list1 = clFormalUserVersionMapper.selectMaxVerNoList();
-
-
-
         PageHelper.startPage(IntegerUtil.getIntZero(params.get("currentPage")), IntegerUtil.getIntZero(params.get("pageSize")));
 
-        List<ClFormalUser> list = this.clFormalUserMapper.selectMaxVersionList();
+        List<FormalUserBean> list = this.clFormalUserMapper.selectMaxVersionList();
 
-        return new PageInfo<ClFormalUser>(list);
+
+        return new PageInfo<FormalUserBean>(list);
     }
 
     /**

@@ -2,6 +2,7 @@ package org.blazer.bigclient.controller;
 
 import com.github.pagehelper.PageInfo;
 import org.blazer.bigclient.body.AjaxResult;
+import org.blazer.bigclient.body.FormalUserBean;
 import org.blazer.bigclient.excel.ExcelHeader;
 import org.blazer.bigclient.model.ClFormalUser;
 import org.blazer.bigclient.service.ClFormalUserService;
@@ -39,12 +40,6 @@ public class ClFormalUserController extends BaseController {
     @Autowired
     private ClFormalUserService clFormalUserService;
 
-    @Autowired
-    private ClFormalUserVersionService clFormalUserVersionService;
-
-    @Autowired
-    private KamAdvisorService kamAdvisorService;
-
     /**
      * 根据搜索条件分页查询
      * 添加了投顾权限控制
@@ -55,7 +50,7 @@ public class ClFormalUserController extends BaseController {
      */
     @ResponseBody
     @RequestMapping("findByPage")
-    public PageInfo<ClFormalUser> findByPage(HttpServletRequest request, HttpServletResponse response) {
+    public PageInfo<FormalUserBean> findByPage(HttpServletRequest request, HttpServletResponse response) {
         //获取前台传递过来的参数
         HashMap<String, String> params = getParamMap(request);
         LOGGER.debug("currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
