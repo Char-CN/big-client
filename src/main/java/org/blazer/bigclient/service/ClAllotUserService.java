@@ -4,10 +4,15 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.blazer.bigclient.model.ClAllotUser;
+import org.blazer.bigclient.model.ClFormalUser;
+import org.blazer.bigclient.model.ClFormalUserVersion;
+import org.blazer.bigclient.model.KamAdvisor;
+import org.blazer.bigclient.util.DateUtil;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.blazer.bigclient.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
@@ -22,6 +27,15 @@ import java.util.List;
 public class ClAllotUserService extends BaseService<ClAllotUser> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ClAllotUserService.class);
+
+    @Autowired
+    private ClFormalUserService clFormalUserService;
+
+    @Autowired
+    private ClFormalUserVersionService clFormalUserVersionService;
+
+    @Autowired
+    private KamAdvisorService kamAdvisorService;
 
     public PageInfo<ClAllotUser> findByPage(HashMap<String, String> params) {
         LOGGER.info("根据条件查询平台待分配客户列表。。。");
@@ -55,27 +69,48 @@ public class ClAllotUserService extends BaseService<ClAllotUser> {
     }
 
 
-    public void assignToFormal(String advisorName, String ids) {
+    public Boolean assignToFormal(String advisorName, String ids) {
+
+        Boolean flag = false;
 
         if (StringUtils.isNotEmpty(advisorName) && StringUtils.isNotEmpty(ids)) {
 
-            String[] idsArr = ids.split(",");
-            for (int i = 0; i < idsArr.length; i++) {
-                ClAllotUser clAllotUser = this.selectByKey(idsArr[i]);
-                clAllotUser.setInvestmentAdviser(advisorName);
-                clAllotUser.setUserIdentify("DHK0001");
-                clAllotUser.setMtime(new Date());
-                this.updateNotNull(clAllotUser);
+            try {
+                String[] idsArr = ids.split(",");
+                for (int i = 0; i < idsArr.length; i++) {
+                    ClAllotUser clAllotUser = this.selectByKey(idsArr[i]);
+                    clAllotUser.setInvestmentAdviser(advisorName);
+                    clAllotUser.setUserIdentify("DHK0001");
+                    clAllotUser.setMtime(new Date());
+                    this.updateNotNull(clAllotUser);
 
-                //保存到正式名单的表格
-
-//TODO
-
-
-
+                    //保存到正式名单表
+                    ClFormalUser clFormalUser = new ClFormalUser();
+                    clFormalUser.setPhoneNumber(clAllotUser.getPhoneNumber());
+                    clFormalUser.setReportOrAllot("分配");
+                    clFormalUser.setReportOrAllotDate(DateUtil.thisDate());
+                    clFormalUser.setUserIdentify("DHK0001");
+                    clFormalUser.setIfDelete(0);
+                    clFormalUser.setCtime(new Date());
+                    this.clFormalUserService.save(clFormalUser);
+                    //保存到版本表
+                    ClFormalUserVersion clFormalUserVersion = new ClFormalUserVersion();
+                    clFormalUserVersion.setUserId(clFormalUser.getId());
+                    KamAdvisor kamAdvisor = this.kamAdvisorService.selectByActualName(clAllotUser.getInvestmentAdviser());
+                    if(kamAdvisor == null){
+                        return flag;
+                    }
+                    clFormalUserVersion.setAdvisorId(kamAdvisor.getId());
+                    clFormalUserVersion.setVersionNo("1");
+                    clFormalUserVersion.setStartDate(DateUtil.str2Date(clFormalUser.getReportOrAllotDate()));
+                    clFormalUserVersion.setCtime(new Date());
+                    this.clFormalUserVersionService.save(clFormalUserVersion);
+                }
+                flag = true;
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
         }
-
+        return flag;
     }
 }
