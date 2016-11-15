@@ -80,13 +80,13 @@ public class ClFormalUserService extends BaseService<ClFormalUser> {
         String dateStart = StringUtil.getStrEmpty(params.get("dateStart"));
         String dateEnd = StringUtil.getStrEmpty(params.get("dateEnd"));
 
-        List<ClFormalUserVersion> list1 = clFormalUserVersionMapper.selectMaxVerNoList();
+//        List<ClFormalUserVersion> list1 = clFormalUserVersionMapper.selectMaxVerNoList();
 
 
 
         PageHelper.startPage(IntegerUtil.getIntZero(params.get("currentPage")), IntegerUtil.getIntZero(params.get("pageSize")));
 
-        List<ClFormalUser> list = this.clFormalUserMapper.selectMaxVersionByPage();
+        List<ClFormalUser> list = this.clFormalUserMapper.selectMaxVersionList();
 
         return new PageInfo<ClFormalUser>(list);
     }

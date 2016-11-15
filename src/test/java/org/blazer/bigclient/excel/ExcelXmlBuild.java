@@ -1,6 +1,7 @@
 package org.blazer.bigclient.excel;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.blazer.bigclient.body.FormalUserBean;
 import org.blazer.bigclient.model.*;
 import org.blazer.bigclient.util.ReflectUtil;
 import org.springframework.util.TypeUtils;
@@ -30,7 +31,7 @@ public class ExcelXmlBuild {
         System.out.println(xml2);
         String xml3 = builderXml("clFormalUser", "正式客户名单（导入）", true, ClFormalUser.class, 5000);
         System.out.println(xml3);*/
-        String xml = builderXml("srAssetsBalance", "资产余额", true, SrAssetsBalance.class, 5000);
+        /*String xml = builderXml("srAssetsBalance", "资产余额", true, SrAssetsBalance.class, 5000);
         System.out.println(xml);
         String xml1 = builderXml("srRegularSalesDetails", "定期销售明细", true, SrRegularSalesDetails.class, 5000);
         System.out.println(xml1);
@@ -41,11 +42,11 @@ public class ExcelXmlBuild {
         String xml4 = builderXml("paCurrentSalesScaleAccounting", "活期销售规模核算", true, PaCurrentSalesScaleAccounting.class, 5000);
         System.out.println(xml4);
         String xml5 = builderXml("paCustomersAccounting", "获客数核算", true, PaCustomersAccounting.class, 5000);
-        System.out.println(xml5);
-       /* String xml6 = builderXml("clAllotUser", "平台待分配客户", true, ClAllotUser.class, 5000);
+        System.out.println(xml5);*/
+        String xml6 = builderXml("formalUserBean", "正式客户名单", true, FormalUserBean.class, 5000);
         System.out.println(xml6);
-        String xml7 = builderXml("clFormalUser", "正式客户名单（导入）", true, ClFormalUser.class, 5000);
-        System.out.println(xml7);*/
+//        String xml7 = builderXml("clFormalUser", "正式客户名单（导入）", true, ClFormalUser.class, 5000);
+//        System.out.println(xml7);
 
     }
 

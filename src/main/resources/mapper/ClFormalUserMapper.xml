@@ -10,19 +10,22 @@
     <result column="report_or_allot" property="reportOrAllot" jdbcType="VARCHAR" />
     <result column="report_or_allot_date" property="reportOrAllotDate" jdbcType="VARCHAR" />
     <result column="user_identify" property="userIdentify" jdbcType="VARCHAR" />
-    <result column="investment_adviser" property="investmentAdviser" jdbcType="VARCHAR" />
     <result column="if_delete" property="ifDelete" jdbcType="INTEGER" />
     <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
     <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
   </resultMap>
 
 
-  <select id="selectMaxVersionByPage" >
-
-
-
+  <select id="selectMaxVersionList" resultType="List">
+    SELECT a.*,b.*,c.actual_name
+    FROM
+    (SELECT a.user_id,a.version_no,a.advisor_id FROM cl_formal_user_version a
+    JOIN (SELECT user_id,max(version_no) AS max_version_no FROM cl_formal_user_version GROUP BY user_id) b
+    ON a.user_id = b.user_id
+    AND a.version_no = b.max_version_no) a
+    LEFT OUTER JOIN cl_formal_user b ON a.user_id = b.id
+    LEFT OUTER JOIN kam_advisor c ON a.advisor_id = c.id
   </select>
-
 
 
 </mapper>

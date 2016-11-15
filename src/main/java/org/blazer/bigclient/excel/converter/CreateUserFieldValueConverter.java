@@ -22,7 +22,7 @@ public class CreateUserFieldValueConverter implements ResolveFieldValueConverter
 			if(queryForDb(value.toString())){
 				//这里可以重新对对象进行设置
 				ClFormalUser stu = (ClFormalUser) bean;
-				stu.setInvestmentAdviser("jacky");
+				stu.setUserIdentify("DHK0000");
 				//stu.setCreateUserId(xx);
 				return value;
 			}else{

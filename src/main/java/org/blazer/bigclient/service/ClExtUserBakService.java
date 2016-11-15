@@ -73,7 +73,7 @@ public class ClExtUserBakService extends BaseService<ClExtUserBak> {
                     formalUser.setReportOrAllot("上报");
                     formalUser.setReportOrAllotDate(DateUtil.dateTime2Str(extUserBak.getCtime(), DateUtil.DEFAULT_DATE_TIME_FORMAT));
                     formalUser.setUserIdentify("DKH000");
-                    formalUser.setInvestmentAdviser(extUserBak.getInvestmentAdviser());
+//                    formalUser.setInvestmentAdviser(extUserBak.getInvestmentAdviser());
                     formalUser.setIfDelete(0);
                     formalUser.setCtime(new Date());
                     this.clFormalUserService.save(formalUser);
@@ -163,7 +163,7 @@ public class ClExtUserBakService extends BaseService<ClExtUserBak> {
                 formalUser.setReportOrAllot("上报");
                 formalUser.setReportOrAllotDate(DateUtil.dateTime2Str(extUserBak.getCtime(), DateUtil.DEFAULT_DATE_TIME_FORMAT));
                 formalUser.setUserIdentify("DKH000");
-                formalUser.setInvestmentAdviser(extUserBak.getInvestmentAdviser());
+//                formalUser.setInvestmentAdviser(extUserBak.getInvestmentAdviser());
                 formalUser.setIfDelete(0);
                 formalUser.setCtime(new Date());
                 this.clFormalUserService.save(formalUser);
@@ -197,10 +197,11 @@ public class ClExtUserBakService extends BaseService<ClExtUserBak> {
             if(extUserBak != null){
                 this.updateNotNull(extUserBak);
 
+                //TODO
                 //查询出正式客户
                 ClFormalUser formalUser = this.clFormalUserService.selectByPhoneNumber(extUserBak.getPhoneNumber());
                 if(formalUser != null){
-                    formalUser.setInvestmentAdviser(extUserBak.getInvestmentAdviser());
+//                    formalUser.setInvestmentAdviser(extUserBak.getInvestmentAdviser());
                     this.clFormalUserService.updateNotNull(formalUser);
                 }
                 //更新user版本表,先查询之前最大版本的记录，然后添加一条新的记录

@@ -54,7 +54,7 @@ public class ClFormalUserController extends BaseController {
      * @return
      */
     @ResponseBody
-    @RequestMapping("/findByPage")
+    @RequestMapping("findByPage")
     public PageInfo<ClFormalUser> findByPage(HttpServletRequest request, HttpServletResponse response) {
         //获取前台传递过来的参数
         HashMap<String, String> params = getParamMap(request);
@@ -97,7 +97,6 @@ public class ClFormalUserController extends BaseController {
         try {
             //修改用户，先根据id查询到客户
             ClFormalUser user = this.clFormalUserService.selectByKey(id);
-            user.setInvestmentAdviser(investmentAdviser);
             user.setMtime(new Date());
             this.clFormalUserService.updateNotNull(user);
         } catch (Exception e) {

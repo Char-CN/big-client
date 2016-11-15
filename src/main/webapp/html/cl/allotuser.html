@@ -102,7 +102,7 @@
                     id: rst[i].id
                 }, function (event) {
                     var id = event.data.id;
-                    var r = confirm("确定要删除该用户吗？删除后数据无法恢复！！！")
+                    var r = confirm("确定要删除该用户吗？")
                     if (r == true) {
                         console.log(id);
                         $.post("cl/allot/deleteById.do", {id: id}, function (data) {

@@ -46,7 +46,7 @@ public class ClAllotUserController extends BaseController {
      * @return
      */
     @ResponseBody
-    @RequestMapping("/findByPage")
+    @RequestMapping("findByPage")
     public PageInfo<ClAllotUser> findByPage(HttpServletRequest request, HttpServletResponse response) {
         //获取前台传递过来的参数
         HashMap<String, String> params = getParamMap(request);
@@ -154,12 +154,16 @@ public class ClAllotUserController extends BaseController {
             //指定导出字段
             List<String> specifyFields = new ArrayList<String>();
             specifyFields.add("phoneNumber");
-            specifyFields.add("customerName");
             specifyFields.add("userName");
-            specifyFields.add("investmentAdviser");
-            specifyFields.add("ifEffective");
-            specifyFields.add("remark");
-            specifyFields.add("ctime");
+            specifyFields.add("registerDate");
+            specifyFields.add("idCard");
+            specifyFields.add("ifEmployee");
+            specifyFields.add("assetsAmount");
+            specifyFields.add("sex");
+            specifyFields.add("age");
+            specifyFields.add("birthday");
+            specifyFields.add("referrer");
+            specifyFields.add("referrerPhoneNumber");
 
             //构建excel试图
             mv = super.createExcelView(id, list, excelName, header, specifyFields);

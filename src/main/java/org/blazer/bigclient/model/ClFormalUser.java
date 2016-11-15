@@ -37,12 +37,6 @@ public class ClFormalUser {
     private String userIdentify;
 
     /**
-     * 投资顾问
-     */
-    @Column(name = "investment_adviser")
-    private String investmentAdviser;
-
-    /**
      * 是否删除;0:未删除，1:删除
      */
     @Column(name = "if_delete")
@@ -149,24 +143,6 @@ public class ClFormalUser {
     }
 
     /**
-     * 获取投资顾问
-     *
-     * @return investment_adviser - 投资顾问
-     */
-    public String getInvestmentAdviser() {
-        return investmentAdviser;
-    }
-
-    /**
-     * 设置投资顾问
-     *
-     * @param investmentAdviser 投资顾问
-     */
-    public void setInvestmentAdviser(String investmentAdviser) {
-        this.investmentAdviser = investmentAdviser;
-    }
-
-    /**
      * 获取是否删除;0:未删除，1:删除
      *
      * @return if_delete - 是否删除;0:未删除，1:删除
@@ -218,20 +194,5 @@ public class ClFormalUser {
      */
     public void setCtime(Date ctime) {
         this.ctime = ctime;
-    }
-
-    @Override
-    public String toString() {
-        return "ClFormalUser{" +
-                "id=" + id +
-                ", phoneNumber=" + phoneNumber +
-                ", reportOrAllot='" + reportOrAllot + '\'' +
-                ", reportOrAllotDate='" + reportOrAllotDate + '\'' +
-                ", userIdentify='" + userIdentify + '\'' +
-                ", investmentAdviser='" + investmentAdviser + '\'' +
-                ", ifDelete=" + ifDelete +
-                ", mtime=" + mtime +
-                ", ctime=" + ctime +
-                '}';
     }
 }

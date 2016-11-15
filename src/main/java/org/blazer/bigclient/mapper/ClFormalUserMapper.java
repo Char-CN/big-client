@@ -9,6 +9,5 @@ import java.util.List;
 @Repository
 public interface ClFormalUserMapper extends MyMapper<ClFormalUser> {
 
-    List<ClFormalUser> selectMaxVersionByPage();
-
+    List<ClFormalUser> selectMaxVersionList();
 }

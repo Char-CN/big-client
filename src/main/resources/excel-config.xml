@@ -64,18 +64,34 @@
 
 
 	<!-- 正式客户名单 -->
-	<excel id="clFormalUser" class="org.blazer.bigclient.model.ClFormalUser"
+	<!--<excel id="clFormalUser" class="org.blazer.bigclient.model.ClFormalUser"
 		   sheetname="正式客户名单" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
 		<field name="id" title="自动编号"/>
 		<field name="phoneNumber" title="手机号码"/>
 		<field name="reportOrAllot" title="上报/分配"/>
 		<field name="reportOrAllotDate" title="上报/分配时间"/>
 		<field name="userIdentify" title="客户标识"/>
-		<field name="investmentAdviser" title="投资顾问"/>
+		&lt;!&ndash;<field name="investmentAdviser" title="投资顾问"/>&ndash;&gt;
 		<field name="ifDelete" title="是否删除" format="0:未删除,1:已删除"/>
 		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+	</excel>-->
+
+	<!-- 正式客户名单 -->
+	<excel id="formalUserBean" class="org.blazer.bigclient.body.FormalUserBean"
+		   sheetname="正式客户名单" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
+		<field name="userId" title="客户编号"/>
+		<field name="phoneNumber" title="手机号码"/>
+		<field name="reportOrAllot" title="上报/分配"/>
+		<field name="reportOrAllotDate" title="上报/分配时间"/>
+		<field name="userIdentify" title="客户标识"/>
+		<field name="investmentAdviser" title="投资顾问"/>
+		<field name="ifDelete" title="是否删除" format="0:未删除,1:已删除"/>
+		<field name="versionNo" title="版本编号"/>
+		<field name="startDate" title="起始日期" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="endDate" title="结束日期" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
+
 
 	<!-- 资产余额 -->
 	<excel id="srAssetsBalance" class="org.blazer.bigclient.model.SrAssetsBalance"
