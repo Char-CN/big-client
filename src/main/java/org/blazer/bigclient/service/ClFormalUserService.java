@@ -57,7 +57,7 @@ public class ClFormalUserService extends BaseService<ClFormalUser> {
      * @return
      */
     public PageInfo<FormalUserBean> findByPage(HashMap<String, String> params) {
-        LOGGER.info("根据条件查询正式客户【ClFormalUser】列表。。。");
+        LOGGER.info("根据条件查询正式客户【FormalUserBean】列表。。。");
 
         String search = StringUtil.getStrEmpty(params.get("search"));
         String dateStart = StringUtil.getStrEmpty(params.get("dateStart"));

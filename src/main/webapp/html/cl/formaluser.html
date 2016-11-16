@@ -15,7 +15,7 @@
         margin-left: 10px;
     }
 
-    #search3 {
+    #search {
         height: 30px;
         position: relative;
         left: 10px;
@@ -30,42 +30,10 @@
     }
 </style>
 
-<div class="row" style="margin: 0;">
-    <div class="input-group has-primary" style="float: left;">
-        <span class="in_left buy">搜索条件：</span>
-        <input id="search_text" type="text" class="form-control" placeholder="手机号精确查询..."/>
-        <span class="buy">起始时间：</span>
-        <input id="search_date_start" placeholder="查询的起始日期" class="laydate-icon date" onClick="laydate({istime: true, format: 'YYYY-MM-DD'})">
-        <span class="buy">截止时间：</span>
-        <input id="search_date_end" placeholder="查询的截止日期" class="laydate-icon date" onClick="laydate({istime: true, format: 'YYYY-MM-DD'})">
-        <button id="search3" class="btn btn-primary" type="button">搜索</button>
-        <button id="exportExcel" class="btn btn-primary" type="button" style="float: right;">导出Excel</button>
-    </div>
-</div>
-<hr class="line-3"/>
-<table id="tb" class="table table-hover table-condensed table-bordered">
-    <thead>
-    <tr>
-        <th width="10%">手机号码</th>
-        <th width="10%">上报/分配</th>
-        <th width="10%">上报/分配时间</th>
-        <th width="10%">投资顾问</th>
-        <th width="10%">客户标识</th>
-        <th width="10%">版本号码</th>
-        <th width="10%">版本起始日期</th>
-        <th width="10%">版本结束日期</th>
-        <th width="10%">是否业绩池</th>
-        <th width="10%">操作</th>
-    </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
-<ul id="pagination" class="pagination" style="cursor:pointer"></ul>
-
 <script>
     $(function () {
         var lock = false;
+
         // 定义分页控件
         var pagination = new PageHelper("pagination");
         var _currentPage_lastCurrent = 1;
@@ -78,7 +46,6 @@
             $.post("cl/formal/findByPage.do", {
                 currentPage: currentPage,
                 pageSize: 10,
-//                ifReportOrAllot: 1,
                 search: search_text,
                 dateStart: search_date_start,
                 dateEnd: search_date_end
@@ -122,31 +89,31 @@
 
                 var td = $("<td>");
                 /*td.append($("<a class='compileA'>编辑</a>").click({
-                    id: rst[i].id,
-                    phoneNumber: rst[i].phoneNumber,
-                    reportOrAllot: rst[i].reportOrAllot,
-                    reportOrAllotDate: rst[i].reportOrAllotDate,
-                    userIdentify: rst[i].userIdentify,
-                    investmentAdviser: rst[i].investmentAdviser,
-                    ifDelete: rst[i].ifDelete,
-                    mtime: rst[i].mtime,
-                    ctime: rst[i].ctime
-                }, function (event) {
-                    $util.modal("修改客户", "html/cl/formaluser_add_edit.html", {
-                        id: event.data.id,
-                        phoneNumber: event.data.phoneNumber,
-                        reportOrAllot: event.data.reportOrAllot,
-                        reportOrAllotDate: event.data.reportOrAllotDate,
-                        userIdentify: event.data.userIdentify,
-                        investmentAdviser: event.data.investmentAdviser,
-                        ifDelete: event.data.ifDelete,
-                        mtime: event.data.mtime,
-                        ctime: event.data.ctime
-                    }, function () {
-                        //刷新当前页
-                        reload();
-                    });
-                }));*/
+                 id: rst[i].id,
+                 phoneNumber: rst[i].phoneNumber,
+                 reportOrAllot: rst[i].reportOrAllot,
+                 reportOrAllotDate: rst[i].reportOrAllotDate,
+                 userIdentify: rst[i].userIdentify,
+                 investmentAdviser: rst[i].investmentAdviser,
+                 ifDelete: rst[i].ifDelete,
+                 mtime: rst[i].mtime,
+                 ctime: rst[i].ctime
+                 }, function (event) {
+                 $util.modal("修改客户", "html/cl/formaluser_add_edit.html", {
+                 id: event.data.id,
+                 phoneNumber: event.data.phoneNumber,
+                 reportOrAllot: event.data.reportOrAllot,
+                 reportOrAllotDate: event.data.reportOrAllotDate,
+                 userIdentify: event.data.userIdentify,
+                 investmentAdviser: event.data.investmentAdviser,
+                 ifDelete: event.data.ifDelete,
+                 mtime: event.data.mtime,
+                 ctime: event.data.ctime
+                 }, function () {
+                 //刷新当前页
+                 reload();
+                 });
+                 }));*/
                 td.append($("<a class='removeA'>删除</a>").click({
                     id: rst[i].id
                 }, function (event) {
@@ -162,32 +129,35 @@
                     }
                 }));
 
-				tr.append(td);
-				$("#tb>tbody").append(tr);
-			}
-		};
+                tr.append(td);
+                $("#tb>tbody").append(tr);
+            }
+        };
 
-		findByPage(1);
-		$("#search").click(function() {
-			findByPage(1);
-		});
+        //搜索框的三个参数
         var search_text = "";
         $("#search_text").change(function () {
             search_text = $(this).val();
         });
         var search_date_start = "";
-        $("#search_date_start").change(function () {
+        $("#search_date_start").blur(function () {
             search_date_start = $(this).val();
         });
         var search_date_end = "";
-        $("#search_date_end").change(function () {
+        $("#search_date_end").blur(function () {
             search_date_end = $(this).val();
         });
 
-		/**
-		 * ajax下载excel
-		 */
-		$("#exportExcel").click(function() {
+        findByPage(1);
+        $("#search").click(function() {
+            findByPage(1);
+        });
+
+
+        /**
+         * ajax下载excel
+         */
+        $("#exportExcel").click(function() {
             downLoadFile({
                 url: 'cl/formal/exportExcel.do', //请求的url
                 data: {search: search_text},//要发送的数据
@@ -195,7 +165,43 @@
                     //alert("导出excel文件成功");
                 }
             });
-		});
+        });
 
-   });
+    });
 </script>
+
+<div class="row" style="margin: 0;">
+    <div class="input-group has-primary" style="float: left;">
+        <span class="in_left buy">搜索条件：</span>
+        <input id="search_text" type="text" class="form-control" placeholder="手机号精确查询..."/>
+        <span class="buy">起始时间：</span>
+        <input id="search_date_start" name="search_date_start" placeholder="查询的起始日期" class="laydate-icon date" onClick="laydate({istime: true, format: 'YYYY-MM-DD'})">
+        <span class="buy">截止时间：</span>
+        <input id="search_date_end" name="search_date_end" placeholder="查询的截止日期" class="laydate-icon date" onClick="laydate({istime: true, format: 'YYYY-MM-DD'})">
+        <button id="search" class="btn btn-primary" type="button">搜索</button>
+        <button id="exportExcel" class="btn btn-primary" type="button" style="float: right;">导出Excel</button>
+    </div>
+</div>
+<hr class="line-3"/>
+<table id="tb" class="table table-hover table-condensed table-bordered">
+    <thead>
+    <tr>
+        <th width="10%">手机号码</th>
+        <th width="10%">上报/分配</th>
+        <th width="10%">上报/分配时间</th>
+        <th width="10%">投资顾问</th>
+        <th width="10%">客户标识</th>
+        <th width="10%">版本号码</th>
+        <th width="10%">版本起始日期</th>
+        <th width="10%">版本结束日期</th>
+        <th width="10%">是否业绩池</th>
+        <th width="10%">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<ul id="pagination" class="pagination" style="cursor:pointer"></ul>
+
+
+

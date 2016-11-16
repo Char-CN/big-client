@@ -1,6 +1,7 @@
 package org.blazer.bigclient.controller;
 
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.blazer.bigclient.body.AjaxResult;
 import org.blazer.bigclient.body.FormalUserBean;
 import org.blazer.bigclient.excel.ExcelHeader;
@@ -51,9 +52,10 @@ public class ClFormalUserController extends BaseController {
     public PageInfo<FormalUserBean> findByPage(HttpServletRequest request, HttpServletResponse response) {
         //获取前台传递过来的参数
         HashMap<String, String> params = getParamMap(request);
-        LOGGER.debug("currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
-                ", pageSize:" + IntegerUtil.getIntZero(params.get("pageSize")) +
-                ", search:" + StringUtil.getStrEmpty(params.get("search")));
+
+        LOGGER.debug("当前页-currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
+                ", 每页的行数-pageSize:" + IntegerUtil.getIntZero(params.get("pageSize")) +
+                ", 查询条件-search:" + StringUtil.getStrEmpty(params.get("search")));
 
         /*//获取当前登录用户
         KamAdvisor advisor = super.getCurrentUser(request);

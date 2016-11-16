@@ -61,13 +61,13 @@
       a.if_delete = 0
       AND e.id IS NOT NULL
 
-      <if test="search != null">
+      <if test="search != ''">
         AND a.phone_number = #{search}
       </if>
-      <if test="dateStart == '1900-01-01' and dateEnd = date(now())">
+      <if test="dateStart != null and dateEnd != null">
         AND d.user_id IS NOT NULL
       </if>
-    ;
+
 
     <!--<choose>
       <when test="title != null">
@@ -81,16 +81,6 @@
       </otherwise>
     </choose>-->
 
-
-      <!--<if test="search != null">
-        AND a.phone_number = #{search}
-      </if>
-      <if test="dateStart != null">
-        AND b.start_date = #{dateStart}
-      </if>
-      <if test="dateEnd != null">
-        AND b.end_date = #{dateEnd}
-      </if>-->
   </select>
 
 
