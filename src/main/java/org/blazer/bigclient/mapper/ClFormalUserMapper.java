@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface ClFormalUserMapper extends MyMapper<ClFormalUser> {
 
-    List<FormalUserBean> selectMaxVersionList();
+    List<FormalUserBean> selectMaxVersionList(String search, String dateStart, String dateEnd);
 
 }

@@ -33,23 +33,64 @@
 
   <select id="selectMaxVersionList" resultMap="DTOResultMap">
     SELECT
-      b.id,
-      b.phone_number,
-      b.report_or_allot,
-      b.report_or_allot_date,
-      b.user_identify,
+      a.id,
+      a.phone_number,
+      a.report_or_allot,
+      a.report_or_allot_date,
+      a.user_identify,
       c.actual_name,
-      b.if_performance_pool,
-      a.version_no,
-      a.start_date,
-      a.end_date
+      a.if_performance_pool,
+      b.version_no,
+      b.start_date,
+      b.end_date
     FROM
-    (SELECT a.user_id,a.version_no,a.advisor_id,a.start_date,a.end_date FROM cl_formal_user_version a
-    JOIN (SELECT user_id,max(version_no) AS max_version_no FROM cl_formal_user_version GROUP BY user_id) b
-    ON a.user_id = b.user_id
-    AND a.version_no = b.max_version_no) a
-    LEFT OUTER JOIN cl_formal_user b ON a.user_id = b.id
-    LEFT OUTER JOIN kam_advisor c ON a.advisor_id = c.id
+      cl_formal_user AS a
+      JOIN cl_formal_user_version AS b ON a.id = b.user_id
+      JOIN kam_advisor AS c ON b.advisor_id = c.id
+      LEFT OUTER JOIN (SELECT user_id,max(version_no) AS max_version_no FROM cl_formal_user_version	GROUP BY user_id) AS d ON a.id = d.user_id
+      LEFT OUTER JOIN (SELECT	id,user_id,advisor_id	FROM cl_formal_user_version
+        WHERE
+        <![CDATA[
+        (start_date<=#{dateStart} AND coalesce(end_date,date(now()))>=#{dateEnd})
+        OR (start_date<=#{dateStart} AND coalesce(end_date,date(now()))<=#{dateEnd} AND #{dateStart}<=coalesce(end_date,date(now())))
+        OR (start_date>=#{dateStart} AND coalesce(end_date,date(now()))<=#{dateEnd})
+        OR (start_date>=#{dateStart} AND coalesce(end_date,date(now()))>=#{dateEnd} AND #{dateEnd}>=start_date)
+        ]]>
+        ) AS e ON b.id = e.id
+    WHERE
+      a.if_delete = 0
+      AND e.id IS NOT NULL
+
+      <if test="search != null">
+        AND a.phone_number = #{search}
+      </if>
+      <if test="dateStart == '1900-01-01' and dateEnd = date(now())">
+        AND d.user_id IS NOT NULL
+      </if>
+    ;
+
+    <!--<choose>
+      <when test="title != null">
+        AND title like #{title}
+      </when>
+      <when test="author != null and author.name != null">
+        AND author_name like #{author.name}
+      </when>
+      <otherwise>
+        AND featured = 1
+      </otherwise>
+    </choose>-->
+
+
+      <!--<if test="search != null">
+        AND a.phone_number = #{search}
+      </if>
+      <if test="dateStart != null">
+        AND b.start_date = #{dateStart}
+      </if>
+      <if test="dateEnd != null">
+        AND b.end_date = #{dateEnd}
+      </if>-->
   </select>
 
 

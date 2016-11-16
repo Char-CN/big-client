@@ -5,8 +5,8 @@ import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.blazer.bigclient.body.FormalUserBean;
 import org.blazer.bigclient.mapper.ClFormalUserMapper;
-import org.blazer.bigclient.mapper.ClFormalUserVersionMapper;
 import org.blazer.bigclient.model.ClFormalUser;
+import org.blazer.bigclient.util.DateUtil;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.blazer.bigclient.util.LongUtil;
 import org.blazer.bigclient.util.StringUtil;
@@ -61,11 +61,17 @@ public class ClFormalUserService extends BaseService<ClFormalUser> {
 
         String search = StringUtil.getStrEmpty(params.get("search"));
         String dateStart = StringUtil.getStrEmpty(params.get("dateStart"));
+        if(StringUtils.isEmpty(dateStart)){
+            dateStart="1900-01-01";
+        }
         String dateEnd = StringUtil.getStrEmpty(params.get("dateEnd"));
+        if(StringUtils.isEmpty(dateEnd)){
+            dateEnd = DateUtil.thisDate();
+        }
 
         PageHelper.startPage(IntegerUtil.getIntZero(params.get("currentPage")), IntegerUtil.getIntZero(params.get("pageSize")));
 
-        List<FormalUserBean> list = this.clFormalUserMapper.selectMaxVersionList();
+        List<FormalUserBean> list = this.clFormalUserMapper.selectMaxVersionList(search,dateStart,dateEnd);
 
         return new PageInfo<FormalUserBean>(list);
     }

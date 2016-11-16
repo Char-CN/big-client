@@ -30,8 +30,8 @@ public class ExcelXmlBuild {
         String xml2 = builderXml("clAllotUser", "平台待分配客户", true, ClAllotUser.class, 5000);
         System.out.println(xml2);
         String xml3 = builderXml("clFormalUser", "正式客户名单（导入）", true, ClFormalUser.class, 5000);
-        System.out.println(xml3);*/
-        /*String xml = builderXml("srAssetsBalance", "资产余额", true, SrAssetsBalance.class, 5000);
+        System.out.println(xml3);
+        String xml = builderXml("srAssetsBalance", "资产余额", true, SrAssetsBalance.class, 5000);
         System.out.println(xml);
         String xml1 = builderXml("srRegularSalesDetails", "定期销售明细", true, SrRegularSalesDetails.class, 5000);
         System.out.println(xml1);

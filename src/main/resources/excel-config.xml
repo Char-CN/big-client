@@ -3,6 +3,11 @@
 <excels>
 	<!-- excel标签参看:ExcelDefinition,Field标签参看:FieldValue -->
 
+
+	<!--
+		客户名单
+	 -->
+
 	<!-- 外部拓展客户（导入） -->
 	<excel id="clExtUserBak" class="org.blazer.bigclient.model.ClExtUserBak"
 		   sheetname="外部拓展客户（导入）" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
@@ -62,21 +67,6 @@
 		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
 
-
-	<!-- 正式客户名单 -->
-	<!--<excel id="clFormalUser" class="org.blazer.bigclient.model.ClFormalUser"
-		   sheetname="正式客户名单" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
-		<field name="id" title="自动编号"/>
-		<field name="phoneNumber" title="手机号码"/>
-		<field name="reportOrAllot" title="上报/分配"/>
-		<field name="reportOrAllotDate" title="上报/分配时间"/>
-		<field name="userIdentify" title="客户标识"/>
-		&lt;!&ndash;<field name="investmentAdviser" title="投资顾问"/>&ndash;&gt;
-		<field name="ifDelete" title="是否删除" format="0:未删除,1:已删除"/>
-		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
-		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
-	</excel>-->
-
 	<!-- 正式客户名单 -->
 	<excel id="formalUserBean" class="org.blazer.bigclient.body.FormalUserBean"
 		   sheetname="正式客户名单" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
@@ -86,12 +76,16 @@
 		<field name="reportOrAllotDate" title="上报/分配时间"/>
 		<field name="userIdentify" title="客户标识"/>
 		<field name="investmentAdviser" title="投资顾问"/>
-		<field name="ifDelete" title="是否删除" format="0:未删除,1:已删除"/>
+		<field name="ifPerformancePool" title="是否业绩池"/>
 		<field name="versionNo" title="版本编号"/>
 		<field name="startDate" title="起始日期" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<field name="endDate" title="结束日期" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
 
+
+	<!--
+		统计报表
+	 -->
 
 	<!-- 资产余额 -->
 	<excel id="srAssetsBalance" class="org.blazer.bigclient.model.SrAssetsBalance"
@@ -129,8 +123,10 @@
 		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
+
+	<!-- 活期期销售明细 -->
 	<excel id="srCurrentSalesDetails" class="org.blazer.bigclient.model.SrCurrentSalesDetails"
-		   sheetname="活期期销售明细" defaultColumnWidth="5000" enableStyle="true">
+		   sheetname="活期期销售明细" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
 		<field name="id" title="id"/>
 		<field name="userName" title="userName"/>
 		<field name="phoneNumber" title="phoneNumber"/>
@@ -145,8 +141,15 @@
 		<field name="mtime" title="mtime" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<field name="ctime" title="ctime" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
+
+
+	<!--
+		业绩核算
+	 -->
+
+	<!--定期销售规模核算-->
 	<excel id="paRegularSalesScaleAccounting" class="org.blazer.bigclient.model.PaRegularSalesScaleAccounting"
-		   sheetname="定期销售规模核算" defaultColumnWidth="5000" enableStyle="true">
+		   sheetname="定期销售规模核算" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
 		<field name="id" title="id"/>
 		<field name="userName" title="userName"/>
 		<field name="phoneNumber" title="phoneNumber"/>
@@ -167,8 +170,10 @@
 		<field name="mtime" title="mtime" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<field name="ctime" title="ctime" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
+
+	<!--活期销售规模核算-->
 	<excel id="paCurrentSalesScaleAccounting" class="org.blazer.bigclient.model.PaCurrentSalesScaleAccounting"
-		   sheetname="活期销售规模核算" defaultColumnWidth="5000" enableStyle="true">
+		   sheetname="活期销售规模核算" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
 		<field name="id" title="id"/>
 		<field name="investmentAdviser" title="investmentAdviser"/>
 		<field name="monthlyPurchaseAmount" title="monthlyPurchaseAmount"/>
@@ -180,8 +185,10 @@
 		<field name="mtime" title="mtime" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<field name="ctime" title="ctime" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
+
+	<!--获客数核算-->
 	<excel id="paCustomersAccounting" class="org.blazer.bigclient.model.PaCustomersAccounting"
-		   sheetname="获客数核算" defaultColumnWidth="5000" enableStyle="true">
+		   sheetname="获客数核算" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
 		<field name="id" title="id"/>
 		<field name="userName" title="userName"/>
 		<field name="phoneNumber" title="phoneNumber"/>
