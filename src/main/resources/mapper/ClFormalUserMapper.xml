@@ -60,14 +60,15 @@
     WHERE
       a.if_delete = 0
       AND e.id IS NOT NULL
-
       <if test="search != ''">
         AND a.phone_number = #{search}
       </if>
-      <if test="dateStart != null and dateEnd != null">
+      <if test="history != 'on'">
         AND d.user_id IS NOT NULL
       </if>
-
+    ORDER BY
+      a.phone_number,
+      b.start_date DESC
 
     <!--<choose>
       <when test="title != null">

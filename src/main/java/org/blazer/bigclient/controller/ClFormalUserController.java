@@ -55,7 +55,10 @@ public class ClFormalUserController extends BaseController {
 
         LOGGER.debug("当前页-currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
                 ", 每页的行数-pageSize:" + IntegerUtil.getIntZero(params.get("pageSize")) +
-                ", 查询条件-search:" + StringUtil.getStrEmpty(params.get("search")));
+                ", 查询条件-search:" + StringUtil.getStrEmpty(params.get("search")) +
+                ", 查询历史-history:" + StringUtil.getStrEmpty(params.get("history")) +
+                ", 起始时间-dateStart:" + StringUtil.getStrEmpty(params.get("dateStart")) +
+                ", 截止时间-dateEnd:" + StringUtil.getStrEmpty(params.get("dateEnd"))+"......");
 
         /*//获取当前登录用户
         KamAdvisor advisor = super.getCurrentUser(request);
@@ -78,25 +81,26 @@ public class ClFormalUserController extends BaseController {
     @RequestMapping(value = "saveOne", method = RequestMethod.POST)
     public AjaxResult saveOne(HttpServletRequest request) {
 
-        AjaxResult result = AjaxResult.success("保存客户成功...");
+        AjaxResult result = AjaxResult.success("修改客户信息成功...");
 
         //获取前台页面传递的参数
         Long id = LongUtil.getLongZero(request.getParameter("id"));
+
         String phoneNumber = StringUtil.getStrEmpty(request.getParameter("phoneNumber"));
 
-        LOGGER.debug("当前正要保存客户的手机号是 :" + phoneNumber);
+        LOGGER.debug("当前修改的客户手机号是 :" + phoneNumber);
 
-        String customerName = StringUtil.getStrEmpty(request.getParameter("customerName"));
-        String investmentAdviser = StringUtil.getStrEmpty(request.getParameter("investmentAdviser"));
+        String ifPerformancePool = StringUtil.getStrEmpty(request.getParameter("ifPerformancePool"));
 
         try {
             //修改用户，先根据id查询到客户
             ClFormalUser user = this.clFormalUserService.selectByKey(id);
+            user.setIfPerformancePool(ifPerformancePool);
             user.setMtime(new Date());
             this.clFormalUserService.updateNotNull(user);
         } catch (Exception e) {
             result.setCode(AjaxResult.CODE_FAILURE);
-            result.setMsg("保存客户信息失败..." + e.getMessage());
+            result.setMsg("修改客户信息失败..." + e.getMessage());
             e.printStackTrace();
         }
         LOGGER.debug("返回页面的结果对象：" + result);

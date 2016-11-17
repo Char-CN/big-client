@@ -12,7 +12,8 @@ import java.util.List;
 public interface ClFormalUserMapper extends MyMapper<ClFormalUser> {
 
     List<FormalUserBean> selectMaxVersionList(@Param(value = "search") String search,
-                                              @Param(value = "dateStart")String dateStart,
-                                              @Param(value = "dateEnd")String dateEnd);
+                                              @Param(value = "dateStart") String dateStart,
+                                              @Param(value = "dateEnd") String dateEnd,
+                                              @Param(value = "history") String history);
 
 }

@@ -60,6 +60,7 @@ public class ClFormalUserService extends BaseService<ClFormalUser> {
         LOGGER.info("根据条件查询正式客户【FormalUserBean】列表。。。");
 
         String search = StringUtil.getStrEmpty(params.get("search"));
+        String history = StringUtil.getStrEmpty(params.get("history"));
         String dateStart = StringUtil.getStrEmpty(params.get("dateStart"));
         if(StringUtils.isEmpty(dateStart)){
             dateStart="1900-01-01";
@@ -71,7 +72,7 @@ public class ClFormalUserService extends BaseService<ClFormalUser> {
 
         PageHelper.startPage(IntegerUtil.getIntZero(params.get("currentPage")), IntegerUtil.getIntZero(params.get("pageSize")));
 
-        List<FormalUserBean> list = this.clFormalUserMapper.selectMaxVersionList(search,dateStart,dateEnd);
+        List<FormalUserBean> list = this.clFormalUserMapper.selectMaxVersionList(search,dateStart,dateEnd,history);
 
         return new PageInfo<FormalUserBean>(list);
     }
