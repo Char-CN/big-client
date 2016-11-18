@@ -1,12 +1,15 @@
 package org.blazer.bigclient.body;
 
+import java.io.Serializable;
+
 /**
  * Created by cuican on 2016-11-18.
  */
-public class AdvisorInfoBean {
+public class AdvisorInfoBean implements Serializable {
+
+    private static final long serialVersionUID = -9205618461475346830L;
 
     private Long id;
-    private Long tid;
     private String serialNumber;
     private String level;
     private String systemName;
@@ -14,7 +17,6 @@ public class AdvisorInfoBean {
     private String phoneNumber;
     private String email;
     private String teamName;
-    private Long teamLeaderId;
     private String teamLeaderName;
     private Integer totalNumber;
     private String area;
@@ -25,14 +27,6 @@ public class AdvisorInfoBean {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getTid() {
-        return tid;
-    }
-
-    public void setTid(Long tid) {
-        this.tid = tid;
     }
 
     public String getSerialNumber() {
@@ -91,14 +85,6 @@ public class AdvisorInfoBean {
         this.teamName = teamName;
     }
 
-    public Long getTeamLeaderId() {
-        return teamLeaderId;
-    }
-
-    public void setTeamLeaderId(Long teamLeaderId) {
-        this.teamLeaderId = teamLeaderId;
-    }
-
     public String getTeamLeaderName() {
         return teamLeaderName;
     }
@@ -127,7 +113,6 @@ public class AdvisorInfoBean {
     public String toString() {
         return "AdvisorInfoBean{" +
                 "id=" + id +
-                ", tid=" + tid +
                 ", serialNumber='" + serialNumber + '\'' +
                 ", level='" + level + '\'' +
                 ", systemName='" + systemName + '\'' +
@@ -135,7 +120,6 @@ public class AdvisorInfoBean {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
                 ", teamName='" + teamName + '\'' +
-                ", teamLeaderId=" + teamLeaderId +
                 ", teamLeaderName='" + teamLeaderName + '\'' +
                 ", totalNumber=" + totalNumber +
                 ", area='" + area + '\'' +

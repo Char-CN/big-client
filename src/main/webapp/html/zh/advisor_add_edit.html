@@ -7,12 +7,23 @@
         //当前窗口dom对象
         var this_window = $("#" + windowId);
         //获取参数
+        /*id: rst[i].id,
+         serialNumber: rst[i].serialNumber,
+         level: rst[i].level,
+         systemName: rst[i].systemName,
+         actualName: rst[i].actualName,
+         phoneNumber: rst[i].phoneNumber,
+         remark: rst[i].remark,
+         teamName: rst[i].teamName,
+         teamLeaderName: rst[i].teamLeaderName,
+         totalNumber: rst[i].totalNumber,
+         area: rst[i].area*/
         var id = $util.getQueryString(queryString, "id");
+        var serialNumber = $util.getQueryString(queryString, "serialNumber");
+        var level = $util.getQueryString(queryString, "level");
+        var systemName = $util.getQueryString(queryString, "systemName");
+        var actualName = $util.getQueryString(queryString, "actualName");
         var phoneNumber = $util.getQueryString(queryString, "phoneNumber");
-        var sysName = $util.getQueryString(queryString, "sysName");
-        var sysIfRegister = $util.getQueryString(queryString, "sysIfRegister");
-        var sysRegisterDate = $util.getQueryString(queryString, "sysRegisterDate");
-        var sysIfRealName = $util.getQueryString(queryString, "sysIfRealName");
         var sysIfBindCard = $util.getQueryString(queryString, "sysIfBindCard");
         var sysIfTransaction = $util.getQueryString(queryString, "sysIfTransaction");
         var sysReferrer = $util.getQueryString(queryString, "sysReferrer");
@@ -55,34 +66,7 @@
         });
 
     });
-    //   Date 插件   start
-    $('#ca').calendar({
-        width: 320,
-        height: 320,
-        data: [
-            {
-                date: '2015/12/24',
-                value: 'Christmas Eve'
-            },
-            {
-                date: '2015/12/25',
-                value: 'Merry Christmas'
-            },
-            {
-                date: '2016/01/01',
-                value: 'Happy New Year'
-            }
-        ],
-        onSelected: function (view, date, data) {
-        }
-    });
-    function createDate(event) {
-        $("<div id='da'></div>").calendar({
-            trigger: $(event),
-            zIndex: 999,
-            format: 'yyyy-mm-dd'
-        }).appendTo($("body"));
-    }
+
 </script>
 
 
