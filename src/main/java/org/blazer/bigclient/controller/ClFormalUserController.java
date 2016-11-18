@@ -53,7 +53,7 @@ public class ClFormalUserController extends BaseController {
         //获取前台传递过来的参数
         HashMap<String, String> params = getParamMap(request);
 
-        LOGGER.debug("当前页-currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
+        LOGGER.debug("分页条件查询列表--当前页-currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
                 ", 每页的行数-pageSize:" + IntegerUtil.getIntZero(params.get("pageSize")) +
                 ", 查询条件-search:" + StringUtil.getStrEmpty(params.get("search")) +
                 ", 查询历史-history:" + StringUtil.getStrEmpty(params.get("history")) +
@@ -122,12 +122,12 @@ public class ClFormalUserController extends BaseController {
         LOGGER.debug("正在被删除的用户id是 :" + id);
         AjaxResult result = AjaxResult.success("删除用户信息成功...");
         try {
-            ClFormalUser clAllotUser = this.clFormalUserService.selectByKey(id);
-            clAllotUser.setIfDelete(1);
-            this.clFormalUserService.updateNotNull(clAllotUser);
+            ClFormalUser user = this.clFormalUserService.selectByKey(id);
+            user.setIfDelete(1);
+            this.clFormalUserService.updateNotNull(user);
         } catch (Exception e) {
             result.setCode(AjaxResult.CODE_FAILURE);
-            result.setMsg("删除用户操作失败。。。" + e.getMessage());
+            result.setMsg("删除客户操作失败。。。" + e.getMessage());
             e.printStackTrace();
         }
         return result;
@@ -144,28 +144,34 @@ public class ClFormalUserController extends BaseController {
     public ModelAndView exportExcel(HttpServletRequest request) {
         ModelAndView mv = null;
         try {
-            //根据条件获取要导出的数据集合
-            String search = StringUtil.getStrEmpty(request.getParameter("search"));
-            String template = StringUtil.getStrEmpty(request.getParameter("template"));
-            LOGGER.debug("search:" + search + "，template:" + template);
+            //获取前台传递过来的参数
+            HashMap<String, String> params = getParamMap(request);
+
+            LOGGER.debug("Excel导出查询数据列表--当前页-currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
+                    ", 每页的行数-pageSize:" + IntegerUtil.getIntZero(params.get("pageSize")) +
+                    ", 查询条件-search:" + StringUtil.getStrEmpty(params.get("search")) +
+                    ", 查询历史-history:" + StringUtil.getStrEmpty(params.get("history")) +
+                    ", 起始时间-dateStart:" + StringUtil.getStrEmpty(params.get("dateStart")) +
+                    ", 截止时间-dateEnd:" + StringUtil.getStrEmpty(params.get("dateEnd"))+"......");
 
             //xml配置中的ID
-            String id = "clAllotUser";
+            String id = "formalUserBean";
             // 要导出的数据
-            List<ClFormalUser> list = this.clFormalUserService.findBySearch(search);
+            List<FormalUserBean> list = this.clFormalUserService.findBySearch(params);
             //excel文件名称,不需要任何后缀
-            String excelName = "AllotUser_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
+            String excelName = "FormalUser_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
             //可以为空,自定义Excel头信息
             ExcelHeader header = null;
             //指定导出字段
-            List<String> specifyFields = new ArrayList<String>();
+            List<String> specifyFields = new ArrayList<>();
             specifyFields.add("phoneNumber");
-            specifyFields.add("customerName");
-            specifyFields.add("userName");
+            specifyFields.add("reportOrAllot");
+            specifyFields.add("reportOrAllotDate");
+            specifyFields.add("userIdentify");
             specifyFields.add("investmentAdviser");
-            specifyFields.add("ifEffective");
-            specifyFields.add("remark");
-            specifyFields.add("ctime");
+            specifyFields.add("versionNo");
+            specifyFields.add("startDate");
+            specifyFields.add("endDate");
 
             //构建excel试图
             mv = super.createExcelView(id, list, excelName, header, specifyFields);

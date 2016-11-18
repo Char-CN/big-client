@@ -57,7 +57,7 @@ public class ClFormalUserService extends BaseService<ClFormalUser> {
      * @return
      */
     public PageInfo<FormalUserBean> findByPage(HashMap<String, String> params) {
-        LOGGER.info("根据条件查询正式客户【FormalUserBean】列表。。。");
+        LOGGER.info("根据条件分页查询正式客户【FormalUserBean】列表。。。");
 
         String search = StringUtil.getStrEmpty(params.get("search"));
         String history = StringUtil.getStrEmpty(params.get("history"));
@@ -71,27 +71,24 @@ public class ClFormalUserService extends BaseService<ClFormalUser> {
         }
 
         PageHelper.startPage(IntegerUtil.getIntZero(params.get("currentPage")), IntegerUtil.getIntZero(params.get("pageSize")));
-
         List<FormalUserBean> list = this.clFormalUserMapper.selectMaxVersionList(search,dateStart,dateEnd,history);
-
-        return new PageInfo<FormalUserBean>(list);
+        return new PageInfo<>(list);
     }
 
-    /**
-     * 条件查询，excel导出
-     *
-     * @param search
-     * @return
-     */
-    public List<ClFormalUser> findBySearch(String search) {
-        LOGGER.info("根据条件查询正式客户【ClFormalUser】数据，导出到excel表。");
-        Example example = new Example(ClFormalUser.class);
-        Example.Criteria criteria = example.createCriteria();
-        String search_text = StringUtil.getStrEmpty(search);
-        if (StringUtils.isNotEmpty(search_text)) {
-            criteria.andCondition("phone_number like '%" + search + "%'" + " or user_name like '%" + search + "%'");
+    public List<FormalUserBean> findBySearch(HashMap<String, String> params) {
+        LOGGER.info("根据条件查询正式客户【FormalUserBean】，导出Excel文件。。。");
+
+        String search = StringUtil.getStrEmpty(params.get("search"));
+        String history = StringUtil.getStrEmpty(params.get("history"));
+        String dateStart = StringUtil.getStrEmpty(params.get("dateStart"));
+        if(StringUtils.isEmpty(dateStart)){
+            dateStart="1900-01-01";
         }
-        criteria.andEqualTo("ifDelete", 0);
-        return selectByExample(example);
+        String dateEnd = StringUtil.getStrEmpty(params.get("dateEnd"));
+        if(StringUtils.isEmpty(dateEnd)){
+            dateEnd = DateUtil.thisDate();
+        }
+
+        return this.clFormalUserMapper.selectMaxVersionList(search,dateStart,dateEnd,history);
     }
 }

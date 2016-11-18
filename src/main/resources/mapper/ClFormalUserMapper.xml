@@ -47,7 +47,8 @@
       cl_formal_user AS a
       JOIN cl_formal_user_version AS b ON a.id = b.user_id
       JOIN kam_advisor AS c ON b.advisor_id = c.id
-      LEFT OUTER JOIN (SELECT user_id,max(version_no) AS max_version_no FROM cl_formal_user_version	GROUP BY user_id) AS d ON a.id = d.user_id
+      LEFT OUTER JOIN (SELECT user_id,max(version_no) AS max_version_no FROM cl_formal_user_version	GROUP BY user_id) AS d
+                 ON b.user_id=d.user_id AND b.version_no=d.max_version_no
       LEFT OUTER JOIN (SELECT	id,user_id,advisor_id	FROM cl_formal_user_version
         WHERE
         <![CDATA[
@@ -63,7 +64,7 @@
       <if test="search != ''">
         AND a.phone_number = #{search}
       </if>
-      <if test="history != 'on'">
+      <if test="history == ''">
         AND d.user_id IS NOT NULL
       </if>
     ORDER BY
