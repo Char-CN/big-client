@@ -1,6 +1,7 @@
 package org.blazer.bigclient.controller;
 
 import com.github.pagehelper.PageInfo;
+import org.blazer.bigclient.body.AdvisorInfoBean;
 import org.blazer.bigclient.model.KamAdvisor;
 import org.blazer.bigclient.service.KamAdvisorService;
 import org.blazer.bigclient.util.IntegerUtil;
@@ -37,7 +38,7 @@ public class KamAdvisorController extends BaseController {
      */
     @ResponseBody
     @RequestMapping("/findByPage")
-    public PageInfo<KamAdvisor> findByPage(HttpServletRequest request, HttpServletResponse response) {
+    public PageInfo<AdvisorInfoBean> findByPage(HttpServletRequest request, HttpServletResponse response) {
         HashMap<String, String> params = getParamMap(request);
         LOGGER.debug("currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
                 ", pageSize:" + IntegerUtil.getIntZero(params.get("pageSize")) +
