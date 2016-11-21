@@ -1,44 +1,52 @@
-/*
-b.start_date <= dateStart
-b.end_date >= dateEnd  有可能为null
-a.phone_number like %phoneNumber%
-*/
 
-SELECT
-a.id(b.user_id),
-a.phone_number,
-a.report_or_allot,
-a.report_or_allot_date,
-a.user_identify,
-a.investment_adviser(c.actual_name),
-a.if_delete,
-a.mtime,
-a.ctime
-FROM
-cl_formal_user AS a;
+###业绩报表		performance report
 
-SELECT
-b.id,
-b.user_id,
-b.advisor_id(c.id),
-b.version_no,
-b.start_date,
-b.end_date,
-b.mtime,
-b.ctime
-FROM
-cl_formal_user_version AS b;
 
-SELECT
-c.id,
-c.tid,
-c.serial_number,
-c.level,
-c.system_name,
-c.actual_name,
-c.phone_number,
-c.remark,
-c.mtime,
-c.ctime
-FROM
-kam_advisor AS c;
+#业绩报表		performance report
+DROP TABLE IF EXISTS `pr_performance_report`;
+CREATE TABLE `pr_performance_report` (
+  `id`  bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自动编号' ,
+  `level`  varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '投顾级别' ,
+  `serial_number`  varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '投顾编号' ,
+  `system_name`  varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '系统登录用户名' ,
+  `actual_name`  varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '投顾姓名' ,
+  `phone_number`  varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '投顾手机号码' ,
+  `remark`  varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注信息' ,
+  `mtime`  timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间' ,
+  `ctime`  timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间' ,
+  PRIMARY KEY (`id`)
+)
+  ENGINE=InnoDB
+  DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+  AUTO_INCREMENT=2
+  ROW_FORMAT=DYNAMIC
+  COMMENT='[统计报表]--[资产余额]--assets balance'
+;
+
+
+
+#获客构成		constitute customer
+DROP TABLE IF EXISTS `sr_regular_sales_details`;
+CREATE TABLE `kam_advisor` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自动编号',
+  `tid` bigint(20) DEFAULT NULL COMMENT '所属团队ID（advisor_team.id）',
+  `serial_number` varchar(20) DEFAULT NULL COMMENT '投顾编号',
+  `level` varchar(20) DEFAULT NULL COMMENT '投顾级别',
+  `system_name` varchar(20) DEFAULT NULL COMMENT '系统登录用户名',
+  `actual_name` varchar(20) DEFAULT NULL COMMENT '投顾姓名',
+  `phone_number` varchar(20) DEFAULT NULL COMMENT '投顾手机号码',
+  `remark` varchar(100) DEFAULT NULL COMMENT '备注信息',
+  `mtime` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `ctime` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+
+
+#客户转换率		customer conversion rate
+DROP TABLE IF EXISTS `sr_regular_sales_details`;
+
+
+
+
+#定期兑付报表	regular payment
+DROP TABLE IF EXISTS `sr_regular_sales_details`;
