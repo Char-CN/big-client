@@ -7,11 +7,9 @@ DROP TABLE IF EXISTS `pr_performance_report`;
 CREATE TABLE `pr_performance_report` (
   `id`  bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自动编号' ,
   `level`  varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '投顾级别' ,
-  `serial_number`  varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '投顾编号' ,
-  `system_name`  varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '系统登录用户名' ,
   `actual_name`  varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '投顾姓名' ,
-  `phone_number`  varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '投顾手机号码' ,
-  `remark`  varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注信息' ,
+
+
   `mtime`  timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间' ,
   `ctime`  timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间' ,
   PRIMARY KEY (`id`)
@@ -22,6 +20,18 @@ CREATE TABLE `pr_performance_report` (
   ROW_FORMAT=DYNAMIC
   COMMENT='[统计报表]--[资产余额]--assets balance'
 ;
+
+/*
+当前vip客户数（人数）    current_vip_customers_number
+计入业绩客户AUM值（亿元）performance_customers_AUM
+计入业绩客户数（人数）   performance_customers_number
+上报客户数注册增长率
+上报客户交易数增长率
+上月销售规模（万元）
+月销售规模（万元）
+月销售规模业绩目标（万元）
+销售规模完成率
+*/
 
 
 
