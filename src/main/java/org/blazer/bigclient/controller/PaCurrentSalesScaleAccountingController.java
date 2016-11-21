@@ -2,8 +2,8 @@ package org.blazer.bigclient.controller;
 
 import com.github.pagehelper.PageInfo;
 import org.blazer.bigclient.excel.ExcelHeader;
-import org.blazer.bigclient.model.SrAssetsBalance;
-import org.blazer.bigclient.service.SrAssetsBalanceService;
+import org.blazer.bigclient.model.PaCurrentSalesScaleAccounting;
+import org.blazer.bigclient.service.PaCurrentSalesScaleAccountingService;
 import org.blazer.bigclient.util.DateUtil;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.blazer.bigclient.util.StringUtil;
@@ -24,16 +24,16 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by cuican on 2016-11-14.
+ * Created by cuican on 2016-11-21.
  */
-@RequestMapping("/sr/assets_balance")
+@RequestMapping("/pa/current_sales_scale")
 @Controller
-public class SrAssetsBalanceController extends BaseController {
+public class PaCurrentSalesScaleAccountingController extends BaseController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SrAssetsBalanceController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PaCurrentSalesScaleAccountingController.class);
 
     @Autowired
-    private SrAssetsBalanceService srAssetsBalanceService;
+    private PaCurrentSalesScaleAccountingService paCurrentSalesScaleAccountingService;
 
     /**
      * 根据搜索条件分页查询
@@ -45,7 +45,7 @@ public class SrAssetsBalanceController extends BaseController {
      */
     @ResponseBody
     @RequestMapping("findByPage")
-    public PageInfo<SrAssetsBalance> findByPage(HttpServletRequest request, HttpServletResponse response) {
+    public PageInfo<PaCurrentSalesScaleAccounting> findByPage(HttpServletRequest request, HttpServletResponse response) {
         //获取前台传递过来的参数
         HashMap<String, String> params = getParamMap(request);
         LOGGER.debug("currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
@@ -59,7 +59,7 @@ public class SrAssetsBalanceController extends BaseController {
         if (advisor != null) {
             params.put("advisorName", advisor.getActualName());
         }*/
-        return this.srAssetsBalanceService.findByPage(params);
+        return this.paCurrentSalesScaleAccountingService.findByPage(params);
     }
 
 
@@ -78,24 +78,28 @@ public class SrAssetsBalanceController extends BaseController {
             LOGGER.debug("查询条件---search:" + search);
 
             //xml配置中的ID
-            String id = "srAssetsBalance";
+            String id = "paCurrentSalesScaleAccounting";
             // 要导出的数据
-            List<SrAssetsBalance> list = this.srAssetsBalanceService.findBySearch(search);
+            List<PaCurrentSalesScaleAccounting> list = this.paCurrentSalesScaleAccountingService.findBySearch(search);
+            if (list == null || list.size() == 0) {
+                PaCurrentSalesScaleAccounting currentSalesDetails = new PaCurrentSalesScaleAccounting();
+//                currentSalesDetails.setUserName("测试姓名");
+                list.add(currentSalesDetails);
+            }
             //excel文件名称,不需要任何后缀
-            String excelName = "AssetsBalance_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
+            String excelName = "RegularSalesScaleAccounting_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
             //可以为空,自定义Excel头信息
             ExcelHeader header = null;
             //指定导出字段
             List<String> specifyFields = new ArrayList<String>();
-            specifyFields.add("userName");
-            specifyFields.add("phoneNumber");
+
             specifyFields.add("investmentAdviser");
-            specifyFields.add("registerDate");
-            specifyFields.add("regularAssetsTotal");
-            specifyFields.add("regularAumTimePoint");
-            specifyFields.add("currentAssetsTotal");
-            specifyFields.add("currentAumTimePoint");
-            specifyFields.add("aumTotal");
+            specifyFields.add("monthlyPurchaseAmount");
+            specifyFields.add("monthlyPurchaseAmount10");
+            specifyFields.add("monthlyInvestmentTarget");
+            specifyFields.add("monthlyPerformanceLimit");
+            specifyFields.add("effectiveCurrentSalesScale");
+            specifyFields.add("deferredNextMonth");
 
             //构建excel试图
             mv = super.createExcelView(id, list, excelName, header, specifyFields);

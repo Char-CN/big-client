@@ -2,8 +2,8 @@ package org.blazer.bigclient.controller;
 
 import com.github.pagehelper.PageInfo;
 import org.blazer.bigclient.excel.ExcelHeader;
-import org.blazer.bigclient.model.SrRegularSalesDetails;
-import org.blazer.bigclient.service.SrRegularSalesDetailsService;
+import org.blazer.bigclient.model.PaRegularSalesScaleAccounting;
+import org.blazer.bigclient.service.PaRegularSalesScaleAccountingService;
 import org.blazer.bigclient.util.DateUtil;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.blazer.bigclient.util.StringUtil;
@@ -24,16 +24,16 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by cuican on 2016-11-16.
+ * Created by cuican on 2016-11-21.
  */
-@RequestMapping("/sr/regular_sales_details")
+@RequestMapping("/pa/regular_sales_scale")
 @Controller
-public class SrRegularSalesDetailsController extends BaseController {
+public class PaRegularSalesScaleAccountingController extends BaseController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SrRegularSalesDetailsController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PaRegularSalesScaleAccountingController.class);
 
     @Autowired
-    private SrRegularSalesDetailsService srRegularSalesDetailsService;
+    private PaRegularSalesScaleAccountingService paRegularSalesScaleAccountingService;
 
     /**
      * 根据搜索条件分页查询
@@ -45,7 +45,7 @@ public class SrRegularSalesDetailsController extends BaseController {
      */
     @ResponseBody
     @RequestMapping("findByPage")
-    public PageInfo<SrRegularSalesDetails> findByPage(HttpServletRequest request, HttpServletResponse response) {
+    public PageInfo<PaRegularSalesScaleAccounting> findByPage(HttpServletRequest request, HttpServletResponse response) {
         //获取前台传递过来的参数
         HashMap<String, String> params = getParamMap(request);
         LOGGER.debug("currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
@@ -59,7 +59,7 @@ public class SrRegularSalesDetailsController extends BaseController {
         if (advisor != null) {
             params.put("advisorName", advisor.getActualName());
         }*/
-        return this.srRegularSalesDetailsService.findByPage(params);
+        return this.paRegularSalesScaleAccountingService.findByPage(params);
     }
 
 
@@ -78,16 +78,41 @@ public class SrRegularSalesDetailsController extends BaseController {
             LOGGER.debug("查询条件---search:" + search);
 
             //xml配置中的ID
-            String id = "srRegularSalesDetails";
+            String id = "paRegularSalesScaleAccounting";
             // 要导出的数据
-            List<SrRegularSalesDetails> list = this.srRegularSalesDetailsService.findBySearch(search);
+            List<PaRegularSalesScaleAccounting> list = this.paRegularSalesScaleAccountingService.findBySearch(search);
+            if (list == null || list.size() == 0) {
+                PaRegularSalesScaleAccounting regularSalesScaleAccounting = new PaRegularSalesScaleAccounting();
+                regularSalesScaleAccounting.setUserName("测试姓名");
+                list.add(regularSalesScaleAccounting);
+            }
             //excel文件名称,不需要任何后缀
-            String excelName = "RegularSalesDetails_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
+            String excelName = "RegularSalesScaleAccounting_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
             //可以为空,自定义Excel头信息
             ExcelHeader header = null;
             //指定导出字段
             List<String> specifyFields = new ArrayList<String>();
-
+            /*
+            * <field name="id" title="自动编号"/>
+                <field name="userName" title="客户姓名"/>
+                <field name="phoneNumber" title="手机号码"/>
+                <field name="referrer" title="扫码推荐人"/>
+                <field name="rebateExpirationDate" title="返利失效日期"/>
+                <field name="reportOrAllot" title="上报/分配"/>
+                <field name="reportOrAllotDate" title="上报/分配时间"/>
+                <field name="investmentAdviser" title="投资顾问"/>
+                <field name="userIdentify" title="客户标识"/>
+                <field name="basicProductName" title="基础产品名称（定期）"/>
+                <field name="investmentAmount" title="投资金额"/>
+                <field name="regularAssetsTotal" title="现有资产"/>
+                <field name="investmentDate" title="购买时间"/>
+                <field name="partitionCoefficient" title="分配系数"/>
+                <field name="performancePoolCoefficient" title="业绩池系数"/>
+                <field name="productCoefficient" title="产品系数"/>
+                <field name="effectiveSalesAmount" title="有效销售金额（单位：元）"/>
+                <field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+                <field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+            * */
             specifyFields.add("userName");
             specifyFields.add("phoneNumber");
             specifyFields.add("referrer");
@@ -100,6 +125,10 @@ public class SrRegularSalesDetailsController extends BaseController {
             specifyFields.add("investmentAmount");
             specifyFields.add("regularAssetsTotal");
             specifyFields.add("investmentDate");
+            specifyFields.add("partitionCoefficient");
+            specifyFields.add("performancePoolCoefficient");
+            specifyFields.add("productCoefficient");
+            specifyFields.add("effectiveSalesAmount");
 
             //构建excel试图
             mv = super.createExcelView(id, list, excelName, header, specifyFields);
@@ -108,4 +137,5 @@ public class SrRegularSalesDetailsController extends BaseController {
         }
         return mv;
     }
+
 }

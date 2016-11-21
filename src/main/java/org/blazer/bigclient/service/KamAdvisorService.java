@@ -5,7 +5,9 @@ import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.blazer.bigclient.body.AdvisorInfoBean;
 import org.blazer.bigclient.mapper.KamAdvisorMapper;
+import org.blazer.bigclient.mapper.KamAdvisorTeamMapper;
 import org.blazer.bigclient.model.KamAdvisor;
+import org.blazer.bigclient.model.KamAdvisorTeam;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.blazer.bigclient.util.StringUtil;
 import org.slf4j.Logger;
@@ -27,6 +29,9 @@ public class KamAdvisorService extends BaseService<KamAdvisor> {
 
     @Autowired
     private KamAdvisorMapper kamAdvisorMapper;
+
+    @Autowired
+    private KamAdvisorTeamMapper kamAdvisorTeamMapper;
 
 
     public PageInfo<AdvisorInfoBean> findByPage(HashMap<String, String> params) {
@@ -61,5 +66,58 @@ public class KamAdvisorService extends BaseService<KamAdvisor> {
             e.printStackTrace();
         }
         return advisor;
+    }
+
+    /**
+     * 新增投顾，查询投顾编号是否存在
+     *
+     * @param serialNumber
+     * @return
+     */
+    public Boolean selectBySerialNumber(String serialNumber) {
+        Boolean flag = false;
+        KamAdvisor advisor = new KamAdvisor();
+        advisor.setSerialNumber(serialNumber);
+        KamAdvisor kamAdvisor = this.selcetOne(advisor);
+        if (kamAdvisor == null) {
+            flag = true;
+        }
+        return flag;
+    }
+
+    /**
+     * 新增
+     *
+     * @param advisor
+     * @param teamName
+     */
+    public void saveOne(KamAdvisor advisor, String teamName) {
+        try {
+            KamAdvisorTeam advisorTeam = new KamAdvisorTeam();
+            advisorTeam.setTeamName(teamName);
+            this.kamAdvisorTeamMapper.selectOne(advisorTeam);
+            advisor.setTid(advisorTeam.getId());
+            this.save(advisor);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 更新
+     *
+     * @param advisor
+     * @param teamName
+     */
+    public void updateOne(KamAdvisor advisor, String teamName) {
+        try {
+            KamAdvisorTeam advisorTeam = new KamAdvisorTeam();
+            advisorTeam.setTeamName(teamName);
+            this.kamAdvisorTeamMapper.selectOne(advisorTeam);
+            advisor.setTid(advisorTeam.getId());
+            this.updateNotNull(advisor);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

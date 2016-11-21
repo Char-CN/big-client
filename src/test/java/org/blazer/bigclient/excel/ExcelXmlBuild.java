@@ -1,6 +1,7 @@
 package org.blazer.bigclient.excel;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.blazer.bigclient.body.AdvisorInfoBean;
 import org.blazer.bigclient.body.FormalUserBean;
 import org.blazer.bigclient.model.*;
 import org.blazer.bigclient.util.ReflectUtil;
@@ -43,10 +44,10 @@ public class ExcelXmlBuild {
         System.out.println(xml4);
         String xml5 = builderXml("paCustomersAccounting", "获客数核算", true, PaCustomersAccounting.class, 5000);
         System.out.println(xml5);*/
-        String xml6 = builderXml("formalUserBean", "正式客户名单", true, FormalUserBean.class, 5000);
-        System.out.println(xml6);
-//        String xml7 = builderXml("clFormalUser", "正式客户名单（导入）", true, ClFormalUser.class, 5000);
-//        System.out.println(xml7);
+//        String xml6 = builderXml("formalUserBean", "正式客户名单", true, FormalUserBean.class, 5000);
+//        System.out.println(xml6);
+        String xml7 = builderXml("advisorInfoBean", "投资顾问信息", true, AdvisorInfoBean.class, 5000);
+        System.out.println(xml7);
 
     }
 

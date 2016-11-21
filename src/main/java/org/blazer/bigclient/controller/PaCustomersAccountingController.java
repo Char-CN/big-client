@@ -2,8 +2,8 @@ package org.blazer.bigclient.controller;
 
 import com.github.pagehelper.PageInfo;
 import org.blazer.bigclient.excel.ExcelHeader;
-import org.blazer.bigclient.model.SrAssetsBalance;
-import org.blazer.bigclient.service.SrAssetsBalanceService;
+import org.blazer.bigclient.model.PaCustomersAccounting;
+import org.blazer.bigclient.service.PaCustomersAccountingService;
 import org.blazer.bigclient.util.DateUtil;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.blazer.bigclient.util.StringUtil;
@@ -24,16 +24,16 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by cuican on 2016-11-14.
+ * Created by cuican on 2016-11-21.
  */
-@RequestMapping("/sr/assets_balance")
+@RequestMapping("/pa/customers_accounting")
 @Controller
-public class SrAssetsBalanceController extends BaseController {
+public class PaCustomersAccountingController extends BaseController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SrAssetsBalanceController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PaCustomersAccountingController.class);
 
     @Autowired
-    private SrAssetsBalanceService srAssetsBalanceService;
+    private PaCustomersAccountingService paCustomersAccountingService;
 
     /**
      * 根据搜索条件分页查询
@@ -45,7 +45,7 @@ public class SrAssetsBalanceController extends BaseController {
      */
     @ResponseBody
     @RequestMapping("findByPage")
-    public PageInfo<SrAssetsBalance> findByPage(HttpServletRequest request, HttpServletResponse response) {
+    public PageInfo<PaCustomersAccounting> findByPage(HttpServletRequest request, HttpServletResponse response) {
         //获取前台传递过来的参数
         HashMap<String, String> params = getParamMap(request);
         LOGGER.debug("currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
@@ -59,7 +59,7 @@ public class SrAssetsBalanceController extends BaseController {
         if (advisor != null) {
             params.put("advisorName", advisor.getActualName());
         }*/
-        return this.srAssetsBalanceService.findByPage(params);
+        return this.paCustomersAccountingService.findByPage(params);
     }
 
 
@@ -78,24 +78,38 @@ public class SrAssetsBalanceController extends BaseController {
             LOGGER.debug("查询条件---search:" + search);
 
             //xml配置中的ID
-            String id = "srAssetsBalance";
+            String id = "paCustomersAccounting";
             // 要导出的数据
-            List<SrAssetsBalance> list = this.srAssetsBalanceService.findBySearch(search);
+            List<PaCustomersAccounting> list = this.paCustomersAccountingService.findBySearch(search);
+            if (list == null || list.size() == 0) {
+                PaCustomersAccounting customersAccounting = new PaCustomersAccounting();
+//                currentSalesDetails.setUserName("测试姓名");
+                list.add(customersAccounting);
+            }
             //excel文件名称,不需要任何后缀
-            String excelName = "AssetsBalance_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
+            String excelName = "RegularSalesScaleAccounting_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
             //可以为空,自定义Excel头信息
             ExcelHeader header = null;
             //指定导出字段
             List<String> specifyFields = new ArrayList<String>();
+
             specifyFields.add("userName");
             specifyFields.add("phoneNumber");
-            specifyFields.add("investmentAdviser");
             specifyFields.add("registerDate");
-            specifyFields.add("regularAssetsTotal");
-            specifyFields.add("regularAumTimePoint");
-            specifyFields.add("currentAssetsTotal");
-            specifyFields.add("currentAumTimePoint");
-            specifyFields.add("aumTotal");
+            specifyFields.add("investmentAdviser");
+            specifyFields.add("userIdentify");
+            specifyFields.add("ifPerformancePool");
+            specifyFields.add("endingBalance");
+            specifyFields.add("endingNotLessThanFifty");
+            specifyFields.add("buyAmount");
+            specifyFields.add("beginningBalance");
+            specifyFields.add("beginningNoGreaterThanFifty");
+            specifyFields.add("matchingPeriodInitialValue");
+            specifyFields.add("beginningComparison");
+            specifyFields.add("difference");
+            specifyFields.add("redemptionOrder");
+            specifyFields.add("revise");
+            specifyFields.add("errorQuery");
 
             //构建excel试图
             mv = super.createExcelView(id, list, excelName, header, specifyFields);

@@ -1,5 +1,6 @@
 package org.blazer.bigclient.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import org.blazer.bigclient.body.AdvisorInfoBean;
 import org.blazer.bigclient.model.KamAdvisor;
 import org.blazer.bigclient.util.MyMapper;
@@ -9,5 +10,5 @@ import java.util.List;
 
 @Repository
 public interface KamAdvisorMapper extends MyMapper<KamAdvisor> {
-    List<AdvisorInfoBean> findByPage(String search);
+    List<AdvisorInfoBean> findByPage(@Param(value = "search") String search);
 }

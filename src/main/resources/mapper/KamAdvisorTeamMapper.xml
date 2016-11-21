@@ -14,4 +14,22 @@
     <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
     <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
   </resultMap>
+
+  <!--<select id="selectByName">
+    SELECT
+      id,
+      team_name,
+      team_leader_id,
+      total_number,
+      area,
+      remark,
+      mtime,
+      ctime
+    FROM
+      kam_advisor_team
+    WHERE
+      team_name = #{teamName}
+  </select>-->
+
+
 </mapper>

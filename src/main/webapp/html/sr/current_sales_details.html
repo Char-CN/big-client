@@ -33,16 +33,31 @@
             for (var i in rst) {
                 var cls = "warning";
                 var tr = $('<tr class="' + cls + '">');
-
-                tr.append('<td>' + rst[i].kamUserInfo.userName + '</td>');
-                tr.append('<td>' + rst[i].kamUserInfo.phoneNumber + '</td>');
-                tr.append('<td>' + rst[i].kamUserInfo.investmentAdviser + '</td>');
-                tr.append('<td>' + rst[i].kamUserInfo.registerDate + '</td>');
-                tr.append('<td>' + rst[i].regularAssetsTotal + '</td>');
-                tr.append('<td>' + rst[i].regularAumTimePoint + '</td>');
+                /*
+                 <field name="id" title="自动编号"/>
+                 <field name="userName" title="客户姓名"/>
+                 <field name="phoneNumber" title="手机号码"/>
+                 <field name="reportOrAllot" title="上报/分配"/>
+                 <field name="reportOrAllotDate" title="上报/分配日期"/>
+                 <field name="investmentAdviser" title="投资顾问"/>
+                 <field name="userIdentify" title="客户标识"/>
+                 <field name="baseProductName" title="基础产品名称"/>
+                 <field name="purchaseAmount" title="申购金额"/>
+                 <field name="currentAssetsTotal" title="现有资产"/>
+                 <field name="purchaseDate" title="申购时间"/>
+                 <field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+                 <field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+                 */
+                tr.append('<td>' + rst[i].userName + '</td>');
+                tr.append('<td>' + rst[i].phoneNumber + '</td>');
+                tr.append('<td>' + rst[i].reportOrAllot + '</td>');
+                tr.append('<td>' + rst[i].reportOrAllotDate + '</td>');
+                tr.append('<td>' + rst[i].investmentAdviser + '</td>');
+                tr.append('<td>' + rst[i].userIdentify + '</td>');
+                tr.append('<td>' + rst[i].baseProductName + '</td>');
+                tr.append('<td>' + rst[i].purchaseAmount + '</td>');
                 tr.append('<td>' + rst[i].currentAssetsTotal + '</td>');
-                tr.append('<td>' + rst[i].currentAumTimePoint + '</td>');
-                tr.append('<td>' + rst[i].aumTotal + '</td>');
+                tr.append('<td>' + rst[i].purchaseDate + '</td>');
 
                 $("#tb>tbody").append(tr);
             }
@@ -85,14 +100,16 @@
 <table id="tb" class="table table-hover table-condensed table-bordered">
     <thead>
     <tr>
-        <th width="12.5%">客户姓名</th>
-        <th width="12.5%">手机号码</th>
-        <th width="12.5%">上报/分配</th>
-        <th width="12.5%">上报/分配日期</th>
-        <th width="12.5%">客户标识</th>
-        <th width="12.5%">基础产品名称</th>
-        <th width="12.5%">申购金额</th>
-        <th width="12.5%">申购日期</th>
+        <th width="10%">客户姓名</th>
+        <th width="10%">手机号码</th>
+        <th width="10%">上报/分配</th>
+        <th width="10%">上报/分配日期</th>
+        <th width="10%">投资顾问</th>
+        <th width="10%">客户标识</th>
+        <th width="10%">基础产品名称</th>
+        <th width="10%">申购金额</th>
+        <th width="10%">现有资产</th>
+        <th width="10%">申购时间</th>
     </tr>
     </thead>
     <tbody>

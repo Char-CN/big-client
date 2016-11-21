@@ -33,28 +33,33 @@
             for (var i in rst) {
                 var cls = "warning";
                 var tr = $('<tr class="' + cls + '">');
-                /*<field name="id" title="自动编号"/>
+                /*
+                * <field name="id" title="自动编号"/>
                  <field name="userName" title="客户姓名"/>
                  <field name="phoneNumber" title="手机号码"/>
-                 <field name="referrer" title="referrer"/>
-                 <field name="rebateExpirationDate" title="rebateExpirationDate"/>
-                 <field name="reportOrAllot" title="reportOrAllot"/>
-                 <field name="reportOrAllotDate" title="reportOrAllotDate"/>
-                 <field name="investmentAdviser" title="investmentAdviser"/>
-                 <field name="userIdentify" title="userIdentify"/>
-                 <field name="basicProductName" title="basicProductName"/>
-                 <field name="investmentAmount" title="投资顾问"/>
-                 <field name="regularAssetsTotal" title="regularAssetsTotal"/>
-                 <field name="investmentDate" title="investmentDate"/>*/
-                tr.append('<td>' + rst[i].kamUserInfo.userName + '</td>');
-                tr.append('<td>' + rst[i].kamUserInfo.phoneNumber + '</td>');
-                tr.append('<td>' + rst[i].kamUserInfo.investmentAdviser + '</td>');
-                tr.append('<td>' + rst[i].kamUserInfo.registerDate + '</td>');
+                 <field name="referrer" title="扫码推荐人"/>
+                 <field name="rebateExpirationDate" title="返利失效日期"/>
+                 <field name="reportOrAllot" title="上报/分配"/>
+                 <field name="reportOrAllotDate" title="上报/分配日期"/>
+                 <field name="investmentAdviser" title="投资顾问"/>
+                 <field name="userIdentify" title="客户标识"/>
+                 <field name="basicProductName" title="基础产品名称"/>
+                 <field name="investmentAmount" title="投资金额"/>
+                 <field name="regularAssetsTotal" title="现有资产"/>
+                 <field name="investmentDate" title="购买时间"/>
+                * */
+                tr.append('<td>' + rst[i].userName + '</td>');
+                tr.append('<td>' + rst[i].phoneNumber + '</td>');
+                tr.append('<td>' + rst[i].referrer + '</td>');
+                tr.append('<td>' + rst[i].rebateExpirationDate + '</td>');
+                tr.append('<td>' + rst[i].reportOrAllot + '</td>');
+                tr.append('<td>' + rst[i].reportOrAllotDate + '</td>');
+                tr.append('<td>' + rst[i].investmentAdviser + '</td>');
+                tr.append('<td>' + rst[i].userIdentify + '</td>');
+                tr.append('<td>' + rst[i].basicProductName + '</td>');
+                tr.append('<td>' + rst[i].investmentAmount + '</td>');
                 tr.append('<td>' + rst[i].regularAssetsTotal + '</td>');
-                tr.append('<td>' + rst[i].regularAumTimePoint + '</td>');
-                tr.append('<td>' + rst[i].currentAssetsTotal + '</td>');
-                tr.append('<td>' + rst[i].currentAumTimePoint + '</td>');
-                tr.append('<td>' + rst[i].aumTotal + '</td>');
+                tr.append('<td>' + rst[i].investmentDate + '</td>');
 
                 $("#tb>tbody").append(tr);
             }

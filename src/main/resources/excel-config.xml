@@ -110,36 +110,36 @@
 		<field name="id" title="自动编号"/>
 		<field name="userName" title="客户姓名"/>
 		<field name="phoneNumber" title="手机号码"/>
-		<field name="referrer" title="referrer"/>
-		<field name="rebateExpirationDate" title="rebateExpirationDate"/>
-		<field name="reportOrAllot" title="reportOrAllot"/>
-		<field name="reportOrAllotDate" title="reportOrAllotDate"/>
-		<field name="investmentAdviser" title="investmentAdviser"/>
-		<field name="userIdentify" title="userIdentify"/>
-		<field name="basicProductName" title="basicProductName"/>
-		<field name="investmentAmount" title="投资顾问"/>
-		<field name="regularAssetsTotal" title="regularAssetsTotal"/>
-		<field name="investmentDate" title="investmentDate"/>
+		<field name="referrer" title="扫码推荐人"/>
+		<field name="rebateExpirationDate" title="返利失效日期"/>
+		<field name="reportOrAllot" title="上报/分配"/>
+		<field name="reportOrAllotDate" title="上报/分配日期"/>
+		<field name="investmentAdviser" title="投资顾问"/>
+		<field name="userIdentify" title="客户标识"/>
+		<field name="basicProductName" title="基础产品名称"/>
+		<field name="investmentAmount" title="投资金额"/>
+		<field name="regularAssetsTotal" title="现有资产"/>
+		<field name="investmentDate" title="购买时间"/>
 		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
 
-	<!-- 活期期销售明细 -->
+	<!-- 活期销售明细 -->
 	<excel id="srCurrentSalesDetails" class="org.blazer.bigclient.model.SrCurrentSalesDetails"
 		   sheetname="活期期销售明细" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
-		<field name="id" title="id"/>
-		<field name="userName" title="userName"/>
-		<field name="phoneNumber" title="phoneNumber"/>
-		<field name="reportOrAllot" title="reportOrAllot"/>
-		<field name="reportOrAllotDate" title="reportOrAllotDate"/>
-		<field name="investmentAdviser" title="investmentAdviser"/>
-		<field name="userIdentify" title="userIdentify"/>
-		<field name="baseProductName" title="baseProductName"/>
-		<field name="purchaseAmount" title="purchaseAmount"/>
-		<field name="currentAssetsTotal" title="currentAssetsTotal"/>
-		<field name="purchaseDate" title="purchaseDate"/>
-		<field name="mtime" title="mtime" pattern="yyyy-MM-dd HH:mm:ss"/>
-		<field name="ctime" title="ctime" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="id" title="自动编号"/>
+		<field name="userName" title="客户姓名"/>
+		<field name="phoneNumber" title="手机号码"/>
+		<field name="reportOrAllot" title="上报/分配"/>
+		<field name="reportOrAllotDate" title="上报/分配日期"/>
+		<field name="investmentAdviser" title="投资顾问"/>
+		<field name="userIdentify" title="客户标识"/>
+		<field name="baseProductName" title="基础产品名称"/>
+		<field name="purchaseAmount" title="申购金额"/>
+		<field name="currentAssetsTotal" title="现有资产"/>
+		<field name="purchaseDate" title="申购时间"/>
+		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
 
 
@@ -150,65 +150,65 @@
 	<!--定期销售规模核算-->
 	<excel id="paRegularSalesScaleAccounting" class="org.blazer.bigclient.model.PaRegularSalesScaleAccounting"
 		   sheetname="定期销售规模核算" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
-		<field name="id" title="id"/>
-		<field name="userName" title="userName"/>
-		<field name="phoneNumber" title="phoneNumber"/>
-		<field name="referrer" title="referrer"/>
-		<field name="rebateExpirationDate" title="rebateExpirationDate"/>
-		<field name="reportOrAllot" title="reportOrAllot"/>
-		<field name="reportOrAllotDate" title="reportOrAllotDate"/>
-		<field name="investmentAdviser" title="investmentAdviser"/>
-		<field name="userIdentify" title="userIdentify"/>
-		<field name="basicProductName" title="basicProductName"/>
-		<field name="investmentAmount" title="investmentAmount"/>
-		<field name="regularAssetsTotal" title="regularAssetsTotal"/>
-		<field name="investmentDate" title="investmentDate"/>
-		<field name="partitionCoefficient" title="partitionCoefficient"/>
-		<field name="performancePoolCoefficient" title="performancePoolCoefficient"/>
-		<field name="productCoefficient" title="productCoefficient"/>
-		<field name="effectiveSalesAmount" title="effectiveSalesAmount"/>
-		<field name="mtime" title="mtime" pattern="yyyy-MM-dd HH:mm:ss"/>
-		<field name="ctime" title="ctime" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="id" title="自动编号"/>
+		<field name="userName" title="客户姓名"/>
+		<field name="phoneNumber" title="手机号码"/>
+		<field name="referrer" title="扫码推荐人"/>
+		<field name="rebateExpirationDate" title="返利失效日期"/>
+		<field name="reportOrAllot" title="上报/分配"/>
+		<field name="reportOrAllotDate" title="上报/分配时间"/>
+		<field name="investmentAdviser" title="投资顾问"/>
+		<field name="userIdentify" title="客户标识"/>
+		<field name="basicProductName" title="基础产品名称（定期）"/>
+		<field name="investmentAmount" title="投资金额"/>
+		<field name="regularAssetsTotal" title="现有资产"/>
+		<field name="investmentDate" title="购买时间"/>
+		<field name="partitionCoefficient" title="分配系数"/>
+		<field name="performancePoolCoefficient" title="业绩池系数"/>
+		<field name="productCoefficient" title="产品系数"/>
+		<field name="effectiveSalesAmount" title="有效销售金额（单位：元）"/>
+		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
 
 	<!--活期销售规模核算-->
 	<excel id="paCurrentSalesScaleAccounting" class="org.blazer.bigclient.model.PaCurrentSalesScaleAccounting"
 		   sheetname="活期销售规模核算" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
-		<field name="id" title="id"/>
-		<field name="investmentAdviser" title="investmentAdviser"/>
-		<field name="monthlyPurchaseAmount" title="monthlyPurchaseAmount"/>
-		<field name="monthlyPurchaseAmount10" title="monthlyPurchaseAmount10"/>
-		<field name="monthlyInvestmentTarget" title="monthlyInvestmentTarget"/>
-		<field name="monthlyPerformanceLimit" title="monthlyPerformanceLimit"/>
-		<field name="effectiveCurrentSalesScale" title="effectiveCurrentSalesScale"/>
-		<field name="deferredNextMonth" title="deferredNextMonth"/>
-		<field name="mtime" title="mtime" pattern="yyyy-MM-dd HH:mm:ss"/>
-		<field name="ctime" title="ctime" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="id" title="自动编号"/>
+		<field name="investmentAdviser" title="投资顾问"/>
+		<field name="monthlyPurchaseAmount" title="当月申购金额（万元）"/>
+		<field name="monthlyPurchaseAmount10" title="当月申购金额/10（千元）"/>
+		<field name="monthlyInvestmentTarget" title="月投资规模目标（万元）"/>
+		<field name="monthlyPerformanceLimit" title="当月活期业绩上限（万元）"/>
+		<field name="effectiveCurrentSalesScale" title="有效活期销售规模（万元）"/>
+		<field name="deferredNextMonth" title="递延下月（万元）"/>
+		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
 
 	<!--获客数核算-->
 	<excel id="paCustomersAccounting" class="org.blazer.bigclient.model.PaCustomersAccounting"
 		   sheetname="获客数核算" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
-		<field name="id" title="id"/>
-		<field name="userName" title="userName"/>
-		<field name="phoneNumber" title="phoneNumber"/>
-		<field name="registerDate" title="registerDate"/>
-		<field name="investmentAdviser" title="investmentAdviser"/>
-		<field name="userIdentify" title="userIdentify"/>
-		<field name="ifPerformancePool" title="ifPerformancePool"/>
-		<field name="endingBalance" title="endingBalance"/>
-		<field name="endingNotLessThanFifty" title="endingNotLessThanFifty"/>
-		<field name="buyAmount" title="buyAmount"/>
-		<field name="beginningBalance" title="beginningBalance"/>
-		<field name="beginningNoGreaterThanFifty" title="beginningNoGreaterThanFifty"/>
-		<field name="matchingPeriodInitialValue" title="matchingPeriodInitialValue"/>
-		<field name="beginningComparison" title="beginningComparison"/>
-		<field name="difference" title="difference"/>
-		<field name="redemptionOrder" title="redemptionOrder"/>
-		<field name="revise" title="revise"/>
-		<field name="errorQuery" title="errorQuery"/>
-		<field name="mtime" title="mtime" pattern="yyyy-MM-dd HH:mm:ss"/>
-		<field name="ctime" title="ctime" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="id" title="自动编号"/>
+		<field name="userName" title="客户姓名"/>
+		<field name="phoneNumber" title="手机号码"/>
+		<field name="registerDate" title="注册日期"/>
+		<field name="investmentAdviser" title="投资顾问"/>
+		<field name="userIdentify" title="客户标识"/>
+		<field name="ifPerformancePool" title="是否业绩池" format="0:不计入,1:计入"/>
+		<field name="endingBalance" title="期末AUM"/>
+		<field name="endingNotLessThanFifty" title="期末不小于50万"/>
+		<field name="buyAmount" title="投资总额"/>
+		<field name="beginningBalance" title="期初AUM"/>
+		<field name="beginningNoGreaterThanFifty" title="期初不大于50万"/>
+		<field name="matchingPeriodInitialValue" title="匹配期初值"/>
+		<field name="beginningComparison" title="期初对比"/>
+		<field name="difference" title="差异"/>
+		<field name="redemptionOrder" title="兑付单"/>
+		<field name="revise" title="修正"/>
+		<field name="errorQuery" title="差错查询"/>
+		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
 
 
@@ -240,7 +240,22 @@
 	</excel>-->
 
 	<!-- 投资顾问 -->
-	<excel id="kamAdvisor" class="org.blazer.bigclient.model.KamAdvisor"
+	<excel id="advisorInfoBean" class="org.blazer.bigclient.body.AdvisorInfoBean"
+		   sheetname="投资顾问信息" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
+		<field name="id" title="自动编号"/>
+		<field name="serialNumber" title="投顾编号"/>
+		<field name="level" title="投顾级别"/>
+		<field name="systemName" title="系统用户名"/>
+		<field name="actualName" title="投顾姓名"/>
+		<field name="phoneNumber" title="手机号码"/>
+		<field name="email" title="电子邮箱"/>
+		<field name="teamName" title="所在团队"/>
+		<field name="teamLeaderName" title="所在团队组长"/>
+		<field name="totalNumber" title="所在团队总人数"/>
+		<field name="area" title="所在团队区域"/>
+	</excel>
+
+	<!--<excel id="kamAdvisor" class="org.blazer.bigclient.model.KamAdvisor"
 		   sheetname="投资顾问" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
 		<field name="id" title="自动编号"/>
 		<field name="serialNumber" title="投顾编号"/>
@@ -251,6 +266,9 @@
 		<field name="remark" title="备注"/>
 		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
-	</excel>
+	</excel>-->
+
+
+
 
 </excels>

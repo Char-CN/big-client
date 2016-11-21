@@ -18,23 +18,33 @@
   </resultMap>
 
   <resultMap id="BodyResultMap" type="org.blazer.bigclient.body.AdvisorInfoBean">
+    <!--<field name="id" title="自动编号"/>
+        <field name="serialNumber" title="投顾编号"/>
+        <field name="level" title="投顾级别"/>
+        <field name="systemName" title="系统用户名"/>
+        <field name="actualName" title="投顾姓名"/>
+        <field name="phoneNumber" title="手机号码"/>
+        <field name="email" title="邮箱地址"/>
+        <field name="teamName" title="所属团队"/>
+        <field name="teamLeaderName" title="所属团队组长"/>
+        <field name="totalNumber" title="所属团队总人数"/>
+        <field name="area" title="所属团队所在地"/>-->
     <id column="id" property="id"/>
-    <result column="tid" property="tid"/>
     <result column="serial_number" property="serialNumber"/>
     <result column="level" property="level"/>
     <result column="system_name" property="systemName"/>
     <result column="actual_name" property="actualName"/>
-    <result column="actual_name" property="investmentAdviser"/>
-    <result column="if_performance_pool" property="ifPerformancePool"/>
-    <result column="version_no" property="versionNo"/>
-    <result column="start_date" property="startDate"/>
-    <result column="end_date" property="endDate"/>
+    <result column="phone_number" property="phoneNumber"/>
+    <result column="remark" property="email"/>
+    <result column="team_name" property="teamName"/>
+    <result column="team_leader_name" property="teamLeaderName"/>
+    <result column="total_number2" property="totalNumber"/>
+    <result column="area" property="area"/>
   </resultMap>
 
   <select id="findByPage" resultMap="BodyResultMap">
     SELECT
       a.id,
-      a.tid,
       a.serial_number,
       a.`level`,
       a.system_name,
@@ -42,9 +52,7 @@
       a.phone_number,
       a.remark,
       b.team_name,
-      b.team_leader_id,
-      c.actual_name,
-      b.total_number,
+      c.actual_name AS team_leader_name,
       d.total_number2,
       b.area
     FROM
@@ -61,7 +69,7 @@
     WHERE
       1=1
       <if test="search != null and search != ''">
-        AND phone_number like '%#{search}%' or actual_name like '%#{search}%'
+        AND a.phone_number like CONCAT('%',#{search},'%' )
       </if>
   </select>
 

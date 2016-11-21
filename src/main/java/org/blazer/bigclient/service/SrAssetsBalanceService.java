@@ -25,7 +25,7 @@ public class SrAssetsBalanceService extends BaseService<SrAssetsBalance> {
 
     public PageInfo<SrAssetsBalance> findByPage(HashMap<String, String> params) {
         LOGGER.info("根据条件查询资产余额[SrAssetsBalance]列表...");
-        Example example = new Example(ClExtUser.class);
+        Example example = new Example(SrAssetsBalance.class);
         Example.Criteria criteria = example.createCriteria();
         String search = StringUtil.getStrEmpty(params.get("search"));
         String advisorName = StringUtil.getStrEmpty(params.get("advisorName"));
@@ -36,7 +36,6 @@ public class SrAssetsBalanceService extends BaseService<SrAssetsBalance> {
             //此处为实体类的属性，不是表字段
             criteria.andEqualTo("investmentAdviser", advisorName);
         }
-//        criteria.andEqualTo("ifDelete", 0);
         PageHelper.startPage(IntegerUtil.getIntZero(params.get("currentPage")), IntegerUtil.getIntZero(params.get("pageSize")));
         List<SrAssetsBalance> list = selectByExample(example);
         return new PageInfo(list);
@@ -44,13 +43,12 @@ public class SrAssetsBalanceService extends BaseService<SrAssetsBalance> {
 
     public List<SrAssetsBalance> findBySearch(String search) {
         LOGGER.info("根据条件查询资产余额[SrAssetsBalance]，导出到excel表...");
-        Example example = new Example(ClExtUser.class);
+        Example example = new Example(SrAssetsBalance.class);
         Example.Criteria criteria = example.createCriteria();
         String search_text = StringUtil.getStrEmpty(search);
         if (StringUtils.isNotEmpty(search_text)) {
             criteria.andCondition("phone_number like '%" + search + "%'" + " or user_name like '%" + search + "%'");
         }
-//        criteria.andEqualTo("ifDelete", 0);
         return selectByExample(example);
     }
 }

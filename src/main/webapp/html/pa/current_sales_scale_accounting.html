@@ -33,16 +33,21 @@
             for (var i in rst) {
                 var cls = "warning";
                 var tr = $('<tr class="' + cls + '">');
-                
-                tr.append('<td>' + rst[i].kamUserInfo.userName + '</td>');
-                tr.append('<td>' + rst[i].kamUserInfo.phoneNumber + '</td>');
-                tr.append('<td>' + rst[i].kamUserInfo.investmentAdviser + '</td>');
-                tr.append('<td>' + rst[i].kamUserInfo.registerDate + '</td>');
-                tr.append('<td>' + rst[i].regularAssetsTotal + '</td>');
-                tr.append('<td>' + rst[i].regularAumTimePoint + '</td>');
-                tr.append('<td>' + rst[i].currentAssetsTotal + '</td>');
-                tr.append('<td>' + rst[i].currentAumTimePoint + '</td>');
-                tr.append('<td>' + rst[i].aumTotal + '</td>');
+                /*<field name="id" title="自动编号"/>
+                 <field name="investmentAdviser" title="投资顾问"/>
+                 <field name="monthlyPurchaseAmount" title="当月申购金额（万元）"/>
+                 <field name="monthlyPurchaseAmount10" title="当月申购金额/10（千元）"/>
+                 <field name="monthlyInvestmentTarget" title="月投资规模目标（万元）"/>
+                 <field name="monthlyPerformanceLimit" title="当月活期业绩上限（万元）"/>
+                 <field name="effectiveCurrentSalesScale" title="有效活期销售规模（万元）"/>
+                 <field name="deferredNextMonth" title="递延下月（万元）"/>*/
+                tr.append('<td>' + rst[i].investmentAdviser + '</td>');
+                tr.append('<td>' + rst[i].monthlyPurchaseAmount + '</td>');
+                tr.append('<td>' + rst[i].monthlyPurchaseAmount10 + '</td>');
+                tr.append('<td>' + rst[i].monthlyInvestmentTarget + '</td>');
+                tr.append('<td>' + rst[i].monthlyPerformanceLimit + '</td>');
+                tr.append('<td>' + rst[i].effectiveCurrentSalesScale + '</td>');
+                tr.append('<td>' + rst[i].deferredNextMonth + '</td>');
 
                 $("#tb>tbody").append(tr);
             }
@@ -85,13 +90,13 @@
 <table id="tb" class="table table-hover table-condensed table-bordered">
     <thead>
     <tr>
-        <th width="14.2%">投资顾问</th>
-        <th width="14.3%">当月申购金额（万元）</th>
-        <th width="14.3%">当月申购金额/10</th>
-        <th width="14.3%">月投资规模目标（万元）</th>
-        <th width="14.3%">当月活期业绩上限（万元）</th>
-        <th width="14.3%">有效活期销售规模（万元）</th>
-        <th width="14.3%">递延下月（万元）</th>
+        <th width="14%">投资顾问</th>
+        <th width="14%">当月申购金额（万元）</th>
+        <th width="14%">当月申购金额/10（千元）</th>
+        <th width="14%">月投资规模目标（万元）</th>
+        <th width="15%">当月活期业绩上限（万元）</th>
+        <th width="15%">有效活期销售规模（万元）</th>
+        <th width="14%">递延下月（万元）</th>
     </tr>
     </thead>
     <tbody>
