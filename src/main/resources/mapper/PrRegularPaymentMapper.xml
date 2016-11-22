@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.blazer.bigclient.mapper.PrRegularPaymentMapper" >
+  <resultMap id="BaseResultMap" type="org.blazer.bigclient.model.PrRegularPayment" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="product_period" property="productPeriod" jdbcType="VARCHAR" />
+    <result column="year_days" property="yearDays" jdbcType="VARCHAR" />
+    <result column="principal" property="principal" jdbcType="VARCHAR" />
+    <result column="product_revenue" property="productRevenue" jdbcType="VARCHAR" />
+    <result column="investment_advisor" property="investmentAdvisor" jdbcType="VARCHAR" />
+    <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+  </resultMap>
+</mapper>

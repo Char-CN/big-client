@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.blazer.bigclient.mapper.PrPerformanceReportMapper" >
+  <resultMap id="BaseResultMap" type="org.blazer.bigclient.model.PrPerformanceReport" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="advisor_level" property="advisorLevel" jdbcType="VARCHAR" />
+    <result column="investment_advisor" property="investmentAdvisor" jdbcType="VARCHAR" />
+    <result column="current_vip_customers_number" property="currentVipCustomersNumber" jdbcType="VARCHAR" />
+    <result column="performance_customers_AUM" property="performanceCustomersAum" jdbcType="VARCHAR" />
+    <result column="performance_customers_number" property="performanceCustomersNumber" jdbcType="VARCHAR" />
+    <result column="reported_customers_registered_growth_rate" property="reportedCustomersRegisteredGrowthRate" jdbcType="VARCHAR" />
+    <result column="reported_customers_transactions_growth_rate" property="reportedCustomersTransactionsGrowthRate" jdbcType="VARCHAR" />
+    <result column="last_month_sales_scale" property="lastMonthSalesScale" jdbcType="VARCHAR" />
+    <result column="monthly_sales_scale" property="monthlySalesScale" jdbcType="VARCHAR" />
+    <result column="monthly_sales_scale_performance_targets" property="monthlySalesScalePerformanceTargets" jdbcType="VARCHAR" />
+    <result column="sales_completion_rate" property="salesCompletionRate" jdbcType="VARCHAR" />
+    <result column="monthly_number_of_get_customers" property="monthlyNumberOfGetCustomers" jdbcType="VARCHAR" />
+    <result column="monthly_acquisition_target" property="monthlyAcquisitionTarget" jdbcType="VARCHAR" />
+    <result column="get_customers_completion_rate" property="getCustomersCompletionRate" jdbcType="VARCHAR" />
+    <result column="comprehensive_completion_rate" property="comprehensiveCompletionRate" jdbcType="VARCHAR" />
+    <result column="comprehensive_completion_rate_ranking" property="comprehensiveCompletionRateRanking" jdbcType="VARCHAR" />
+    <result column="team_comprehensive_completion_rate" property="teamComprehensiveCompletionRate" jdbcType="VARCHAR" />
+    <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+  </resultMap>
+</mapper>

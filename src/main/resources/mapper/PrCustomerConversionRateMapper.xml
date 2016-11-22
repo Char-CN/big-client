@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.blazer.bigclient.mapper.PrCustomerConversionRateMapper" >
+  <resultMap id="BaseResultMap" type="org.blazer.bigclient.model.PrCustomerConversionRate" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="last_period_customers_number" property="lastPeriodCustomersNumber" jdbcType="VARCHAR" />
+    <result column="current_period_customers_number" property="currentPeriodCustomersNumber" jdbcType="VARCHAR" />
+    <result column="last_period_registered_customers_number" property="lastPeriodRegisteredCustomersNumber" jdbcType="VARCHAR" />
+    <result column="current_period_registered_customers_number" property="currentPeriodRegisteredCustomersNumber" jdbcType="VARCHAR" />
+    <result column="last_period_transaction_customers_number" property="lastPeriodTransactionCustomersNumber" jdbcType="VARCHAR" />
+    <result column="current_period_transaction_customers_number" property="currentPeriodTransactionCustomersNumber" jdbcType="VARCHAR" />
+    <result column="current_period_registered_customers_proportion" property="currentPeriodRegisteredCustomersProportion" jdbcType="VARCHAR" />
+    <result column="customer_registration_growth_rate" property="customerRegistrationGrowthRate" jdbcType="VARCHAR" />
+    <result column="current_period_transactions_customers_proportion" property="currentPeriodTransactionsCustomersProportion" jdbcType="VARCHAR" />
+    <result column="customer_transaction_conversion_rate" property="customerTransactionConversionRate" jdbcType="VARCHAR" />
+    <result column="current_period_customers_aum_growth_rate" property="currentPeriodCustomersAumGrowthRate" jdbcType="VARCHAR" />
+    <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+  </resultMap>
+</mapper>

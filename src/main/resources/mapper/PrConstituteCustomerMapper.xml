@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.blazer.bigclient.mapper.PrConstituteCustomerMapper" >
+  <resultMap id="BaseResultMap" type="org.blazer.bigclient.model.PrConstituteCustomer" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="performance_customers_number" property="performanceCustomersNumber" jdbcType="VARCHAR" />
+    <result column="pure_new_vip_customers" property="pureNewVipCustomers" jdbcType="VARCHAR" />
+    <result column="reported_customers_number" property="reportedCustomersNumber" jdbcType="VARCHAR" />
+    <result column="allot_customers_number" property="allotCustomersNumber" jdbcType="VARCHAR" />
+    <result column="weekly_get_customers_number" property="weeklyGetCustomersNumber" jdbcType="VARCHAR" />
+    <result column="current_vip_customers_number" property="currentVipCustomersNumber" jdbcType="VARCHAR" />
+    <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+  </resultMap>
+</mapper>
