@@ -2,8 +2,8 @@ package org.blazer.bigclient.controller;
 
 import com.github.pagehelper.PageInfo;
 import org.blazer.bigclient.excel.ExcelHeader;
-import org.blazer.bigclient.model.PaRegularSalesScaleAccounting;
-import org.blazer.bigclient.service.PaRegularSalesScaleAccountingService;
+import org.blazer.bigclient.model.PrPerformanceReport;
+import org.blazer.bigclient.service.PrPerformanceReportService;
 import org.blazer.bigclient.util.DateUtil;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.blazer.bigclient.util.StringUtil;
@@ -26,14 +26,14 @@ import java.util.List;
 /**
  * Created by cuican on 2016-11-21.
  */
-@RequestMapping("/pa/regular_sales_scale")
+@RequestMapping("/pr/performance_report")
 @Controller
-public class PaRegularSalesScaleAccountingController extends BaseController {
+public class PrPerformanceReportController extends BaseController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PaRegularSalesScaleAccountingController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PrPerformanceReportController.class);
 
     @Autowired
-    private PaRegularSalesScaleAccountingService paRegularSalesScaleAccountingService;
+    private PrPerformanceReportService prPerformanceReportService;
 
     /**
      * 根据搜索条件分页查询
@@ -45,7 +45,7 @@ public class PaRegularSalesScaleAccountingController extends BaseController {
      */
     @ResponseBody
     @RequestMapping("findByPage")
-    public PageInfo<PaRegularSalesScaleAccounting> findByPage(HttpServletRequest request, HttpServletResponse response) {
+    public PageInfo<PrPerformanceReport> findByPage(HttpServletRequest request, HttpServletResponse response) {
         //获取前台传递过来的参数
         HashMap<String, String> params = getParamMap(request);
         LOGGER.debug("currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
@@ -59,7 +59,7 @@ public class PaRegularSalesScaleAccountingController extends BaseController {
         if (advisor != null) {
             params.put("advisorName", advisor.getActualName());
         }*/
-        return this.paRegularSalesScaleAccountingService.findByPage(params);
+        return this.prPerformanceReportService.findByPage(params);
     }
 
 
@@ -80,11 +80,11 @@ public class PaRegularSalesScaleAccountingController extends BaseController {
             //xml配置中的ID
             String id = "paRegularSalesScaleAccounting";
             // 要导出的数据
-            List<PaRegularSalesScaleAccounting> list = this.paRegularSalesScaleAccountingService.findBySearch(search);
+            List<PrPerformanceReport> list = this.prPerformanceReportService.findBySearch(search);
             if (list == null || list.size() == 0) {
-                PaRegularSalesScaleAccounting regularSalesScaleAccounting = new PaRegularSalesScaleAccounting();
-                regularSalesScaleAccounting.setUserName("测试姓名");
-                list.add(regularSalesScaleAccounting);
+                PrPerformanceReport performanceReport = new PrPerformanceReport();
+                performanceReport.setInvestmentAdvisor("测试姓名");
+                list.add(performanceReport);
             }
             //excel文件名称,不需要任何后缀
             String excelName = "RegularSalesScaleAccounting_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
@@ -92,7 +92,26 @@ public class PaRegularSalesScaleAccountingController extends BaseController {
             ExcelHeader header = null;
             //指定导出字段
             List<String> specifyFields = new ArrayList<String>();
-
+            /*<field name="id" title="自动编号"/>
+            <field name="advisorLevel" title="投顾级别"/>
+            <field name="investmentAdvisor" title="投顾姓名"/>
+            <field name="currentVipCustomersNumber" title="当前vip客户数（人数）"/>
+            <field name="performanceCustomersAum" title="计入业绩客户AUM值（亿元）"/>
+            <field name="performanceCustomersNumber" title="计入业绩客户数（人数）"/>
+            <field name="reportedCustomersRegisteredGrowthRate" title="上报客户数注册增长率"/>
+            <field name="reportedCustomersTransactionsGrowthRate" title="上报客户交易数增长率"/>
+            <field name="lastMonthSalesScale" title="上月销售规模（万元）"/>
+            <field name="monthlySalesScale" title="月销售规模（万元）"/>
+            <field name="monthlySalesScalePerformanceTargets" title="月销售规模业绩目标（万元）"/>
+            <field name="salesCompletionRate" title="销售规模完成率"/>
+            <field name="monthlyNumberOfGetCustomers" title="月获客数（折算）"/>
+            <field name="monthlyAcquisitionTarget" title="月度获客目标（折算）"/>
+            <field name="getCustomersCompletionRate" title="获客完成率"/>
+            <field name="comprehensiveCompletionRate" title="综合完成率"/>
+            <field name="comprehensiveCompletionRateRanking" title="综合完成率排名"/>
+            <field name="teamComprehensiveCompletionRate" title="投资组综合完成率"/>
+            <field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+            <field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>*/
             specifyFields.add("userName");
             specifyFields.add("phoneNumber");
             specifyFields.add("referrer");

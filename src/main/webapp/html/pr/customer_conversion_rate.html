@@ -33,21 +33,23 @@
             for (var i in rst) {
                 var cls = "warning";
                 var tr = $('<tr class="' + cls + '">');
-                /*<field name="id" title="自动编号"/>
-                 <field name="investmentAdviser" title="投资顾问"/>
-                 <field name="monthlyPurchaseAmount" title="当月申购金额（万元）"/>
-                 <field name="monthlyPurchaseAmount10" title="当月申购金额/10（千元）"/>
-                 <field name="monthlyInvestmentTarget" title="月投资规模目标（万元）"/>
-                 <field name="monthlyPerformanceLimit" title="当月活期业绩上限（万元）"/>
-                 <field name="effectiveCurrentSalesScale" title="有效活期销售规模（万元）"/>
-                 <field name="deferredNextMonth" title="递延下月（万元）"/>*/
+
+                tr.append('<td>' + rst[i].userName + '</td>');
+                tr.append('<td>' + rst[i].phoneNumber + '</td>');
+                tr.append('<td>' + rst[i].referrer + '</td>');
+                tr.append('<td>' + rst[i].rebateExpirationDate + '</td>');
+                tr.append('<td>' + rst[i].reportOrAllot + '</td>');
+                tr.append('<td>' + rst[i].reportOrAllotDate + '</td>');
                 tr.append('<td>' + rst[i].investmentAdviser + '</td>');
-                tr.append('<td>' + rst[i].monthlyPurchaseAmount + '</td>');
-                tr.append('<td>' + rst[i].monthlyPurchaseAmount10 + '</td>');
-                tr.append('<td>' + rst[i].monthlyInvestmentTarget + '</td>');
-                tr.append('<td>' + rst[i].monthlyPerformanceLimit + '</td>');
-                tr.append('<td>' + rst[i].effectiveCurrentSalesScale + '</td>');
-                tr.append('<td>' + rst[i].deferredNextMonth + '</td>');
+                tr.append('<td>' + rst[i].userIdentify + '</td>');
+                tr.append('<td>' + rst[i].basicProductName + '</td>');
+                tr.append('<td>' + rst[i].investmentAmount + '</td>');
+                tr.append('<td>' + rst[i].regularAssetsTotal + '</td>');
+                tr.append('<td>' + rst[i].investmentDate + '</td>');
+                tr.append('<td>' + rst[i].partitionCoefficient + '</td>');
+                tr.append('<td>' + rst[i].performancePoolCoefficient + '</td>');
+                tr.append('<td>' + rst[i].productCoefficient + '</td>');
+                tr.append('<td>' + rst[i].effectiveSalesAmount + '</td>');
 
                 $("#tb>tbody").append(tr);
             }
@@ -87,19 +89,31 @@
     <button type="button" id="exportExcel" class="btn btn-primary" style="float: right;">导出Excel</button>
 </div>
 <hr class="line-3"/>
-<table id="tb" class="table table-hover table-condensed table-bordered">
-    <thead>
-    <tr>
-        <th width="14%">投资顾问</th>
-        <th width="14%">当月申购金额（万元）</th>
-        <th width="14%">当月申购金额/10（千元）</th>
-        <th width="14%">月投资规模目标（万元）</th>
-        <th width="15%">当月活期业绩上限（万元）</th>
-        <th width="15%">有效活期销售规模（万元）</th>
-        <th width="14%">递延下月（万元）</th>
-    </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
+<div class="table-responsive">
+    <table id="tb" class="table table-hover table-condensed table-bordered">
+        <thead>
+        <tr>
+            <th>客户姓名</th>
+            <th>手机号码</th>
+            <th>扫码推荐人</th>
+            <th>返利失效日期</th>
+            <th>上报/分配</th>
+            <th>上报/分配日期</th>
+            <th>投资顾问</th>
+            <th>客户标识</th>
+            <th>基础产品名称</th>
+            <th>投资金额</th>
+            <th>现有资产</th>
+            <th>购买日期</th>
+            <th>分配系数</th>
+            <th>业绩池系数</th>
+            <th>产品系数</th>
+            <th>有效销售金额</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
 <ul id="pagination" class="pagination" style="cursor:pointer"></ul>

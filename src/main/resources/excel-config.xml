@@ -243,34 +243,34 @@
 	<!-- 获客构成 -->
 	<excel id="prConstituteCustomer" class="org.blazer.bigclient.model.PrConstituteCustomer"
 		   sheetname="获客构成" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
-		<field name="id" title="id"/>
-		<field name="performanceCustomersNumber" title="performanceCustomersNumber"/>
-		<field name="pureNewVipCustomers" title="pureNewVipCustomers"/>
-		<field name="reportedCustomersNumber" title="reportedCustomersNumber"/>
-		<field name="allotCustomersNumber" title="allotCustomersNumber"/>
-		<field name="weeklyGetCustomersNumber" title="weeklyGetCustomersNumber"/>
-		<field name="currentVipCustomersNumber" title="currentVipCustomersNumber"/>
-		<field name="mtime" title="mtime" pattern="yyyy-MM-dd HH:mm:ss"/>
-		<field name="ctime" title="ctime" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="id" title="自动编号"/>
+		<field name="performanceCustomersNumber" title="计入业绩客户数"/>
+		<field name="pureNewVipCustomers" title="纯新增vip客户数"/>
+		<field name="reportedCustomersNumber" title="上报客户数"/>
+		<field name="allotCustomersNumber" title="分配客户数"/>
+		<field name="weeklyGetCustomersNumber" title="本周获客数"/>
+		<field name="currentVipCustomersNumber" title="当前vip客户数"/>
+		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
 
 	<!-- 客户转换率 -->
 	<excel id="prCustomerConversionRate" class="org.blazer.bigclient.model.PrCustomerConversionRate"
 		   sheetname="客户转换率" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
-		<field name="id" title="id"/>
-		<field name="lastPeriodCustomersNumber" title="lastPeriodCustomersNumber"/>
-		<field name="currentPeriodCustomersNumber" title="currentPeriodCustomersNumber"/>
-		<field name="lastPeriodRegisteredCustomersNumber" title="lastPeriodRegisteredCustomersNumber"/>
-		<field name="currentPeriodRegisteredCustomersNumber" title="currentPeriodRegisteredCustomersNumber"/>
-		<field name="lastPeriodTransactionCustomersNumber" title="lastPeriodTransactionCustomersNumber"/>
-		<field name="currentPeriodTransactionCustomersNumber" title="currentPeriodTransactionCustomersNumber"/>
-		<field name="currentPeriodRegisteredCustomersProportion" title="currentPeriodRegisteredCustomersProportion"/>
-		<field name="customerRegistrationGrowthRate" title="customerRegistrationGrowthRate"/>
-		<field name="currentPeriodTransactionsCustomersProportion" title="currentPeriodTransactionsCustomersProportion"/>
-		<field name="customerTransactionConversionRate" title="customerTransactionConversionRate"/>
-		<field name="currentPeriodCustomersAumGrowthRate" title="currentPeriodCustomersAumGrowthRate"/>
-		<field name="mtime" title="mtime" pattern="yyyy-MM-dd HH:mm:ss"/>
-		<field name="ctime" title="ctime" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="id" title="自动编号"/>
+		<field name="lastPeriodCustomersNumber" title="上期客户数"/>
+		<field name="currentPeriodCustomersNumber" title="本期客户数"/>
+		<field name="lastPeriodRegisteredCustomersNumber" title="上期注册客户数"/>
+		<field name="currentPeriodRegisteredCustomersNumber" title="本期注册客户数"/>
+		<field name="lastPeriodTransactionCustomersNumber" title="上期客户交易数"/>
+		<field name="currentPeriodTransactionCustomersNumber" title="本期客户交易数"/>
+		<field name="currentPeriodRegisteredCustomersProportion" title="本期注册客户占比"/>
+		<field name="customerRegistrationGrowthRate" title="客户注册增长率"/>
+		<field name="currentPeriodTransactionsCustomersProportion" title="本期交易客户占比"/>
+		<field name="customerTransactionConversionRate" title="客户交易转换率"/>
+		<field name="currentPeriodCustomersAumGrowthRate" title="本期客户AUM增长率（期末基准）"/>
+		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
 
 
@@ -278,17 +278,17 @@
 	<!-- 定期兑付报表 -->
 	<excel id="prRegularPayment" class="org.blazer.bigclient.model.PrRegularPayment"
 		   sheetname="定期兑付报表" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
-		<field name="id" title="id"/>
-		<field name="userName" title="userName"/>
-		<field name="phoneNumber" title="phoneNumber"/>
-		<field name="productName" title="productName"/>
-		<field name="productPeriod" title="productPeriod"/>
-		<field name="yearDays" title="yearDays"/>
-		<field name="principal" title="principal"/>
-		<field name="productRevenue" title="productRevenue"/>
-		<field name="investmentAdvisor" title="investmentAdvisor"/>
-		<field name="mtime" title="mtime" pattern="yyyy-MM-dd HH:mm:ss"/>
-		<field name="ctime" title="ctime" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="id" title="自动编号"/>
+		<field name="userName" title="客户姓名"/>
+		<field name="phoneNumber" title="手机号码"/>
+		<field name="productName" title="产品名称"/>
+		<field name="productPeriod" title="产品期限"/>
+		<field name="yearDays" title="年天数"/>
+		<field name="principal" title="本金"/>
+		<field name="productRevenue" title="产品收益"/>
+		<field name="investmentAdvisor" title="投资顾问"/>
+		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
 
 
