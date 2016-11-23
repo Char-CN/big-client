@@ -124,6 +124,37 @@ public class PrPerformanceReport {
      */
     private Date ctime;
 
+
+    public PrPerformanceReport() {
+    }
+
+    public PrPerformanceReport(String advisorLevel, String investmentAdvisor, String currentVipCustomersNumber,
+                               String performanceCustomersAum, String performanceCustomersNumber, String reportedCustomersRegisteredGrowthRate,
+                               String reportedCustomersTransactionsGrowthRate, String lastMonthSalesScale, String monthlySalesScale,
+                               String monthlySalesScalePerformanceTargets, String salesCompletionRate, String monthlyNumberOfGetCustomers,
+                               String monthlyAcquisitionTarget, String getCustomersCompletionRate, String comprehensiveCompletionRate,
+                               String comprehensiveCompletionRateRanking, String teamComprehensiveCompletionRate, Date mtime, Date ctime) {
+        this.advisorLevel = advisorLevel;
+        this.investmentAdvisor = investmentAdvisor;
+        this.currentVipCustomersNumber = currentVipCustomersNumber;
+        this.performanceCustomersAum = performanceCustomersAum;
+        this.performanceCustomersNumber = performanceCustomersNumber;
+        this.reportedCustomersRegisteredGrowthRate = reportedCustomersRegisteredGrowthRate;
+        this.reportedCustomersTransactionsGrowthRate = reportedCustomersTransactionsGrowthRate;
+        this.lastMonthSalesScale = lastMonthSalesScale;
+        this.monthlySalesScale = monthlySalesScale;
+        this.monthlySalesScalePerformanceTargets = monthlySalesScalePerformanceTargets;
+        this.salesCompletionRate = salesCompletionRate;
+        this.monthlyNumberOfGetCustomers = monthlyNumberOfGetCustomers;
+        this.monthlyAcquisitionTarget = monthlyAcquisitionTarget;
+        this.getCustomersCompletionRate = getCustomersCompletionRate;
+        this.comprehensiveCompletionRate = comprehensiveCompletionRate;
+        this.comprehensiveCompletionRateRanking = comprehensiveCompletionRateRanking;
+        this.teamComprehensiveCompletionRate = teamComprehensiveCompletionRate;
+        this.mtime = mtime;
+        this.ctime = ctime;
+    }
+
     /**
      * 获取自动编号
      *
@@ -482,5 +513,31 @@ public class PrPerformanceReport {
      */
     public void setCtime(Date ctime) {
         this.ctime = ctime;
+    }
+
+    @Override
+    public String toString() {
+        return "PrPerformanceReport{" +
+                "id=" + id +
+                ", advisorLevel='" + advisorLevel + '\'' +
+                ", investmentAdvisor='" + investmentAdvisor + '\'' +
+                ", currentVipCustomersNumber='" + currentVipCustomersNumber + '\'' +
+                ", performanceCustomersAum='" + performanceCustomersAum + '\'' +
+                ", performanceCustomersNumber='" + performanceCustomersNumber + '\'' +
+                ", reportedCustomersRegisteredGrowthRate='" + reportedCustomersRegisteredGrowthRate + '\'' +
+                ", reportedCustomersTransactionsGrowthRate='" + reportedCustomersTransactionsGrowthRate + '\'' +
+                ", lastMonthSalesScale='" + lastMonthSalesScale + '\'' +
+                ", monthlySalesScale='" + monthlySalesScale + '\'' +
+                ", monthlySalesScalePerformanceTargets='" + monthlySalesScalePerformanceTargets + '\'' +
+                ", salesCompletionRate='" + salesCompletionRate + '\'' +
+                ", monthlyNumberOfGetCustomers='" + monthlyNumberOfGetCustomers + '\'' +
+                ", monthlyAcquisitionTarget='" + monthlyAcquisitionTarget + '\'' +
+                ", getCustomersCompletionRate='" + getCustomersCompletionRate + '\'' +
+                ", comprehensiveCompletionRate='" + comprehensiveCompletionRate + '\'' +
+                ", comprehensiveCompletionRateRanking='" + comprehensiveCompletionRateRanking + '\'' +
+                ", teamComprehensiveCompletionRate='" + teamComprehensiveCompletionRate + '\'' +
+                ", mtime=" + mtime +
+                ", ctime=" + ctime +
+                '}';
     }
 }

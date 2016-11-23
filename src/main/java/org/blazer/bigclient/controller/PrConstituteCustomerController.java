@@ -2,8 +2,8 @@ package org.blazer.bigclient.controller;
 
 import com.github.pagehelper.PageInfo;
 import org.blazer.bigclient.excel.ExcelHeader;
-import org.blazer.bigclient.model.PrPerformanceReport;
-import org.blazer.bigclient.service.PrPerformanceReportService;
+import org.blazer.bigclient.model.PrConstituteCustomer;
+import org.blazer.bigclient.service.PrConstituteCustomerService;
 import org.blazer.bigclient.util.DateUtil;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.blazer.bigclient.util.StringUtil;
@@ -26,14 +26,14 @@ import java.util.List;
 /**
  * Created by cuican on 2016-11-21.
  */
-@RequestMapping("/pr/performance_report")
+@RequestMapping("/pr/constitute_customer")
 @Controller
-public class PrPerformanceReportController extends BaseController {
+public class PrConstituteCustomerController extends BaseController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PrPerformanceReportController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PrConstituteCustomerController.class);
 
     @Autowired
-    private PrPerformanceReportService prPerformanceReportService;
+    private PrConstituteCustomerService prConstituteCustomerService;
 
     /**
      * 根据搜索条件分页查询
@@ -45,7 +45,7 @@ public class PrPerformanceReportController extends BaseController {
      */
     @ResponseBody
     @RequestMapping("findByPage")
-    public PageInfo<PrPerformanceReport> findByPage(HttpServletRequest request, HttpServletResponse response) {
+    public PageInfo<PrConstituteCustomer> findByPage(HttpServletRequest request, HttpServletResponse response) {
         //获取前台传递过来的参数
         HashMap<String, String> params = getParamMap(request);
         LOGGER.debug("currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
@@ -59,7 +59,7 @@ public class PrPerformanceReportController extends BaseController {
         if (advisor != null) {
             params.put("advisorName", advisor.getActualName());
         }*/
-        return this.prPerformanceReportService.findByPage(params);
+        return this.prConstituteCustomerService.findByPage(params);
     }
 
 
@@ -78,18 +78,16 @@ public class PrPerformanceReportController extends BaseController {
             LOGGER.debug("查询条件---search:" + search);
 
             //xml配置中的ID
-            String id = "prPerformanceReport";
+            String id = "prConstituteCustomer";
             // 要导出的数据
-            List<PrPerformanceReport> list = this.prPerformanceReportService.findBySearch(search);
+            List<PrConstituteCustomer> list = this.prConstituteCustomerService.findBySearch(search);
             if (list == null || list.size() == 0) {
-                PrPerformanceReport performanceReport = new PrPerformanceReport("无数据", "无数据", "无数据", "无数据", "无数据",
-                                                                                "无数据", "无数据", "无数据", "无数据", "无数据",
-                                                                                "无数据", "无数据", "无数据", "无数据", "无数据",
-                                                                                "无数据", "无数据", new Date(), new Date());
-                list.add(performanceReport);
+                PrConstituteCustomer constituteCustomer = new PrConstituteCustomer();
+                constituteCustomer.setAllotCustomersNumber("测试姓名");
+                list.add(constituteCustomer);
             }
             //excel文件名称,不需要任何后缀
-            String excelName = "RegularSalesScaleAccounting_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
+            String excelName = "ConstituteCustomer_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
             //可以为空,自定义Excel头信息
             ExcelHeader header = null;
             //指定导出字段

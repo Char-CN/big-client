@@ -58,6 +58,21 @@ public class PrConstituteCustomer {
      */
     private Date ctime;
 
+
+    public PrConstituteCustomer() {
+    }
+
+    public PrConstituteCustomer(String performanceCustomersNumber, String pureNewVipCustomers, String reportedCustomersNumber, String allotCustomersNumber, String weeklyGetCustomersNumber, String currentVipCustomersNumber, Date mtime, Date ctime) {
+        this.performanceCustomersNumber = performanceCustomersNumber;
+        this.pureNewVipCustomers = pureNewVipCustomers;
+        this.reportedCustomersNumber = reportedCustomersNumber;
+        this.allotCustomersNumber = allotCustomersNumber;
+        this.weeklyGetCustomersNumber = weeklyGetCustomersNumber;
+        this.currentVipCustomersNumber = currentVipCustomersNumber;
+        this.mtime = mtime;
+        this.ctime = ctime;
+    }
+
     /**
      * 获取自动编号
      *
@@ -218,5 +233,20 @@ public class PrConstituteCustomer {
      */
     public void setCtime(Date ctime) {
         this.ctime = ctime;
+    }
+
+    @Override
+    public String toString() {
+        return "PrConstituteCustomer{" +
+                "id=" + id +
+                ", performanceCustomersNumber='" + performanceCustomersNumber + '\'' +
+                ", pureNewVipCustomers='" + pureNewVipCustomers + '\'' +
+                ", reportedCustomersNumber='" + reportedCustomersNumber + '\'' +
+                ", allotCustomersNumber='" + allotCustomersNumber + '\'' +
+                ", weeklyGetCustomersNumber='" + weeklyGetCustomersNumber + '\'' +
+                ", currentVipCustomersNumber='" + currentVipCustomersNumber + '\'' +
+                ", mtime=" + mtime +
+                ", ctime=" + ctime +
+                '}';
     }
 }
