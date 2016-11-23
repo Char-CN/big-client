@@ -82,8 +82,7 @@ public class PrConstituteCustomerController extends BaseController {
             // 要导出的数据
             List<PrConstituteCustomer> list = this.prConstituteCustomerService.findBySearch(search);
             if (list == null || list.size() == 0) {
-                PrConstituteCustomer constituteCustomer = new PrConstituteCustomer();
-                constituteCustomer.setAllotCustomersNumber("测试姓名");
+                PrConstituteCustomer constituteCustomer = new PrConstituteCustomer("空", "空", "空", "空", "空", "空", "空", new Date(), new Date());
                 list.add(constituteCustomer);
             }
             //excel文件名称,不需要任何后缀

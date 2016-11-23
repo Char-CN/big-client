@@ -270,7 +270,7 @@
 		<field name="customerRegistrationGrowthRate" title="客户注册增长率"/>
 		<field name="currentPeriodTransactionsCustomersProportion" title="本期交易客户占比"/>
 		<field name="customerTransactionConversionRate" title="客户交易转换率"/>
-		<field name="currentPeriodCustomersAumGrowthRate" title="本期客户AUM增长率（期末基准）"/>
+		<field name="currentPeriodCustomersAumGrowthRate" title="本期客户AUM增长率（期末基准）" columnWidth="9000"/>
 		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
@@ -293,32 +293,6 @@
 		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
 
-
-
-	<!-- 资产余额 带有userInfo的复杂对象 -->
-	<!--<excel id="srAssetsBalance" class="org.blazer.bigclient.model.SrAssetsBalance"
-		   sheetname="资产余额表" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
-		&lt;!&ndash; 复杂对象 &ndash;&gt;
-		&lt;!&ndash;<field name="book.bookName" title="图书名称" columnWidth="6000"/>&ndash;&gt;
-		&lt;!&ndash;<field name="book.price" title="图书价格" columnWidth="6000" decimalFormatPattern="###,##0.00" roundingMode="up" defaultValue="0.00"/>&ndash;&gt;
-		&lt;!&ndash;<field name="book.author.authorName" title="作者名称" columnWidth="6000"/>&ndash;&gt;
-
-		<field name="kamUserInfo.userName" title="客户姓名"/>
-		<field name="kamUserInfo.phoneNumber" title="手机号码"/>
-		<field name="kamUserInfo.investmentAdviser" title="投资顾问"/>
-		<field name="kamUserInfo.registerDate" title="注册日期"/>
-
-		<field name="id" title="自动编号"/>
-		<field name="uid" title="客户的自动编号"/>
-		<field name="regularAssetsTotal" title="当前定期AUM（资产总额）"/>
-		<field name="regularAumTimePoint" title="当前定期AUM时间点"/>
-		<field name="currentAssetsTotal" title="当前活期AUM（资产总额）"/>
-		<field name="currentAumTimePoint" title="当前活期AUM时间点"/>
-		<field name="aumTotal" title="当前AUM汇总（单位：元）"/>
-		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
-		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
-	</excel>-->
-
 	<!-- 投资顾问 -->
 	<excel id="advisorInfoBean" class="org.blazer.bigclient.body.AdvisorInfoBean"
 		   sheetname="投资顾问信息" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
@@ -335,20 +309,28 @@
 		<field name="area" title="所在团队区域"/>
 	</excel>
 
-	<!--<excel id="kamAdvisor" class="org.blazer.bigclient.model.KamAdvisor"
-		   sheetname="投资顾问" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
+	<!-- test_model -->
+	<!--<excel id="srAssetsBalance" class="org.blazer.bigclient.model.SrAssetsBalance"
+		   sheetname="资产余额表" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
+		&lt;!&ndash; 复杂对象 &ndash;&gt;
+		<field name="book.bookName" title="图书名称" columnWidth="6000"/>
+		<field name="book.price" title="图书价格" columnWidth="6000" decimalFormatPattern="###,##0.00" roundingMode="up" defaultValue="0.00"/>
+		<field name="book.author.authorName" title="作者名称" columnWidth="6000"/>
+
+		<field name="kamUserInfo.userName" title="客户姓名"/>
+		<field name="kamUserInfo.phoneNumber" title="手机号码"/>
+		<field name="kamUserInfo.investmentAdviser" title="投资顾问"/>
+		<field name="kamUserInfo.registerDate" title="注册日期"/>
+
 		<field name="id" title="自动编号"/>
-		<field name="serialNumber" title="投顾编号"/>
-		<field name="level" title="投顾级别"/>
-		<field name="systemName" title="系统登录用户名"/>
-		<field name="actualName" title="投顾姓名"/>
-		<field name="phoneNumber" title="手机号码"/>
-		<field name="remark" title="备注"/>
+		<field name="uid" title="客户的自动编号"/>
+		<field name="regularAssetsTotal" title="当前定期AUM（资产总额）"/>
+		<field name="regularAumTimePoint" title="当前定期AUM时间点"/>
+		<field name="currentAssetsTotal" title="当前活期AUM（资产总额）"/>
+		<field name="currentAumTimePoint" title="当前活期AUM时间点"/>
+		<field name="aumTotal" title="当前AUM汇总（单位：元）"/>
 		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>-->
-
-
-
 
 </excels>

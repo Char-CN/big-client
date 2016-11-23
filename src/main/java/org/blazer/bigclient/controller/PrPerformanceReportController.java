@@ -82,14 +82,14 @@ public class PrPerformanceReportController extends BaseController {
             // 要导出的数据
             List<PrPerformanceReport> list = this.prPerformanceReportService.findBySearch(search);
             if (list == null || list.size() == 0) {
-                PrPerformanceReport performanceReport = new PrPerformanceReport("无数据", "无数据", "无数据", "无数据", "无数据",
-                                                                                "无数据", "无数据", "无数据", "无数据", "无数据",
-                                                                                "无数据", "无数据", "无数据", "无数据", "无数据",
-                                                                                "无数据", "无数据", new Date(), new Date());
+                PrPerformanceReport performanceReport = new PrPerformanceReport("空", "空", "空", "空", "空",
+                                                                                "空", "空", "空", "空", "空",
+                                                                                "空", "空", "空", "空", "空",
+                                                                                "空", "空", new Date(), new Date());
                 list.add(performanceReport);
             }
             //excel文件名称,不需要任何后缀
-            String excelName = "RegularSalesScaleAccounting_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
+            String excelName = "PerformanceReport_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
             //可以为空,自定义Excel头信息
             ExcelHeader header = null;
             //指定导出字段

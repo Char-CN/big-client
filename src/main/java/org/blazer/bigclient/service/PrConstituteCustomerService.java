@@ -29,7 +29,7 @@ public class PrConstituteCustomerService extends BaseService<PrConstituteCustome
         String search = StringUtil.getStrEmpty(params.get("search"));
         String advisorName = StringUtil.getStrEmpty(params.get("advisorName"));
         if (StringUtils.isNotEmpty(search)) {
-            criteria.andLike("investmentAdvisor",search);
+            criteria.andLike("investmentAdvisor", "%" + search + "%");
         }
         if (StringUtils.isNotEmpty(advisorName)) {
             //此处为实体类的属性，不是表字段
@@ -46,7 +46,7 @@ public class PrConstituteCustomerService extends BaseService<PrConstituteCustome
         Example.Criteria criteria = example.createCriteria();
         String search_text = StringUtil.getStrEmpty(search);
         if (StringUtils.isNotEmpty(search_text)) {
-            criteria.andLike("investmentAdvisor",search);
+            criteria.andLike("investmentAdvisor", "%" + search + "%");
         }
         return selectByExample(example);
     }

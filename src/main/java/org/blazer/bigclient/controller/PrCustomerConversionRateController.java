@@ -82,34 +82,32 @@ public class PrCustomerConversionRateController extends BaseController {
             // 要导出的数据
             List<PrCustomerConversionRate> list = this.prCustomerConversionRateService.findBySearch(search);
             if (list == null || list.size() == 0) {
-                PrCustomerConversionRate constituteCustomer = new PrCustomerConversionRate();
-                constituteCustomer.setInvestmentAdvisor("测试姓名");
-                list.add(constituteCustomer);
+                PrCustomerConversionRate customerConversionRate = new PrCustomerConversionRate("空", "空", "空", "空", "空",
+                                                            "空", "空", "空", "空", "空", "空", "空", new Date(), new Date());
+                list.add(customerConversionRate);
             }
             //excel文件名称,不需要任何后缀
-            String excelName = "ConstituteCustomer_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
+            String excelName = "CustomerConversionRate_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
             //可以为空,自定义Excel头信息
             ExcelHeader header = null;
             //指定导出字段
             List<String> specifyFields = new ArrayList<String>();
 
-            specifyFields.add("advisorLevel");
             specifyFields.add("investmentAdvisor");
-            specifyFields.add("currentVipCustomersNumber");
-            specifyFields.add("performanceCustomersAum");
-            specifyFields.add("performanceCustomersNumber");
-            specifyFields.add("reportedCustomersRegisteredGrowthRate");
-            specifyFields.add("reportedCustomersTransactionsGrowthRate");
-            specifyFields.add("lastMonthSalesScale");
-            specifyFields.add("monthlySalesScale");
-            specifyFields.add("monthlySalesScalePerformanceTargets");
-            specifyFields.add("salesCompletionRate");
-            specifyFields.add("monthlyNumberOfGetCustomers");
-            specifyFields.add("monthlyAcquisitionTarget");
-            specifyFields.add("getCustomersCompletionRate");
-            specifyFields.add("comprehensiveCompletionRate");
-            specifyFields.add("comprehensiveCompletionRateRanking");
-            specifyFields.add("teamComprehensiveCompletionRate");
+            specifyFields.add("lastPeriodCustomersNumber");
+            specifyFields.add("currentPeriodCustomersNumber");
+            specifyFields.add("lastPeriodRegisteredCustomersNumber");
+            specifyFields.add("currentPeriodRegisteredCustomersNumber");
+            specifyFields.add("lastPeriodTransactionCustomersNumber");
+            specifyFields.add("currentPeriodTransactionCustomersNumber");
+            specifyFields.add("currentPeriodRegisteredCustomersProportion");
+            specifyFields.add("lastPeriodTransactionCustomersNumber");
+            specifyFields.add("currentPeriodTransactionCustomersNumber");
+            specifyFields.add("currentPeriodRegisteredCustomersProportion");
+            specifyFields.add("customerRegistrationGrowthRate");
+            specifyFields.add("currentPeriodTransactionsCustomersProportion");
+            specifyFields.add("customerTransactionConversionRate");
+            specifyFields.add("currentPeriodCustomersAumGrowthRate");
 
             //构建excel试图
             mv = super.createExcelView(id, list, excelName, header, specifyFields);
