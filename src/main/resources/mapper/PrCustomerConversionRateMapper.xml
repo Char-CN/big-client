@@ -6,6 +6,7 @@
       WARNING - @mbggenerated
     -->
     <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="investment_advisor" property="investmentAdvisor" jdbcType="VARCHAR" />
     <result column="last_period_customers_number" property="lastPeriodCustomersNumber" jdbcType="VARCHAR" />
     <result column="current_period_customers_number" property="currentPeriodCustomersNumber" jdbcType="VARCHAR" />
     <result column="last_period_registered_customers_number" property="lastPeriodRegisteredCustomersNumber" jdbcType="VARCHAR" />

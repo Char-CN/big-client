@@ -10,7 +10,7 @@
             }
             _currentPage_lastCurrent = currentPage;
             lock = true;
-            $.post("sr/current_sales_details/findByPage.do", {
+            $.post("pr/regular_payment/findByPage.do", {
                 currentPage: currentPage,
                 pageSize: 10,
                 search: search_text
@@ -34,22 +34,14 @@
                 var cls = "warning";
                 var tr = $('<tr class="' + cls + '">');
 
-                tr.append('<td>' + rst[i].userName + '</td>');
-                tr.append('<td>' + rst[i].phoneNumber + '</td>');
-                tr.append('<td>' + rst[i].referrer + '</td>');
-                tr.append('<td>' + rst[i].rebateExpirationDate + '</td>');
-                tr.append('<td>' + rst[i].reportOrAllot + '</td>');
-                tr.append('<td>' + rst[i].reportOrAllotDate + '</td>');
-                tr.append('<td>' + rst[i].investmentAdviser + '</td>');
-                tr.append('<td>' + rst[i].userIdentify + '</td>');
-                tr.append('<td>' + rst[i].basicProductName + '</td>');
-                tr.append('<td>' + rst[i].investmentAmount + '</td>');
-                tr.append('<td>' + rst[i].regularAssetsTotal + '</td>');
-                tr.append('<td>' + rst[i].investmentDate + '</td>');
-                tr.append('<td>' + rst[i].partitionCoefficient + '</td>');
-                tr.append('<td>' + rst[i].performancePoolCoefficient + '</td>');
-                tr.append('<td>' + rst[i].productCoefficient + '</td>');
-                tr.append('<td>' + rst[i].effectiveSalesAmount + '</td>');
+                tr.append('<td>' + rst[i].userName+ '</td>');
+                tr.append('<td>' + rst[i].phoneNumber+ '</td>');
+                tr.append('<td>' + rst[i].productName+ '</td>');
+                tr.append('<td>' + rst[i].productPeriod+ '</td>');
+                tr.append('<td>' + rst[i].yearDays+ '</td>');
+                tr.append('<td>' + rst[i].principal+ '</td>');
+                tr.append('<td>' + rst[i].productRevenue+ '</td>');
+                tr.append('<td>' + rst[i].investmentAdvisor+ '</td>');
 
                 $("#tb>tbody").append(tr);
             }
@@ -69,7 +61,7 @@
          */
         $("#exportExcel").click(function () {
             downLoadFile({
-                url: 'sr/assets_balance/exportExcel.do', //请求的url
+                url: 'pr/regular_payment/exportExcel.do', //请求的url
                 data: {search: search_text},//要发送的数据
                 callback: function () {
                     //alert("导出excel文件成功");

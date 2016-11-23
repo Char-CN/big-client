@@ -69,6 +69,23 @@ public class PrRegularPayment {
      */
     private Date ctime;
 
+    public PrRegularPayment() {
+    }
+
+    public PrRegularPayment(String userName, String phoneNumber, String productName, String productPeriod, String yearDays,
+                            String principal, String productRevenue, String investmentAdvisor, Date mtime, Date ctime) {
+        this.userName = userName;
+        this.phoneNumber = phoneNumber;
+        this.productName = productName;
+        this.productPeriod = productPeriod;
+        this.yearDays = yearDays;
+        this.principal = principal;
+        this.productRevenue = productRevenue;
+        this.investmentAdvisor = investmentAdvisor;
+        this.mtime = mtime;
+        this.ctime = ctime;
+    }
+
     /**
      * 获取自动编号
      *
@@ -265,5 +282,22 @@ public class PrRegularPayment {
      */
     public void setCtime(Date ctime) {
         this.ctime = ctime;
+    }
+
+    @Override
+    public String toString() {
+        return "PrRegularPayment{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", productName='" + productName + '\'' +
+                ", productPeriod='" + productPeriod + '\'' +
+                ", yearDays='" + yearDays + '\'' +
+                ", principal='" + principal + '\'' +
+                ", productRevenue='" + productRevenue + '\'' +
+                ", investmentAdvisor='" + investmentAdvisor + '\'' +
+                ", mtime=" + mtime +
+                ", ctime=" + ctime +
+                '}';
     }
 }

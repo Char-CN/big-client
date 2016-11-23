@@ -2,8 +2,8 @@ package org.blazer.bigclient.controller;
 
 import com.github.pagehelper.PageInfo;
 import org.blazer.bigclient.excel.ExcelHeader;
-import org.blazer.bigclient.model.PrConstituteCustomer;
-import org.blazer.bigclient.service.PrConstituteCustomerService;
+import org.blazer.bigclient.model.PrCustomerConversionRate;
+import org.blazer.bigclient.service.PrCustomerConversionRateService;
 import org.blazer.bigclient.util.DateUtil;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.blazer.bigclient.util.StringUtil;
@@ -26,14 +26,14 @@ import java.util.List;
 /**
  * Created by cuican on 2016-11-21.
  */
-@RequestMapping("/pr/constitute_customer")
+@RequestMapping("/pr/customer_conversion_rate")
 @Controller
-public class PrConstituteCustomerController extends BaseController {
+public class PrCustomerConversionRateController extends BaseController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PrConstituteCustomerController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PrCustomerConversionRateController.class);
 
     @Autowired
-    private PrConstituteCustomerService prConstituteCustomerService;
+    private PrCustomerConversionRateService prCustomerConversionRateService;
 
     /**
      * 根据搜索条件分页查询
@@ -45,7 +45,7 @@ public class PrConstituteCustomerController extends BaseController {
      */
     @ResponseBody
     @RequestMapping("findByPage")
-    public PageInfo<PrConstituteCustomer> findByPage(HttpServletRequest request, HttpServletResponse response) {
+    public PageInfo<PrCustomerConversionRate> findByPage(HttpServletRequest request, HttpServletResponse response) {
         //获取前台传递过来的参数
         HashMap<String, String> params = getParamMap(request);
         LOGGER.debug("currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
@@ -59,7 +59,7 @@ public class PrConstituteCustomerController extends BaseController {
         if (advisor != null) {
             params.put("advisorName", advisor.getActualName());
         }*/
-        return this.prConstituteCustomerService.findByPage(params);
+        return this.prCustomerConversionRateService.findByPage(params);
     }
 
 
@@ -78,12 +78,12 @@ public class PrConstituteCustomerController extends BaseController {
             LOGGER.debug("查询条件---search:" + search);
 
             //xml配置中的ID
-            String id = "prConstituteCustomer";
+            String id = "prCustomerConversionRate";
             // 要导出的数据
-            List<PrConstituteCustomer> list = this.prConstituteCustomerService.findBySearch(search);
+            List<PrCustomerConversionRate> list = this.prCustomerConversionRateService.findBySearch(search);
             if (list == null || list.size() == 0) {
-                PrConstituteCustomer constituteCustomer = new PrConstituteCustomer();
-                constituteCustomer.setAllotCustomersNumber("测试姓名");
+                PrCustomerConversionRate constituteCustomer = new PrCustomerConversionRate();
+                constituteCustomer.setInvestmentAdvisor("测试姓名");
                 list.add(constituteCustomer);
             }
             //excel文件名称,不需要任何后缀
@@ -92,13 +92,24 @@ public class PrConstituteCustomerController extends BaseController {
             ExcelHeader header = null;
             //指定导出字段
             List<String> specifyFields = new ArrayList<String>();
+
+            specifyFields.add("advisorLevel");
             specifyFields.add("investmentAdvisor");
-            specifyFields.add("performanceCustomersNumber");
-            specifyFields.add("pureNewVipCustomers");
-            specifyFields.add("reportedCustomersNumber");
-            specifyFields.add("allotCustomersNumber");
-            specifyFields.add("weeklyGetCustomersNumber");
             specifyFields.add("currentVipCustomersNumber");
+            specifyFields.add("performanceCustomersAum");
+            specifyFields.add("performanceCustomersNumber");
+            specifyFields.add("reportedCustomersRegisteredGrowthRate");
+            specifyFields.add("reportedCustomersTransactionsGrowthRate");
+            specifyFields.add("lastMonthSalesScale");
+            specifyFields.add("monthlySalesScale");
+            specifyFields.add("monthlySalesScalePerformanceTargets");
+            specifyFields.add("salesCompletionRate");
+            specifyFields.add("monthlyNumberOfGetCustomers");
+            specifyFields.add("monthlyAcquisitionTarget");
+            specifyFields.add("getCustomersCompletionRate");
+            specifyFields.add("comprehensiveCompletionRate");
+            specifyFields.add("comprehensiveCompletionRateRanking");
+            specifyFields.add("teamComprehensiveCompletionRate");
 
             //构建excel试图
             mv = super.createExcelView(id, list, excelName, header, specifyFields);

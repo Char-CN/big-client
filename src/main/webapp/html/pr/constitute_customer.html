@@ -10,7 +10,7 @@
             }
             _currentPage_lastCurrent = currentPage;
             lock = true;
-            $.post("sr/current_sales_details/findByPage.do", {
+            $.post("pr/constitute_customer/findByPage.do", {
                 currentPage: currentPage,
                 pageSize: 10,
                 search: search_text
@@ -34,12 +34,13 @@
                 var cls = "warning";
                 var tr = $('<tr class="' + cls + '">');
 
-                tr.append('<th>' + rst[i].performanceCustomersNumber+ '</th>');
-                tr.append('<th>' + rst[i].pureNewVipCustomers+ '</th>');
-                tr.append('<th>' + rst[i].reportedCustomersNumber+ '</th>');
-                tr.append('<th>' + rst[i].allotCustomersNumber+ '</th>');
-                tr.append('<th>' + rst[i].weeklyGetCustomersNumber+ '</th>');
-                tr.append('<th>' + rst[i].currentVipCustomersNumber+ '</th>');
+                tr.append('<td>' + rst[i].investmentAdvisor+ '</td>');
+                tr.append('<td>' + rst[i].performanceCustomersNumber+ '</td>');
+                tr.append('<td>' + rst[i].pureNewVipCustomers+ '</td>');
+                tr.append('<td>' + rst[i].reportedCustomersNumber+ '</td>');
+                tr.append('<td>' + rst[i].allotCustomersNumber+ '</td>');
+                tr.append('<td>' + rst[i].weeklyGetCustomersNumber+ '</td>');
+                tr.append('<td>' + rst[i].currentVipCustomersNumber+ '</td>');
 
                 $("#tb>tbody").append(tr);
             }
@@ -59,7 +60,7 @@
          */
         $("#exportExcel").click(function () {
             downLoadFile({
-                url: 'sr/assets_balance/exportExcel.do', //请求的url
+                url: 'pr/constitute_customer/exportExcel.do', //请求的url
                 data: {search: search_text},//要发送的数据
                 callback: function () {
                     //alert("导出excel文件成功");
@@ -70,8 +71,8 @@
     });
 </script>
 <div class="row" style="margin: 0;">
-    <div class="input-group has-primary" style="float: left; width: 300px;">
-        <input id="search_text" type="text" class="form-control" placeholder="手机号或姓名的模糊查询..."/>
+    <div class="input-group has-primary" style="float: left; width: 250px;">
+        <input id="search_text" type="text" class="form-control" placeholder="投顾姓名模糊查询..."/>
         <span class="input-group-btn">
 			<button id="search" class="btn btn-primary" type="button">搜索</button>
 		</span>
@@ -83,11 +84,12 @@
     <table id="tb" class="table table-hover table-condensed table-bordered">
         <thead>
         <tr>
-            <th width="20%" rowspan="2" style="line-height: 60px;">计入业绩客户数</th>
-            <th width="20%" rowspan="2" style="line-height: 60px;">纯新增vip客户数</th>
+            <th width="16%" rowspan="2" style="line-height: 60px;">投资顾问</th>
+            <th width="16%" rowspan="2" style="line-height: 60px;">计入业绩客户数</th>
+            <th width="16%" rowspan="2" style="line-height: 60px;">纯新增vip客户数</th>
             <th width="20%" colspan="2" >提升vip客户数</th>
-            <th width="20%" rowspan="2" style="line-height: 60px;">本周获客数</th>
-            <th width="20%" rowspan="2" style="line-height: 60px;">当前vip客户数</th>
+            <th width="16%" rowspan="2" style="line-height: 60px;">本周获客数</th>
+            <th width="16%" rowspan="2" style="line-height: 60px;">当前vip客户数</th>
         </tr>
         <tr>
             <th>上报客户数</th>

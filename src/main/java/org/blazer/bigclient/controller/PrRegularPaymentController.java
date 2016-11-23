@@ -2,8 +2,8 @@ package org.blazer.bigclient.controller;
 
 import com.github.pagehelper.PageInfo;
 import org.blazer.bigclient.excel.ExcelHeader;
-import org.blazer.bigclient.model.PrConstituteCustomer;
-import org.blazer.bigclient.service.PrConstituteCustomerService;
+import org.blazer.bigclient.model.PrRegularPayment;
+import org.blazer.bigclient.service.PrRegularPaymentService;
 import org.blazer.bigclient.util.DateUtil;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.blazer.bigclient.util.StringUtil;
@@ -26,14 +26,14 @@ import java.util.List;
 /**
  * Created by cuican on 2016-11-21.
  */
-@RequestMapping("/pr/constitute_customer")
+@RequestMapping("/pr/regular_payment")
 @Controller
-public class PrConstituteCustomerController extends BaseController {
+public class PrRegularPaymentController extends BaseController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PrConstituteCustomerController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PrRegularPaymentController.class);
 
     @Autowired
-    private PrConstituteCustomerService prConstituteCustomerService;
+    private PrRegularPaymentService prRegularPaymentService;
 
     /**
      * 根据搜索条件分页查询
@@ -45,7 +45,7 @@ public class PrConstituteCustomerController extends BaseController {
      */
     @ResponseBody
     @RequestMapping("findByPage")
-    public PageInfo<PrConstituteCustomer> findByPage(HttpServletRequest request, HttpServletResponse response) {
+    public PageInfo<PrRegularPayment> findByPage(HttpServletRequest request, HttpServletResponse response) {
         //获取前台传递过来的参数
         HashMap<String, String> params = getParamMap(request);
         LOGGER.debug("currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
@@ -59,7 +59,7 @@ public class PrConstituteCustomerController extends BaseController {
         if (advisor != null) {
             params.put("advisorName", advisor.getActualName());
         }*/
-        return this.prConstituteCustomerService.findByPage(params);
+        return this.prRegularPaymentService.findByPage(params);
     }
 
 
@@ -78,27 +78,27 @@ public class PrConstituteCustomerController extends BaseController {
             LOGGER.debug("查询条件---search:" + search);
 
             //xml配置中的ID
-            String id = "prConstituteCustomer";
+            String id = "prRegularPayment";
             // 要导出的数据
-            List<PrConstituteCustomer> list = this.prConstituteCustomerService.findBySearch(search);
+            List<PrRegularPayment> list = this.prRegularPaymentService.findBySearch(search);
             if (list == null || list.size() == 0) {
-                PrConstituteCustomer constituteCustomer = new PrConstituteCustomer();
-                constituteCustomer.setAllotCustomersNumber("测试姓名");
-                list.add(constituteCustomer);
+                PrRegularPayment regularPayment = new PrRegularPayment("空", "空", "空", "空", "空", "空", "空", "空", new Date(), new Date());
+                list.add(regularPayment);
             }
             //excel文件名称,不需要任何后缀
-            String excelName = "ConstituteCustomer_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
+            String excelName = "RegularSalesScaleAccounting_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
             //可以为空,自定义Excel头信息
             ExcelHeader header = null;
             //指定导出字段
             List<String> specifyFields = new ArrayList<String>();
+            specifyFields.add("userName");
+            specifyFields.add("phoneNumber");
+            specifyFields.add("productName");
+            specifyFields.add("productPeriod");
+            specifyFields.add("yearDays");
+            specifyFields.add("principal");
+            specifyFields.add("productRevenue");
             specifyFields.add("investmentAdvisor");
-            specifyFields.add("performanceCustomersNumber");
-            specifyFields.add("pureNewVipCustomers");
-            specifyFields.add("reportedCustomersNumber");
-            specifyFields.add("allotCustomersNumber");
-            specifyFields.add("weeklyGetCustomersNumber");
-            specifyFields.add("currentVipCustomersNumber");
 
             //构建excel试图
             mv = super.createExcelView(id, list, excelName, header, specifyFields);

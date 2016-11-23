@@ -13,6 +13,12 @@ public class PrConstituteCustomer {
     private Long id;
 
     /**
+     * 投资顾问
+     */
+    @Column(name = "investment_advisor")
+    private String investmentAdvisor;
+
+    /**
      * 计入业绩客户数
      */
     @Column(name = "performance_customers_number")
@@ -62,7 +68,11 @@ public class PrConstituteCustomer {
     public PrConstituteCustomer() {
     }
 
-    public PrConstituteCustomer(String performanceCustomersNumber, String pureNewVipCustomers, String reportedCustomersNumber, String allotCustomersNumber, String weeklyGetCustomersNumber, String currentVipCustomersNumber, Date mtime, Date ctime) {
+
+    public PrConstituteCustomer(String investmentAdvisor, String performanceCustomersNumber, String pureNewVipCustomers,
+                                String reportedCustomersNumber, String allotCustomersNumber, String weeklyGetCustomersNumber,
+                                String currentVipCustomersNumber, Date mtime, Date ctime) {
+        this.investmentAdvisor = investmentAdvisor;
         this.performanceCustomersNumber = performanceCustomersNumber;
         this.pureNewVipCustomers = pureNewVipCustomers;
         this.reportedCustomersNumber = reportedCustomersNumber;
@@ -89,6 +99,24 @@ public class PrConstituteCustomer {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /**
+     * 获取投资顾问
+     *
+     * @return investment_advisor - 投资顾问
+     */
+    public String getInvestmentAdvisor() {
+        return investmentAdvisor;
+    }
+
+    /**
+     * 设置投资顾问
+     *
+     * @param investmentAdvisor 投资顾问
+     */
+    public void setInvestmentAdvisor(String investmentAdvisor) {
+        this.investmentAdvisor = investmentAdvisor;
     }
 
     /**
@@ -239,6 +267,7 @@ public class PrConstituteCustomer {
     public String toString() {
         return "PrConstituteCustomer{" +
                 "id=" + id +
+                ", investmentAdvisor='" + investmentAdvisor + '\'' +
                 ", performanceCustomersNumber='" + performanceCustomersNumber + '\'' +
                 ", pureNewVipCustomers='" + pureNewVipCustomers + '\'' +
                 ", reportedCustomersNumber='" + reportedCustomersNumber + '\'' +

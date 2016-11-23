@@ -13,6 +13,12 @@ public class PrCustomerConversionRate {
     private Long id;
 
     /**
+     * 投资顾问
+     */
+    @Column(name = "investment_advisor")
+    private String investmentAdvisor;
+
+    /**
      * 上期客户数
      */
     @Column(name = "last_period_customers_number")
@@ -88,6 +94,32 @@ public class PrCustomerConversionRate {
      */
     private Date ctime;
 
+
+    public PrCustomerConversionRate() {
+    }
+
+    public PrCustomerConversionRate(String investmentAdvisor, String lastPeriodCustomersNumber, String currentPeriodCustomersNumber,
+                                    String lastPeriodRegisteredCustomersNumber, String currentPeriodRegisteredCustomersNumber,
+                                    String lastPeriodTransactionCustomersNumber, String currentPeriodTransactionCustomersNumber,
+                                    String currentPeriodRegisteredCustomersProportion, String customerRegistrationGrowthRate,
+                                    String currentPeriodTransactionsCustomersProportion, String customerTransactionConversionRate,
+                                    String currentPeriodCustomersAumGrowthRate, Date mtime, Date ctime) {
+        this.investmentAdvisor = investmentAdvisor;
+        this.lastPeriodCustomersNumber = lastPeriodCustomersNumber;
+        this.currentPeriodCustomersNumber = currentPeriodCustomersNumber;
+        this.lastPeriodRegisteredCustomersNumber = lastPeriodRegisteredCustomersNumber;
+        this.currentPeriodRegisteredCustomersNumber = currentPeriodRegisteredCustomersNumber;
+        this.lastPeriodTransactionCustomersNumber = lastPeriodTransactionCustomersNumber;
+        this.currentPeriodTransactionCustomersNumber = currentPeriodTransactionCustomersNumber;
+        this.currentPeriodRegisteredCustomersProportion = currentPeriodRegisteredCustomersProportion;
+        this.customerRegistrationGrowthRate = customerRegistrationGrowthRate;
+        this.currentPeriodTransactionsCustomersProportion = currentPeriodTransactionsCustomersProportion;
+        this.customerTransactionConversionRate = customerTransactionConversionRate;
+        this.currentPeriodCustomersAumGrowthRate = currentPeriodCustomersAumGrowthRate;
+        this.mtime = mtime;
+        this.ctime = ctime;
+    }
+
     /**
      * 获取自动编号
      *
@@ -104,6 +136,24 @@ public class PrCustomerConversionRate {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /**
+     * 获取投资顾问
+     *
+     * @return investment_advisor - 投资顾问
+     */
+    public String getInvestmentAdvisor() {
+        return investmentAdvisor;
+    }
+
+    /**
+     * 设置投资顾问
+     *
+     * @param investmentAdvisor 投资顾问
+     */
+    public void setInvestmentAdvisor(String investmentAdvisor) {
+        this.investmentAdvisor = investmentAdvisor;
     }
 
     /**
@@ -338,5 +388,26 @@ public class PrCustomerConversionRate {
      */
     public void setCtime(Date ctime) {
         this.ctime = ctime;
+    }
+
+    @Override
+    public String toString() {
+        return "PrCustomerConversionRate{" +
+                "id=" + id +
+                ", investmentAdvisor='" + investmentAdvisor + '\'' +
+                ", lastPeriodCustomersNumber='" + lastPeriodCustomersNumber + '\'' +
+                ", currentPeriodCustomersNumber='" + currentPeriodCustomersNumber + '\'' +
+                ", lastPeriodRegisteredCustomersNumber='" + lastPeriodRegisteredCustomersNumber + '\'' +
+                ", currentPeriodRegisteredCustomersNumber='" + currentPeriodRegisteredCustomersNumber + '\'' +
+                ", lastPeriodTransactionCustomersNumber='" + lastPeriodTransactionCustomersNumber + '\'' +
+                ", currentPeriodTransactionCustomersNumber='" + currentPeriodTransactionCustomersNumber + '\'' +
+                ", currentPeriodRegisteredCustomersProportion='" + currentPeriodRegisteredCustomersProportion + '\'' +
+                ", customerRegistrationGrowthRate='" + customerRegistrationGrowthRate + '\'' +
+                ", currentPeriodTransactionsCustomersProportion='" + currentPeriodTransactionsCustomersProportion + '\'' +
+                ", customerTransactionConversionRate='" + customerTransactionConversionRate + '\'' +
+                ", currentPeriodCustomersAumGrowthRate='" + currentPeriodCustomersAumGrowthRate + '\'' +
+                ", mtime=" + mtime +
+                ", ctime=" + ctime +
+                '}';
     }
 }
