@@ -81,6 +81,10 @@ public class SrAssetsBalanceController extends BaseController {
             String id = "srAssetsBalance";
             // 要导出的数据
             List<SrAssetsBalance> list = this.srAssetsBalanceService.findBySearch(search);
+            if (list == null || list.size() == 0) {
+                SrAssetsBalance assetsBalance = new SrAssetsBalance("空", 0L, "空", "空", "空", "空", "空", "空", "空", new Date(), new Date());
+                list.add(assetsBalance);
+            }
             //excel文件名称,不需要任何后缀
             String excelName = "AssetsBalance_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
             //可以为空,自定义Excel头信息

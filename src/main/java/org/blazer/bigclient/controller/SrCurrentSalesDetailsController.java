@@ -82,12 +82,12 @@ public class SrCurrentSalesDetailsController extends BaseController {
             // 要导出的数据
             List<SrCurrentSalesDetails> list = this.srCurrentSalesDetailsService.findBySearch(search);
             if (list == null || list.size() == 0) {
-                SrCurrentSalesDetails currentSalesDetails = new SrCurrentSalesDetails();
-                currentSalesDetails.setUserName("测试姓名");
+                SrCurrentSalesDetails currentSalesDetails = new SrCurrentSalesDetails("空", 0L, "空", "空", "空", "空", "空", "空",
+                        "空", "空", new Date(), new Date());
                 list.add(currentSalesDetails);
             }
             //excel文件名称,不需要任何后缀
-            String excelName = "RegularSalesDetails_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
+            String excelName = "CurrentSalesDetails_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
             //可以为空,自定义Excel头信息
             ExcelHeader header = null;
             //指定导出字段

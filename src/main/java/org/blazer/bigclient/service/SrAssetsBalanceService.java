@@ -24,7 +24,7 @@ public class SrAssetsBalanceService extends BaseService<SrAssetsBalance> {
     private static final Logger LOGGER = LoggerFactory.getLogger(SrAssetsBalanceService.class);
 
     public PageInfo<SrAssetsBalance> findByPage(HashMap<String, String> params) {
-        LOGGER.info("根据条件查询资产余额[SrAssetsBalance]列表...");
+        LOGGER.info("根据条件查询：资产余额[SrAssetsBalance]列表...");
         Example example = new Example(SrAssetsBalance.class);
         Example.Criteria criteria = example.createCriteria();
         String search = StringUtil.getStrEmpty(params.get("search"));
@@ -42,7 +42,7 @@ public class SrAssetsBalanceService extends BaseService<SrAssetsBalance> {
     }
 
     public List<SrAssetsBalance> findBySearch(String search) {
-        LOGGER.info("根据条件查询资产余额[SrAssetsBalance]，导出到excel表...");
+        LOGGER.info("根据条件查询：资产余额[SrAssetsBalance]，导出到excel表...");
         Example example = new Example(SrAssetsBalance.class);
         Example.Criteria criteria = example.createCriteria();
         String search_text = StringUtil.getStrEmpty(search);

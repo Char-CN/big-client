@@ -76,6 +76,25 @@ public class SrAssetsBalance {
      */
     private Date ctime;
 
+    public SrAssetsBalance() {
+    }
+
+    public SrAssetsBalance(String userName, Long phoneNumber, String investmentAdviser, String registerDate,
+                           String regularAssetsTotal, String regularAumTimePoint, String currentAssetsTotal,
+                           String currentAumTimePoint, String aumTotal, Date mtime, Date ctime) {
+        this.userName = userName;
+        this.phoneNumber = phoneNumber;
+        this.investmentAdviser = investmentAdviser;
+        this.registerDate = registerDate;
+        this.regularAssetsTotal = regularAssetsTotal;
+        this.regularAumTimePoint = regularAumTimePoint;
+        this.currentAssetsTotal = currentAssetsTotal;
+        this.currentAumTimePoint = currentAumTimePoint;
+        this.aumTotal = aumTotal;
+        this.mtime = mtime;
+        this.ctime = ctime;
+    }
+
     /**
      * 获取自动编号
      *
@@ -290,5 +309,23 @@ public class SrAssetsBalance {
      */
     public void setCtime(Date ctime) {
         this.ctime = ctime;
+    }
+
+    @Override
+    public String toString() {
+        return "SrAssetsBalance{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                ", investmentAdviser='" + investmentAdviser + '\'' +
+                ", registerDate='" + registerDate + '\'' +
+                ", regularAssetsTotal='" + regularAssetsTotal + '\'' +
+                ", regularAumTimePoint='" + regularAumTimePoint + '\'' +
+                ", currentAssetsTotal='" + currentAssetsTotal + '\'' +
+                ", currentAumTimePoint='" + currentAumTimePoint + '\'' +
+                ", aumTotal='" + aumTotal + '\'' +
+                ", mtime=" + mtime +
+                ", ctime=" + ctime +
+                '}';
     }
 }

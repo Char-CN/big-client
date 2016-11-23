@@ -82,6 +82,26 @@ public class SrCurrentSalesDetails {
      */
     private Date ctime;
 
+    public SrCurrentSalesDetails() {
+    }
+
+    public SrCurrentSalesDetails(String userName, Long phoneNumber, String reportOrAllot, String reportOrAllotDate,
+                                 String investmentAdviser, String userIdentify, String baseProductName, String purchaseAmount,
+                                 String currentAssetsTotal, String purchaseDate, Date mtime, Date ctime) {
+        this.userName = userName;
+        this.phoneNumber = phoneNumber;
+        this.reportOrAllot = reportOrAllot;
+        this.reportOrAllotDate = reportOrAllotDate;
+        this.investmentAdviser = investmentAdviser;
+        this.userIdentify = userIdentify;
+        this.baseProductName = baseProductName;
+        this.purchaseAmount = purchaseAmount;
+        this.currentAssetsTotal = currentAssetsTotal;
+        this.purchaseDate = purchaseDate;
+        this.mtime = mtime;
+        this.ctime = ctime;
+    }
+
     /**
      * 获取自动编号
      *
@@ -314,5 +334,24 @@ public class SrCurrentSalesDetails {
      */
     public void setCtime(Date ctime) {
         this.ctime = ctime;
+    }
+
+    @Override
+    public String toString() {
+        return "SrCurrentSalesDetails{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                ", reportOrAllot='" + reportOrAllot + '\'' +
+                ", reportOrAllotDate='" + reportOrAllotDate + '\'' +
+                ", investmentAdviser='" + investmentAdviser + '\'' +
+                ", userIdentify='" + userIdentify + '\'' +
+                ", baseProductName='" + baseProductName + '\'' +
+                ", purchaseAmount='" + purchaseAmount + '\'' +
+                ", currentAssetsTotal='" + currentAssetsTotal + '\'' +
+                ", purchaseDate='" + purchaseDate + '\'' +
+                ", mtime=" + mtime +
+                ", ctime=" + ctime +
+                '}';
     }
 }

@@ -93,6 +93,29 @@ public class SrRegularSalesDetails {
      */
     private Date ctime;
 
+    public SrRegularSalesDetails() {
+    }
+
+    public SrRegularSalesDetails(String userName, Long phoneNumber, String referrer, String rebateExpirationDate,
+                                 String reportOrAllot, String reportOrAllotDate, String investmentAdviser, String userIdentify,
+                                 String basicProductName, String investmentAmount, String regularAssetsTotal, String investmentDate,
+                                 Date mtime, Date ctime) {
+        this.userName = userName;
+        this.phoneNumber = phoneNumber;
+        this.referrer = referrer;
+        this.rebateExpirationDate = rebateExpirationDate;
+        this.reportOrAllot = reportOrAllot;
+        this.reportOrAllotDate = reportOrAllotDate;
+        this.investmentAdviser = investmentAdviser;
+        this.userIdentify = userIdentify;
+        this.basicProductName = basicProductName;
+        this.investmentAmount = investmentAmount;
+        this.regularAssetsTotal = regularAssetsTotal;
+        this.investmentDate = investmentDate;
+        this.mtime = mtime;
+        this.ctime = ctime;
+    }
+
     /**
      * 获取自动编号
      *

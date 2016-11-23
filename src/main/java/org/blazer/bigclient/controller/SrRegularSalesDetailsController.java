@@ -81,6 +81,11 @@ public class SrRegularSalesDetailsController extends BaseController {
             String id = "srRegularSalesDetails";
             // 要导出的数据
             List<SrRegularSalesDetails> list = this.srRegularSalesDetailsService.findBySearch(search);
+            if (list == null || list.size() == 0) {
+                SrRegularSalesDetails regularSalesDetails = new SrRegularSalesDetails("空", 0L, "空", "空", "空","空", "空", "空",
+                                                                                    "空", "空", "空", "空", new Date(), new Date());
+                list.add(regularSalesDetails);
+            }
             //excel文件名称,不需要任何后缀
             String excelName = "RegularSalesDetails_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
             //可以为空,自定义Excel头信息
