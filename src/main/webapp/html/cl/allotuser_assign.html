@@ -22,7 +22,7 @@
         $util.modalOnSave(windowId, function () {
             $.post("cl/allot/assignToFormal.do", {
                 ids: ids,
-                advisor:this_window.find("selecet[name=advisor]").val()
+                advisorId:this_window.find("selecet[name=advisor]").val()
             }, function (data) {
                 if (data.code == 1) {
                     //保存成功，关闭当前窗口

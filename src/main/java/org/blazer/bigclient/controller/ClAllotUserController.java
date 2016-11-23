@@ -78,10 +78,10 @@ public class ClAllotUserController extends BaseController {
         AjaxResult result = AjaxResult.success("分配客户成功...");
         // 分配客户包含两个动作，第一，更新自身的两个字段，客户标识和投资顾问
         // 第二，把分配的客户添加到正式名单中去，操作正式名单表和版本记录表
-        String advisorName = StringUtil.getStrEmpty(request.getParameter("advisor"));
+        String advisorId = StringUtil.getStrEmpty(request.getParameter("advisorId"));
         String ids = StringUtil.getStrEmpty(request.getParameter("ids"));
-        LOGGER.debug("客户即将被分配给投资顾问————" + advisorName);
-        Boolean flag = this.clAllotUserService.assignToFormal(advisorName, ids);
+
+        Boolean flag = this.clAllotUserService.assignToFormal(advisorId, ids);
         if (!flag) {
             result.setCode(AjaxResult.CODE_FAILURE);
             result.setMsg("分配客户失败...");

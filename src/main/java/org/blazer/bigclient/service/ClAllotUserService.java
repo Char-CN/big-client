@@ -69,17 +69,22 @@ public class ClAllotUserService extends BaseService<ClAllotUser> {
     }
 
 
-    public Boolean assignToFormal(String advisorName, String ids) {
+    public Boolean assignToFormal(String advisorId, String ids) {
 
         Boolean flag = false;
 
-        if (StringUtils.isNotEmpty(advisorName) && StringUtils.isNotEmpty(ids)) {
+        if (StringUtils.isNotEmpty(advisorId) && StringUtils.isNotEmpty(ids)) {
 
             try {
+                KamAdvisor advisor = this.kamAdvisorService.selectByKey(advisorId);
+                if(advisor == null){
+                    return flag;
+                }
                 String[] idsArr = ids.split(",");
                 for (int i = 0; i < idsArr.length; i++) {
+
                     ClAllotUser clAllotUser = this.selectByKey(idsArr[i]);
-                    clAllotUser.setInvestmentAdviser(advisorName);
+                    clAllotUser.setInvestmentAdviser(advisor.getActualName());
                     clAllotUser.setUserIdentify("DHK0001");
                     clAllotUser.setMtime(new Date());
                     this.updateNotNull(clAllotUser);
@@ -93,14 +98,11 @@ public class ClAllotUserService extends BaseService<ClAllotUser> {
                     clFormalUser.setIfDelete(0);
                     clFormalUser.setCtime(new Date());
                     this.clFormalUserService.save(clFormalUser);
+
                     //保存到版本表
                     ClFormalUserVersion clFormalUserVersion = new ClFormalUserVersion();
                     clFormalUserVersion.setUserId(clFormalUser.getId());
-                    KamAdvisor kamAdvisor = this.kamAdvisorService.selectByActualName(clAllotUser.getInvestmentAdviser());
-                    if(kamAdvisor == null){
-                        return flag;
-                    }
-                    clFormalUserVersion.setAdvisorId(kamAdvisor.getId());
+                    clFormalUserVersion.setAdvisorId(Long.parseLong(advisorId));
                     clFormalUserVersion.setVersionNo("1");
                     clFormalUserVersion.setStartDate(DateUtil.str2Date(clFormalUser.getReportOrAllotDate()));
                     clFormalUserVersion.setCtime(new Date());
