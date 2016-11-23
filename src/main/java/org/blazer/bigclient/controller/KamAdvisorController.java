@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,6 +51,19 @@ public class KamAdvisorController extends BaseController {
                 ", search:" + StringUtil.getStrEmpty(params.get("search")));
         return kamAdvisorService.findByPage(params);
     }
+
+    /**
+     * 查询所有投顾
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/findAll")
+    public List<KamAdvisor> findAll(){
+        Example example = new Example(KamAdvisor.class);
+        return kamAdvisorService.selectByExample(example);
+    }
+
 
     /**
      * 单个保存
