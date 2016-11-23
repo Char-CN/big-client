@@ -10,7 +10,7 @@
             }
             _currentPage_lastCurrent = currentPage;
             lock = true;
-            $.post("sr/current_sales_details/findByPage.do", {
+            $.post("pa/regular_sales_scale/findByPage.do", {
                 currentPage: currentPage,
                 pageSize: 10,
                 search: search_text
@@ -69,7 +69,7 @@
          */
         $("#exportExcel").click(function () {
             downLoadFile({
-                url: 'sr/assets_balance/exportExcel.do', //请求的url
+                url: 'pa/regular_sales_scale/exportExcel.do', //请求的url
                 data: {search: search_text},//要发送的数据
                 callback: function () {
                     //alert("导出excel文件成功");
@@ -90,26 +90,26 @@
 </div>
 <hr class="line-3"/>
 <div class="table-responsive">
-    <table id="tb" class="table table-hover table-condensed table-bordered">
+    <table id="tb" class="table table-hover table-condensed table-bordered" style="width: 2000px">
         <thead>
-        <tr>
-            <th>客户姓名</th>
-            <th>手机号码</th>
-            <th>扫码推荐人</th>
-            <th>返利失效日期</th>
-            <th>上报/分配</th>
-            <th>上报/分配日期</th>
-            <th>投资顾问</th>
-            <th>客户标识</th>
-            <th>基础产品名称</th>
-            <th>投资金额</th>
-            <th>现有资产</th>
-            <th>购买日期</th>
-            <th>分配系数</th>
-            <th>业绩池系数</th>
-            <th>产品系数</th>
-            <th>有效销售金额</th>
-        </tr>
+            <tr>
+                <th>客户姓名</th>
+                <th>手机号码</th>
+                <th>扫码推荐人</th>
+                <th>返利失效日期</th>
+                <th>上报/分配</th>
+                <th>上报/分配日期</th>
+                <th>投资顾问</th>
+                <th>客户标识</th>
+                <th>基础产品名称</th>
+                <th>投资金额</th>
+                <th>现有资产</th>
+                <th>购买日期</th>
+                <th>分配系数</th>
+                <th>业绩池系数</th>
+                <th>产品系数</th>
+                <th>有效销售金额</th>
+            </tr>
         </thead>
         <tbody>
         </tbody>

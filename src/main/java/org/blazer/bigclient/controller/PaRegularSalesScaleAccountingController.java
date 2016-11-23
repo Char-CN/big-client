@@ -82,8 +82,8 @@ public class PaRegularSalesScaleAccountingController extends BaseController {
             // 要导出的数据
             List<PaRegularSalesScaleAccounting> list = this.paRegularSalesScaleAccountingService.findBySearch(search);
             if (list == null || list.size() == 0) {
-                PaRegularSalesScaleAccounting regularSalesScaleAccounting = new PaRegularSalesScaleAccounting();
-                regularSalesScaleAccounting.setUserName("测试姓名");
+                PaRegularSalesScaleAccounting regularSalesScaleAccounting = new PaRegularSalesScaleAccounting("空", Long.parseLong(0 + ""),
+                        "空", "空", "空","空", "空", "空", "空", "空", "空", "空", 0, 0, 0, Double.parseDouble(0 + ""), new Date(), new Date());
                 list.add(regularSalesScaleAccounting);
             }
             //excel文件名称,不需要任何后缀

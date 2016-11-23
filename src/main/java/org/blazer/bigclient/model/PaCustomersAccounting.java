@@ -122,6 +122,35 @@ public class PaCustomersAccounting {
      */
     private Date ctime;
 
+    public PaCustomersAccounting() {
+    }
+
+    public PaCustomersAccounting(String userName, Long phoneNumber, String registerDate, String investmentAdviser, String userIdentify,
+                                 Integer ifPerformancePool, String endingBalance, Integer endingNotLessThanFifty, String buyAmount,
+                                 String beginningBalance, Integer beginningNoGreaterThanFifty, String matchingPeriodInitialValue,
+                                 String beginningComparison, String difference, String redemptionOrder, String revise, String errorQuery,
+                                 Date mtime, Date ctime) {
+        this.userName = userName;
+        this.phoneNumber = phoneNumber;
+        this.registerDate = registerDate;
+        this.investmentAdviser = investmentAdviser;
+        this.userIdentify = userIdentify;
+        this.ifPerformancePool = ifPerformancePool;
+        this.endingBalance = endingBalance;
+        this.endingNotLessThanFifty = endingNotLessThanFifty;
+        this.buyAmount = buyAmount;
+        this.beginningBalance = beginningBalance;
+        this.beginningNoGreaterThanFifty = beginningNoGreaterThanFifty;
+        this.matchingPeriodInitialValue = matchingPeriodInitialValue;
+        this.beginningComparison = beginningComparison;
+        this.difference = difference;
+        this.redemptionOrder = redemptionOrder;
+        this.revise = revise;
+        this.errorQuery = errorQuery;
+        this.mtime = mtime;
+        this.ctime = ctime;
+    }
+
     /**
      * 获取自动编号
      *
@@ -480,5 +509,31 @@ public class PaCustomersAccounting {
      */
     public void setCtime(Date ctime) {
         this.ctime = ctime;
+    }
+
+    @Override
+    public String toString() {
+        return "PaCustomersAccounting{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                ", registerDate='" + registerDate + '\'' +
+                ", investmentAdviser='" + investmentAdviser + '\'' +
+                ", userIdentify='" + userIdentify + '\'' +
+                ", ifPerformancePool=" + ifPerformancePool +
+                ", endingBalance='" + endingBalance + '\'' +
+                ", endingNotLessThanFifty=" + endingNotLessThanFifty +
+                ", buyAmount='" + buyAmount + '\'' +
+                ", beginningBalance='" + beginningBalance + '\'' +
+                ", beginningNoGreaterThanFifty=" + beginningNoGreaterThanFifty +
+                ", matchingPeriodInitialValue='" + matchingPeriodInitialValue + '\'' +
+                ", beginningComparison='" + beginningComparison + '\'' +
+                ", difference='" + difference + '\'' +
+                ", redemptionOrder='" + redemptionOrder + '\'' +
+                ", revise='" + revise + '\'' +
+                ", errorQuery='" + errorQuery + '\'' +
+                ", mtime=" + mtime +
+                ", ctime=" + ctime +
+                '}';
     }
 }

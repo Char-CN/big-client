@@ -82,12 +82,12 @@ public class PaCustomersAccountingController extends BaseController {
             // 要导出的数据
             List<PaCustomersAccounting> list = this.paCustomersAccountingService.findBySearch(search);
             if (list == null || list.size() == 0) {
-                PaCustomersAccounting customersAccounting = new PaCustomersAccounting();
-//                currentSalesDetails.setUserName("测试姓名");
+                PaCustomersAccounting customersAccounting = new PaCustomersAccounting("空", Long.parseLong(0 + ""), "空", "空", "空",
+                        0, "空", 0, "空", "空", 0, "空", "空", "空", "空", "空", "空", new Date(), new Date());
                 list.add(customersAccounting);
             }
             //excel文件名称,不需要任何后缀
-            String excelName = "RegularSalesScaleAccounting_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
+            String excelName = "CustomersAccounting_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
             //可以为空,自定义Excel头信息
             ExcelHeader header = null;
             //指定导出字段

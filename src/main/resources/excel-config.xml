@@ -173,7 +173,7 @@
 
 	<!--活期销售规模核算-->
 	<excel id="paCurrentSalesScaleAccounting" class="org.blazer.bigclient.model.PaCurrentSalesScaleAccounting"
-		   sheetname="活期销售规模核算" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
+		   sheetname="活期销售规模核算" defaultColumnWidth="6000" enableStyle="true" defaultAlign="center">
 		<field name="id" title="自动编号"/>
 		<field name="investmentAdviser" title="投资顾问"/>
 		<field name="monthlyPurchaseAmount" title="当月申购金额（万元）"/>

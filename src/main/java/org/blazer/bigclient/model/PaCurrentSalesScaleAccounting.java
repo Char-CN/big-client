@@ -64,6 +64,24 @@ public class PaCurrentSalesScaleAccounting {
      */
     private Date ctime;
 
+
+    public PaCurrentSalesScaleAccounting() {
+    }
+
+    public PaCurrentSalesScaleAccounting(String investmentAdviser, Double monthlyPurchaseAmount, Double monthlyPurchaseAmount10,
+                                         Double monthlyInvestmentTarget, Double monthlyPerformanceLimit, Double effectiveCurrentSalesScale,
+                                         Double deferredNextMonth, Date mtime, Date ctime) {
+        this.investmentAdviser = investmentAdviser;
+        this.monthlyPurchaseAmount = monthlyPurchaseAmount;
+        this.monthlyPurchaseAmount10 = monthlyPurchaseAmount10;
+        this.monthlyInvestmentTarget = monthlyInvestmentTarget;
+        this.monthlyPerformanceLimit = monthlyPerformanceLimit;
+        this.effectiveCurrentSalesScale = effectiveCurrentSalesScale;
+        this.deferredNextMonth = deferredNextMonth;
+        this.mtime = mtime;
+        this.ctime = ctime;
+    }
+
     /**
      * 获取自动编号
      *
@@ -242,5 +260,21 @@ public class PaCurrentSalesScaleAccounting {
      */
     public void setCtime(Date ctime) {
         this.ctime = ctime;
+    }
+
+    @Override
+    public String toString() {
+        return "PaCurrentSalesScaleAccounting{" +
+                "id=" + id +
+                ", investmentAdviser='" + investmentAdviser + '\'' +
+                ", monthlyPurchaseAmount=" + monthlyPurchaseAmount +
+                ", monthlyPurchaseAmount10=" + monthlyPurchaseAmount10 +
+                ", monthlyInvestmentTarget=" + monthlyInvestmentTarget +
+                ", monthlyPerformanceLimit=" + monthlyPerformanceLimit +
+                ", effectiveCurrentSalesScale=" + effectiveCurrentSalesScale +
+                ", deferredNextMonth=" + deferredNextMonth +
+                ", mtime=" + mtime +
+                ", ctime=" + ctime +
+                '}';
     }
 }

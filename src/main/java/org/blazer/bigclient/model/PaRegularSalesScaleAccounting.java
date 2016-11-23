@@ -117,6 +117,35 @@ public class PaRegularSalesScaleAccounting {
      */
     private Date ctime;
 
+    public PaRegularSalesScaleAccounting() {
+    }
+
+    public PaRegularSalesScaleAccounting(String userName, Long phoneNumber, String referrer, String rebateExpirationDate,
+                                         String reportOrAllot, String reportOrAllotDate, String investmentAdviser,
+                                         String userIdentify, String basicProductName, String investmentAmount,
+                                         String regularAssetsTotal, String investmentDate, Integer partitionCoefficient,
+                                         Integer performancePoolCoefficient, Integer productCoefficient, Double effectiveSalesAmount,
+                                         Date mtime, Date ctime) {
+        this.userName = userName;
+        this.phoneNumber = phoneNumber;
+        this.referrer = referrer;
+        this.rebateExpirationDate = rebateExpirationDate;
+        this.reportOrAllot = reportOrAllot;
+        this.reportOrAllotDate = reportOrAllotDate;
+        this.investmentAdviser = investmentAdviser;
+        this.userIdentify = userIdentify;
+        this.basicProductName = basicProductName;
+        this.investmentAmount = investmentAmount;
+        this.regularAssetsTotal = regularAssetsTotal;
+        this.investmentDate = investmentDate;
+        this.partitionCoefficient = partitionCoefficient;
+        this.performancePoolCoefficient = performancePoolCoefficient;
+        this.productCoefficient = productCoefficient;
+        this.effectiveSalesAmount = effectiveSalesAmount;
+        this.mtime = mtime;
+        this.ctime = ctime;
+    }
+
     /**
      * 获取自动编号
      *
@@ -457,5 +486,30 @@ public class PaRegularSalesScaleAccounting {
      */
     public void setCtime(Date ctime) {
         this.ctime = ctime;
+    }
+
+    @Override
+    public String toString() {
+        return "PaRegularSalesScaleAccounting{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                ", referrer='" + referrer + '\'' +
+                ", rebateExpirationDate='" + rebateExpirationDate + '\'' +
+                ", reportOrAllot='" + reportOrAllot + '\'' +
+                ", reportOrAllotDate='" + reportOrAllotDate + '\'' +
+                ", investmentAdviser='" + investmentAdviser + '\'' +
+                ", userIdentify='" + userIdentify + '\'' +
+                ", basicProductName='" + basicProductName + '\'' +
+                ", investmentAmount='" + investmentAmount + '\'' +
+                ", regularAssetsTotal='" + regularAssetsTotal + '\'' +
+                ", investmentDate='" + investmentDate + '\'' +
+                ", partitionCoefficient=" + partitionCoefficient +
+                ", performancePoolCoefficient=" + performancePoolCoefficient +
+                ", productCoefficient=" + productCoefficient +
+                ", effectiveSalesAmount=" + effectiveSalesAmount +
+                ", mtime=" + mtime +
+                ", ctime=" + ctime +
+                '}';
     }
 }
