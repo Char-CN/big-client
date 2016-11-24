@@ -8,11 +8,12 @@
         var this_window = $("#" + windowId);
         //获取参数
         var ids = $util.getQueryString(queryString, "ids");
+        console.log(ids[0]);
 
         //查询所有投顾,构建options
         $.post("advisor/findAll.do", function (data) {
             for (var i = 0; i < data.length; i++) {
-                $("#advisor").append("<option value='" + data[i].id + "'>" + data[i].actualName + "</option>");
+                this_window.find(" select[name=advisor]").append("<option value='" + data[i].id + "'>" + data[i].actualName + "</option>");
             }
         });
 
@@ -22,7 +23,7 @@
         $util.modalOnSave(windowId, function () {
             $.post("cl/allot/assignToFormal.do", {
                 ids: ids,
-                advisorId:this_window.find("selecet[name=advisor]").val()
+                advisorId: this_window.find("select[name=advisor]").val()
             }, function (data) {
                 if (data.code == 1) {
                     //保存成功，关闭当前窗口

@@ -80,7 +80,6 @@ public class ClAllotUserController extends BaseController {
         // 第二，把分配的客户添加到正式名单中去，操作正式名单表和版本记录表
         String advisorId = StringUtil.getStrEmpty(request.getParameter("advisorId"));
         String ids = StringUtil.getStrEmpty(request.getParameter("ids"));
-
         Boolean flag = this.clAllotUserService.assignToFormal(advisorId, ids);
         if (!flag) {
             result.setCode(AjaxResult.CODE_FAILURE);

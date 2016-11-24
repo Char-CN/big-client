@@ -53,7 +53,7 @@ public class ClAllotUserService extends BaseService<ClAllotUser> {
         criteria.andEqualTo("ifDelete", 0);
         PageHelper.startPage(IntegerUtil.getIntZero(params.get("currentPage")), IntegerUtil.getIntZero(params.get("pageSize")));
         List<ClAllotUser> list = selectByExample(example);
-        return new PageInfo<ClAllotUser>(list);
+        return new PageInfo<>(list);
     }
 
     public List<ClAllotUser> findBySearch(String search) {
@@ -76,16 +76,16 @@ public class ClAllotUserService extends BaseService<ClAllotUser> {
         if (StringUtils.isNotEmpty(advisorId) && StringUtils.isNotEmpty(ids)) {
 
             try {
-                KamAdvisor advisor = this.kamAdvisorService.selectByKey(advisorId);
+                KamAdvisor advisor = this.kamAdvisorService.selectByKey(Long.parseLong(advisorId));
                 if(advisor == null){
                     return flag;
                 }
                 String[] idsArr = ids.split(",");
                 for (int i = 0; i < idsArr.length; i++) {
 
-                    ClAllotUser clAllotUser = this.selectByKey(idsArr[i]);
+                    ClAllotUser clAllotUser = this.selectByKey(Long.parseLong(idsArr[i]));
                     clAllotUser.setInvestmentAdviser(advisor.getActualName());
-                    clAllotUser.setUserIdentify("DHK0001");
+                    clAllotUser.setUserIdentify("DKH001");
                     clAllotUser.setMtime(new Date());
                     this.updateNotNull(clAllotUser);
 
