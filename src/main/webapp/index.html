@@ -33,12 +33,16 @@
 	<script src="js/base.js"></script>
 	<script src="js/commons.js"></script>
 	<script type="text/javascript" src="js/laydate.js"></script>
-	<!--<script type="text/javascript" src="http://bigdata.blazer.org:8030/js/userservice.js"></script>-->
+	<script type="text/javascript" charset="utf-8" src="http://bigdata.blazer.org:8030/js/userservice.js"></script>
 <script>
-	/*var $userservice = new $userservice("user-service");*/
+	var $userservice = new $userservice("user-service");
 	window.onload = function() {
-		/*//获取用户名
-		$(".login>li:eq(0)").append($userservice.userName + '('+ $userservice.userNameCn+')');*/
+		//获取用户名
+//		$(".login>li:eq(0)").append($userservice.userName + '('+ $userservice.userNameCn+')');
+		$("#showname").text($userservice.userNameCn);
+		$("#logout").click(function(){
+			$userservice.logout();
+		});
 
 		var width = $(window).width();
 		var height = $(window).height();
@@ -143,7 +147,7 @@
 			link_ul.append(link_li_e2);
 
 			//默认页面
-			link_li_a3.click();
+			link_li_e2.click();
 		};
 		var setSrc = function(obj, src) {
 			$("#center_head").text($(obj).text());
@@ -213,8 +217,8 @@
 					</li>
 				</ul>
 				<ul class="in_right login">
-					<li class="in_left"><a href="javascript:void(0);" onclick="alert('上菜');" class="exit"></a></li>
-					<li class="in_left"><a href="javascript:void(0);" onclick="alert('登不出');" class="border">登出</a></li>
+					<li class="in_left"><a id="showname" href="javascript:void(0);" class="border"></a></li>
+					<li class="in_left"><a id="logout" href="javascript:void(0);" class="border">登出</a></li>
 				</ul>
 				</nav>
 			</section>

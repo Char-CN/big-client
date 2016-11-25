@@ -84,29 +84,33 @@ public class ClAllotUserService extends BaseService<ClAllotUser> {
                 for (int i = 0; i < idsArr.length; i++) {
 
                     ClAllotUser clAllotUser = this.selectByKey(Long.parseLong(idsArr[i]));
-                    clAllotUser.setInvestmentAdviser(advisor.getActualName());
-                    clAllotUser.setUserIdentify("DKH001");
-                    clAllotUser.setMtime(new Date());
-                    this.updateNotNull(clAllotUser);
+                    if (StringUtils.isNotEmpty(clAllotUser.getInvestmentAdviser())) {
+                        return flag;
+                    } else {
+                        clAllotUser.setInvestmentAdviser(advisor.getActualName());
+                        clAllotUser.setUserIdentify("DKH001");
+                        clAllotUser.setMtime(new Date());
+                        this.updateNotNull(clAllotUser);
 
-                    //保存到正式名单表
-                    ClFormalUser clFormalUser = new ClFormalUser();
-                    clFormalUser.setPhoneNumber(clAllotUser.getPhoneNumber());
-                    clFormalUser.setReportOrAllot("分配");
-                    clFormalUser.setReportOrAllotDate(DateUtil.thisDate());
-                    clFormalUser.setUserIdentify("DHK0001");
-                    clFormalUser.setIfDelete(0);
-                    clFormalUser.setCtime(new Date());
-                    this.clFormalUserService.save(clFormalUser);
+                        //保存到正式名单表
+                        ClFormalUser clFormalUser = new ClFormalUser();
+                        clFormalUser.setPhoneNumber(clAllotUser.getPhoneNumber());
+                        clFormalUser.setReportOrAllot("分配");
+                        clFormalUser.setReportOrAllotDate(DateUtil.thisDate());
+                        clFormalUser.setUserIdentify("DHK0001");
+                        clFormalUser.setIfDelete(0);
+                        clFormalUser.setCtime(new Date());
+                        this.clFormalUserService.save(clFormalUser);
 
-                    //保存到版本表
-                    ClFormalUserVersion clFormalUserVersion = new ClFormalUserVersion();
-                    clFormalUserVersion.setUserId(clFormalUser.getId());
-                    clFormalUserVersion.setAdvisorId(Long.parseLong(advisorId));
-                    clFormalUserVersion.setVersionNo("1");
-                    clFormalUserVersion.setStartDate(DateUtil.str2Date(clFormalUser.getReportOrAllotDate()));
-                    clFormalUserVersion.setCtime(new Date());
-                    this.clFormalUserVersionService.save(clFormalUserVersion);
+                        //保存到版本表
+                        ClFormalUserVersion clFormalUserVersion = new ClFormalUserVersion();
+                        clFormalUserVersion.setUserId(clFormalUser.getId());
+                        clFormalUserVersion.setAdvisorId(Long.parseLong(advisorId));
+                        clFormalUserVersion.setVersionNo("1");
+                        clFormalUserVersion.setStartDate(DateUtil.str2Date(clFormalUser.getReportOrAllotDate()));
+                        clFormalUserVersion.setCtime(new Date());
+                        this.clFormalUserVersionService.save(clFormalUserVersion);
+                    }
                 }
                 flag = true;
             } catch (Exception e) {
