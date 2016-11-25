@@ -25,11 +25,12 @@ public class ExcelHandlerUtil {
         System.out.println("目标文件名fileName = " + targetFileName);
 
         //设置目标文件夹地址
-        String realPath = request.getSession().getServletContext().getRealPath("/");
+        /*String realPath = request.getSession().getServletContext().getRealPath("/");
         System.out.println("项目所在绝对路径地址realPath = " + realPath);
         String[] strs = realPath.split("target");
         System.out.println(strs[0]);
-        String targetDirectory = strs[0] + "src\\upload\\";
+        String targetDirectory = strs[0] + "src\\upload\\";*/
+        String targetDirectory = "/opt/excel";
         System.out.println("标文件夹地址targetDirectory = " + targetDirectory);
 
         // 将Excle文件名称和路径存到数据库中

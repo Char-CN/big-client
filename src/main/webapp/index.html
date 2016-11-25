@@ -35,7 +35,7 @@
 	<script type="text/javascript" src="js/laydate.js"></script>
 	<script type="text/javascript" charset="utf-8" src="http://bigdata.blazer.org:8030/js/userservice.js"></script>
 <script>
-	var $userservice = new $userservice("user-service");
+	var $userservice = new $userservice("big-client");
 	window.onload = function() {
 
 		//获取用户名
@@ -148,7 +148,7 @@
 			link_ul.append(link_li_e2);
 
 			//默认页面
-			link_li_e2.click();
+			link_li_a1.click();
 		};
 		var setSrc = function(obj, src) {
 			$("#center_head").text($(obj).text());
