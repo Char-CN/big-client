@@ -43,10 +43,10 @@ public class ClFormalUser {
     private Integer ifDelete;
 
     /**
-     * 是否业绩池
+     * 是否业绩池（0：否，1：是）
      */
     @Column(name = "if_performance_pool")
-    private String ifPerformancePool;
+    private Integer ifPerformancePool;
 
     /**
      * 更新时间
@@ -171,7 +171,7 @@ public class ClFormalUser {
      *
      * @return if_performance_pool - 是否业绩池
      */
-    public String getIfPerformancePool() {
+    public Integer getIfPerformancePool() {
         return ifPerformancePool;
     }
 
@@ -180,7 +180,7 @@ public class ClFormalUser {
      *
      * @param ifPerformancePool 是否业绩池
      */
-    public void setIfPerformancePool(String ifPerformancePool) {
+    public void setIfPerformancePool(Integer ifPerformancePool) {
         this.ifPerformancePool = ifPerformancePool;
     }
 

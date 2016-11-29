@@ -20,7 +20,7 @@ public class FormalUserBean implements Serializable {
     private String reportOrAllotDate;
     private String userIdentify;
     private String investmentAdviser;
-    private String ifPerformancePool;
+    private Integer ifPerformancePool;
     private String versionNo;
     private Date startDate;
     private Date endDate;
@@ -75,11 +75,11 @@ public class FormalUserBean implements Serializable {
         this.investmentAdviser = investmentAdviser;
     }
 
-    public String getIfPerformancePool() {
+    public Integer getIfPerformancePool() {
         return ifPerformancePool;
     }
 
-    public void setIfPerformancePool(String ifPerformancePool) {
+    public void setIfPerformancePool(Integer ifPerformancePool) {
         this.ifPerformancePool = ifPerformancePool;
     }
 

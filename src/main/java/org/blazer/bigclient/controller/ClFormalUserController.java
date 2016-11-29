@@ -95,7 +95,7 @@ public class ClFormalUserController extends BaseController {
         try {
             //修改用户，先根据id查询到客户
             ClFormalUser user = this.clFormalUserService.selectByKey(id);
-            user.setIfPerformancePool(ifPerformancePool);
+            user.setIfPerformancePool(Integer.parseInt(ifPerformancePool));
             user.setMtime(new Date());
             this.clFormalUserService.updateNotNull(user);
         } catch (Exception e) {
