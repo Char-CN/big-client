@@ -1,6 +1,8 @@
 package org.blazer.bigclient.service;
 
+import org.blazer.bigclient.mapper.ClPerformancePoolListMapper;
 import org.blazer.bigclient.model.ClPerformancePoolList;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,4 +13,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ClPerformancePoolListService extends BaseService<ClPerformancePoolList> {
+
+    @Autowired
+    private ClPerformancePoolListMapper clPerformancePoolListMapper;
+
+    public void deleteAll() {
+        this.clPerformancePoolListMapper.deleteAll();
+    }
 }

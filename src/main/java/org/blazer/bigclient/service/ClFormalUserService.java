@@ -45,6 +45,8 @@ public class ClFormalUserService extends BaseService<ClFormalUser> {
      */
     public void importExcelData(List<ClPerformancePoolList> listBean, ClExcel excel) {
 
+        this.clPerformancePoolListService.deleteAll();
+
         if (listBean != null && listBean.size() > 0 && excel != null) {
 
             //保存excel文件对象信息到数据库表
