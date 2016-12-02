@@ -48,13 +48,15 @@ public class ExcelXmlBuild {
         System.out.println(xml6);
         String xml7 = builderXml("advisorInfoBean", "投资顾问信息", true, AdvisorInfoBean.class, 5000);
         System.out.println(xml7);*/
-        String xml1 = builderXml("prConstituteCustomer", "获客构成", true, PrConstituteCustomer.class, 5000);
-        System.out.println(xml1);
-        String xml2 = builderXml("prCustomerConversionRate", "客户转换率", true, PrCustomerConversionRate.class, 5000);
-        System.out.println(xml2);
-        String xml3 = builderXml("prPerformanceReport", "业绩报表", true, PrPerformanceReport.class, 5000);
-        System.out.println(xml3);
-        String xml4 = builderXml("prRegularPayment", "定期兑付报表", true, PrRegularPayment.class, 5000);
+//        String xml1 = builderXml("prConstituteCustomer", "获客构成", true, PrConstituteCustomer.class, 5000);
+//        System.out.println(xml1);
+//        String xml2 = builderXml("prCustomerConversionRate", "客户转换率", true, PrCustomerConversionRate.class, 5000);
+//        System.out.println(xml2);
+//        String xml3 = builderXml("prPerformanceReport", "业绩报表", true, PrPerformanceReport.class, 5000);
+//        System.out.println(xml3);
+//        String xml4 = builderXml("prRegularPayment", "定期兑付报表", true, PrRegularPayment.class, 5000);
+//        System.out.println(xml4);
+       String xml4 = builderXml("clPerformancePoolList", "业绩池名单", true, ClPerformancePoolList.class, 5000);
         System.out.println(xml4);
 
     }

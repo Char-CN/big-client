@@ -5,7 +5,7 @@ import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.blazer.bigclient.body.FormalUserBean;
 import org.blazer.bigclient.mapper.ClFormalUserMapper;
-import org.blazer.bigclient.model.ClFormalUser;
+import org.blazer.bigclient.model.*;
 import org.blazer.bigclient.util.DateUtil;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.blazer.bigclient.util.LongUtil;
@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,6 +30,43 @@ public class ClFormalUserService extends BaseService<ClFormalUser> {
 
     @Autowired
     private ClFormalUserMapper clFormalUserMapper;
+
+    @Autowired
+    private ClExcelService clExcelService;
+
+    @Autowired
+    private ClPerformancePoolListService clPerformancePoolListService;
+
+    /**
+     * 保存excel导入数据
+     *
+     * @param listBean
+     * @param excel
+     */
+    public void importExcelData(List<ClPerformancePoolList> listBean, ClExcel excel) {
+
+        if (listBean != null && listBean.size() > 0 && excel != null) {
+
+            //保存excel文件对象信息到数据库表
+            LOGGER.info("保存excel对象信息到数据库表。");
+            this.clExcelService.getMapper().insert(excel);
+
+            //遍历上传名单的list集合，完善每一个客户对象信息
+            for (int i = 0; i < listBean.size(); i++) {
+                //先用该手机号匹配正式名单的客户
+                ClPerformancePoolList clPerformancePoolList = listBean.get(i);
+                Long phoneNumber = LongUtil.getLongZero(clPerformancePoolList.getPhoneNumber());
+                ClFormalUser formalUser = this.selectByPhoneNumber(phoneNumber);
+
+                if (formalUser != null) {
+                    clPerformancePoolList.setCtime(new Date());//该记录创建时间
+                    formalUser.setIfPerformancePool(1);
+                    this.updateNotNull(formalUser);
+                    this.clPerformancePoolListService.save(clPerformancePoolList);
+                }
+            }
+        }
+    }
 
     /**
      * 根据手机号查询单个客户
@@ -91,4 +129,6 @@ public class ClFormalUserService extends BaseService<ClFormalUser> {
 
         return this.clFormalUserMapper.selectMaxVersionList(search,dateStart,dateEnd,history);
     }
+
+
 }

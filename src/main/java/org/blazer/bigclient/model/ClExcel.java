@@ -3,7 +3,7 @@ package org.blazer.bigclient.model;
 import java.util.Date;
 import javax.persistence.*;
 
-@Table(name = "kam_excel")
+@Table(name = "cl_excel")
 public class ClExcel {
     /**
      * 自动编号
