@@ -56,7 +56,9 @@ public class ExcelXmlBuild {
 //        System.out.println(xml3);
 //        String xml4 = builderXml("prRegularPayment", "定期兑付报表", true, PrRegularPayment.class, 5000);
 //        System.out.println(xml4);
-       String xml4 = builderXml("clPerformancePoolList", "业绩池名单", true, ClPerformancePoolList.class, 5000);
+//       String xml4 = builderXml("clPerformancePoolList", "业绩池名单", true, ClPerformancePoolList.class, 5000);
+//        System.out.println(xml4);
+        String xml4 = builderXml("paCurrentSalesScaleAccounting", "活期销售规模核算", true, PaCurrentSalesScaleAccounting.class, 5000);
         System.out.println(xml4);
 
     }

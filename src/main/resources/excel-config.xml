@@ -167,7 +167,7 @@
 		<field name="reportOrAllotDate" title="上报/分配时间"/>
 		<field name="investmentAdviser" title="投资顾问"/>
 		<field name="userIdentify" title="客户标识"/>
-		<field name="basicProductName" title="基础产品名称（定期）"/>
+		<field name="basicProductName" title="基础产品名称"/>
 		<field name="investmentAmount" title="投资金额"/>
 		<field name="regularAssetsTotal" title="现有资产"/>
 		<field name="investmentDate" title="购买时间"/>
@@ -181,15 +181,21 @@
 
 	<!--活期销售规模核算-->
 	<excel id="paCurrentSalesScaleAccounting" class="org.blazer.bigclient.model.PaCurrentSalesScaleAccounting"
-		   sheetname="活期销售规模核算" defaultColumnWidth="6000" enableStyle="true" defaultAlign="center">
+		   sheetname="活期销售规模核算" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
 		<field name="id" title="自动编号"/>
+		<field name="userName" title="客户姓名"/>
+		<field name="phoneNumber" title="手机号码"/>
+		<field name="reportOrAllot" title="上报/分配"/>
+		<field name="reportOrAllotDate" title="上报/分配时间"/>
 		<field name="investmentAdviser" title="投资顾问"/>
-		<field name="monthlyPurchaseAmount" title="当月申购金额（万元）"/>
-		<field name="monthlyPurchaseAmount10" title="当月申购金额/10（千元）"/>
-		<field name="monthlyInvestmentTarget" title="月投资规模目标（万元）"/>
-		<field name="monthlyPerformanceLimit" title="当月活期业绩上限（万元）"/>
-		<field name="effectiveCurrentSalesScale" title="有效活期销售规模（万元）"/>
-		<field name="deferredNextMonth" title="递延下月（万元）"/>
+		<field name="userIdentify" title="客户标识"/>
+		<field name="basicProductName" title="基础产品名称"/>
+		<field name="monthlyPurchaseAmount" title="申购金额"/>
+		<field name="purchaseDate" title="申购日期"/>
+		<field name="monthlyPurchaseAmount10" title="申购金额/10"/>
+		<field name="ifReport" title="是否上报"/>
+		<field name="effectiveCurrentSalesScale" title="有效金额"/>
+		<field name="deferredNextMonth" title="递延下月金额"/>
 		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>

@@ -202,6 +202,9 @@
 
         //ajax上传文件
         var ajaxFileUpload = function() {
+            //TODO add loading
+
+
             $.ajaxFileUpload({
                 url : "/cl/formal/importExcel.do", //用于文件上传的服务器端请求地址
                 type : "post",
@@ -224,6 +227,10 @@
                 },
                 error : function(data, status, e) { //服务器响应失败处理函数
                     alert(data.msg + "---" + e);
+                },
+                complete : function(){
+                    //TODO delete loading
+
                 }
             });
         };

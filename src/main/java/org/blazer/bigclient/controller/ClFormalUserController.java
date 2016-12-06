@@ -35,7 +35,7 @@ import java.util.*;
 @Controller
 public class ClFormalUserController extends BaseController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ClAllotUserController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClFormalUserController.class);
 
     //设置文件允许上传的类型
     private static final HashMap<String, String> TypeMap = new HashMap<String, String>();

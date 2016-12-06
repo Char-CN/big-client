@@ -2,9 +2,7 @@ package org.blazer.bigclient.test;
 
 import org.apache.ibatis.session.SqlSession;
 import org.blazer.bigclient.mapper.PaRegularSalesScaleAccountingMapper;
-import org.blazer.bigclient.mapper.PrRegularPaymentMapper;
 import org.blazer.bigclient.model.PaRegularSalesScaleAccounting;
-import org.blazer.bigclient.model.PrRegularPayment;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
