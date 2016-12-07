@@ -18,10 +18,4 @@
     <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
   </resultMap>
 
-
-
-
-
-
-
 </mapper>

@@ -24,12 +24,7 @@ public class PaCurrentSalesScaleAccountingMapperTest extends BasicTest {
         ArrayList<PaCurrentSalesScaleAccounting> list = new ArrayList<>();
 
         for (int i = 1; i <= 51; i++) {
-            /*String userName, Long phoneNumber, String reportOrAllot, String reportOrAllotDate,
-             String investmentAdviser, String userIdentify, String basicProductName,
-             Double monthlyPurchaseAmount, String purchaseDate, Double monthlyPurchaseAmount10,
-             String ifReport, Double effectiveCurrentSalesScale, Double deferredNextMonth,
-             Date mtime, Date ctime*/
-            PaCurrentSalesScaleAccounting user = new PaCurrentSalesScaleAccounting(i + "", Long.parseLong("i + \"\""),i + "",i + "",
+            PaCurrentSalesScaleAccounting user = new PaCurrentSalesScaleAccounting(i + "", Long.parseLong(i + ""),i + "",i + "",
                     i + "",i + "",i + "",Double.parseDouble(i + ""),i + "",Double.parseDouble(i + ""),i + "",
                     Double.parseDouble(i + ""), Double.parseDouble(i + ""), new Date(), new Date());
 

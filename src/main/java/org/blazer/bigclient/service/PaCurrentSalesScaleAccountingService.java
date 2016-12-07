@@ -29,8 +29,7 @@ public class PaCurrentSalesScaleAccountingService extends BaseService<PaCurrentS
         String search = StringUtil.getStrEmpty(params.get("search"));
         String advisorName = StringUtil.getStrEmpty(params.get("advisorName"));
         if (StringUtils.isNotEmpty(search)) {
-//            criteria.andCondition("phone_number like '%" + search + "%'" + " or user_name like '%" + search + "%'");
-            criteria.andLike("investmentAdviser","%" + search + "%");
+            criteria.andCondition("phone_number like '%" + search + "%'" + " or user_name like '%" + search + "%'");
         }
         if (StringUtils.isNotEmpty(advisorName)) {
             //此处为实体类的属性，不是表字段
@@ -47,8 +46,7 @@ public class PaCurrentSalesScaleAccountingService extends BaseService<PaCurrentS
         Example.Criteria criteria = example.createCriteria();
         String search_text = StringUtil.getStrEmpty(search);
         if (StringUtils.isNotEmpty(search_text)) {
-//            criteria.andCondition("phone_number like '%" + search + "%'" + " or user_name like '%" + search + "%'");
-            criteria.andLike("investmentAdviser","%" + search + "%");
+            criteria.andCondition("phone_number like '%" + search + "%'" + " or user_name like '%" + search + "%'");
         }
         return this.selectByExample(example);
     }

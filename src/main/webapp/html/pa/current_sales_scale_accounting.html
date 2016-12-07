@@ -34,11 +34,17 @@
                 var cls = "warning";
                 var tr = $('<tr class="' + cls + '">');
 
+                tr.append('<td>' + rst[i].userName + '</td>');
+                tr.append('<td>' + rst[i].phoneNumber + '</td>');
+                tr.append('<td>' + rst[i].reportOrAllot + '</td>');
+                tr.append('<td>' + rst[i].reportOrAllotDate + '</td>');
                 tr.append('<td>' + rst[i].investmentAdviser + '</td>');
+                tr.append('<td>' + rst[i].userIdentify + '</td>');
+                tr.append('<td>' + rst[i].basicProductName + '</td>');
                 tr.append('<td>' + rst[i].monthlyPurchaseAmount + '</td>');
+                tr.append('<td>' + rst[i].purchaseDate + '</td>');
                 tr.append('<td>' + rst[i].monthlyPurchaseAmount10 + '</td>');
-                tr.append('<td>' + rst[i].monthlyInvestmentTarget + '</td>');
-                tr.append('<td>' + rst[i].monthlyPerformanceLimit + '</td>');
+                tr.append('<td>' + rst[i].ifReport + '</td>');
                 tr.append('<td>' + rst[i].effectiveCurrentSalesScale + '</td>');
                 tr.append('<td>' + rst[i].deferredNextMonth + '</td>');
 
@@ -72,7 +78,7 @@
 </script>
 <div class="row" style="margin: 0;">
     <div class="input-group has-primary" style="float: left; width: 300px;">
-        <input id="search_text" type="text" class="form-control" placeholder="投顾姓名的模糊查询..."/>
+        <input id="search_text" type="text" class="form-control" placeholder="客户姓名或手机号模糊查询..."/>
         <span class="input-group-btn">
 			<button id="search" class="btn btn-primary" type="button">搜索</button>
 		</span>
@@ -80,19 +86,27 @@
     <button type="button" id="exportExcel" class="btn btn-primary" style="float: right;">导出Excel</button>
 </div>
 <hr class="line-3"/>
-<table id="tb" class="table table-hover table-condensed table-bordered">
-    <thead>
-    <tr>
-        <th width="14%">投资顾问</th>
-        <th width="14%">当月申购金额（万元）</th>
-        <th width="14%">当月申购金额/10（千元）</th>
-        <th width="14%">月投资规模目标（万元）</th>
-        <th width="15%">当月活期业绩上限（万元）</th>
-        <th width="15%">有效活期销售规模（万元）</th>
-        <th width="14%">递延下月（万元）</th>
-    </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
+<div class="table-responsive">
+    <table id="tb" class="table table-hover table-condensed table-bordered" style="width: 2000px">
+        <thead>
+            <tr>
+                <th>客户姓名</th>
+                <th>手机号码</th>
+                <th>上报/分配</th>
+                <th>上报/分配时间</th>
+                <th>投资顾问</th>
+                <th>客户标识</th>
+                <th>基础产品名称</th>
+                <th>申购金额</th>
+                <th>申购日期</th>
+                <th>申购金额/10</th>
+                <th>是否上报</th>
+                <th>有效金额</th>
+                <th>递延下月金额</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
 <ul id="pagination" class="pagination" style="cursor:pointer"></ul>

@@ -82,10 +82,10 @@ public class PaCurrentSalesScaleAccountingController extends BaseController {
             // 要导出的数据
             List<PaCurrentSalesScaleAccounting> list = this.paCurrentSalesScaleAccountingService.findBySearch(search);
             if (list == null || list.size() == 0) {
-//                PaCurrentSalesScaleAccounting currentSalesScaleAccounting = new PaCurrentSalesScaleAccounting("空", Double.parseDouble(0 + ""),
-//                        Double.parseDouble(0 + ""), Double.parseDouble(0 + ""), Double.parseDouble(0 + ""), Double.parseDouble(0 + ""),
-//                        Double.parseDouble(0 + ""), new Date(), new Date());
-//                list.add(currentSalesScaleAccounting);
+                PaCurrentSalesScaleAccounting currentSalesScaleAccounting = new PaCurrentSalesScaleAccounting("空",
+                        Long.parseLong(0 + ""),"空","空","空","空","空",Double.parseDouble(0 + ""),"空",
+                        Double.parseDouble(0 + ""),"空",Double.parseDouble(0 + ""), Double.parseDouble(0 + ""), new Date(), new Date());
+                list.add(currentSalesScaleAccounting);
             }
             //excel文件名称,不需要任何后缀
             String excelName = "CurrentSalesScaleAccounting_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
@@ -94,11 +94,17 @@ public class PaCurrentSalesScaleAccountingController extends BaseController {
             //指定导出字段
             List<String> specifyFields = new ArrayList<String>();
 
+            specifyFields.add("userName");
+            specifyFields.add("phoneNumber");
+            specifyFields.add("reportOrAllot");
+            specifyFields.add("reportOrAllotDate");
             specifyFields.add("investmentAdviser");
+            specifyFields.add("userIdentify");
+            specifyFields.add("basicProductName");
             specifyFields.add("monthlyPurchaseAmount");
+            specifyFields.add("purchaseDate");
             specifyFields.add("monthlyPurchaseAmount10");
-            specifyFields.add("monthlyInvestmentTarget");
-            specifyFields.add("monthlyPerformanceLimit");
+            specifyFields.add("ifReport");
             specifyFields.add("effectiveCurrentSalesScale");
             specifyFields.add("deferredNextMonth");
 
