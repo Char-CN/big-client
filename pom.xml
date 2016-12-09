@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.blazer</groupId>
 	<artifactId>big-client</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>2.0.3-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <properties>
@@ -19,11 +19,21 @@
     </properties>
 
 	<dependencies>
+		<!--login-->
 		<dependency>
 			<groupId>org.blazer</groupId>
 			<artifactId>user-service-core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.12</version>
+		</dependency>
+
+
 		<!-- 测试工具 -->
 		<dependency>
 			<groupId>junit</groupId>
