@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.blazer.bigclient.model.PaRegularSalesScaleAccounting;
+import org.blazer.bigclient.util.DateUtil;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.blazer.bigclient.util.StringUtil;
 import org.slf4j.Logger;
@@ -27,14 +28,24 @@ public class PaRegularSalesScaleAccountingService extends BaseService<PaRegularS
         Example example = new Example(PaRegularSalesScaleAccounting.class);
         Example.Criteria criteria = example.createCriteria();
         String search = StringUtil.getStrEmpty(params.get("search"));
-        String advisorName = StringUtil.getStrEmpty(params.get("advisorName"));
         if (StringUtils.isNotEmpty(search)) {
             criteria.andCondition("phone_number like '%" + search + "%'" + " or user_name like '%" + search + "%'");
         }
+        String dateStart = StringUtil.getStrEmpty(params.get("dateStart"));
+        if(StringUtils.isEmpty(dateStart)){
+            dateStart="1900-01-01";
+        }
+        criteria.andLessThanOrEqualTo("investmentDate",dateStart);
+        String dateEnd = StringUtil.getStrEmpty(params.get("dateEnd"));
+        if(StringUtils.isEmpty(dateEnd)){
+            dateEnd = DateUtil.thisDate();
+        }
+        criteria.andGreaterThanOrEqualTo("investmentDate",dateEnd);
+        /*String advisorName = StringUtil.getStrEmpty(params.get("advisorName"));
         if (StringUtils.isNotEmpty(advisorName)) {
             //此处为实体类的属性，不是表字段
             criteria.andEqualTo("investmentAdviser", advisorName);
-        }
+        }*/
         PageHelper.startPage(IntegerUtil.getIntZero(params.get("currentPage")), IntegerUtil.getIntZero(params.get("pageSize")));
         List<PaRegularSalesScaleAccounting> list = selectByExample(example);
         return new PageInfo(list);

@@ -9,22 +9,55 @@
                 return;
             }
             _currentPage_lastCurrent = currentPage;
-            lock = true;
-            $.post("pa/current_sales_scale/findByPage.do", {
-                currentPage: currentPage,
-                pageSize: 10,
-                search: search_text
-            }, function (data) {
-                init(data.list);
-                // 初始化分页控件：参数：(当前页，页大小，总条数，点击分页时候调用的方法)
-                pagination.init(data.pageNum, data.pageSize, data.total, findByPage);
-                lock = false;
-            });
+
+            var boo = false;
+            var search_date_start = $("#search_date_start").val();
+            var search_date_end = $("#search_date_end").val();
+
+            if (search_date_start != "" && search_date_end != "") {
+                if (search_date_start > search_date_end) {
+                    alert("查询起始时间不能大于截止时间！");
+                } else {
+                    boo = true;
+                }
+            } else {
+                boo = true;
+            }
+
+            if(boo) {
+                lock = true;
+                $.post("pa/current_sales_scale/findByPage.do", {
+                    currentPage: currentPage,
+                    pageSize: 10,
+                    dateStart: search_date_start,
+                    dateEnd: search_date_end,
+                    search: search_text
+                }, function (data) {
+                    init(data.list);
+                    // 初始化分页控件：参数：(当前页，页大小，总条数，点击分页时候调用的方法)
+                    pagination.init(data.pageNum, data.pageSize, data.total, findByPage);
+                    lock = false;
+                });
+            }
         };
 
         //刷新当前页
         var reload = function () {
             findByPage(_currentPage_lastCurrent);
+        };
+
+        /**
+         * 处理null值的字段
+         * 判断 是、否,上报、分配等。
+         */
+        var dealNull = function (field, num1, num2, val1, val2) {
+            var str = "";
+            if (field == num1) {
+                str = val1;
+            } else if (field == num2) {
+                str = val2;
+            }
+            return str;
         };
 
         // 初始化数据
@@ -36,7 +69,8 @@
 
                 tr.append('<td>' + rst[i].userName + '</td>');
                 tr.append('<td>' + rst[i].phoneNumber + '</td>');
-                tr.append('<td>' + rst[i].reportOrAllot + '</td>');
+                var reportOrAllot = dealNull(rst[i].reportOrAllot, "1", "2", "上报", "分配");
+                tr.append('<td>' + reportOrAllot + '</td>');
                 tr.append('<td>' + rst[i].reportOrAllotDate + '</td>');
                 tr.append('<td>' + rst[i].investmentAdviser + '</td>');
                 tr.append('<td>' + rst[i].userIdentify + '</td>');
@@ -46,7 +80,15 @@
                 tr.append('<td>' + rst[i].monthlyPurchaseAmount10 + '</td>');
                 tr.append('<td>' + rst[i].ifReport + '</td>');
                 tr.append('<td>' + rst[i].effectiveCurrentSalesScale + '</td>');
-                tr.append('<td>' + rst[i].deferredNextMonth + '</td>');
+                var deferredNextMonth = rst[i].deferredNextMonth;
+                if (deferredNextMonth == "1") {
+                    deferredNextMonth = "是";
+                } else if (deferredNextMonth == "0") {
+                    deferredNextMonth = "否";
+                } else {
+                    deferredNextMonth = "";
+                }
+                tr.append('<td>' + deferredNextMonth + '</td>');
 
                 $("#tb>tbody").append(tr);
             }
@@ -77,13 +119,16 @@
     });
 </script>
 <div class="row" style="margin: 0;">
-    <div class="input-group has-primary" style="float: left; width: 300px;">
-        <input id="search_text" type="text" class="form-control" placeholder="客户姓名或手机号模糊查询..."/>
-        <span class="input-group-btn">
-			<button id="search" class="btn btn-primary" type="button">搜索</button>
-		</span>
+    <div class="input-group has-primary" style="float: left;">
+        <span class="in_left buy">搜索条件：</span>
+        <input id="search_text" type="text" class="form-control" placeholder="手机号或姓名的模糊查询..."/>
+        <span class="buy">起始时间：</span>
+        <input id="search_date_start" placeholder="查询的起始日期" class="laydate-icon date" onClick="laydate({istime: true, format: 'YYYY-MM-DD'})">
+        <span class="buy">截止时间：</span>
+        <input id="search_date_end" placeholder="查询的截止日期" class="laydate-icon date" onClick="laydate({istime: true, format: 'YYYY-MM-DD'})">
+        <button id="search" style="margin-left:10px;" class="btn btn-primary search_btn" type="button">搜索</button>
+        <button type="button" id="exportExcel" class="btn btn-primary" style="float: right;">导出Excel</button>
     </div>
-    <button type="button" id="exportExcel" class="btn btn-primary" style="float: right;">导出Excel</button>
 </div>
 <hr class="line-3"/>
 <div class="table-responsive">

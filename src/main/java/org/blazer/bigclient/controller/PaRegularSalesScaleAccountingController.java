@@ -48,9 +48,11 @@ public class PaRegularSalesScaleAccountingController extends BaseController {
     public PageInfo<PaRegularSalesScaleAccounting> findByPage(HttpServletRequest request, HttpServletResponse response) {
         //获取前台传递过来的参数
         HashMap<String, String> params = getParamMap(request);
-        LOGGER.debug("currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
-                ", pageSize:" + IntegerUtil.getIntZero(params.get("pageSize")) +
-                ", search:" + StringUtil.getStrEmpty(params.get("search")));
+        LOGGER.debug("分页条件查询列表--当前页-currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
+                ", 每页的行数-pageSize:" + IntegerUtil.getIntZero(params.get("pageSize")) +
+                ", 查询条件-search:" + StringUtil.getStrEmpty(params.get("search")) +
+                ", 起始时间-dateStart:" + StringUtil.getStrEmpty(params.get("dateStart")) +
+                ", 截止时间-dateEnd:" + StringUtil.getStrEmpty(params.get("dateEnd"))+"......");
 
         /*//获取当前登录用户
         KamAdvisor advisor = super.getCurrentUser(request);

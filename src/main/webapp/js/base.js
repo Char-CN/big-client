@@ -37,3 +37,21 @@ var downloadFileByTagA = function(){
     $("<span>AAAAAAA</span>").appendTo(a).trigger("click");
     window.setTimeout(function(){a.remove();},3000);
 };
+
+/**
+ * 处理null值的字段
+ * 判断 是、否,上报、分配等。
+ */
+var dealNull = function (field, num1, num2, val1, val2) {
+    var str = "";
+    if (field == num1) {
+        str = val1;
+    } else if (field == num2) {
+        str = val2;
+    }
+    return str;
+};
+
+
+
+
