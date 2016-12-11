@@ -3,7 +3,6 @@ package org.blazer.bigclient.controller;
 import com.github.pagehelper.PageInfo;
 import org.blazer.bigclient.excel.ExcelHeader;
 import org.blazer.bigclient.model.PaCurrentPackageRegularSalesScaleAccounting;
-import org.blazer.bigclient.model.PaCurrentSalesScaleAccounting;
 import org.blazer.bigclient.service.PaCurrentPackageRegularSalesScaleAccountingService;
 import org.blazer.bigclient.util.DateUtil;
 import org.blazer.bigclient.util.IntegerUtil;
@@ -27,7 +26,7 @@ import java.util.List;
 /**
  * Created by cuican on 2016-11-21.
  */
-@RequestMapping("/pa/current_sales_scale")
+@RequestMapping("/pa/cpr_sales_scale")
 @Controller
 public class PaCurrentPackageRegularSalesScaleAccountingController extends BaseController {
 

@@ -24,11 +24,11 @@ public class PaCurrentSalesScaleAccountingMapperTest extends BasicTest {
         ArrayList<PaCurrentSalesScaleAccounting> list = new ArrayList<>();
 
         for (int i = 1; i <= 51; i++) {
-            PaCurrentSalesScaleAccounting user = new PaCurrentSalesScaleAccounting(i + "", Long.parseLong(i + ""),i + "",i + "",
-                    i + "",i + "",i + "",Double.parseDouble(i + ""),i + "",Double.parseDouble(i + ""),i + "",
-                    Double.parseDouble(i + ""), Double.parseDouble(i + ""), new Date(), new Date());
-
-            list.add(user);
+//            PaCurrentSalesScaleAccounting user = new PaCurrentSalesScaleAccounting(i + "", Long.parseLong(i + ""),i + "",i + "",
+//                    i + "",i + "",i + "",Double.parseDouble(i + ""),i + "",Double.parseDouble(i + ""),i + "",
+//                    Double.parseDouble(i + ""), Double.parseDouble(i + ""), new Date(), new Date());
+//
+//            list.add(user);
         }
 
         mapper.insertList(list);

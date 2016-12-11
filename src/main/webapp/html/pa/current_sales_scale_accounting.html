@@ -13,7 +13,6 @@
             var boo = false;
             var search_date_start = $("#search_date_start").val();
             var search_date_end = $("#search_date_end").val();
-
             if (search_date_start != "" && search_date_end != "") {
                 if (search_date_start > search_date_end) {
                     alert("查询起始时间不能大于截止时间！");
@@ -76,9 +75,10 @@
                 tr.append('<td>' + rst[i].userIdentify + '</td>');
                 tr.append('<td>' + rst[i].basicProductName + '</td>');
                 tr.append('<td>' + rst[i].monthlyPurchaseAmount + '</td>');
+                tr.append('<td>' + rst[i].currentAssetsTotal + '</td>');
                 tr.append('<td>' + rst[i].purchaseDate + '</td>');
                 tr.append('<td>' + rst[i].monthlyPurchaseAmount10 + '</td>');
-                tr.append('<td>' + rst[i].ifReport + '</td>');
+                tr.append('<td>' + rst[i].performancePoolCoefficient + '</td>');
                 tr.append('<td>' + rst[i].effectiveCurrentSalesScale + '</td>');
                 var deferredNextMonth = rst[i].deferredNextMonth;
                 if (deferredNextMonth == "1") {
@@ -143,11 +143,12 @@
                 <th>客户标识</th>
                 <th>基础产品名称</th>
                 <th>申购金额</th>
+                <th>现有资产</th>
                 <th>申购日期</th>
                 <th>申购金额/10</th>
-                <th>是否上报</th>
-                <th>有效金额</th>
-                <th>递延下月金额</th>
+                <th>业绩池系数</th>
+                <th>有效金额（万元）</th>
+                <th>递延下月</th>
             </tr>
         </thead>
         <tbody>

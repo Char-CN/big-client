@@ -48,9 +48,11 @@ public class SrCurrentSalesDetailsController extends BaseController {
     public PageInfo<SrCurrentSalesDetails> findByPage(HttpServletRequest request, HttpServletResponse response) {
         //获取前台传递过来的参数
         HashMap<String, String> params = getParamMap(request);
-        LOGGER.debug("currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
-                ", pageSize:" + IntegerUtil.getIntZero(params.get("pageSize")) +
-                ", search:" + StringUtil.getStrEmpty(params.get("search")));
+        LOGGER.debug("分页条件查询列表--当前页-currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
+                ", 每页的行数-pageSize:" + IntegerUtil.getIntZero(params.get("pageSize")) +
+                ", 查询条件-search:" + StringUtil.getStrEmpty(params.get("search")) +
+                ", 起始时间-dateStart:" + StringUtil.getStrEmpty(params.get("dateStart")) +
+                ", 截止时间-dateEnd:" + StringUtil.getStrEmpty(params.get("dateEnd"))+"......");
 
         /*//获取当前登录用户
         KamAdvisor advisor = super.getCurrentUser(request);
@@ -59,7 +61,7 @@ public class SrCurrentSalesDetailsController extends BaseController {
         if (advisor != null) {
             params.put("advisorName", advisor.getActualName());
         }*/
-        return this.srCurrentSalesDetailsService.findByPage(params);
+        return this.srCurrentSalesDetailsService.findByPage(new SrCurrentSalesDetails(),params,"purchaseDate");
     }
 
 
@@ -73,14 +75,18 @@ public class SrCurrentSalesDetailsController extends BaseController {
     public ModelAndView exportExcel(HttpServletRequest request) {
         ModelAndView mv = null;
         try {
-            //根据条件获取要导出的数据集合
-            String search = StringUtil.getStrEmpty(request.getParameter("search"));
-            LOGGER.debug("查询条件---search:" + search);
+            //获取前台传递过来的参数
+            HashMap<String, String> params = getParamMap(request);
+            LOGGER.debug("excel导出条件查询--当前页-currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
+                    ", 每页的行数-pageSize:" + IntegerUtil.getIntZero(params.get("pageSize")) +
+                    ", 查询条件-search:" + StringUtil.getStrEmpty(params.get("search")) +
+                    ", 起始时间-dateStart:" + StringUtil.getStrEmpty(params.get("dateStart")) +
+                    ", 截止时间-dateEnd:" + StringUtil.getStrEmpty(params.get("dateEnd"))+"---");
 
             //xml配置中的ID
             String id = "srCurrentSalesDetails";
             // 要导出的数据
-            List<SrCurrentSalesDetails> list = this.srCurrentSalesDetailsService.findBySearch(search);
+            List<SrCurrentSalesDetails> list = this.srCurrentSalesDetailsService.findBySearch(new SrCurrentSalesDetails(),params,"purchaseDate");
             if (list == null || list.size() == 0) {
                 SrCurrentSalesDetails currentSalesDetails = new SrCurrentSalesDetails("空", 0L, "空", "空", "空", "空", "空", "空",
                         "空", "空", new Date(), new Date());
@@ -99,7 +105,7 @@ public class SrCurrentSalesDetailsController extends BaseController {
             specifyFields.add("reportOrAllotDate");
             specifyFields.add("investmentAdviser");
             specifyFields.add("userIdentify");
-            specifyFields.add("basicProductName");
+            specifyFields.add("baseProductName");
             specifyFields.add("purchaseAmount");
             specifyFields.add("currentAssetsTotal");
             specifyFields.add("purchaseDate");

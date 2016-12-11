@@ -150,6 +150,23 @@
 		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
 
+	<!-- 活包定销售明细 -->
+	<excel id="srCurrentPackageRegularSalesDetails" class="org.blazer.bigclient.model.SrCurrentPackageRegularSalesDetails"
+		   sheetname="活包定销售明细" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
+		<field name="id" title="自动编号"/>
+		<field name="userName" title="客户姓名"/>
+		<field name="phoneNumber" title="手机号码"/>
+		<field name="reportOrAllot" title="上报/分配"/>
+		<field name="reportOrAllotDate" title="上报/分配日期"/>
+		<field name="investmentAdviser" title="投资顾问"/>
+		<field name="userIdentify" title="客户标识"/>
+		<field name="baseProductName" title="基础产品名称"/>
+		<field name="purchaseAmount" title="申购金额"/>
+		<field name="currentAssetsTotal" title="现有资产"/>
+		<field name="purchaseDate" title="申购时间"/>
+		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+	</excel>
 
 	<!--
 		业绩核算
@@ -186,15 +203,38 @@
 		<field name="userName" title="客户姓名"/>
 		<field name="phoneNumber" title="手机号码"/>
 		<field name="reportOrAllot" title="上报/分配"/>
-		<field name="reportOrAllotDate" title="上报/分配时间"/>
+		<field name="reportOrAllotDate" title="上报/分配日期"/>
 		<field name="investmentAdviser" title="投资顾问"/>
 		<field name="userIdentify" title="客户标识"/>
 		<field name="basicProductName" title="基础产品名称"/>
 		<field name="monthlyPurchaseAmount" title="申购金额"/>
+		<field name="currentAssetsTotal" title="现有资产"/>
 		<field name="purchaseDate" title="申购日期"/>
 		<field name="monthlyPurchaseAmount10" title="申购金额/10"/>
-		<field name="ifReport" title="是否上报"/>
-		<field name="effectiveCurrentSalesScale" title="有效金额"/>
+		<field name="performancePoolCoefficient" title="业绩池系数"/>
+		<field name="effectiveCurrentSalesScale" title="有效金额（万元）"/>
+		<field name="deferredNextMonth" title="递延下月金额"/>
+		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+	</excel>
+
+	<!--活包定销售规模核算-->
+	<excel id="paCurrentPackageRegularSalesScaleAccounting" class="org.blazer.bigclient.model.PaCurrentPackageRegularSalesScaleAccounting"
+		   sheetname="活包定销售规模核算" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
+		<field name="id" title="自动编号"/>
+		<field name="userName" title="客户姓名"/>
+		<field name="phoneNumber" title="手机号码"/>
+		<field name="reportOrAllot" title="上报/分配"/>
+		<field name="reportOrAllotDate" title="上报/分配日期"/>
+		<field name="investmentAdviser" title="投资顾问"/>
+		<field name="userIdentify" title="客户标识"/>
+		<field name="basicProductName" title="基础产品名称"/>
+		<field name="monthlyPurchaseAmount" title="申购金额"/>
+		<field name="currentAssetsTotal" title="现有资产"/>
+		<field name="purchaseDate" title="申购日期"/>
+		<field name="monthlyPurchaseAmount5" title="申购金额/10"/>
+		<field name="performancePoolCoefficient" title="业绩池系数"/>
+		<field name="effectiveCurrentSalesScale" title="有效金额（万元）"/>
 		<field name="deferredNextMonth" title="递延下月金额"/>
 		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
