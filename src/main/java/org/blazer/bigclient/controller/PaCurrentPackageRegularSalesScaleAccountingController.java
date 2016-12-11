@@ -2,8 +2,9 @@ package org.blazer.bigclient.controller;
 
 import com.github.pagehelper.PageInfo;
 import org.blazer.bigclient.excel.ExcelHeader;
+import org.blazer.bigclient.model.PaCurrentPackageRegularSalesScaleAccounting;
 import org.blazer.bigclient.model.PaCurrentSalesScaleAccounting;
-import org.blazer.bigclient.service.PaCurrentSalesScaleAccountingService;
+import org.blazer.bigclient.service.PaCurrentPackageRegularSalesScaleAccountingService;
 import org.blazer.bigclient.util.DateUtil;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.blazer.bigclient.util.StringUtil;
@@ -28,12 +29,12 @@ import java.util.List;
  */
 @RequestMapping("/pa/current_sales_scale")
 @Controller
-public class PaCurrentSalesScaleAccountingController extends BaseController {
+public class PaCurrentPackageRegularSalesScaleAccountingController extends BaseController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PaCurrentSalesScaleAccountingController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PaCurrentPackageRegularSalesScaleAccountingController.class);
 
     @Autowired
-    private PaCurrentSalesScaleAccountingService paCurrentSalesScaleAccountingService;
+    private PaCurrentPackageRegularSalesScaleAccountingService paCurrentPackageRegularSalesScaleAccountingService;
 
     /**
      * 根据搜索条件分页查询
@@ -45,7 +46,7 @@ public class PaCurrentSalesScaleAccountingController extends BaseController {
      */
     @ResponseBody
     @RequestMapping("findByPage")
-    public PageInfo<PaCurrentSalesScaleAccounting> findByPage(HttpServletRequest request, HttpServletResponse response) {
+    public PageInfo<PaCurrentPackageRegularSalesScaleAccounting> findByPage(HttpServletRequest request, HttpServletResponse response) {
         //获取前台传递过来的参数
         HashMap<String, String> params = getParamMap(request);
         LOGGER.debug("分页条件查询列表--当前页-currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
@@ -61,7 +62,7 @@ public class PaCurrentSalesScaleAccountingController extends BaseController {
         if (advisor != null) {
             params.put("advisorName", advisor.getActualName());
         }*/
-        return this.paCurrentSalesScaleAccountingService.findByPage(params);
+        return this.paCurrentPackageRegularSalesScaleAccountingService.findByPage(params);
     }
 
 
@@ -82,7 +83,7 @@ public class PaCurrentSalesScaleAccountingController extends BaseController {
             //xml配置中的ID
             String id = "paCurrentSalesScaleAccounting";
             // 要导出的数据
-            List<PaCurrentSalesScaleAccounting> list = this.paCurrentSalesScaleAccountingService.findBySearch(search);
+            List<PaCurrentPackageRegularSalesScaleAccounting> list = this.paCurrentPackageRegularSalesScaleAccountingService.findBySearch(search);
             if (list == null || list.size() == 0) {
 //                PaCurrentSalesScaleAccounting currentSalesScaleAccounting = new PaCurrentSalesScaleAccounting("空",
 //                        Long.parseLong(0 + ""),"空","空","空","空","空",Double.parseDouble(0 + ""),"空",

@@ -82,9 +82,9 @@ public class PaCustomersAccountingController extends BaseController {
             // 要导出的数据
             List<PaCustomersAccounting> list = this.paCustomersAccountingService.findBySearch(search);
             if (list == null || list.size() == 0) {
-                PaCustomersAccounting customersAccounting = new PaCustomersAccounting("空", Long.parseLong(0 + ""), "空", "空", "空",
-                        0, "空", 0, "空", "空", 0, "空", "空", "空", "空", "空", "空", new Date(), new Date());
-                list.add(customersAccounting);
+//                PaCustomersAccounting customersAccounting = new PaCustomersAccounting("空", Long.parseLong(0 + ""), "空", "空", "空",
+//                        0, "空", 0, "空", "空", 0, "空", "空", "空", "空", "空", "空", new Date(), new Date());
+//                list.add(customersAccounting);
             }
             //excel文件名称,不需要任何后缀
             String excelName = "CustomersAccounting_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
@@ -93,22 +93,27 @@ public class PaCustomersAccountingController extends BaseController {
             //指定导出字段
             List<String> specifyFields = new ArrayList<String>();
 
+            specifyFields.add("id");
             specifyFields.add("userName");
             specifyFields.add("phoneNumber");
             specifyFields.add("registerDate");
+            specifyFields.add("endingBalance");
+            specifyFields.add("endingBalanceTimePoint");
+            specifyFields.add("endingNotLessThanFifty");
             specifyFields.add("investmentAdviser");
+            specifyFields.add("buyAmount");
+            specifyFields.add("currentAmountPaid");
+            specifyFields.add("beginningBalance");
+            specifyFields.add("beginningBalanceTimePoint");
+            specifyFields.add("beginningNoGreaterThanFifty");
             specifyFields.add("userIdentify");
             specifyFields.add("ifPerformancePool");
-            specifyFields.add("endingBalance");
-            specifyFields.add("endingNotLessThanFifty");
-            specifyFields.add("buyAmount");
-            specifyFields.add("beginningBalance");
-            specifyFields.add("beginningNoGreaterThanFifty");
-            specifyFields.add("matchingPeriodInitialValue");
-            specifyFields.add("beginningComparison");
-            specifyFields.add("difference");
-            specifyFields.add("redemptionOrder");
-            specifyFields.add("revise");
+            specifyFields.add("advisorGetCustomers");
+            specifyFields.add("comparisonHistoricalAdvisor");
+            specifyFields.add("advisorGetCustomersRemoveDuplicates");
+            specifyFields.add("centerForCustomers");
+            specifyFields.add("comparisonHistoricalCenter");
+            specifyFields.add("centerForCustomersRemoveDuplicates");
             specifyFields.add("errorQuery");
 
             //构建excel试图

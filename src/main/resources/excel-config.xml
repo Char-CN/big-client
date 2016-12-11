@@ -207,19 +207,23 @@
 		<field name="userName" title="客户姓名"/>
 		<field name="phoneNumber" title="手机号码"/>
 		<field name="registerDate" title="注册日期"/>
-		<field name="investmentAdviser" title="投资顾问"/>
-		<field name="userIdentify" title="客户标识"/>
-		<field name="ifPerformancePool" title="是否业绩池" format="0:不计入,1:计入"/>
 		<field name="endingBalance" title="期末AUM"/>
-		<field name="endingNotLessThanFifty" title="期末不小于50万"/>
-		<field name="buyAmount" title="投资总额"/>
+		<field name="endingBalanceTimePoint" title="期末AUM时间点"/>
+		<field name="endingNotLessThanFifty" title="期末不小于50万系数"/>
+		<field name="investmentAdviser" title="投资顾问"/>
+		<field name="buyAmount" title="投资金额"/>
+		<field name="currentAmountPaid" title="本期兑付金额"/>
 		<field name="beginningBalance" title="期初AUM"/>
-		<field name="beginningNoGreaterThanFifty" title="期初不大于50万"/>
-		<field name="matchingPeriodInitialValue" title="匹配期初值"/>
-		<field name="beginningComparison" title="期初对比"/>
-		<field name="difference" title="差异"/>
-		<field name="redemptionOrder" title="兑付单"/>
-		<field name="revise" title="修正"/>
+		<field name="beginningBalanceTimePoint" title="期初AUM时间点"/>
+		<field name="beginningNoGreaterThanFifty" title="期初不大于50万系数"/>
+		<field name="userIdentify" title="客户标识"/>
+		<field name="ifPerformancePool" title="业绩池系数"/>
+		<field name="advisorGetCustomers" title="投顾获客"/>
+		<field name="comparisonHistoricalAdvisor" title="比对历史获客（投顾）"/>
+		<field name="advisorGetCustomersRemoveDuplicates" title="投顾获客去重"/>
+		<field name="centerForCustomers" title="中心获客"/>
+		<field name="comparisonHistoricalCenter" title="比对历史获客（中心）"/>
+		<field name="centerForCustomersRemoveDuplicates" title="中心获客去重"/>
 		<field name="errorQuery" title="差错查询"/>
 		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>

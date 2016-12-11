@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.blazer.bigclient.mapper.PaCurrentSalesScaleAccountingMapper" >
-  <resultMap id="BaseResultMap" type="org.blazer.bigclient.model.PaCurrentSalesScaleAccounting" >
+<mapper namespace="org.blazer.bigclient.mapper.PaCurrentPackageRegularSalesScaleAccountingMapper" >
+  <resultMap id="BaseResultMap" type="org.blazer.bigclient.model.PaCurrentPackageRegularSalesScaleAccounting" >
     <!--
       WARNING - @mbg.generated
     -->
@@ -12,11 +12,11 @@
     <result column="report_or_allot_date" property="reportOrAllotDate" jdbcType="VARCHAR" />
     <result column="investment_adviser" property="investmentAdviser" jdbcType="VARCHAR" />
     <result column="user_identify" property="userIdentify" jdbcType="VARCHAR" />
-    <result column="basic_product_name" property="basicProductName" jdbcType="VARCHAR" />
-    <result column="monthly_purchase_amount" property="monthlyPurchaseAmount" jdbcType="DOUBLE" />
+    <result column="base_product_name" property="baseProductName" jdbcType="VARCHAR" />
+    <result column="purchase_amount" property="purchaseAmount" jdbcType="VARCHAR" />
     <result column="current_assets_total" property="currentAssetsTotal" jdbcType="VARCHAR" />
     <result column="purchase_date" property="purchaseDate" jdbcType="VARCHAR" />
-    <result column="monthly_purchase_amount_10" property="monthlyPurchaseAmount10" jdbcType="DOUBLE" />
+    <result column="monthly_purchase_amount_5" property="monthlyPurchaseAmount5" jdbcType="DOUBLE" />
     <result column="performance_pool_coefficient" property="performancePoolCoefficient" jdbcType="INTEGER" />
     <result column="effective_current_sales_scale" property="effectiveCurrentSalesScale" jdbcType="DOUBLE" />
     <result column="deferred_next_month" property="deferredNextMonth" jdbcType="DOUBLE" />

@@ -37,19 +37,23 @@
                 tr.append('<td>' + rst[i].userName+ '</td>');
                 tr.append('<td>' + rst[i].phoneNumber+ '</td>');
                 tr.append('<td>' + rst[i].registerDate+ '</td>');
+                tr.append('<td>' + rst[i].endingBalance+ '</td>');
+                tr.append('<td>' + rst[i].endingBalanceTimePoint+ '</td>');
+                tr.append('<td>' + rst[i].endingNotLessThanFifty+ '</td>');
                 tr.append('<td>' + rst[i].investmentAdviser+ '</td>');
+                tr.append('<td>' + rst[i].buyAmount+ '</td>');
+                tr.append('<td>' + rst[i].currentAmountPaid+ '</td>');
+                tr.append('<td>' + rst[i].beginningBalance+ '</td>');
+                tr.append('<td>' + rst[i].beginningBalanceTimePoint+ '</td>');
+                tr.append('<td>' + rst[i].beginningNoGreaterThanFifty+ '</td>');
                 tr.append('<td>' + rst[i].userIdentify+ '</td>');
                 tr.append('<td>' + rst[i].ifPerformancePool+ '</td>');
-                tr.append('<td>' + rst[i].endingBalance+ '</td>');
-                tr.append('<td>' + rst[i].endingNotLessThanFifty+ '</td>');
-                tr.append('<td>' + rst[i].buyAmount+ '</td>');
-                tr.append('<td>' + rst[i].beginningBalance+ '</td>');
-                tr.append('<td>' + rst[i].beginningNoGreaterThanFifty+ '</td>');
-                tr.append('<td>' + rst[i].matchingPeriodInitialValue+ '</td>');
-                tr.append('<td>' + rst[i].beginningComparison+ '</td>');
-                tr.append('<td>' + rst[i].difference+ '</td>');
-                tr.append('<td>' + rst[i].redemptionOrder+ '</td>');
-                tr.append('<td>' + rst[i].revise+ '</td>');
+                tr.append('<td>' + rst[i].advisorGetCustomers+ '</td>');
+                tr.append('<td>' + rst[i].comparisonHistoricalAdvisor+ '</td>');
+                tr.append('<td>' + rst[i].advisorGetCustomersRemoveDuplicates+ '</td>');
+                tr.append('<td>' + rst[i].centerForCustomers+ '</td>');
+                tr.append('<td>' + rst[i].comparisonHistoricalCenter+ '</td>');
+                tr.append('<td>' + rst[i].centerForCustomersRemoveDuplicates+ '</td>');
                 tr.append('<td>' + rst[i].errorQuery+ '</td>');
 
                 $("#tb>tbody").append(tr);
@@ -91,25 +95,29 @@
 </div>
 <hr class="line-3"/>
 <div class="table-responsive">
-    <table id="tb" class="table table-hover table-condensed table-bordered" style="width: 2000px">
+    <table id="tb" class="table table-hover table-condensed table-bordered" style="width: 2500px">
         <thead>
             <tr>
                 <th>客户姓名</th>
                 <th>手机号码</th>
                 <th>注册日期</th>
-                <th>投资顾问</th>
-                <th>客户标识</th>
-                <th>是否业绩池</th>
                 <th>期末AUM</th>
-                <th>期末不小于50万</th>
-                <th>投资总额</th>
+                <th>期末AUM时间点</th>
+                <th>期末不小于50万系数</th>
+                <th>投资顾问</th>
+                <th>投资金额</th>
+                <th>本期兑付金额</th>
                 <th>期初AUM</th>
-                <th>期初不大于50万</th>
-                <th>匹配期初值</th>
-                <th>期初对比</th>
-                <th>差异</th>
-                <th>兑付单</th>
-                <th>修正</th>
+                <th>期初AUM时间点</th>
+                <th>期初不大于50万系数</th>
+                <th>客户标识</th>
+                <th>业绩池系数</th>
+                <th>投顾获客</th>
+                <th>比对历史获客（投顾）</th>
+                <th>投顾获客去重</th>
+                <th>中心获客</th>
+                <th>比对历史获客（中心）</th>
+                <th>中心获客去重</th>
                 <th>差错查询</th>
             </tr>
         </thead>

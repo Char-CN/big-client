@@ -22,19 +22,12 @@ public class PaCustomersAccountingMapperTest extends BasicTest {
         PaCustomersAccountingMapper mapper = sqlSession.getMapper(PaCustomersAccountingMapper.class);
 
         ArrayList<PaCustomersAccounting> list = new ArrayList<>();
-
         for (int i = 1; i <= 51; i++) {
-            /*(String userName, Long phoneNumber, String registerDate, String investmentAdviser, String userIdentify,
-             Integer ifPerformancePool, String endingBalance, Integer endingNotLessThanFifty, String buyAmount,
-             String beginningBalance, Integer beginningNoGreaterThanFifty, String matchingPeriodInitialValue,
-             String beginningComparison, String difference, String redemptionOrder, String revise, String errorQuery,
-             Date mtime, Date ctime)*/
-            PaCustomersAccounting user = new PaCustomersAccounting(i + "", Long.parseLong(i + ""), i + "", i + "", i + "",
-                                                                    i, i + "", i, i + "",
-                                                                    i + "", i, i + "",
-                                                                    i + "", i + "", i + "", i + "", i + "",
-                                                                    new Date(), new Date());
-
+            PaCustomersAccounting user = new PaCustomersAccounting(Long.parseLong(i + ""),i + "", Long.parseLong(i + ""), i + "", i + "", i + "",
+                    i, i + "", i + "", i + "", i + "",
+                    i + "", i, i + "", i, i,
+                    i, i, i, i, i,
+                    i + "", new Date(), new Date());
             list.add(user);
         }
 

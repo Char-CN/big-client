@@ -10,8 +10,8 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "pa_current_sales_scale_accounting")
-public class PaCurrentSalesScaleAccounting {
+@Table(name = "pa_current_package_regular_sales_scale_accounting")
+public class PaCurrentPackageRegularSalesScaleAccounting {
     /**
      * 自动编号
      */
@@ -56,34 +56,34 @@ public class PaCurrentSalesScaleAccounting {
     private String userIdentify;
 
     /**
-     * 基础产品名称（活期）
+     * 基础产品名称（活包定）
      */
-    @Column(name = "basic_product_name")
-    private String basicProductName;
+    @Column(name = "base_product_name")
+    private String baseProductName;
 
     /**
-     * 申购金额（万元）
+     * 申购金额
      */
-    @Column(name = "monthly_purchase_amount")
-    private Double monthlyPurchaseAmount;
+    @Column(name = "purchase_amount")
+    private String purchaseAmount;
 
     /**
-     * 现有资产
+     * 现有资产---当前活期AUM（资产总额）
      */
     @Column(name = "current_assets_total")
     private String currentAssetsTotal;
 
     /**
-     * 申购日期
+     * 申购时间 0000-00-00 00:00:00
      */
     @Column(name = "purchase_date")
     private String purchaseDate;
 
     /**
-     * 申购金额/10（千元）
+     * 申购金额/5
      */
-    @Column(name = "monthly_purchase_amount_10")
-    private Double monthlyPurchaseAmount10;
+    @Column(name = "monthly_purchase_amount_5")
+    private Double monthlyPurchaseAmount5;
 
     /**
      * 业绩池系数
@@ -98,7 +98,7 @@ public class PaCurrentSalesScaleAccounting {
     private Double effectiveCurrentSalesScale;
 
     /**
-     * 递延下月金额（万元）
+     * 递延下月
      */
     @Column(name = "deferred_next_month")
     private Double deferredNextMonth;

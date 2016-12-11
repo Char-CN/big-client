@@ -3,25 +3,29 @@
 <mapper namespace="org.blazer.bigclient.mapper.PaCustomersAccountingMapper" >
   <resultMap id="BaseResultMap" type="org.blazer.bigclient.model.PaCustomersAccounting" >
     <!--
-      WARNING - @mbggenerated
+      WARNING - @mbg.generated
     -->
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="phone_number" property="phoneNumber" jdbcType="BIGINT" />
     <result column="register_date" property="registerDate" jdbcType="VARCHAR" />
+    <result column="ending_balance" property="endingBalance" jdbcType="VARCHAR" />
+    <result column="ending_balance_time_point" property="endingBalanceTimePoint" jdbcType="VARCHAR" />
+    <result column="ending_not_less_than_fifty" property="endingNotLessThanFifty" jdbcType="INTEGER" />
     <result column="investment_adviser" property="investmentAdviser" jdbcType="VARCHAR" />
+    <result column="buy_amount" property="buyAmount" jdbcType="VARCHAR" />
+    <result column="current_amount_paid" property="currentAmountPaid" jdbcType="VARCHAR" />
+    <result column="beginning_balance" property="beginningBalance" jdbcType="VARCHAR" />
+    <result column="beginning_balance_time_point" property="beginningBalanceTimePoint" jdbcType="VARCHAR" />
+    <result column="beginning_no_greater_than_fifty" property="beginningNoGreaterThanFifty" jdbcType="INTEGER" />
     <result column="user_identify" property="userIdentify" jdbcType="VARCHAR" />
     <result column="if_performance_pool" property="ifPerformancePool" jdbcType="INTEGER" />
-    <result column="ending_balance" property="endingBalance" jdbcType="VARCHAR" />
-    <result column="ending_not_less_than_fifty" property="endingNotLessThanFifty" jdbcType="INTEGER" />
-    <result column="buy_amount" property="buyAmount" jdbcType="VARCHAR" />
-    <result column="beginning_balance" property="beginningBalance" jdbcType="VARCHAR" />
-    <result column="beginning_no_greater_than_fifty" property="beginningNoGreaterThanFifty" jdbcType="INTEGER" />
-    <result column="matching_period_initial_value" property="matchingPeriodInitialValue" jdbcType="VARCHAR" />
-    <result column="beginning_comparison" property="beginningComparison" jdbcType="VARCHAR" />
-    <result column="difference" property="difference" jdbcType="VARCHAR" />
-    <result column="redemption_order" property="redemptionOrder" jdbcType="VARCHAR" />
-    <result column="revise" property="revise" jdbcType="VARCHAR" />
+    <result column="advisor_get_customers" property="advisorGetCustomers" jdbcType="INTEGER" />
+    <result column="comparison_historical_advisor" property="comparisonHistoricalAdvisor" jdbcType="INTEGER" />
+    <result column="advisor_get_customers_remove_duplicates" property="advisorGetCustomersRemoveDuplicates" jdbcType="INTEGER" />
+    <result column="center_for_customers" property="centerForCustomers" jdbcType="INTEGER" />
+    <result column="comparison_historical_center" property="comparisonHistoricalCenter" jdbcType="INTEGER" />
+    <result column="center_for_customers_remove_duplicates" property="centerForCustomersRemoveDuplicates" jdbcType="INTEGER" />
     <result column="error_query" property="errorQuery" jdbcType="VARCHAR" />
     <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
     <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
