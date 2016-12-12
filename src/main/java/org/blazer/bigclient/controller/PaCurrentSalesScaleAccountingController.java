@@ -77,9 +77,7 @@ public class PaCurrentSalesScaleAccountingController extends BaseController {
         try {
             //获取前台传递过来的参数
             HashMap<String, String> params = getParamMap(request);
-            LOGGER.debug("excel导出条件查询--当前页-currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
-                    ", 每页的行数-pageSize:" + IntegerUtil.getIntZero(params.get("pageSize")) +
-                    ", 查询条件-search:" + StringUtil.getStrEmpty(params.get("search")) +
+            LOGGER.debug("excel导出条件查询--查询条件-search:" + StringUtil.getStrEmpty(params.get("search")) +
                     ", 起始时间-dateStart:" + StringUtil.getStrEmpty(params.get("dateStart")) +
                     ", 截止时间-dateEnd:" + StringUtil.getStrEmpty(params.get("dateEnd"))+"---");
 

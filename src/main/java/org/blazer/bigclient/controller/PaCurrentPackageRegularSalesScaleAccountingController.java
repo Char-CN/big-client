@@ -84,7 +84,7 @@ public class PaCurrentPackageRegularSalesScaleAccountingController extends BaseC
                     ", 截止时间-dateEnd:" + StringUtil.getStrEmpty(params.get("dateEnd"))+"---");
 
             //xml配置中的ID
-            String id = "paCurrentSalesScaleAccounting";
+            String id = "paCurrentPackageRegularSalesScaleAccounting";
             // 要导出的数据
             List<PaCurrentPackageRegularSalesScaleAccounting> list = this.paCurrentPackageRegularSalesScaleAccountingService.findBySearch(
                     new PaCurrentPackageRegularSalesScaleAccounting(),params,"purchaseDate");
@@ -95,7 +95,7 @@ public class PaCurrentPackageRegularSalesScaleAccountingController extends BaseC
                 list.add(salesScaleAccounting);
             }
             //excel文件名称,不需要任何后缀
-            String excelName = "CurrentSalesScaleAccounting_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
+            String excelName = "CurrentPackageRegularSalesScaleAccounting_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
             //可以为空,自定义Excel头信息
             ExcelHeader header = null;
             //指定导出字段
@@ -107,8 +107,8 @@ public class PaCurrentPackageRegularSalesScaleAccountingController extends BaseC
             specifyFields.add("reportOrAllotDate");
             specifyFields.add("investmentAdviser");
             specifyFields.add("userIdentify");
-            specifyFields.add("basicProductName");
-            specifyFields.add("monthlyPurchaseAmount");
+            specifyFields.add("baseProductName");
+            specifyFields.add("purchaseAmount");
             specifyFields.add("currentAssetsTotal");
             specifyFields.add("purchaseDate");
             specifyFields.add("monthlyPurchaseAmount5");
