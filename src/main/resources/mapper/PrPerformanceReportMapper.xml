@@ -3,25 +3,31 @@
 <mapper namespace="org.blazer.bigclient.mapper.PrPerformanceReportMapper" >
   <resultMap id="BaseResultMap" type="org.blazer.bigclient.model.PrPerformanceReport" >
     <!--
-      WARNING - @mbggenerated
+      WARNING - @mbg.generated
     -->
     <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="team_name" property="teamName" jdbcType="VARCHAR" />
     <result column="advisor_level" property="advisorLevel" jdbcType="VARCHAR" />
     <result column="investment_advisor" property="investmentAdvisor" jdbcType="VARCHAR" />
-    <result column="current_vip_customers_number" property="currentVipCustomersNumber" jdbcType="VARCHAR" />
-    <result column="performance_customers_AUM" property="performanceCustomersAum" jdbcType="VARCHAR" />
-    <result column="performance_customers_number" property="performanceCustomersNumber" jdbcType="VARCHAR" />
+    <result column="current_vip_customers_number" property="currentVipCustomersNumber" jdbcType="INTEGER" />
+    <result column="performance_customers_aum" property="performanceCustomersAum" jdbcType="DOUBLE" />
+    <result column="performance_customers_number" property="performanceCustomersNumber" jdbcType="INTEGER" />
     <result column="reported_customers_registered_growth_rate" property="reportedCustomersRegisteredGrowthRate" jdbcType="VARCHAR" />
     <result column="reported_customers_transactions_growth_rate" property="reportedCustomersTransactionsGrowthRate" jdbcType="VARCHAR" />
-    <result column="last_month_sales_scale" property="lastMonthSalesScale" jdbcType="VARCHAR" />
-    <result column="monthly_sales_scale" property="monthlySalesScale" jdbcType="VARCHAR" />
-    <result column="monthly_sales_scale_performance_targets" property="monthlySalesScalePerformanceTargets" jdbcType="VARCHAR" />
+    <result column="monthly_regular_sales_scale" property="monthlyRegularSalesScale" jdbcType="DOUBLE" />
+    <result column="monthly_current_sales_scale_conversion" property="monthlyCurrentSalesScaleConversion" jdbcType="DOUBLE" />
+    <result column="monthly_cpr_sales_scale_conversion" property="monthlyCprSalesScaleConversion" jdbcType="DOUBLE" />
+    <result column="monthly_sales_scale" property="monthlySalesScale" jdbcType="DOUBLE" />
+    <result column="monthly_sales_scale_performance_targets" property="monthlySalesScalePerformanceTargets" jdbcType="INTEGER" />
     <result column="sales_completion_rate" property="salesCompletionRate" jdbcType="VARCHAR" />
-    <result column="monthly_number_of_get_customers" property="monthlyNumberOfGetCustomers" jdbcType="VARCHAR" />
-    <result column="monthly_acquisition_target" property="monthlyAcquisitionTarget" jdbcType="VARCHAR" />
+    <result column="team_sales_scale" property="teamSalesScale" jdbcType="DOUBLE" />
+    <result column="monthly_get_customers_number" property="monthlyGetCustomersNumber" jdbcType="INTEGER" />
+    <result column="monthly_get_customers_target" property="monthlyGetCustomersTarget" jdbcType="INTEGER" />
     <result column="get_customers_completion_rate" property="getCustomersCompletionRate" jdbcType="VARCHAR" />
+    <result column="team_get_customers_number" property="teamGetCustomersNumber" jdbcType="INTEGER" />
     <result column="comprehensive_completion_rate" property="comprehensiveCompletionRate" jdbcType="VARCHAR" />
-    <result column="comprehensive_completion_rate_ranking" property="comprehensiveCompletionRateRanking" jdbcType="VARCHAR" />
+    <result column="comprehensive_completion_rate_ranking" property="comprehensiveCompletionRateRanking" jdbcType="INTEGER" />
     <result column="team_comprehensive_completion_rate" property="teamComprehensiveCompletionRate" jdbcType="VARCHAR" />
     <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
     <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />

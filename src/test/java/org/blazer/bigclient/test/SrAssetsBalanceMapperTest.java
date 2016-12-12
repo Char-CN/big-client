@@ -24,11 +24,7 @@ public class SrAssetsBalanceMapperTest extends BasicTest {
         ArrayList<SrAssetsBalance> list = new ArrayList<>();
 
         for (int i = 1; i <= 51; i++) {
-            /*(String userName, Long phoneNumber, String investmentAdviser, String registerDate,
-               String regularAssetsTotal, String regularAumTimePoint, String currentAssetsTotal,
-               String currentAumTimePoint, String aumTotal, Date mtime, Date ctime)*/
-            SrAssetsBalance user = new SrAssetsBalance(i + "", Long.parseLong(i + ""), i + "", i + "", i + "", i + "",
-                                                        i + "", i + "", i + "", new Date(), new Date());
+            SrAssetsBalance user = new SrAssetsBalance();
 
             list.add(user);
         }

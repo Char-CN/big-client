@@ -103,11 +103,10 @@
 		<field name="phoneNumber" title="手机号码"/>
 		<field name="investmentAdviser" title="投资顾问"/>
 		<field name="registerDate" title="注册日期"/>
-		<field name="regularAssetsTotal" title="当前定期AUM（资产总额）"/>
-		<field name="regularAumTimePoint" title="当前定期AUM时间点"/>
-		<field name="currentAssetsTotal" title="当前活期AUM（资产总额）"/>
-		<field name="currentAumTimePoint" title="当前活期AUM时间点"/>
-		<field name="aumTotal" title="当前AUM汇总（元）"/>
+		<field name="regularAssetsTotal" title="当前定期资产总额"/>
+		<field name="currentAssetsTotal" title="当前活期资产总额"/>
+		<field name="aumTotal" title="当前AUM（资产总额）"/>
+		<field name="aumTimePoint" title="AUM时间点"/>
 		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
@@ -277,23 +276,29 @@
 	<excel id="prPerformanceReport" class="org.blazer.bigclient.model.PrPerformanceReport"
 		   sheetname="业绩报表" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
 		<field name="id" title="自动编号"/>
+		<field name="area" title="区域"/>
+		<field name="teamName" title="投顾组"/>
 		<field name="advisorLevel" title="投顾级别"/>
-		<field name="investmentAdvisor" title="投顾姓名"/>
+		<field name="investmentAdvisor" title="投资顾问"/>
 		<field name="currentVipCustomersNumber" title="当前vip客户数（人数）"/>
 		<field name="performanceCustomersAum" title="计入业绩客户AUM值（亿元）"/>
 		<field name="performanceCustomersNumber" title="计入业绩客户数（人数）"/>
 		<field name="reportedCustomersRegisteredGrowthRate" title="上报客户数注册增长率"/>
 		<field name="reportedCustomersTransactionsGrowthRate" title="上报客户交易数增长率"/>
-		<field name="lastMonthSalesScale" title="上月销售规模（万元）"/>
-		<field name="monthlySalesScale" title="月销售规模（万元）"/>
+		<field name="monthlyRegularSalesScale" title="本月定期销售规模（万元）"/>
+		<field name="monthlyCurrentSalesScaleConversion" title="本月活期申购额折算后（万元）"/>
+		<field name="monthlyCprSalesScaleConversion" title="本月活包定申购额折算后（万元）"/>
+		<field name="monthlySalesScale" title="当前销售规模（万元）"/>
 		<field name="monthlySalesScalePerformanceTargets" title="月销售规模业绩目标（万元）"/>
 		<field name="salesCompletionRate" title="销售规模完成率"/>
-		<field name="monthlyNumberOfGetCustomers" title="月获客数（折算）"/>
-		<field name="monthlyAcquisitionTarget" title="月度获客目标（折算）"/>
+		<field name="teamSalesScale" title="小组销售规模（万元）"/>
+		<field name="monthlyGetCustomersNumber" title="本月获客数（折算）"/>
+		<field name="monthlyGetCustomersTarget" title="月度获客业绩目标（折算）"/>
 		<field name="getCustomersCompletionRate" title="获客完成率"/>
+		<field name="teamGetCustomersNumber" title="小组获客数量（折算）"/>
 		<field name="comprehensiveCompletionRate" title="综合完成率"/>
 		<field name="comprehensiveCompletionRateRanking" title="综合完成率排名"/>
-		<field name="teamComprehensiveCompletionRate" title="投资组综合完成率"/>
+		<field name="teamComprehensiveCompletionRate" title="小组综合完成率"/>
 		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>

@@ -28,26 +28,31 @@ public class SrAssetsBalanceService extends BaseService<SrAssetsBalance> {
         Example example = new Example(SrAssetsBalance.class);
         Example.Criteria criteria = example.createCriteria();
         String search = StringUtil.getStrEmpty(params.get("search"));
-        String advisorName = StringUtil.getStrEmpty(params.get("advisorName"));
         if (StringUtils.isNotEmpty(search)) {
             criteria.andCondition("phone_number like '%" + search + "%'" + " or user_name like '%" + search + "%'");
         }
-        if (StringUtils.isNotEmpty(advisorName)) {
-            //此处为实体类的属性，不是表字段
-            criteria.andEqualTo("investmentAdviser", advisorName);
+        //AUM时间点
+        String dateStart = StringUtil.getStrEmpty(params.get("dateStart"));
+        if (StringUtils.isNotEmpty(dateStart)) {
+            criteria.andEqualTo("aumTimePoint", dateStart);
         }
         PageHelper.startPage(IntegerUtil.getIntZero(params.get("currentPage")), IntegerUtil.getIntZero(params.get("pageSize")));
         List<SrAssetsBalance> list = selectByExample(example);
         return new PageInfo(list);
     }
 
-    public List<SrAssetsBalance> findBySearch(String search) {
+    public List<SrAssetsBalance> findBySearch(HashMap<String, String> params) {
         LOGGER.info("根据条件查询：资产余额[SrAssetsBalance]，导出到excel表...");
         Example example = new Example(SrAssetsBalance.class);
         Example.Criteria criteria = example.createCriteria();
-        String search_text = StringUtil.getStrEmpty(search);
-        if (StringUtils.isNotEmpty(search_text)) {
+        String search = StringUtil.getStrEmpty(params.get("search"));
+        if (StringUtils.isNotEmpty(search)) {
             criteria.andCondition("phone_number like '%" + search + "%'" + " or user_name like '%" + search + "%'");
+        }
+        //AUM时间点
+        String dateStart = StringUtil.getStrEmpty(params.get("dateStart"));
+        if (StringUtils.isNotEmpty(dateStart)) {
+            criteria.andEqualTo("aumTimePoint", dateStart);
         }
         return selectByExample(example);
     }

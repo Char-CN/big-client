@@ -9,10 +9,14 @@
                 return;
             }
             _currentPage_lastCurrent = currentPage;
+
+            var search_date_start = $("#search_date_start").val();
+
             lock = true;
             $.post("sr/assets_balance/findByPage.do", {
                 currentPage: currentPage,
                 pageSize: 10,
+                dateStart: search_date_start,
                 search: search_text
             }, function (data) {
                 init(data.list);
@@ -33,27 +37,15 @@
             for (var i in rst) {
                 var cls = "warning";
                 var tr = $('<tr class="' + cls + '">');
-                /*<field name="id" title="自动编号"/>
-                 <field name="userName" title="客户姓名"/>
-                 <field name="phoneNumber" title="手机号码"/>
-                 <field name="investmentAdviser" title="投资顾问"/>
-                 <field name="registerDate" title="注册日期"/>
-                 <field name="regularAssetsTotal" title="当前定期AUM（资产总额）"/>
-                 <field name="regularAumTimePoint" title="当前定期AUM时间点"/>
-                 <field name="currentAssetsTotal" title="当前活期AUM（资产总额）"/>
-                 <field name="currentAumTimePoint" title="当前活期AUM时间点"/>
-                 <field name="aumTotal" title="当前AUM汇总（元）"/>
-                 <field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
-                 <field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>*/
+
                 tr.append('<td>' + rst[i].userName + '</td>');
                 tr.append('<td>' + rst[i].phoneNumber + '</td>');
                 tr.append('<td>' + rst[i].investmentAdviser + '</td>');
                 tr.append('<td>' + rst[i].registerDate + '</td>');
                 tr.append('<td>' + rst[i].regularAssetsTotal + '</td>');
-                tr.append('<td>' + rst[i].regularAumTimePoint + '</td>');
                 tr.append('<td>' + rst[i].currentAssetsTotal + '</td>');
-                tr.append('<td>' + rst[i].currentAumTimePoint + '</td>');
                 tr.append('<td>' + rst[i].aumTotal + '</td>');
+                tr.append('<td>' + rst[i].aumTimePoint + '</td>');
 
                 $("#tb>tbody").append(tr);
             }
@@ -72,9 +64,10 @@
          * ajax下载excel
          */
         $("#exportExcel").click(function () {
+            var search_date_start = $("#search_date_start").val();
             downLoadFile({
                 url: 'sr/assets_balance/exportExcel.do', //请求的url
-                data: {search: search_text},//要发送的数据
+                data: {search: search_text,dateStart: search_date_start},//要发送的数据
                 callback: function () {
                     //alert("导出excel文件成功");
                 }
@@ -84,28 +77,27 @@
     });
 </script>
 <div class="row" style="margin: 0;">
-    <div class="input-group has-primary" style="float: left; width: 300px;">
-        <input id="search_text" type="text" class="form-control" placeholder="手机号或姓名模糊查询..."/>
-        <span class="input-group-btn">
-			<button id="search" class="btn btn-primary" type="button">搜索</button>
-		</span>
+    <div class="input-group has-primary" style="float: left;">
+        <span class="in_left buy">搜索条件：</span>
+        <input id="search_text" type="text" class="form-control" placeholder="手机号或姓名的模糊查询..."/>
+        <span class="buy">AUM时间点：</span>
+        <input id="search_date_start" placeholder="请选择一个日期" class="laydate-icon date" onClick="laydate({istime: true, format: 'YYYY-MM-DD'})">
+        <button id="search" style="margin-left:10px;" class="btn btn-primary search_btn" type="button">搜索</button>
+        <button type="button" id="exportExcel" class="btn btn-primary" style="float: right;">导出Excel</button>
     </div>
-    <button type="button" id="exportExcel" class="btn btn-primary" style="float: right;">导出Excel</button>
 </div>
 <hr class="line-3"/>
-<!-- /.col-lg-6 -->
 <table id="tb" class="table table-hover table-condensed table-bordered">
     <thead>
     <tr>
-        <th width="8%">客户姓名</th>
-        <th width="8%">手机号码</th>
-        <th width="10%">投资顾问</th>
-        <th width="10%">注册日期</th>
-        <th width="14%">当前定期AUM（资产总额）</th>
-        <th width="12%">AUM时间点（定期）</th>
-        <th width="14%">当前活期AUM（资产总额）</th>
-        <th width="11%">AUM时间点（活期）</th>
-        <th width="12%">当前AUM汇总(元)</th>
+        <th width="12.5%">客户姓名</th>
+        <th width="12.5%">手机号码</th>
+        <th width="12.5%">投资顾问</th>
+        <th width="12.5%">注册日期</th>
+        <th width="12.5%">当前定期资产总额</th>
+        <th width="12.5%">当前活期资产总额</th>
+        <th width="12.5%">当前AUM（资产总额）</th>
+        <th width="12.5%">AUM时间点</th>
     </tr>
     </thead>
     <tbody>

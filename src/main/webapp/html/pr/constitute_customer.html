@@ -12,7 +12,7 @@
             lock = true;
             $.post("pr/constitute_customer/findByPage.do", {
                 currentPage: currentPage,
-                pageSize: 10,
+                pageSize: 50,
                 search: search_text
             }, function (data) {
                 init(data.list);

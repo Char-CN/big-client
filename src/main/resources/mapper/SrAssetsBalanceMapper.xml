@@ -3,7 +3,7 @@
 <mapper namespace="org.blazer.bigclient.mapper.SrAssetsBalanceMapper" >
   <resultMap id="BaseResultMap" type="org.blazer.bigclient.model.SrAssetsBalance" >
     <!--
-      WARNING - @mbggenerated
+      WARNING - @mbg.generated
     -->
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
@@ -11,10 +11,9 @@
     <result column="investment_adviser" property="investmentAdviser" jdbcType="VARCHAR" />
     <result column="register_date" property="registerDate" jdbcType="VARCHAR" />
     <result column="regular_assets_total" property="regularAssetsTotal" jdbcType="VARCHAR" />
-    <result column="regular_aum_time_point" property="regularAumTimePoint" jdbcType="VARCHAR" />
     <result column="current_assets_total" property="currentAssetsTotal" jdbcType="VARCHAR" />
-    <result column="current_aum_time_point" property="currentAumTimePoint" jdbcType="VARCHAR" />
     <result column="aum_total" property="aumTotal" jdbcType="VARCHAR" />
+    <result column="aum_time_point" property="aumTimePoint" jdbcType="VARCHAR" />
     <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
     <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
   </resultMap>

@@ -82,10 +82,7 @@ public class PrPerformanceReportController extends BaseController {
             // 要导出的数据
             List<PrPerformanceReport> list = this.prPerformanceReportService.findBySearch(search);
             if (list == null || list.size() == 0) {
-                PrPerformanceReport performanceReport = new PrPerformanceReport("空", "空", "空", "空", "空",
-                                                                                "空", "空", "空", "空", "空",
-                                                                                "空", "空", "空", "空", "空",
-                                                                                "空", "空", new Date(), new Date());
+                PrPerformanceReport performanceReport = new PrPerformanceReport();
                 list.add(performanceReport);
             }
             //excel文件名称,不需要任何后缀

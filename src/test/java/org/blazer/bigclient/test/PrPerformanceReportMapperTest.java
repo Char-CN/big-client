@@ -24,10 +24,7 @@ public class PrPerformanceReportMapperTest extends BasicTest {
         ArrayList<PrPerformanceReport> list = new ArrayList<>();
 
         for (int i = 1; i <= 51; i++) {
-            PrPerformanceReport user = new PrPerformanceReport(i + "", i + "", i + "", i + "", i + "",
-                                                                i + "", i + "", i + "", i + "", i + "",
-                                                                i + "", i + "", i + "", i + "", i + "",
-                                                                i + "", i + "", new Date(), new Date());
+            PrPerformanceReport user = new PrPerformanceReport();
 
             list.add(user);
         }

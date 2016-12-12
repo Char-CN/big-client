@@ -48,9 +48,10 @@ public class SrAssetsBalanceController extends BaseController {
     public PageInfo<SrAssetsBalance> findByPage(HttpServletRequest request, HttpServletResponse response) {
         //获取前台传递过来的参数
         HashMap<String, String> params = getParamMap(request);
-        LOGGER.debug("currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
-                ", pageSize:" + IntegerUtil.getIntZero(params.get("pageSize")) +
-                ", search:" + StringUtil.getStrEmpty(params.get("search")));
+        LOGGER.debug("分页条件查询列表--当前页-currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
+                ", 每页的行数-pageSize:" + IntegerUtil.getIntZero(params.get("pageSize")) +
+                ", 查询条件-search:" + StringUtil.getStrEmpty(params.get("search")) +
+                ", AUM时间点-dateStart:" + StringUtil.getStrEmpty(params.get("dateStart")) +"......");
 
         /*//获取当前登录用户
         KamAdvisor advisor = super.getCurrentUser(request);
@@ -73,16 +74,20 @@ public class SrAssetsBalanceController extends BaseController {
     public ModelAndView exportExcel(HttpServletRequest request) {
         ModelAndView mv = null;
         try {
-            //根据条件获取要导出的数据集合
-            String search = StringUtil.getStrEmpty(request.getParameter("search"));
-            LOGGER.debug("查询条件---search:" + search);
+            //获取前台传递过来的参数
+            HashMap<String, String> params = getParamMap(request);
+            LOGGER.debug("分页条件查询列表--当前页-currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
+                    ", 每页的行数-pageSize:" + IntegerUtil.getIntZero(params.get("pageSize")) +
+                    ", 查询条件-search:" + StringUtil.getStrEmpty(params.get("search")) +
+                    ", AUM时间点-dateStart:" + StringUtil.getStrEmpty(params.get("dateStart")) +"......");
 
             //xml配置中的ID
             String id = "srAssetsBalance";
             // 要导出的数据
-            List<SrAssetsBalance> list = this.srAssetsBalanceService.findBySearch(search);
+            List<SrAssetsBalance> list = this.srAssetsBalanceService.findBySearch(params);
             if (list == null || list.size() == 0) {
-                SrAssetsBalance assetsBalance = new SrAssetsBalance("空", 0L, "空", "空", "空", "空", "空", "空", "空", new Date(), new Date());
+                SrAssetsBalance assetsBalance = new SrAssetsBalance(Long.parseLong("0"),"0",Long.parseLong("0"),"0",
+                        "0","0","0","0","0",new Date(),new Date());
                 list.add(assetsBalance);
             }
             //excel文件名称,不需要任何后缀
@@ -96,10 +101,9 @@ public class SrAssetsBalanceController extends BaseController {
             specifyFields.add("investmentAdviser");
             specifyFields.add("registerDate");
             specifyFields.add("regularAssetsTotal");
-            specifyFields.add("regularAumTimePoint");
             specifyFields.add("currentAssetsTotal");
-            specifyFields.add("currentAumTimePoint");
             specifyFields.add("aumTotal");
+            specifyFields.add("aumTimePoint");
 
             //构建excel试图
             mv = super.createExcelView(id, list, excelName, header, specifyFields);
