@@ -1,6 +1,7 @@
 package org.blazer.bigclient.controller;
 
 import com.github.pagehelper.PageInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.blazer.bigclient.body.AdvisorInfoBean;
 import org.blazer.bigclient.body.AjaxResult;
 import org.blazer.bigclient.model.KamAdvisor;
@@ -29,8 +30,8 @@ import java.util.List;
  */
 @RequestMapping("/advisor")
 @Controller
+@Slf4j
 public class KamAdvisorController extends BaseController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(KamAdvisorController.class);
 
     @Autowired
     private KamAdvisorService kamAdvisorService;
@@ -46,7 +47,7 @@ public class KamAdvisorController extends BaseController {
     @RequestMapping("/findByPage")
     public PageInfo<AdvisorInfoBean> findByPage(HttpServletRequest request, HttpServletResponse response) {
         HashMap<String, String> params = getParamMap(request);
-        LOGGER.debug("currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
+        log.debug("currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
                 ", pageSize:" + IntegerUtil.getIntZero(params.get("pageSize")) +
                 ", search:" + StringUtil.getStrEmpty(params.get("search")));
         return kamAdvisorService.findByPage(params);
@@ -90,7 +91,7 @@ public class KamAdvisorController extends BaseController {
         String totalNumber = StringUtil.getStrEmpty(request.getParameter("totalNumber"));
         String area = StringUtil.getStrEmpty(request.getParameter("area"));
 
-        LOGGER.debug("当前保存的投顾的姓名是 :" + actualName);
+        log.debug("当前保存的投顾的姓名是 :" + actualName);
 
         /*String userName = StringUtil.getStrEmpty(request.getParameter("userName"));
         String remark = StringUtil.getStrEmpty(request.getParameter("remark"));*/
@@ -135,7 +136,7 @@ public class KamAdvisorController extends BaseController {
             result.setMsg("保存客户信息失败..." + e.getMessage());
             e.printStackTrace();
         }
-        LOGGER.debug("返回页面的结果对象：" + result);
+        log.debug("返回页面的结果对象：" + result);
         return result;
     }
 
