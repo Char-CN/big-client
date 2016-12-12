@@ -34,6 +34,8 @@
                 var cls = "warning";
                 var tr = $('<tr class="' + cls + '">');
 
+                tr.append('<td>' + rst[i].area+ '</td>');
+                tr.append('<td>' + rst[i].teamName+ '</td>');
                 tr.append('<td>' + rst[i].advisorLevel+ '</td>');
                 tr.append('<td>' + rst[i].investmentAdvisor+ '</td>');
                 tr.append('<td>' + rst[i].currentVipCustomersNumber+ '</td>');
@@ -41,13 +43,17 @@
                 tr.append('<td>' + rst[i].performanceCustomersNumber+ '</td>');
                 tr.append('<td>' + rst[i].reportedCustomersRegisteredGrowthRate+ '</td>');
                 tr.append('<td>' + rst[i].reportedCustomersTransactionsGrowthRate+ '</td>');
-                tr.append('<td>' + rst[i].lastMonthSalesScale+ '</td>');
+                tr.append('<td>' + rst[i].monthlyRegularSalesScale+ '</td>');
+                tr.append('<td>' + rst[i].monthlyCurrentSalesScaleConversion+ '</td>');
+                tr.append('<td>' + rst[i].monthlyCprSalesScaleConversion+ '</td>');
                 tr.append('<td>' + rst[i].monthlySalesScale+ '</td>');
                 tr.append('<td>' + rst[i].monthlySalesScalePerformanceTargets+ '</td>');
                 tr.append('<td>' + rst[i].salesCompletionRate+ '</td>');
-                tr.append('<td>' + rst[i].monthlyNumberOfGetCustomers+ '</td>');
-                tr.append('<td>' + rst[i].monthlyAcquisitionTarget+ '</td>');
+                tr.append('<td>' + rst[i].teamSalesScale+ '</td>');
+                tr.append('<td>' + rst[i].monthlyGetCustomersNumber+ '</td>');
+                tr.append('<td>' + rst[i].monthlyGetCustomersTarget+ '</td>');
                 tr.append('<td>' + rst[i].getCustomersCompletionRate+ '</td>');
+                tr.append('<td>' + rst[i].teamGetCustomersNumber+ '</td>');
                 tr.append('<td>' + rst[i].comprehensiveCompletionRate+ '</td>');
                 tr.append('<td>' + rst[i].comprehensiveCompletionRateRanking+ '</td>');
                 tr.append('<td>' + rst[i].teamComprehensiveCompletionRate+ '</td>');
@@ -91,26 +97,32 @@
 </div>
 <hr class="line-3"/>
 <div class="table-responsive">
-    <table id="tb" class="table table-hover table-condensed table-bordered" style="width: 2500px">
+    <table id="tb" class="table table-hover table-condensed table-bordered" style="width: 3000px">
         <thead>
             <tr>
+                <th>区域</th>
+                <th>投顾组</th>
                 <th>投顾级别</th>
-                <th>投顾姓名</th>
-                <th>当前VIP客户数（人数）</th>
+                <th>投资顾问</th>
+                <th>当前vip客户数（人数）</th>
                 <th>计入业绩客户AUM值（亿元）</th>
                 <th>计入业绩客户数（人数）</th>
                 <th>上报客户数注册增长率</th>
                 <th>上报客户交易数增长率</th>
-                <th>上月销售规模（万元）</th>
-                <th>月销售规模（万元）</th>
+                <th>本月定期销售规模（万元）</th>
+                <th>本月活期申购额折算后（万元）</th>
+                <th>本月活包定申购额折算后（万元）</th>
+                <th>当前销售规模（万元）</th>
                 <th>月销售规模业绩目标（万元）</th>
                 <th>销售规模完成率</th>
-                <th>月获客数（折算）</th>
-                <th>月度获客目标（折算）</th>
+                <th>小组销售规模（万元）</th>
+                <th>本月获客数（折算）</th>
+                <th>月度获客业绩目标（折算）</th>
                 <th>获客完成率</th>
+                <th>小组获客数量（折算）</th>
                 <th>综合完成率</th>
                 <th>综合完成率排名</th>
-                <th>投资组综合完成率</th>
+                <th>小组综合完成率</th>
             </tr>
         </thead>
         <tbody>

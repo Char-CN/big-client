@@ -82,7 +82,10 @@ public class PrPerformanceReportController extends BaseController {
             // 要导出的数据
             List<PrPerformanceReport> list = this.prPerformanceReportService.findBySearch(search);
             if (list == null || list.size() == 0) {
-                PrPerformanceReport performanceReport = new PrPerformanceReport();
+                PrPerformanceReport performanceReport = new PrPerformanceReport(Long.parseLong("0"), "0", "0", "0", "0", 0,
+                        Double.parseDouble("0"), 0, "0", "0", Double.parseDouble("0"), Double.parseDouble("0"),
+                        Double.parseDouble("0"), Double.parseDouble("0"), 0, "0", Double.parseDouble("0"),
+                        0, 0, "0", 0, "0", 0, "0", new Date(), new Date());
                 list.add(performanceReport);
             }
             //excel文件名称,不需要任何后缀
@@ -92,6 +95,8 @@ public class PrPerformanceReportController extends BaseController {
             //指定导出字段
             List<String> specifyFields = new ArrayList<String>();
 
+            specifyFields.add("area");
+            specifyFields.add("teamName");
             specifyFields.add("advisorLevel");
             specifyFields.add("investmentAdvisor");
             specifyFields.add("currentVipCustomersNumber");
@@ -99,13 +104,17 @@ public class PrPerformanceReportController extends BaseController {
             specifyFields.add("performanceCustomersNumber");
             specifyFields.add("reportedCustomersRegisteredGrowthRate");
             specifyFields.add("reportedCustomersTransactionsGrowthRate");
-            specifyFields.add("lastMonthSalesScale");
+            specifyFields.add("monthlyRegularSalesScale");
+            specifyFields.add("monthlyCurrentSalesScaleConversion");
+            specifyFields.add("monthlyCprSalesScaleConversion");
             specifyFields.add("monthlySalesScale");
             specifyFields.add("monthlySalesScalePerformanceTargets");
             specifyFields.add("salesCompletionRate");
-            specifyFields.add("monthlyNumberOfGetCustomers");
-            specifyFields.add("monthlyAcquisitionTarget");
+            specifyFields.add("teamSalesScale");
+            specifyFields.add("monthlyGetCustomersNumber");
+            specifyFields.add("monthlyGetCustomersTarget");
             specifyFields.add("getCustomersCompletionRate");
+            specifyFields.add("teamGetCustomersNumber");
             specifyFields.add("comprehensiveCompletionRate");
             specifyFields.add("comprehensiveCompletionRateRanking");
             specifyFields.add("teamComprehensiveCompletionRate");
