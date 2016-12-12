@@ -27,7 +27,6 @@ var downLoadFile = function (options) {
     $form[0].submit();
 };
 
-
 var downloadFileByTagA = function(){
     var a = $("<a></a>").appendTo($("body"));
     a.attr("href", e.data.filePath);

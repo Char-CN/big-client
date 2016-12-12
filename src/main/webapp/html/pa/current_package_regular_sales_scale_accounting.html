@@ -46,20 +46,6 @@
             findByPage(_currentPage_lastCurrent);
         };
 
-        /**
-         * 处理null值的字段
-         * 判断 是、否,上报、分配等。
-         */
-        var dealNull = function (field, num1, num2, val1, val2) {
-            var str = "";
-            if (field == num1) {
-                str = val1;
-            } else if (field == num2) {
-                str = val2;
-            }
-            return str;
-        };
-
         // 初始化数据
         var init = function (rst) {
             $("#tb>tbody").empty();
@@ -76,18 +62,12 @@
                 tr.append('<td>' + rst[i].userIdentify + '</td>');
                 tr.append('<td>' + rst[i].basicProductName + '</td>');
                 tr.append('<td>' + rst[i].monthlyPurchaseAmount + '</td>');
+                tr.append('<td>' + rst[i].currentAssetsTotal + '</td>');
                 tr.append('<td>' + rst[i].purchaseDate + '</td>');
                 tr.append('<td>' + rst[i].monthlyPurchaseAmount5 + '</td>');
-                tr.append('<td>' + rst[i].ifReport + '</td>');
+                tr.append('<td>' + rst[i].performancePoolCoefficient + '</td>');
                 tr.append('<td>' + rst[i].effectiveCurrentSalesScale + '</td>');
-                var deferredNextMonth = rst[i].deferredNextMonth;
-                if (deferredNextMonth == "1") {
-                    deferredNextMonth = "是";
-                } else if (deferredNextMonth == "0") {
-                    deferredNextMonth = "否";
-                } else {
-                    deferredNextMonth = "";
-                }
+                var deferredNextMonth = dealNull(rst[i].deferredNextMonth,"1","0","是","否");
                 tr.append('<td>' + deferredNextMonth + '</td>');
 
                 $("#tb>tbody").append(tr);
@@ -143,11 +123,12 @@
                 <th>客户标识</th>
                 <th>基础产品名称</th>
                 <th>申购金额</th>
+                <th>现有资产</th>
                 <th>申购日期</th>
                 <th>申购金额/5</th>
-                <th>是否上报</th>
-                <th>有效金额</th>
-                <th>递延下月金额</th>
+                <th>业绩池系数</th>
+                <th>有效金额（万元）</th>
+                <th>递延下月</th>
             </tr>
         </thead>
         <tbody>

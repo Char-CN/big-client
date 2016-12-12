@@ -61,7 +61,7 @@ public class PaCurrentPackageRegularSalesScaleAccountingController extends BaseC
         if (advisor != null) {
             params.put("advisorName", advisor.getActualName());
         }*/
-        return this.paCurrentPackageRegularSalesScaleAccountingService.findByPage(params);
+        return this.paCurrentPackageRegularSalesScaleAccountingService.findByPage(new PaCurrentPackageRegularSalesScaleAccounting(),params,"purchaseDate");
     }
 
 
@@ -75,19 +75,24 @@ public class PaCurrentPackageRegularSalesScaleAccountingController extends BaseC
     public ModelAndView exportExcel(HttpServletRequest request) {
         ModelAndView mv = null;
         try {
-            //根据条件获取要导出的数据集合
-            String search = StringUtil.getStrEmpty(request.getParameter("search"));
-            LOGGER.debug("查询条件---search:" + search);
+            //获取前台传递过来的参数
+            HashMap<String, String> params = getParamMap(request);
+            LOGGER.debug("excel导出条件查询--当前页-currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
+                    ", 每页的行数-pageSize:" + IntegerUtil.getIntZero(params.get("pageSize")) +
+                    ", 查询条件-search:" + StringUtil.getStrEmpty(params.get("search")) +
+                    ", 起始时间-dateStart:" + StringUtil.getStrEmpty(params.get("dateStart")) +
+                    ", 截止时间-dateEnd:" + StringUtil.getStrEmpty(params.get("dateEnd"))+"---");
 
             //xml配置中的ID
             String id = "paCurrentSalesScaleAccounting";
             // 要导出的数据
-            List<PaCurrentPackageRegularSalesScaleAccounting> list = this.paCurrentPackageRegularSalesScaleAccountingService.findBySearch(search);
+            List<PaCurrentPackageRegularSalesScaleAccounting> list = this.paCurrentPackageRegularSalesScaleAccountingService.findBySearch(
+                    new PaCurrentPackageRegularSalesScaleAccounting(),params,"purchaseDate");
             if (list == null || list.size() == 0) {
-//                PaCurrentSalesScaleAccounting currentSalesScaleAccounting = new PaCurrentSalesScaleAccounting("空",
-//                        Long.parseLong(0 + ""),"空","空","空","空","空",Double.parseDouble(0 + ""),"空",
-//                        Double.parseDouble(0 + ""),"空",Double.parseDouble(0 + ""), Double.parseDouble(0 + ""), new Date(), new Date());
-//                list.add(currentSalesScaleAccounting);
+                PaCurrentPackageRegularSalesScaleAccounting salesScaleAccounting = new PaCurrentPackageRegularSalesScaleAccounting(
+                        Long.parseLong("0"),"0",Long.parseLong("0"),0,"0","0","0","0","0","0","0",
+                        Double.parseDouble("0"),0,Double.parseDouble("0"),Double.parseDouble("0"),new Date(),new Date());
+                list.add(salesScaleAccounting);
             }
             //excel文件名称,不需要任何后缀
             String excelName = "CurrentSalesScaleAccounting_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
@@ -104,9 +109,10 @@ public class PaCurrentPackageRegularSalesScaleAccountingController extends BaseC
             specifyFields.add("userIdentify");
             specifyFields.add("basicProductName");
             specifyFields.add("monthlyPurchaseAmount");
+            specifyFields.add("currentAssetsTotal");
             specifyFields.add("purchaseDate");
-            specifyFields.add("monthlyPurchaseAmount10");
-            specifyFields.add("ifReport");
+            specifyFields.add("monthlyPurchaseAmount5");
+            specifyFields.add("performancePoolCoefficient");
             specifyFields.add("effectiveCurrentSalesScale");
             specifyFields.add("deferredNextMonth");
 

@@ -82,9 +82,9 @@ public class PaCustomersAccountingController extends BaseController {
             // 要导出的数据
             List<PaCustomersAccounting> list = this.paCustomersAccountingService.findBySearch(search);
             if (list == null || list.size() == 0) {
-//                PaCustomersAccounting customersAccounting = new PaCustomersAccounting("空", Long.parseLong(0 + ""), "空", "空", "空",
-//                        0, "空", 0, "空", "空", 0, "空", "空", "空", "空", "空", "空", new Date(), new Date());
-//                list.add(customersAccounting);
+                PaCustomersAccounting customersAccounting = new PaCustomersAccounting(Long.parseLong("0"),"0",Long.parseLong("0"),
+                        "0","0","0",0,"0","0","0","0","0",0,"0",0,0,0,0,0,0,0,"0", new Date(), new Date());
+                list.add(customersAccounting);
             }
             //excel文件名称,不需要任何后缀
             String excelName = "CustomersAccounting_Export_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);

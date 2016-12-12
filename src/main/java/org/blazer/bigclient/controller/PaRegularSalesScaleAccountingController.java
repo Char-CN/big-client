@@ -61,7 +61,7 @@ public class PaRegularSalesScaleAccountingController extends BaseController {
         if (advisor != null) {
             params.put("advisorName", advisor.getActualName());
         }*/
-        return this.paRegularSalesScaleAccountingService.findByPage(params);
+        return this.paRegularSalesScaleAccountingService.findByPage(new PaRegularSalesScaleAccounting(),params,"investmentDate");
     }
 
 
@@ -75,17 +75,22 @@ public class PaRegularSalesScaleAccountingController extends BaseController {
     public ModelAndView exportExcel(HttpServletRequest request) {
         ModelAndView mv = null;
         try {
-            //根据条件获取要导出的数据集合
-            String search = StringUtil.getStrEmpty(request.getParameter("search"));
-            LOGGER.debug("查询条件---search:" + search);
+            //获取前台传递过来的参数
+            HashMap<String, String> params = getParamMap(request);
+            LOGGER.debug("excel导出条件查询--当前页-currentPage:" + IntegerUtil.getIntZero(params.get("currentPage")) +
+                    ", 每页的行数-pageSize:" + IntegerUtil.getIntZero(params.get("pageSize")) +
+                    ", 查询条件-search:" + StringUtil.getStrEmpty(params.get("search")) +
+                    ", 起始时间-dateStart:" + StringUtil.getStrEmpty(params.get("dateStart")) +
+                    ", 截止时间-dateEnd:" + StringUtil.getStrEmpty(params.get("dateEnd"))+"---");
 
             //xml配置中的ID
             String id = "paRegularSalesScaleAccounting";
             // 要导出的数据
-            List<PaRegularSalesScaleAccounting> list = this.paRegularSalesScaleAccountingService.findBySearch(search);
+            List<PaRegularSalesScaleAccounting> list = this.paRegularSalesScaleAccountingService.findBySearch(
+                    new PaRegularSalesScaleAccounting(),params,"investmentDate");
             if (list == null || list.size() == 0) {
-                PaRegularSalesScaleAccounting regularSalesScaleAccounting = new PaRegularSalesScaleAccounting("空", Long.parseLong(0 + ""),
-                        "空", "空", "空","空", "空", "空", "空", "空", "空", "空", 0, 0, 0, Double.parseDouble(0 + ""), new Date(), new Date());
+                PaRegularSalesScaleAccounting regularSalesScaleAccounting = new PaRegularSalesScaleAccounting("0", Long.parseLong(0 + ""),
+                        "0", "0", "0","0", "0", "0", "0", "0", "0", "0", 0, 0, 0, Double.parseDouble(0 + ""), new Date(), new Date());
                 list.add(regularSalesScaleAccounting);
             }
             //excel文件名称,不需要任何后缀
