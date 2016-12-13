@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.blazer.bigclient.model.ClExtUser;
 import org.blazer.bigclient.model.SrAssetsBalance;
+import org.blazer.bigclient.util.DateUtil;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.blazer.bigclient.util.StringUtil;
 import org.slf4j.Logger;
@@ -34,7 +35,11 @@ public class SrAssetsBalanceService extends BaseService<SrAssetsBalance> {
         //AUM时间点
         String dateStart = StringUtil.getStrEmpty(params.get("dateStart"));
         if (StringUtils.isNotEmpty(dateStart)) {
-            criteria.andEqualTo("aumTimePoint", dateStart);
+            //处理时间格式，添加时分秒
+            String dateStart_front = dateStart + " 00:00:00";
+            String dateStart_back = dateStart + " 23:59:59";
+            criteria.andGreaterThanOrEqualTo("aumTimePoint", dateStart_front);
+            criteria.andLessThanOrEqualTo("aumTimePoint", dateStart_back);
         }
         PageHelper.startPage(IntegerUtil.getIntZero(params.get("currentPage")), IntegerUtil.getIntZero(params.get("pageSize")));
         List<SrAssetsBalance> list = selectByExample(example);
@@ -52,7 +57,10 @@ public class SrAssetsBalanceService extends BaseService<SrAssetsBalance> {
         //AUM时间点
         String dateStart = StringUtil.getStrEmpty(params.get("dateStart"));
         if (StringUtils.isNotEmpty(dateStart)) {
-            criteria.andEqualTo("aumTimePoint", dateStart);
+            String dateStart_front = dateStart + " 00:00:00";
+            String dateStart_back = dateStart + " 23:59:59";
+            criteria.andGreaterThanOrEqualTo("aumTimePoint", dateStart_front);
+            criteria.andLessThanOrEqualTo("aumTimePoint", dateStart_back);
         }
         return selectByExample(example);
     }
