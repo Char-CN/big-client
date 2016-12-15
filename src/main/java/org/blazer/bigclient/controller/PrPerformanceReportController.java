@@ -85,7 +85,7 @@ public class PrPerformanceReportController extends BaseController {
                 PrPerformanceReport performanceReport = new PrPerformanceReport(Long.parseLong("0"), "0", "0", "0", "0", 0,
                         Double.parseDouble("0"), 0, "0", "0", Double.parseDouble("0"), Double.parseDouble("0"),
                         Double.parseDouble("0"), Double.parseDouble("0"), 0, "0", Double.parseDouble("0"),
-                        0, 0, "0", 0, "0", 0, "0", new Date(), new Date());
+                        0, 0, "0", 0, "0", 0, "0", 0, new Date(), new Date());
                 list.add(performanceReport);
             }
             //excel文件名称,不需要任何后缀

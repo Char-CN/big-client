@@ -29,6 +29,7 @@
     <result column="comprehensive_completion_rate" property="comprehensiveCompletionRate" jdbcType="VARCHAR" />
     <result column="comprehensive_completion_rate_ranking" property="comprehensiveCompletionRateRanking" jdbcType="INTEGER" />
     <result column="team_comprehensive_completion_rate" property="teamComprehensiveCompletionRate" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="INTEGER" />
     <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
     <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
   </resultMap>

@@ -157,6 +157,11 @@ public class PrPerformanceReport {
     private String teamComprehensiveCompletionRate;
 
     /**
+     * 版本（格式为年月 201612、201701）
+     */
+    private Integer version;
+
+    /**
      * 更新时间
      */
     private Date mtime;
