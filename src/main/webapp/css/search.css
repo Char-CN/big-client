@@ -40,19 +40,19 @@
 /*#m-tab .tab-head:after{*/
     /*position: absolute;*/
     /*width: 17px;*/
-    /*height:36px;*/
+    /*height:80px;*/
     /*right: 0;*/
     /*margin-top: -40px;*/
     /*margin-right: 24px;*/
     /*content: "";*/
-    /*background-color: #5fdbb9;*/
+    /*background-color:red;*/
     /*border: none;*/
 /*}*/
 #m-tab .tab-body{
     overflow: auto;
 }
 #m-tab table{
-    width:2700px;
+    width:2100px;
     text-align: center;
     border-collapse:collapse;
 }
@@ -60,14 +60,25 @@
     text-align: center;
     padding: 5px 10px;
     border: 1px solid #5fdbb9;
+    vertical-align: middle;
 }
 #m-tab th{
     text-align: center;
     padding:10px 10px;
     background-color:#5fdbb9;
     color: white;
+    vertical-align: middle;
 
 }
 #m-tab col{
     width: 4.34%;
+}
+#m-tab col:nth-child(1){
+    width:2%
+}
+#m-tab col:nth-child(2){
+    width:2%
+}
+#m-tab col:nth-child(3){
+    width:7%;
 }

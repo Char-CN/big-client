@@ -17,12 +17,6 @@
 	<link rel="stylesheet" type="text/css" href="css/search.css"/>
 
 	<style>
-		.bian {
-			background-image: -moz-linear-gradient(top, #BDBD3A, #fff); /* Firefox */
-			background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFF0), color-stop(1, #fff)); /* Saf4+, Chrome */
-			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFF0', endColorstr='#fff', GradientType='0'); /* IE*/
-		}
-
 		th, td {
 			text-align: center;
 		}
@@ -49,7 +43,7 @@
 		var width = $(window).width();
 		var height = $(window).height();
 		$("#center").width(width - 40);
-		$("#center").height(height - $("#north").height() - $("#south").height() - 120);
+		$("#center").height(height - $("#north").height() - $("#south").height() - 150);
 		var init = function () {
 			var body = $('body');
 			var link_ul = $('#ulnavbar');
