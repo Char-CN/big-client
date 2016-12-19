@@ -8,7 +8,6 @@
         var this_window = $("#" + windowId);
         //获取参数
         var ids = $util.getQueryString(queryString, "ids");
-        console.log(ids[0]);
 
         //查询所有投顾,构建options
         $.post("advisor/findAll.do", function (data) {

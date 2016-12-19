@@ -8,7 +8,6 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="team_name" property="teamName" jdbcType="VARCHAR" />
     <result column="team_leader_id" property="teamLeaderId" jdbcType="BIGINT" />
-    <result column="total_number" property="totalNumber" jdbcType="INTEGER" />
     <result column="area" property="area" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
