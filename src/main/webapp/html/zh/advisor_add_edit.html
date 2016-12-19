@@ -19,23 +19,25 @@
         var totalNumber = $util.getQueryString(queryString, "totalNumber");
         var area = $util.getQueryString(queryString, "area");
 
-        //回显数据
-        if (id != null) {
-            this_window.find("input[name=serialNumber]").val(serialNumber);
-            this_window.find("input[name=level]").val(level);
-            this_window.find("input[name=systemName]").val(systemName);
-            this_window.find("input[name=actualName]").val(actualName);
-            this_window.find("input[name=phoneNumber]").val(phoneNumber);
-            this_window.find("input[name=email]").val(email);
-            this_window.find("input[name=teamName]").val(teamName);
-        }
-
         //查询所有投顾组,构建options
         $.post("advisor_team/findAll.do", function (data) {
             for (var i = 0; i < data.length; i++) {
-                this_window.find(" select[name=teamName]").append("<option value='" + data[i].id + "'>" + data[i].teamName + "</option>");
+                this_window.find(" select[name=teamName]").append("<option value='" + data[i].teamName + "'>" + data[i].teamName + "</option>");
             }
+
+            //回显数据
+            if (id != null) {
+                this_window.find("input[name=serialNumber]").val(serialNumber);
+                this_window.find("input[name=level]").val(level);
+                this_window.find("input[name=systemName]").val(systemName);
+                this_window.find("input[name=actualName]").val(actualName);
+                this_window.find("input[name=phoneNumber]").val(phoneNumber);
+                this_window.find("input[name=email]").val(email);
+                this_window.find("select[name=teamName]").val(teamName);
+            }
+
         });
+
 
         /**
          * 触发保存按钮
@@ -49,7 +51,7 @@
                 actualName: this_window.find("input[name=actualName]").val(),
                 phoneNumber: this_window.find("input[name=phoneNumber]").val(),
                 email: this_window.find("input[name=email]").val(),
-                teamId: this_window.find("input[name=teamName]").val()
+                teamName: this_window.find("select[name=teamName]").val()
             }, function (data) {
                 if (data.code == 1) {
                     //保存成功，关闭当前窗口
