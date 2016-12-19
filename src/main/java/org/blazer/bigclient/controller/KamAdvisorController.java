@@ -87,20 +87,8 @@ public class KamAdvisorController extends BaseController {
         String phoneNumber = StringUtil.getStrEmpty(request.getParameter("phoneNumber"));
         String email = StringUtil.getStrEmpty(request.getParameter("email"));
         String teamName = StringUtil.getStrEmpty(request.getParameter("teamName"));
-        String teamLeaderName = StringUtil.getStrEmpty(request.getParameter("teamLeaderName"));
-        String totalNumber = StringUtil.getStrEmpty(request.getParameter("totalNumber"));
-        String area = StringUtil.getStrEmpty(request.getParameter("area"));
 
         log.debug("当前保存的投顾的姓名是 :" + actualName);
-
-        /*String userName = StringUtil.getStrEmpty(request.getParameter("userName"));
-        String remark = StringUtil.getStrEmpty(request.getParameter("remark"));*/
-        /*//获取当前登录用户
-        KamAdvisor advisor = super.getCurrentUser(request);
-        //判断当前登录用户如果为投顾,则添加投顾真实姓名作为查询参数
-        if (advisor != null) {
-            investmentAdviser = advisor.getActualName();
-        }*/
 
         try {
             //查询该投顾编号是否存在
@@ -108,7 +96,7 @@ public class KamAdvisorController extends BaseController {
 
             // 如果id为空，则是新增，不为空，则为修改
             if (id == 0L && !flag) {
-                //构建ClExtUserBak对象
+                //构建advisor对象
                 KamAdvisor advisor = new KamAdvisor();
                 advisor.setSerialNumber(serialNumber);
                 advisor.setLevel(level);
