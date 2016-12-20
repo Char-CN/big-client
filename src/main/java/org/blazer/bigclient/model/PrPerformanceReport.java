@@ -22,19 +22,20 @@ public class PrPerformanceReport {
     /**
      * 区域
      */
-    @OrderBy("desc")
+    @OrderBy("asc")
     private String area;
 
     /**
      * 投顾组
      */
-    @OrderBy("desc")
+    @OrderBy("asc")
     @Column(name = "team_name")
     private String teamName;
 
     /**
      * 投顾级别
      */
+    @OrderBy("desc")
     @Column(name = "advisor_level")
     private String advisorLevel;
 

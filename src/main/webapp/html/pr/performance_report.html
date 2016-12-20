@@ -35,7 +35,8 @@
             var totalCols = ['0', '1', '15', '19', '22'];
             var totalRows = $(".tab-body").find("tr").length;
             for (var i = totalCols.length - 1; i >= 0; i--) {
-                for (var j = totalRows - 1; j >= 1; j--) {
+                //长度控制，最下面两行不合并
+                for (var j = totalRows - 3; j >= 1; j--) {
                     startCell = $(".tab-body").find("tr").eq(j).find("td").eq(totalCols[i]);
                     targetCell = $(".tab-body").find("tr").eq(j - 1).find("td").eq(totalCols[i]);
                     if (startCell.text() == targetCell.text() && targetCell.text() != "") {
@@ -70,11 +71,12 @@
         // 初始化数据
         var init = function (rst) {
             $("#tb>tbody").empty();
+
             for (var i in rst) {
                 var cls = "warning";
-                if (i >= rst.length-2 ){
-                    var tr = $('<tr class="' + cls+'  colspanTR">');
-                }else{
+                if (rst[i].area.indexOf('投资顾问合计') > -1 || rst[i].area.indexOf('大客户中心') > -1) {
+                    var tr = $('<tr class="' + cls + '  colspanTR">');
+                } else {
                     var tr = $('<tr class="' + cls + '">');
                 }
 
@@ -104,6 +106,8 @@
 
                 $("#tb>table").append(tr);
             }
+            //合计的两行放置最下面
+            $("#tb>table").find('.colspanTR').appendTo("#tb>table");
         };
 
         findByPage(1);
