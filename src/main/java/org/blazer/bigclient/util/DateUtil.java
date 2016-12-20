@@ -23,6 +23,8 @@ public abstract class DateUtil {
 	public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
 	/** yyyyMMdd */
 	public static final String DATE_FORMAT = "yyyyMMdd";
+	/** yyyyMM */
+	public static final String DATE_FORMAT_SHORT = "yyyyMM";
 	/** HH:mm:ss */
 	public static final String DEFAULT_TIME_FORMAT = "HH:mm:ss";
 	/** yyyy-MM-dd HH:mm:ss */

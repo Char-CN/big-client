@@ -22,11 +22,13 @@ public class PrPerformanceReport {
     /**
      * 区域
      */
+    @OrderBy("desc")
     private String area;
 
     /**
      * 投顾组
      */
+    @OrderBy("desc")
     @Column(name = "team_name")
     private String teamName;
 

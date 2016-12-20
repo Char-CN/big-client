@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.blazer.bigclient.model.PrPerformanceReport;
+import org.blazer.bigclient.util.DateUtil;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.blazer.bigclient.util.StringUtil;
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,10 +29,12 @@ public class PrPerformanceReportService extends BaseService<PrPerformanceReport>
         Example example = new Example(PrPerformanceReport.class);
         Example.Criteria criteria = example.createCriteria();
         String search = StringUtil.getStrEmpty(params.get("search"));
-        if (StringUtils.isNotEmpty(search)) {
+        if (StringUtils.isEmpty(search)) {
+            search = DateUtil.date2Str(new Date(), DateUtil.DATE_FORMAT_SHORT);
+            criteria.andEqualTo("version", search);
+        } else {
             criteria.andEqualTo("version",search);
         }
-
         PageHelper.startPage(IntegerUtil.getIntZero(params.get("currentPage")), IntegerUtil.getIntZero(params.get("pageSize")));
         List<PrPerformanceReport> list = selectByExample(example);
         return new PageInfo(list);
@@ -42,7 +46,7 @@ public class PrPerformanceReportService extends BaseService<PrPerformanceReport>
         Example.Criteria criteria = example.createCriteria();
         String search_text = StringUtil.getStrEmpty(search);
         if (StringUtils.isNotEmpty(search_text)) {
-            criteria.andEqualTo("version",search);
+            criteria.andEqualTo("version", search);
         }
         return selectByExample(example);
     }

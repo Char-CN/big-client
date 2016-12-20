@@ -5,12 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.blazer.bigclient.body.AdvisorInfoBean;
 import org.blazer.bigclient.body.AjaxResult;
 import org.blazer.bigclient.model.KamAdvisor;
+import org.blazer.bigclient.model.KamAdvisorTeam;
 import org.blazer.bigclient.service.KamAdvisorService;
+import org.blazer.bigclient.service.KamAdvisorTeamService;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.blazer.bigclient.util.LongUtil;
 import org.blazer.bigclient.util.StringUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +35,9 @@ public class KamAdvisorController extends BaseController {
 
     @Autowired
     private KamAdvisorService kamAdvisorService;
+
+    @Autowired
+    private KamAdvisorTeamService kamAdvisorTeamService;
 
     /**
      * 根据搜索条件分页查询
@@ -94,10 +97,14 @@ public class KamAdvisorController extends BaseController {
             //查询该投顾编号是否存在
             Boolean flag = this.kamAdvisorService.selectBySerialNumber(serialNumber);
 
+            //根据teamName，查询投顾组
+            KamAdvisorTeam team = this.kamAdvisorTeamService.selectByName(teamName);
+
             // 如果id为空，则是新增，不为空，则为修改
             if (id == 0L && !flag) {
                 //构建advisor对象
                 KamAdvisor advisor = new KamAdvisor();
+                advisor.setTid(team.getId());
                 advisor.setSerialNumber(serialNumber);
                 advisor.setLevel(level);
                 advisor.setSystemName(systemName);
@@ -106,10 +113,11 @@ public class KamAdvisorController extends BaseController {
                 advisor.setRemark(email);
                 advisor.setCtime(new Date());
                 //保存到数据库
-                this.kamAdvisorService.saveOne(advisor,teamName);
+                this.kamAdvisorService.save(advisor);
             } else {
                 //修改用户，先根据id查询到客户
                 KamAdvisor advisor = this.kamAdvisorService.selectByKey(id);
+                advisor.setTid(team.getId());
                 advisor.setSerialNumber(serialNumber);
                 advisor.setLevel(level);
                 advisor.setSystemName(systemName);
@@ -117,7 +125,7 @@ public class KamAdvisorController extends BaseController {
                 advisor.setPhoneNumber(phoneNumber);
                 advisor.setRemark(email);
                 advisor.setMtime(new Date());
-                this.kamAdvisorService.updateOne(advisor,teamName);
+                this.kamAdvisorService.updateNotNull(advisor);
             }
         } catch (Exception e) {
             result.setCode(AjaxResult.CODE_FAILURE);

@@ -2,12 +2,9 @@ package org.blazer.bigclient.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.apache.commons.lang3.StringUtils;
 import org.blazer.bigclient.body.AdvisorInfoBean;
 import org.blazer.bigclient.mapper.KamAdvisorMapper;
-import org.blazer.bigclient.mapper.KamAdvisorTeamMapper;
 import org.blazer.bigclient.model.KamAdvisor;
-import org.blazer.bigclient.model.KamAdvisorTeam;
 import org.blazer.bigclient.util.IntegerUtil;
 import org.blazer.bigclient.util.StringUtil;
 import org.slf4j.Logger;
@@ -29,10 +26,6 @@ public class KamAdvisorService extends BaseService<KamAdvisor> {
 
     @Autowired
     private KamAdvisorMapper kamAdvisorMapper;
-
-    @Autowired
-    private KamAdvisorTeamMapper kamAdvisorTeamMapper;
-
 
     public PageInfo<AdvisorInfoBean> findByPage(HashMap<String, String> params) {
         LOGGER.info("分页条件查询");
@@ -85,39 +78,4 @@ public class KamAdvisorService extends BaseService<KamAdvisor> {
         return flag;
     }
 
-    /**
-     * 新增
-     *
-     * @param advisor
-     * @param teamName
-     */
-    public void saveOne(KamAdvisor advisor, String teamName) {
-        try {
-            KamAdvisorTeam advisorTeam = new KamAdvisorTeam();
-            advisorTeam.setTeamName(teamName);
-            this.kamAdvisorTeamMapper.selectOne(advisorTeam);
-            advisor.setTid(advisorTeam.getId());
-            this.save(advisor);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 更新
-     *
-     * @param advisor
-     * @param teamName
-     */
-    public void updateOne(KamAdvisor advisor, String teamName) {
-        try {
-            KamAdvisorTeam advisorTeam = new KamAdvisorTeam();
-            advisorTeam.setTeamName(teamName);
-            this.kamAdvisorTeamMapper.selectOne(advisorTeam);
-            advisor.setTid(advisorTeam.getId());
-            this.updateNotNull(advisor);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

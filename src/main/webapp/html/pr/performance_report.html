@@ -1,11 +1,11 @@
 <script>
     $(function () {
-    	// 控制滚动条；
-			$('#m-tab').css('height',$('#m-tab').parent().height()-70).children('.u-tab:last-child').css('height',$('#m-tab').height()-30);
-			$('.tab-body').scroll(function(){
-				var size=$(this).scrollLeft();
-				$(this).prev().children().scrollLeft(size)
-			});
+        // 控制滚动条；
+        $('#m-tab').css('height', $('#m-tab').parent().height() - 70).children('.u-tab:last-child').css('height', $('#m-tab').height() - 30);
+        $('.tab-body').scroll(function () {
+            var size = $(this).scrollLeft();
+            $(this).prev().children().scrollLeft(size)
+        });
         var lock = false;
         // 定义分页控件
         var pagination = new PageHelper("pagination");
@@ -18,34 +18,49 @@
             lock = true;
             $.post("pr/performance_report/findByPage.do", {
                 currentPage: currentPage,
-                pageSize: 50,
+                pageSize: 500,
                 search: search_text
             }, function (data) {
-				init(data.list);
-				merge();
-				// 初始化分页控件：参数：(当前页，页大小，总条数，点击分页时候调用的方法)
-//                pagination.init(data.pageNum, data.pageSize, data.total, findByPage);
-				lock = false;
-			});
-		};
+                init(data.list);
+                merge();
+                colspanMerge();
+                // 初始化分页控件：参数：(当前页，页大小，总条数，点击分页时候调用的方法)
+                // pagination.init(data.pageNum, data.pageSize, data.total, findByPage);
+                lock = false;
+            });
+        };
 
-		//可实现合并单元格,上下行来比较
-		function merge() {
-			var totalCols = ['0', '1', '15', '19', '22'];
-			var totalRows = $(".tab-body").find("tr").length;
-			for (var i = totalCols.length - 1; i >= 0; i--) {
-				for (var j = totalRows - 1; j >= 1; j--) {
-//						/console.log($(".tab-body").find("tr").eq(j).find("td").eq(totalCols[i]).html())
-					startCell = $(".tab-body").find("tr").eq(j).find("td").eq(totalCols[i]);
-					targetCell = $(".tab-body").find("tr").eq(j - 1).find("td").eq(totalCols[i]);
-					if (startCell.text() == targetCell.text() && targetCell.text() != "") {
-						targetCell.attr("rowSpan", (startCell.attr("rowSpan") == undefined) ? 2 : (eval(startCell.attr("rowSpan")) + 1));
-						startCell.remove();
-					}
-				}
-			}
-		}
+        //可实现合并单元格,上下相邻行来比较，内容相同则合并
+        function merge() {
+            var totalCols = ['0', '1', '15', '19', '22'];
+            var totalRows = $(".tab-body").find("tr").length;
+            for (var i = totalCols.length - 1; i >= 0; i--) {
+                for (var j = totalRows - 1; j >= 1; j--) {
+                    startCell = $(".tab-body").find("tr").eq(j).find("td").eq(totalCols[i]);
+                    targetCell = $(".tab-body").find("tr").eq(j - 1).find("td").eq(totalCols[i]);
+                    if (startCell.text() == targetCell.text() && targetCell.text() != "") {
+                        targetCell.attr("rowSpan", (startCell.attr("rowSpan") == undefined) ? 2 : (eval(startCell.attr("rowSpan")) + 1));
+                        startCell.remove();
+                    }
+                }
+            }
+        }
 
+        //可实现合并单元格,左右相邻列来比较，内容相同则合并
+        function colspanMerge() {
+            var totaCols = 4;
+            var totalRows = $(".tab-body").find(".colspanTR").length;
+            for (var i = totalRows - 1; i >= 0; i--) {
+                for (var j = totaCols - 1; j >= 1; j--) {
+                    startCell = $(".tab-body").find(".colspanTR:eq(" + i + ")").find("td").eq(j);
+                    targetCell = $(".tab-body").find(".colspanTR:eq(" + i + ")").find("td").eq(j - 1);
+                    if (startCell.text() == targetCell.text() && targetCell.text() != "") {
+                        targetCell.attr("colspan", (startCell.attr("colspan") == undefined) ? 2 : (eval(startCell.attr("colspan")) + 1));
+                        startCell.remove();
+                    }
+                }
+            }
+        }
 
         //刷新当前页
         var reload = function () {
@@ -57,31 +72,35 @@
             $("#tb>tbody").empty();
             for (var i in rst) {
                 var cls = "warning";
-                var tr = $('<tr class="' + cls + '">');
+                if (i >= rst.length-2 ){
+                    var tr = $('<tr class="' + cls+'  colspanTR">');
+                }else{
+                    var tr = $('<tr class="' + cls + '">');
+                }
 
-                tr.append('<td>' + rst[i].area+ '</td>');
-                tr.append('<td>' + rst[i].teamName+ '</td>');
-                tr.append('<td>' + rst[i].advisorLevel+ '</td>');
-                tr.append('<td>' + rst[i].investmentAdvisor+ '</td>');
-                tr.append('<td>' + rst[i].currentVipCustomersNumber+ '</td>');
-                tr.append('<td>' + rst[i].performanceCustomersAum+ '</td>');
-                tr.append('<td>' + rst[i].performanceCustomersNumber+ '</td>');
-                tr.append('<td>' + rst[i].reportedCustomersRegisteredGrowthRate+ '</td>');
-                tr.append('<td>' + rst[i].reportedCustomersTransactionsGrowthRate+ '</td>');
-                tr.append('<td>' + rst[i].monthlyRegularSalesScale+ '</td>');
-                tr.append('<td>' + rst[i].monthlyCurrentSalesScaleConversion+ '</td>');
-                tr.append('<td>' + rst[i].monthlyCprSalesScaleConversion+ '</td>');
-                tr.append('<td>' + rst[i].monthlySalesScale+ '</td>');
-                tr.append('<td>' + rst[i].monthlySalesScalePerformanceTargets+ '</td>');
-                tr.append('<td>' + rst[i].salesCompletionRate+ '</td>');
-                tr.append('<td>' + rst[i].teamSalesScale+ '</td>');
-                tr.append('<td>' + rst[i].monthlyGetCustomersNumber+ '</td>');
-                tr.append('<td>' + rst[i].monthlyGetCustomersTarget+ '</td>');
-                tr.append('<td>' + rst[i].getCustomersCompletionRate+ '</td>');
-                tr.append('<td>' + rst[i].teamGetCustomersNumber+ '</td>');
-                tr.append('<td>' + rst[i].comprehensiveCompletionRate+ '</td>');
-                tr.append('<td>' + rst[i].comprehensiveCompletionRateRanking+ '</td>');
-                tr.append('<td>' + rst[i].teamComprehensiveCompletionRate+ '</td>');
+                tr.append('<td>' + rst[i].area + '</td>');
+                tr.append('<td>' + rst[i].teamName + '</td>');
+                tr.append('<td>' + rst[i].advisorLevel + '</td>');
+                tr.append('<td>' + rst[i].investmentAdvisor + '</td>');
+                tr.append('<td>' + rst[i].currentVipCustomersNumber + '</td>');
+                tr.append('<td>' + rst[i].performanceCustomersAum + '</td>');
+                tr.append('<td>' + rst[i].performanceCustomersNumber + '</td>');
+                tr.append('<td>' + rst[i].reportedCustomersRegisteredGrowthRate + '</td>');
+                tr.append('<td>' + rst[i].reportedCustomersTransactionsGrowthRate + '</td>');
+                tr.append('<td>' + rst[i].monthlyRegularSalesScale + '</td>');
+                tr.append('<td>' + rst[i].monthlyCurrentSalesScaleConversion + '</td>');
+                tr.append('<td>' + rst[i].monthlyCprSalesScaleConversion + '</td>');
+                tr.append('<td>' + rst[i].monthlySalesScale + '</td>');
+                tr.append('<td>' + rst[i].monthlySalesScalePerformanceTargets + '</td>');
+                tr.append('<td>' + rst[i].salesCompletionRate + '</td>');
+                tr.append('<td>' + rst[i].teamSalesScale + '</td>');
+                tr.append('<td>' + rst[i].monthlyGetCustomersNumber + '</td>');
+                tr.append('<td>' + rst[i].monthlyGetCustomersTarget + '</td>');
+                tr.append('<td>' + rst[i].getCustomersCompletionRate + '</td>');
+                tr.append('<td>' + rst[i].teamGetCustomersNumber + '</td>');
+                tr.append('<td>' + rst[i].comprehensiveCompletionRate + '</td>');
+                tr.append('<td>' + rst[i].comprehensiveCompletionRateRanking + '</td>');
+                tr.append('<td>' + rst[i].teamComprehensiveCompletionRate + '</td>');
 
                 $("#tb>table").append(tr);
             }
@@ -112,99 +131,99 @@
     });
 </script>
 <div class="row" style="margin: 0;">
-	<div class="input-group has-primary" style="float: left;">
-		<span class="in_left buy">搜索条件：</span>
-		<input id="search_text" type="text" class="form-control" placeholder="请输入报表月份 例201701"/>
-		<button id="search" style="margin-left:10px;" class="btn btn-primary search_btn" type="button">搜索</button>
-		<button type="button" id="exportExcel" class="btn btn-primary" style="float: right;">导出Excel</button>
-	</div>
+    <div class="input-group has-primary" style="float: left;">
+        <span class="in_left buy">搜索条件：</span>
+        <input id="search_text" type="text" class="form-control" placeholder="请输入报表月份 例201701"/>
+        <button id="search" style="margin-left:10px;" class="btn btn-primary search_btn" type="button">搜索</button>
+        <button type="button" id="exportExcel" class="btn btn-primary" style="float: right;">导出Excel</button>
+    </div>
 </div>
 <hr class="line-3"/>
 <section id="m-tab">
-			<div style="overflow: hidden; height:80px;">
-				<div class="tab-head u-tab">
-					<table>
-						<colgroup>
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-						</colgroup>
-						<tr>
-							<th>区域</th>
-			                <th>投顾组</th>
-			                <th>投顾级别</th>
-			                <th>投资顾问</th>
-			                <th>当前vip客<br/>户数（人数）</th>
-			                <th>计入业绩客户AUM值（亿元）</th>
-			                <th>计入业绩客户数（人数）</th>
-			                <th>上报客户数注册增长率</th>
-			                <th>上报客户交易数增长率</th>
-			                <th>本月定期销售规模（万元）</th>
-			                <th>本月活期申购额折算后（万元）</th>
-			                <th>本月活包定申购额折算后（万元）</th>
-			                <th>当前销售规模（万元）</th>
-			                <th>月销售规模业绩目标（万元）</th>
-			                <th>销售规模完成率</th>
-			                <th>小组销售规模（万元）</th>
-			                <th>本月获客数（折算）</th>
-			                <th>月度获客业绩目标（折算）</th>
-			                <th>获客完成率</th>
-			                <th>小组获客数量（折算）</th>
-			                <th>综合完成率</th>
-			                <th>综合完成率排名</th>
-			                <th>小组综合完成率</th>
-						</tr>
-					</table>
-				</div>
-			</div>
-			<div class="tab-body u-tab" id="tb">
-				<table border="1px">
-					<colgroup>
-						<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-							<col />
-					</colgroup>
-				</table>
-			</div>
-		</section>
+    <div style="overflow: hidden; height:80px;">
+        <div class="tab-head u-tab">
+            <table>
+                <colgroup>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                </colgroup>
+                <tr>
+                    <th>区域</th>
+                    <th>投顾组</th>
+                    <th>投顾级别</th>
+                    <th>投资顾问</th>
+                    <th>当前vip客<br/>户数（人数）</th>
+                    <th>计入业绩客户AUM值（亿元）</th>
+                    <th>计入业绩客户数（人数）</th>
+                    <th>上报客户数注册增长率</th>
+                    <th>上报客户交易数增长率</th>
+                    <th>本月定期销售规模（万元）</th>
+                    <th>本月活期申购额折算后（万元）</th>
+                    <th>本月活包定申购额折算后（万元）</th>
+                    <th>当前销售规模（万元）</th>
+                    <th>月销售规模业绩目标（万元）</th>
+                    <th>销售规模完成率</th>
+                    <th>小组销售规模（万元）</th>
+                    <th>本月获客数（折算）</th>
+                    <th>月度获客业绩目标（折算）</th>
+                    <th>获客完成率</th>
+                    <th>小组获客数量（折算）</th>
+                    <th>综合完成率</th>
+                    <th>综合完成率排名</th>
+                    <th>小组综合完成率</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="tab-body u-tab" id="tb">
+        <table border="1px">
+            <colgroup>
+                <col/>
+                <col/>
+                <col/>
+                <col/>
+                <col/>
+                <col/>
+                <col/>
+                <col/>
+                <col/>
+                <col/>
+                <col/>
+                <col/>
+                <col/>
+                <col/>
+                <col/>
+                <col/>
+                <col/>
+                <col/>
+                <col/>
+                <col/>
+                <col/>
+                <col/>
+                <col/>
+            </colgroup>
+        </table>
+    </div>
+</section>
 <!--<ul id="pagination" class="pagination" style="cursor:pointer"></ul>-->
