@@ -1,6 +1,8 @@
 package org.blazer.bigclient.controller;
 
+import com.github.abel533.echarts.Option;
 import com.github.pagehelper.PageInfo;
+import org.blazer.bigclient.body.AjaxResult;
 import org.blazer.bigclient.excel.ExcelHeader;
 import org.blazer.bigclient.model.PrPerformanceReport;
 import org.blazer.bigclient.service.PrPerformanceReportService;
@@ -125,6 +127,26 @@ public class PrPerformanceReportController extends BaseController {
             e.printStackTrace();
         }
         return mv;
+    }
+
+    /**
+     * 图标eharts展示
+     *
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/removecauses")
+    @ResponseBody
+    public AjaxResult removecauses() throws Exception {
+        AjaxResult result = new AjaxResult();
+        try {
+            Option option = this.prPerformanceReportService.selectRemoveCauses();
+            result.setCode(AjaxResult.CODE_SUCCESS);
+            result.setObj(option);
+        } catch (Exception e) {
+            result.setMsg(e.toString());
+        }
+        return result;
     }
 
 }

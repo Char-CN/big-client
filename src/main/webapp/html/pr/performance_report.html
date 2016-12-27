@@ -21,6 +21,7 @@
                 pageSize: 500,
                 search: search_text
             }, function (data) {
+                $("#tb>table").empty();
                 init(data.list);
                 merge();
                 colspanMerge();
