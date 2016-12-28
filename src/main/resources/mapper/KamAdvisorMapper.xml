@@ -71,6 +71,7 @@
       <if test="search != null and search != ''">
         AND a.phone_number like CONCAT('%',#{search},'%' )
       </if>
+    order by a.serial_number asc
   </select>
 
 

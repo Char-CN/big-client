@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -78,4 +79,33 @@ public class KamAdvisorService extends BaseService<KamAdvisor> {
         return flag;
     }
 
+    /**
+     * 导入excel表中的投资顾问
+     *
+     * @param list
+     */
+    public void importExcelData(List<KamAdvisor> list) {
+        try {
+            if (list != null && list.size() > 0) {
+                this.kamAdvisorMapper.deleteAll();
+
+                for (KamAdvisor a : list) {
+                    a.setCtime(new Date());
+                    this.save(a);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 查询
+     *
+     * @param search
+     * @return
+     */
+    public List<AdvisorInfoBean> findBySearch(String search) {
+        return this.kamAdvisorMapper.findByPage(search);
+    }
 }

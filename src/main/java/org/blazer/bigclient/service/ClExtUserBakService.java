@@ -194,13 +194,13 @@ public class ClExtUserBakService extends BaseService<ClExtUserBak> {
      */
     public void updateOne(ClExtUserBak extUserBak) {
         try {
-            if(extUserBak != null){
+            if (extUserBak != null) {
                 this.updateNotNull(extUserBak);
 
                 //TODO
                 //查询出正式客户
                 ClFormalUser formalUser = this.clFormalUserService.selectByPhoneNumber(extUserBak.getPhoneNumber());
-                if(formalUser != null){
+                if (formalUser != null) {
 //                    formalUser.setInvestmentAdviser(extUserBak.getInvestmentAdviser());
                     this.clFormalUserService.updateNotNull(formalUser);
                 }
@@ -215,7 +215,7 @@ public class ClExtUserBakService extends BaseService<ClExtUserBak> {
                 }
                 userVersion.setUserId(extUserBak.getId());
                 userVersion.setAdvisorId(advisorId);
-                userVersion.setVersionNo(maxVersion.getVersionNo()+1);
+                userVersion.setVersionNo(maxVersion.getVersionNo() + 1);
                 userVersion.setStartDate(new Date());
                 userVersion.setCtime(new Date());
                 this.clFormalUserVersionService.save(userVersion);
