@@ -56,6 +56,12 @@ public class SrAssetsBalance {
     private String currentAssetsTotal;
 
     /**
+     * 当前活包定AUM
+     */
+    @Column(name = "crp_assets_total")
+    private String crpAssetsTotal;
+
+    /**
      * 当前AUM（资产总额）
      */
     @Column(name = "aum_total")
@@ -64,6 +70,7 @@ public class SrAssetsBalance {
     /**
      * AUM时间点
      */
+    @OrderBy("DESC")
     @Column(name = "aum_time_point")
     private String aumTimePoint;
 

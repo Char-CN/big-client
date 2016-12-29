@@ -12,6 +12,7 @@
     <result column="register_date" property="registerDate" jdbcType="VARCHAR" />
     <result column="regular_assets_total" property="regularAssetsTotal" jdbcType="VARCHAR" />
     <result column="current_assets_total" property="currentAssetsTotal" jdbcType="VARCHAR" />
+    <result column="crp_assets_total" property="crpAssetsTotal" jdbcType="VARCHAR" />
     <result column="aum_total" property="aumTotal" jdbcType="VARCHAR" />
     <result column="aum_time_point" property="aumTimePoint" jdbcType="VARCHAR" />
     <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />

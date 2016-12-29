@@ -87,7 +87,7 @@ public class SrAssetsBalanceController extends BaseController {
             List<SrAssetsBalance> list = this.srAssetsBalanceService.findBySearch(params);
             if (list == null || list.size() == 0) {
                 SrAssetsBalance assetsBalance = new SrAssetsBalance(Long.parseLong("0"),"0",Long.parseLong("0"),"0",
-                        "0","0","0","0","0",new Date(),new Date());
+                        "0","0","0","0","0","0",new Date(),new Date());
                 list.add(assetsBalance);
             }
             //excel文件名称,不需要任何后缀
@@ -102,6 +102,7 @@ public class SrAssetsBalanceController extends BaseController {
             specifyFields.add("registerDate");
             specifyFields.add("regularAssetsTotal");
             specifyFields.add("currentAssetsTotal");
+            specifyFields.add("crpAssetsTotal");
             specifyFields.add("aumTotal");
             specifyFields.add("aumTimePoint");
 
