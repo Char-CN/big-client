@@ -18,4 +18,28 @@
     <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
     <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
   </resultMap>
+
+  <select id="findByMonthly" resultMap="BaseResultMap">
+    SELECT
+        id,
+        user_name,
+        phone_number,
+        investment_adviser,
+        register_date,
+        regular_assets_total,
+        current_assets_total,
+        crp_assets_total,
+        aum_total,
+        aum_time_point,
+        mtime,
+        ctime
+    FROM
+        sr_assets_balance
+    WHERE
+        #{ctime} = date(ctime)
+    ORDER BY
+        aum_time_point DESC
+  </select>
+
+
 </mapper>

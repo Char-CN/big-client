@@ -25,7 +25,7 @@
   </select>
 
 
-  <select id="selectMaxVerNoList" resultType="List">
+  <select id="selectMaxVerNoList" resultType="org.blazer.bigclient.model.ClFormalUserVersion">
     select a.* from cl_formal_user_version as a where version_no = (select max(version_no) from cl_formal_user_version where a.user_id=user_id);
   </select>
 
