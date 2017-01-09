@@ -64,4 +64,16 @@ public class SrAssetsBalanceService extends BaseService<SrAssetsBalance> {
         }
         return selectByExample(example);
     }
+
+    public List<SrAssetsBalance> findByMonthly(String data) {
+        LOGGER.info("月初AUM报表导出：资产余额[SrAssetsBalance]，导出到excel表...");
+        Example example = new Example(SrAssetsBalance.class);
+        Example.Criteria criteria = example.createCriteria();
+        String date = StringUtil.getStrEmpty(data);
+        if (StringUtils.isNotEmpty(date)) {
+            String s = date + "-01";
+            criteria.andCondition(s + " = date(ctime)");
+        }
+        return selectByExample(example);
+    }
 }

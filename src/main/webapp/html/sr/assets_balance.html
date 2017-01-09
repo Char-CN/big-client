@@ -1,3 +1,26 @@
+<style>
+    #Date{
+        float: right;
+        width:186px;
+    }
+    #Date li{
+        list-style: none;
+        float: left;
+        margin-left: 15px;
+        padding: 6.4px 12px;
+        background-color: #5fdbb9;
+        -webkit-border-radius:3px;
+        -moz-border-radius:3px;
+        border-radius:3px;
+    }
+    #Date  select{
+        color: #fff;
+        background-color: #5fdbb9;
+    }
+    #Date a{
+        text-decoration: none;
+    }
+</style>
 <script>
     $(function () {
         var lock = false;
@@ -75,6 +98,34 @@
             });
         });
 
+
+        /**
+         * 月初AUM导出
+         */
+        var data = {};
+        $('select').click(function () {
+            if (!$(this).val() || $(this).val().length < 2) return
+            data.Date = $('#year').val() + "-" + $('#month').val();
+        });
+        $('#exportMonthly').click(function () {
+
+            if (String(data.Date).length != 7) {
+                alert('请选择要导出报表的时间！');
+                return
+            } else {
+                console.log(data);
+                console.log(data.Date);
+
+                downLoadFile({
+                    url: 'sr/assets_balance/exportMonthly.do', //请求的url
+                    data: {date: data.Date},//要发送的数据
+                    callback: function () {
+                        //alert("导出excel文件成功");
+                    }
+                })
+            }
+        });
+
     });
 </script>
 <div class="row" style="margin: 0;">
@@ -85,6 +136,33 @@
         <input id="search_date_start" placeholder="请选择一个日期" class="laydate-icon date" onClick="laydate({istime: true, format: 'YYYY-MM-DD'})">
         <button id="search" style="margin-left:10px;" class="btn btn-primary search_btn" type="button">搜索</button>
         <button type="button" id="exportExcel" class="btn btn-primary" style="float: right;">导出Excel</button>
+        <button type="button" id="exportMonthly" class="btn btn-primary" style="float: right;margin-right: 30px;">月初AUM导出</button>
+        <ul id="Date">
+            <li>
+                <select name="" id="year">
+                    <option value="">年</option>
+                    <option>2016</option>
+                    <option>2017</option>
+                </select>
+            </li>
+            <li>
+                <select name="" id="month">
+                    <option value="">月</option>
+                    <option>01</option>
+                    <option>02</option>
+                    <option>03</option>
+                    <option>04</option>
+                    <option>05</option>
+                    <option>06</option>
+                    <option>07</option>
+                    <option>08</option>
+                    <option>09</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                </select>
+            </li>
+        </ul>
     </div>
 </div>
 <hr class="line-3"/>
