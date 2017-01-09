@@ -137,7 +137,7 @@ public class SrAssetsBalanceController extends BaseController {
                 list.add(assetsBalance);
             }
             //excel文件名称,不需要任何后缀
-            String excelName = "AssetsBalance_Export_" + DateUtil.date2Str(new Date(), DateUtil.DATE_FORMAT_SHORT);
+            String excelName = "AssetsBalance_Monthly_" + DateUtil.date2Str(new Date(), DateUtil.DEFAULT_DATE_TIME_FORMAT);
             //可以为空,自定义Excel头信息
             ExcelHeader header = null;
             //指定导出字段
