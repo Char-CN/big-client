@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.blazer.bigclient.mapper.PrReturnPaymentReportMapper" >
+  <resultMap id="BaseResultMap" type="org.blazer.bigclient.model.PrReturnPaymentReport" >
+     <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="investment_advisor" property="investmentAdvisor" jdbcType="VARCHAR" />
+    <result column="user_identify" property="userIdentify" jdbcType="VARCHAR" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="VARCHAR" />
+    <result column="product_period" property="productPeriod" jdbcType="VARCHAR" />
+    <result column="product_interest_rate" property="productInterestRate" jdbcType="VARCHAR" />
+    <result column="interest_date" property="interestDate" jdbcType="VARCHAR" />
+    <result column="expiry_date" property="expiryDate" jdbcType="VARCHAR" />
+    <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+  </resultMap>
+</mapper>

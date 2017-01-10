@@ -1,0 +1,107 @@
+<script>
+    $(function () {
+        var lock = false;
+        // 定义分页控件
+        var pagination = new PageHelper("pagination");
+        var _currentPage_lastCurrent = 1;
+        var findByPage = function (currentPage) {
+            if (lock) {
+                return;
+            }
+            _currentPage_lastCurrent = currentPage;
+            lock = true;
+            $.post("pr/return_payment/findByPage.do", {
+                currentPage: currentPage,
+                pageSize: 10,
+                search: search_text
+            }, function (data) {
+                init(data.list);
+                // 初始化分页控件：参数：(当前页，页大小，总条数，点击分页时候调用的方法)
+                pagination.init(data.pageNum, data.pageSize, data.total, findByPage);
+                lock = false;
+            });
+        };
+
+        //刷新当前页
+        var reload = function () {
+            findByPage(_currentPage_lastCurrent);
+        };
+
+        // 初始化数据
+        var init = function (rst) {
+            $("#tb>tbody").empty();
+            for (var i in rst) {
+                var cls = "warning";
+                var tr = $('<tr class="' + cls + '">');
+
+                tr.append('<td>' + rst[i].phoneNumber+ '</td>');
+                tr.append('<td>' + rst[i].userName+ '</td>');
+                tr.append('<td>' + rst[i].investmentAdvisor+ '</td>');
+                tr.append('<td>' + rst[i].userIdentify+ '</td>');
+                tr.append('<td>' + rst[i].productName+ '</td>');
+                tr.append('<td>' + rst[i].amount+ '</td>');
+                tr.append('<td>' + rst[i].productPeriod+ '</td>');
+                tr.append('<td>' + rst[i].productInterestRate+ '</td>');
+                tr.append('<td>' + rst[i].interestDate+ '</td>');
+                tr.append('<td>' + rst[i].expiryDate+ '</td>');
+
+                $("#tb>tbody").append(tr);
+            }
+        };
+
+        findByPage(1);
+        $("#search").click(function () {
+            findByPage(1);
+        });
+        var search_text = "";
+        $("#search_text").change(function () {
+            search_text = $(this).val();
+        });
+
+        /**
+         * ajax下载excel
+         */
+        $("#exportExcel").click(function () {
+            downLoadFile({
+                url: 'pr/return_payment/exportExcel.do', //请求的url
+                data: {search: search_text},//要发送的数据
+                callback: function () {
+                    //alert("导出excel文件成功");
+                }
+            });
+        });
+
+    });
+</script>
+<div class="row" style="margin: 0;">
+    <div class="input-group has-primary" style="float: left; width: 300px;">
+        <input id="search_text" type="text" class="form-control" placeholder="手机号或姓名的模糊查询..."/>
+        <span class="input-group-btn">
+			<button id="search" class="btn btn-primary" type="button">搜索</button>
+		</span>
+    </div>
+    <button type="button" id="exportExcel" class="btn btn-primary" style="float: right;">导出Excel</button>
+</div>
+<hr class="line-3"/>
+<div class="table-responsive">
+    <table id="tb" class="table table-hover table-condensed table-bordered">
+        <thead>
+        <tr>
+            <th>手机号码</th>
+            <th>客户姓名</th>
+            <th>投资顾问</th>
+            <th>客户标识</th>
+            <th>产品名称</th>
+            <th>金额</th>
+            <th>产品期限</th>
+            <th>产品利率</th>
+            <th>起息日</th>
+            <th>到期日</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<ul id="pagination" class="pagination" style="cursor:pointer"></ul>

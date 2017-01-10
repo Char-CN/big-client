@@ -168,6 +168,24 @@
 		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
 
+	<!--回款报表-->
+	<excel id="prReturnPaymentReport" class="org.blazer.bigclient.model.PrReturnPaymentReport" sheetname="回款报表"
+		   defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
+		<field name="id" title="自动编号"/>
+		<field name="phoneNumber" title="手机号码"/>
+		<field name="userName" title="客户姓名"/>
+		<field name="investmentAdvisor" title="投资顾问"/>
+		<field name="userIdentify" title="客户标识"/>
+		<field name="productName" title="产品名称"/>
+		<field name="amount" title="金额"/>
+		<field name="productPeriod" title="产品期限"/>
+		<field name="productInterestRate" title="产品利率"/>
+		<field name="interestDate" title="起息日"/>
+		<field name="expiryDate" title="到期日"/>
+		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+	</excel>
+
 	<!--
 		业绩核算
 	 -->
