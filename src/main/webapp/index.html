@@ -94,6 +94,21 @@
 				setSrc(this, 'html/sr/current_package_regular_sales_details.html');
 			});
 			link_ul.append(link_li_b4);
+			var link_li_b5 = $('#list_b_5');
+			link_li_b5.click(function () {
+				setSrc(this, 'html/sr/regular_payment_due.html');
+			});
+			link_ul.append(link_li_b5);
+			var link_li_b6 = $('#list_b_6');
+			link_li_b6.click(function () {
+				setSrc(this, 'html/sr/current_package_regular_sales_details.html');
+			});
+			link_ul.append(link_li_b6);
+			var link_li_b7 = $('#list_b_7');
+			link_li_b7.click(function () {
+				setSrc(this, 'html/sr/current_package_regular_sales_details.html');
+			});
+			link_ul.append(link_li_b7);
 
 			/**performance accounting*/
 			var link_li_c1 = $('#list_c_1');
@@ -204,6 +219,9 @@
 							<li class="nav_two" id="list_b_2"><a href="javascript:void(0);" onclick="stylesWitch(this)">定期销售明细</a></li>
 							<li class="nav_two" id="list_b_3"><a href="javascript:void(0);" onclick="stylesWitch(this)">活期销售明细</a></li>
 							<li class="nav_two" id="list_b_4"><a href="javascript:void(0);" onclick="stylesWitch(this)">活包定销售明细</a></li>
+							<li class="nav_two" id="list_b_5"><a href="javascript:void(0);" onclick="stylesWitch(this)">定期到期兑付</a></li>
+							<li class="nav_two" id="list_b_6"><a href="javascript:void(0);" onclick="stylesWitch(this)">活期赎回</a></li>
+							<li class="nav_two" id="list_b_7"><a href="javascript:void(0);" onclick="stylesWitch(this)">活包定到期兑付</a></li>
 						</ul>
 					</li>
 					<li class="nav_one"><a href="javascript:void(0);">业绩核算</a>
@@ -219,7 +237,7 @@
 							<li class="nav_two" id="list_d_1"><a href="javascript:void(0);" onclick="stylesWitch(this)">业绩报表</a></li>
 							<li class="nav_two" id="list_d_2"><a href="javascript:void(0);" onclick="stylesWitch(this)">获客构成</a></li>
 							<li class="nav_two" id="list_d_3"><a href="javascript:void(0);" onclick="stylesWitch(this)">客户转换率</a></li>
-							<li class="nav_two" id="list_d_4"><a href="javascript:void(0);" onclick="stylesWitch(this)">定期兑付报表</a></li>
+							<li class="nav_two" id="list_d_4"><a href="javascript:void(0);" onclick="stylesWitch(this)">兑付预知报表</a></li>
 							<li class="nav_two" id="list_d_5"><a href="javascript:void(0);" onclick="stylesWitch(this)">回款报表</a></li>
 						</ul>
 					</li>
@@ -242,7 +260,7 @@
 		<div id="center_head" class="panel-heading">默认</div>
 		<div id="center" class="panel-body"></div>
 	</div>
-	<div id="south" class="copyright">©版本号：2.1.1</div>
+	<div id="south" class="copyright">©版本号：2.1.2</div>
 </body>
 <script type="text/javascript">
 	  function stylesWitch(e) {           
