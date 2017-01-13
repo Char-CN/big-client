@@ -168,6 +168,49 @@
 		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
 	</excel>
 
+	<excel id="srRegularPaymentDue" class="org.blazer.bigclient.model.SrRegularPaymentDue"
+		   sheetname="定期到期兑付" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
+		<field name="id" title="自动编号"/>
+		<field name="userName" title="客户姓名"/>
+		<field name="phoneNumber" title="手机号码"/>
+		<field name="productName" title="产品名称"/>
+		<field name="redemptionDate" title="兑付时间"/>
+		<field name="principal" title="本金"/>
+		<field name="productRevenue" title="产品收益"/>
+		<field name="transferAmount" title="划款金额"/>
+		<field name="investmentAdvisor" title="投资顾问"/>
+		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+	</excel>
+
+	<excel id="srCurrentRedemption" class="org.blazer.bigclient.model.SrCurrentRedemption"
+		   sheetname="活期赎回报表" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
+		<field name="id" title="自动编号"/>
+		<field name="userName" title="客户姓名"/>
+		<field name="phoneNumber" title="手机号码"/>
+		<field name="productName" title="产品名称"/>
+		<field name="redemptionDate" title="赎回时间"/>
+		<field name="redemptionAmount" title="赎回金额"/>
+		<field name="investmentAdvisor" title="投资顾问"/>
+		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+	</excel>
+
+	<excel id="srCrpPaymentDue" class="org.blazer.bigclient.model.SrCrpPaymentDue"
+		   sheetname="活包定到期兑付" defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">
+		<field name="id" title="自动编号"/>
+		<field name="userName" title="客户姓名"/>
+		<field name="phoneNumber" title="手机号码"/>
+		<field name="productName" title="产品名称"/>
+		<field name="redemptionDate" title="兑付时间"/>
+		<field name="principal" title="本金"/>
+		<field name="productRevenue" title="产品收益"/>
+		<field name="transferAmount" title="划款金额"/>
+		<field name="investmentAdvisor" title="投资顾问"/>
+		<field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>
+	</excel>
+
 	<!--回款报表-->
 	<excel id="prReturnPaymentReport" class="org.blazer.bigclient.model.PrReturnPaymentReport" sheetname="回款报表"
 		   defaultColumnWidth="5000" enableStyle="true" defaultAlign="center">

@@ -25,7 +25,7 @@
 
             if(boo) {
                 lock = true;
-                $.post("sr/regular_payment_due/findByPage.do", {
+                $.post("sr/current_redemption/findByPage.do", {
                     currentPage: currentPage,
                     pageSize: 10,
                     dateStart: search_date_start,
@@ -51,24 +51,12 @@
             for (var i in rst) {
                 var cls = "warning";
                 var tr = $('<tr class="' + cls + '">');
-                /*<field name="id" title="自动编号"/>
-                 <field name="userName" title="客户姓名"/>
-                 <field name="phoneNumber" title="手机号码"/>
-                 <field name="productName" title="产品名称"/>
-                 <field name="redemptionDate" title="兑付时间"/>
-                 <field name="principal" title="本金"/>
-                 <field name="productRevenue" title="产品收益"/>
-                 <field name="transferAmount" title="划款金额"/>
-                 <field name="" title="投资顾问"/>
-                 <field name="mtime" title="更新时间" pattern="yyyy-MM-dd HH:mm:ss"/>
-                 <field name="ctime" title="创建时间" pattern="yyyy-MM-dd HH:mm:ss"/>*/
+
                 tr.append('<td>' + rst[i].userName + '</td>');
                 tr.append('<td>' + rst[i].phoneNumber + '</td>');
                 tr.append('<td>' + rst[i].productName + '</td>');
                 tr.append('<td>' + rst[i].redemptionDate + '</td>');
-                tr.append('<td>' + rst[i].principal + '</td>');
-                tr.append('<td>' + rst[i].productRevenue + '</td>');
-                tr.append('<td>' + rst[i].transferAmount + '</td>');
+                tr.append('<td>' + rst[i].redemptionAmount + '</td>');
                 tr.append('<td>' + rst[i].investmentAmount + '</td>');
 
                 $("#tb>tbody").append(tr);
@@ -103,7 +91,7 @@
 
             if(boo) {
                 downLoadFile({
-                    url: 'sr/regular_payment_due/exportExcel.do', //请求的url
+                    url: 'sr/current_redemption/exportExcel.do', //请求的url
                     data:  {
                         search: search_text,
                         dateStart: search_date_start,
@@ -134,14 +122,12 @@
 <table id="tb" class="table table-hover table-condensed table-bordered">
     <thead>
     <tr>
-        <th width="12.5%">客户姓名</th>
-        <th width="12.5%">手机号码</th>
-        <th width="12.5%">产品名称</th>
-        <th width="12.5%">兑付时间</th>
-        <th width="12.5%">本金</th>
-        <th width="12.5%">产品收益</th>
-        <th width="12.5%">划款金额</th>
-        <th width="12.5%">投资顾问</th>
+        <th>客户姓名</th>
+        <th>手机号码</th>
+        <th>产品名称</th>
+        <th>赎回时间</th>
+        <th>赎回金额</th>
+        <th>投资顾问</th>
     </tr>
     </thead>
     <tbody>

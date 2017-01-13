@@ -1,9 +1,9 @@
 package org.blazer.bigclient.excel;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.blazer.bigclient.body.AdvisorInfoBean;
-import org.blazer.bigclient.body.FormalUserBean;
-import org.blazer.bigclient.model.*;
+import org.blazer.bigclient.model.SrCrpPaymentDue;
+import org.blazer.bigclient.model.SrCurrentRedemption;
+import org.blazer.bigclient.model.SrRegularPaymentDue;
 import org.blazer.bigclient.util.ReflectUtil;
 import org.springframework.util.TypeUtils;
 
@@ -24,8 +24,13 @@ public class ExcelXmlBuild {
     //快速构建一个XML配置,看不懂直接运行
     public static void main(String[] args) {
 
-        String xml = builderXml("prReturnPaymentReport", "回款报表", true, PrReturnPaymentReport.class, 5000);
+        String xml = builderXml("srRegularPaymentDue", "定期到期兑付", true, SrRegularPaymentDue.class, 5000);
         System.out.println(xml);
+        String xml1 = builderXml("srCurrentRedemption", "活期赎回报表", true, SrCurrentRedemption.class, 5000);
+        System.out.println(xml1);
+        String xml2 = builderXml("srCrpPaymentDue", "活包定到期兑付", true, SrCrpPaymentDue.class, 5000);
+        System.out.println(xml2);
+
     }
 
     /**
