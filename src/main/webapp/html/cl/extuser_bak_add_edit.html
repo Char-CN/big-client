@@ -26,7 +26,7 @@
          * 触发保存按钮
          */
         $util.modalOnSave(windowId, function () {
-            $.post("extUserUpload/saveOne.do", {
+            $.post("cl/extUserBak/saveOne.do", {
                 id: id,
                 phoneNumber: this_window.find("input[name=phoneNumber]").val(),
                 investmentAdviser: this_window.find("input[name=investmentAdviser]").val(),

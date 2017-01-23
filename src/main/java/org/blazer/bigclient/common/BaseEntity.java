@@ -1,6 +1,7 @@
 package org.blazer.bigclient.common;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA
@@ -11,4 +12,9 @@ import java.io.Serializable;
 public abstract class BaseEntity implements Serializable {
 
     private static final long serialVersionUID = -1L;
+
+    private Date mtime;
+
+    private Date ctime;
+
 }
