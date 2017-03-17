@@ -289,11 +289,11 @@
 		<field name="reportOrAllotDate" title="上报/分配日期"/>
 		<field name="investmentAdviser" title="投资顾问"/>
 		<field name="userIdentify" title="客户标识"/>
-		<field name="basicProductName" title="基础产品名称"/>
-		<field name="monthlyPurchaseAmount" title="申购金额"/>
+		<field name="baseProductName" title="基础产品名称"/>
+		<field name="purchaseAmount" title="申购金额"/>
 		<field name="currentAssetsTotal" title="现有资产"/>
 		<field name="purchaseDate" title="申购日期"/>
-		<field name="monthlyPurchaseAmount5" title="申购金额/10"/>
+		<field name="monthlyPurchaseAmount5" title="申购金额/5"/>
 		<field name="performancePoolCoefficient" title="业绩池系数"/>
 		<field name="effectiveCurrentSalesScale" title="有效金额（万元）"/>
 		<field name="deferredNextMonth" title="递延下月金额"/>

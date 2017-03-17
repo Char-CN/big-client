@@ -93,7 +93,7 @@ public class BaseService<T> {
         /**手机号或者姓名*/
         String search = StringUtil.getStrEmpty(params.get("search"));
         if (StringUtils.isNotEmpty(search)) {
-//            criteria.andCondition("phone_number like '%" + search + "%'" + " or user_name like '%" + search + "%'");
+//            criteria.andCondition("phone_number like '%" + search + "%'" + " OR user_name like '%" + search + "%'");
             criteria.andLike("phoneNumber",search);
         }
         /**查询起始时间*/
@@ -126,7 +126,7 @@ public class BaseService<T> {
         Example.Criteria criteria = example.createCriteria();
         String search = StringUtil.getStrEmpty(params.get("search"));
         if (StringUtils.isNotEmpty(search)) {
-//            criteria.andCondition("phone_number like '%" + search + "%'" + " or user_name like '%" + search + "%'");
+//            criteria.andCondition("phone_number like '%" + search + "%'" + " OR user_name like '%" + search + "%'");
             criteria.andLike("phoneNumber",search);
         }
         String dateStart = StringUtil.getStrEmpty(params.get("dateStart"));
