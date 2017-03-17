@@ -20,7 +20,7 @@ import java.util.List;
 
 /**
  * 公共service，提供了通用的方法
- *
+ * <p>
  * Created by cuican on 2016/08/26.
  */
 public class BaseService<T> {
@@ -67,13 +67,13 @@ public class BaseService<T> {
         return mapper.selectByExample(example);
     }
 
-    public T selcetOne(T entity){
+    public T selcetOne(T entity) {
         return mapper.selectOne(entity);
     }
 
     // TODO 其他...
 
-    public Logger getLogger(T t){
+    public Logger getLogger(T t) {
         final Logger LOGGER = LoggerFactory.getLogger(t.getClass());
         return LOGGER;
     }
@@ -87,23 +87,28 @@ public class BaseService<T> {
      * @param params
      * @return
      */
-    public PageInfo<T> findByPage(T t,HashMap<String, String> params,String dateName) {
+    public PageInfo<T> findByPage(T t, HashMap<String, String> params, String dateName) {
         Example example = new Example(t.getClass());
         Example.Criteria criteria = example.createCriteria();
+        /**手机号或者姓名*/
         String search = StringUtil.getStrEmpty(params.get("search"));
         if (StringUtils.isNotEmpty(search)) {
-            criteria.andCondition("phone_number like '%" + search + "%'" + " or user_name like '%" + search + "%'");
+//            criteria.andCondition("phone_number like '%" + search + "%'" + " or user_name like '%" + search + "%'");
+            criteria.andLike("phoneNumber",search);
         }
+        /**查询起始时间*/
         String dateStart = StringUtil.getStrEmpty(params.get("dateStart"));
         if (StringUtils.isEmpty(dateStart)) {
             dateStart = "1900-01-01";
         }
-        criteria.andGreaterThanOrEqualTo(dateName, dateStart);
+        criteria.andGreaterThanOrEqualTo(dateName, dateStart + " 00:00:00");
+        /**查询结束时间*/
         String dateEnd = StringUtil.getStrEmpty(params.get("dateEnd"));
         if (StringUtils.isEmpty(dateEnd)) {
             dateEnd = DateUtil.thisDate();
         }
-        criteria.andLessThanOrEqualTo(dateName, dateEnd);
+        criteria.andLessThanOrEqualTo(dateName, dateEnd + " 23:59:59");
+        /**启用分页*/
         PageHelper.startPage(IntegerUtil.getIntZero(params.get("currentPage")), IntegerUtil.getIntZero(params.get("pageSize")));
         List<T> list = this.selectByExample(example);
         return new PageInfo(list);
@@ -116,23 +121,24 @@ public class BaseService<T> {
      * @param params
      * @return
      */
-    public List<T> findBySearch(T t,HashMap<String, String> params,String dateName) {
+    public List<T> findBySearch(T t, HashMap<String, String> params, String dateName) {
         Example example = new Example(t.getClass());
         Example.Criteria criteria = example.createCriteria();
         String search = StringUtil.getStrEmpty(params.get("search"));
         if (StringUtils.isNotEmpty(search)) {
-            criteria.andCondition("phone_number like '%" + search + "%'" + " or user_name like '%" + search + "%'");
+//            criteria.andCondition("phone_number like '%" + search + "%'" + " or user_name like '%" + search + "%'");
+            criteria.andLike("phoneNumber",search);
         }
         String dateStart = StringUtil.getStrEmpty(params.get("dateStart"));
         if (StringUtils.isEmpty(dateStart)) {
             dateStart = "1900-01-01";
         }
-        criteria.andGreaterThanOrEqualTo(dateName, dateStart);
+        criteria.andGreaterThanOrEqualTo(dateName, dateStart + " 00:00:00");
         String dateEnd = StringUtil.getStrEmpty(params.get("dateEnd"));
         if (StringUtils.isEmpty(dateEnd)) {
             dateEnd = DateUtil.thisDate();
         }
-        criteria.andLessThanOrEqualTo(dateName, dateEnd);
+        criteria.andLessThanOrEqualTo(dateName, dateEnd + " 23:59:59");
         return this.selectByExample(example);
     }
 
@@ -143,7 +149,7 @@ public class BaseService<T> {
      * @param <T>
      * @return
      */
-    public <T> String objectToJson(T object){
+    public <T> String objectToJson(T object) {
         ObjectMapper mapper = new ObjectMapper();
         String jsonValue = null;
         try {
